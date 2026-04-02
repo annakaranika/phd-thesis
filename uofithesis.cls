@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[2025/11/01]
-\ProvidesClass{uofithesis}[2026/03/24 v1.5 University of Illinois Graduate College Dissertation/Thesis Class]
+\ProvidesClass{uofithesis}[2026/04/02 v1.6 University of Illinois Graduate College Dissertation/Thesis Class]
 
 \LoadClass[letterpaper,12pt,oneside]{article}
 
@@ -214,6 +214,34 @@
 
 \renewcommand*{\l@section}{\@dottedtocline{1}{1.5em}{5em}}
 \renewcommand*{\l@subsection}{\@dottedtocline{2}{3em}{2.5em}}
+
+% Print the references for the current biblatex refsection.
+\newcommand{\chapterreferences}{%
+    \@ifpackageloaded{biblatex}{%
+        \printbibliography[heading=subbibintoc,title={References}]%
+    }{%
+        \ClassError{uofithesis}{\string\chapterreferences\space requires biblatex}{%
+            Load biblatex before using \string\chapterreferences.
+        }%
+    }%
+}
+
+% Environment for chapters with end-of-chapter references.
+\newenvironment{sectionwithreferences}[1]{%
+    \@ifpackageloaded{biblatex}{%
+        \begin{refsection}%
+        \section{#1}%
+    }{%
+        \ClassError{uofithesis}{sectionwithreferences requires biblatex}{%
+            Load biblatex before using the sectionwithreferences environment.
+        }%
+    }%
+}{%
+    \@ifpackageloaded{biblatex}{%
+        \chapterreferences%
+        \end{refsection}%
+    }{}%
+}
 
 % Appendix environment that resets numbering and uses A, B, C...
 % instead of 1, 2, 3... for sections.

@@ -21,6 +21,9 @@
 
 # --- Optional pages ---
 \copyrightpage#n
+\chapterreferences#n
+\begin{sectionwithreferences}{title%text}#beginEnv#sectionwithreferences
+\end{sectionwithreferences}#endEnv#sectionwithreferences
 
 # --- Front matter blocks (command form used by thesis.tex) ---
 \abstract{abstract%text}#n

@@ -3,6 +3,20 @@
 **Breaking changes** will be highlighted in each version, if there are any.
 Breaking change would mean a change is needed in the `.tex` file to accommodate the changes in the document class.
 
+## v1.6 - 2026-04-02
+
+### Breaking Changes
+
+- The optional Copyright page and the Title page are now counted for page numbers.
+  If you're referring to specific page numbers in your document, you may need to
+  update those references.
+
+### Other Changes
+
+- Added support for chapter-level references. Use `\sectionwithreferences` to
+  create a section that has its own References subsection at the end.
+  You may need to add `defernumbers=true` to your `biblatex` options.
+
 ## v1.5 - 2026-03-24
 
 Added the `\dedication` environment for better handling of the dedication section.

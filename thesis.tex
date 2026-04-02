@@ -35,10 +35,12 @@
 
 \usepackage{csquotes}
 
-% Bibliography for references
-% biber must be set as the backend, style can be changed as needed
+% Bibliography for references, biber must be set as the backend, style can be 
+% changed as needed.
+% If you need chapter-level references, instead of `\section`, use the
+% `sectionwithreferences` environment.
 \usepackage[hidelinks,pdfusetitle]{hyperref}
-\usepackage[backend=biber,style=ieee]{biblatex}
+\usepackage[backend=biber,style=ieee,defernumbers=true]{biblatex}
 \usepackage[bottom]{footmisc}
 
 % At time of writing, chemistry packages are not compatible with accessibility

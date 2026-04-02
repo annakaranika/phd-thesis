@@ -335,6 +335,19 @@ somewhat logical order by screen readers. [nicematrix example](https://github.co
 
 The `style` can be changed to match your field's requirements (apa, ieee, nature, etc.).
 
+To print references at the end of each chapter instead, use the
+`sectionwithreferences` environment from the class instead of `\section`:
+
+```latex
+\begin{sectionwithreferences}{Chapter Title}
+
+Chapter text with citations \cite{example}.
+
+\end{sectionwithreferences}
+```
+
+The `\end` is needed to properly close the `refsection` environment.
+
 ### Chemistry Packages
 
 **Important limitation**: `mhchem` and `chemfig` are not fully compatible with accessibility tagging, but currently have no alternatives.
@@ -468,6 +481,11 @@ All sections are automatically formatted per Graduate College requirements:
 - Numbered as "Chapter N"
 - Each chapter starts on a new page
 - Sections within chapters do not start on new pages
+
+### Chapter References
+
+If you want a bibliography at the end of each chapter, wrap that chapter in a
+`sectionwithreferences` environment.
 
 ## File Organization
 
