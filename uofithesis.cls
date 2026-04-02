@@ -218,6 +218,7 @@
 % Print the references for the current biblatex refsection.
 \newcommand{\chapterreferences}{%
     \@ifpackageloaded{biblatex}{%
+        \clearpage
         \printbibliography[heading=subbibintoc,title={References}]%
     }{%
         \ClassError{uofithesis}{\string\chapterreferences\space requires biblatex}{%

@@ -347,6 +347,7 @@ Chapter text with citations \cite{example}.
 ```
 
 The `\end` is needed to properly close the `refsection` environment.
+The References heading starts on a new page, even though ordinary subsections do not.
 
 ### Chemistry Packages
 
