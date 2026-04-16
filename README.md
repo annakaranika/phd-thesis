@@ -41,13 +41,12 @@ as the free version times out when building documents with the tagging system en
 
 #### TeX Live Version on Overleaf
 
-Overleaf's TeX Live is not as up to date as a local installation. You will
-likely see build warnings about the tagging system, but the document should 
-still compile.
-
-Using [Overleaf Labs](https://www.overleaf.com/labs/participate) to get access
-to the Rolling Release reduces warnings. This is optional. Make sure to change
+It is **highly** recommended to use [Overleaf Labs](https://www.overleaf.com/labs/participate) to get access
+to the Rolling Release. Make sure to change
 the TeX Live version in the project settings to "Rolling Release" to use it.
+
+Rolling Release versions are updated regularly with the latest TeX Live packages, 
+which helps reduce build issues related to the tagging system.
 
 ### Local TeX Installation
 
@@ -68,9 +67,15 @@ Or you can download the code as a ZIP file from the GitHub page.
 
 ## Requirements
 
-This template requires **TeX Live 2025** or later and must be compiled with **LuaLaTeX**.
+This template requires **TeX Live 2025** or **later** and must be compiled with **LuaLaTeX**.
 
-### Installing TeX Live 2025
+### Installing TeX Live
+
+Install the **latest available version of TeX Live** for your platform. It
+must be at least TeX Live 2025 with up to date packages.
+
+If you already have TeX Live installed, make sure it's fully up to date using
+_TeX Live Manager GUI_, _TeX Live Utility_ or the `tlmgr` command line tool.
 
 For complete instructions refer to the [TeX Live website](https://www.tug.org/texlive/).
 Here are the basic steps for each platform:
@@ -82,7 +87,7 @@ Download and run the installer from https://www.tug.org/texlive/windows.html
 #### macOS
 
 ```bash
-# Install MacTeX (includes TeX Live 2025)
+# Install MacTeX (includes TeX Live)
 # Download from https://www.tug.org/mactex/
 # Or use Homebrew:
 brew install --cask mactex
@@ -100,9 +105,10 @@ cd install-tl-*
 sudo perl install-tl
 
 # Add to PATH (add to ~/.bashrc or ~/.zshrc for persistence)
-export PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
-export MANPATH=/usr/local/texlive/2025/texmf-dist/doc/man:$MANPATH
-export INFOPATH=/usr/local/texlive/2025/texmf-dist/doc/info:$INFOPATH
+# Replace /path-to-texlive with the actual path where TeX Live was installed
+export PATH=/path-to-texlive/bin/x86_64-linux:$PATH
+export MANPATH=/path-to-texlive/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/path-to-texlive/texmf-dist/doc/info:$INFOPATH
 ```
 
 ## Building Your Document
@@ -152,6 +158,46 @@ By default, the class produces a dissertation. For a master's thesis:
 ```latex
 \documentclass[thesis]{uofithesis}
 ```
+
+## VS Code and LaTeX Workshop
+
+To use this template in **Visual Studio Code** with the **LaTeX Workshop** extension,
+the recommendation is to configure **LaTeX Workshop** to use
+**LuaLaTeX** and **latexmk** for building the document.
+
+1. Open VS Code settings (`Ctrl+,` or `Cmd+,` on macOS)
+2. Search for `latex-workshop.latex.tools` and ensure you have a tool configured for `lualatex` using `latexmk`:
+    ```json
+    {
+        "name": "lualatexmk",
+        "command": "latexmk",
+        "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-lualatex",
+            "-outdir=%OUTDIR%",
+            "%DOC%"
+        ]
+    },
+    ```
+3. Search for `latex-workshop.latex.recipes` and ensure you have a recipe configured that uses the `lualatexmk` tool defined above:
+    ```json
+    {
+        "name": "latexmk (lualatex)",
+        "tools": [
+            "lualatexmk"
+        ]
+    },
+    ```
+4. Set this tool as the default builder in `latex-workshop.latex.recipes` so that building your document uses `latexmk` with `lualatex`.
+
+You may also want to set `biblatex` as the Citation Backend for intellisense.
+
+> [!NOTE]
+> The magic comment `%! TEX program = lualatex` at the top of `thesis.tex` is a hint for certain editors
+> to know they need to use `lualatex` to compile the document. That may interfere
+> with editors using `latexmk`, so you can try removing it if you encounter conflicts with your build setup.
 
 ## TeXstudio
 
