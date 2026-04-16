@@ -111,54 +111,6 @@ export MANPATH=/path-to-texlive/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/path-to-texlive/texmf-dist/doc/info:$INFOPATH
 ```
 
-## Building Your Document
-
-### Using latexmk (Recommended)
-
-This repository includes a [`.latexmkrc`](./.latexmkrc) that's set up to use
-the correct tools. You can build with:
-
-```bash
-latexmk thesis.tex
-```
-
-Clean build artifacts:
-
-```bash
-latexmk -c thesis.tex
-```
-
-### Without latexmk
-
-Multiple tool runs are necessary to create all intermediate files and the bibliography:
-
-```bash
-lualatex thesis.tex
-biber thesis
-lualatex thesis.tex
-lualatex thesis.tex
-```
-
-## Document Structure
-
-[`thesis.tex`](./thesis.tex) is a sample for how to use the `uofithesis` class,
-and includes comments and examples for all major features.
-
-Not all elements are required, so remove any sections that don't apply to your document.
-Optional parts include:
-
-- Copyright Page
-- Acknowledgements
-- Appendix or Appendices
-
-### Thesis vs Dissertation
-
-By default, the class produces a dissertation. For a master's thesis:
-
-```latex
-\documentclass[thesis]{uofithesis}
-```
-
 ## VS Code and LaTeX Workshop
 
 To use this template in **Visual Studio Code** with the **LaTeX Workshop** extension,
@@ -222,6 +174,54 @@ for the custom macros. To use it, copy the `uofithesis.cwl` file to your TeXstud
 - macOS/Linux: `~/.config/texstudio/completion/user/`
 
 After copying the file, restart TeXstudio.
+
+## Building Your Document
+
+### Using latexmk (Recommended)
+
+This repository includes a [`.latexmkrc`](./.latexmkrc) that's set up to use
+the correct tools. You can build with:
+
+```bash
+latexmk thesis.tex
+```
+
+Clean build artifacts:
+
+```bash
+latexmk -c thesis.tex
+```
+
+### Without latexmk
+
+Multiple tool runs are necessary to create all intermediate files and the bibliography:
+
+```bash
+lualatex thesis.tex
+biber thesis
+lualatex thesis.tex
+lualatex thesis.tex
+```
+
+## Document Structure
+
+[`thesis.tex`](./thesis.tex) is a sample for how to use the `uofithesis` class,
+and includes comments and examples for all major features.
+
+Not all elements are required, so remove any sections that don't apply to your document.
+Optional parts include:
+
+- Copyright Page
+- Acknowledgements
+- Appendix or Appendices
+
+### Thesis vs Dissertation
+
+By default, the class produces a dissertation. For a master's thesis:
+
+```latex
+\documentclass[thesis]{uofithesis}
+```
 
 ## Package Groups and Accessibility
 
@@ -543,6 +543,13 @@ Use `\input{chapters/chapter1.tex}` or similar to include chapter files.
 ## Troubleshooting
 
 ### Build Errors
+
+#### Update TeX Live / LaTeX Distribution
+
+Make sure your distribution of TeX Live (or MikTeX, MacTeX, etc.) is up to date.
+Use the newest available version.
+
+On Overleaf, use [Overleaf Labs](https://www.overleaf.com/labs/participate) to enable the Rolling Release, which provides access to the most up-to-date TeX Live environment.
 
 #### Error: "Undefined control sequence"
 
