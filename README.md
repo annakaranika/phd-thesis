@@ -252,8 +252,7 @@ The Tagging Project is still under active development, and some features may be 
 > before including a package in your document.
 
 `align`, `equation`, `gather`, `split`, `multline` and other `amsmath` environments 
-are all supported and will be tagged properly. Since they are not floats,
-they do not need to be wrapped in `Part` tags:
+are all supported and will be tagged properly.
 
 ```latex
 Some body text.
@@ -266,8 +265,7 @@ Some body text.
 Some more text...
 ```
 
-If using float, all [float environments must be wrapped in `Part`](#wrap-floats-in-part-tags) 
-tags to ensure they are read in the correct order by screen readers.
+If using float specifiers, see [About Floats](#about-floats).
 
 ### Graphics and Visualization
 
@@ -304,22 +302,19 @@ cycle list name=StrictAA,
 
 ```latex
 % For images
-\tagstructbegin{tag=Part}
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth,alt={Alt text}]{image.png}
     \caption{Image caption}
     \label{fig:image_label}
 \end{figure}
-\tagstructend
 
 % For TikZ diagrams and pgfplots
-\tagstructbegin{tag=Part}
-    \begin{figure}[H]
-        \begin{tikzpicture}[alt={Description of diagram}]
+\begin{figure}
+    \begin{tikzpicture}[alt={Description of diagram}]
 ```
 
-At this time, all [float environments must be wrapped in `Part`](#wrap-floats-in-part-tags) tags to ensure they are read in the correct order by screen readers.
+If using float specifiers, see [About Floats](#about-floats).
 
 Read [Alternative Text for Images](https://digitalaccessibility.illinois.edu/getting-started/accessibility-fundamentals/alternative-text-images) for best practices on writing alt text.
 
@@ -328,8 +323,7 @@ Read [Alternative Text for Images](https://digitalaccessibility.illinois.edu/get
 Tables require proper header configuration for accessibility:
 
 ```latex
-\tagstructbegin{tag=Part}
-\begin{table}[H]
+\begin{table}
     \caption{Table Caption}
     \tagpdfsetup{table/header-rows={1}}  % First row is header
     \begin{tabular}{|l|l|}
@@ -340,10 +334,9 @@ Tables require proper header configuration for accessibility:
         \hline
     \end{tabular}
 \end{table}
-\tagstructend
 ```
 
-At this time, all [float environments must be wrapped in `Part`](#wrap-floats-in-part-tags) tags to ensure they are read in the correct order by screen readers.
+If using float specifiers, see [About Floats](#about-floats).
 
 For tables with header columns:
 
@@ -407,15 +400,13 @@ The References heading starts on a new page, even though ordinary subsections do
 Here's a sample for how to include a chemical structure with `chemfig`:
 
 ```latex
-\tagstructbegin{tag=Part}
-\begin{figure}[H]
+\begin{figure}
     \chemfig{...}
     \caption{Molecular structure}
 \end{figure}
-\tagstructend
 ```
 
-At this time, all [float environments must be wrapped in `Part`](#wrap-floats-in-part-tags) tags to ensure they are read in the correct order by screen readers.
+If using float specifiers, see [About Floats](#about-floats).
 
 ### Source Code Listings
 
@@ -461,20 +452,23 @@ impossible to make LaTeX Tagging do anything else.
 > intentional to meet the Graduate College formatting standards, as the
 > `\chapter` command adds extra vertical space and page breaks that are not allowed.
 
-### Wrap Floats in Part Tags
+### About Floats
 
-Wrap figures and tables in Part tags:
+The LaTeX Tagging system does not currently fully support floats, so most float
+environments are in the wrong order in the underlying PDF structure. That makes
+it hard for assistive technologies to read them in the correct order. The best 
+way to mitigate this is to use the `H` float specifier from the `float` package, 
+which places the float "here" and tags it in the correct order in the PDF structure.
 
-```latex
-\tagstructbegin{tag=Part}
-\begin{figure}[H]
-    % content
-\end{figure}
-\tagstructend
-```
+The `uofithesis` class includes `float` and sets `H` as the default placement 
+for figures and tables, so you can just use `\begin{figure}` and `\begin{table}`.
 
-Without this, all of the figures and tables will be read after the main text, 
-which is very confusing for assistive technology.
+If you need to use other float specifiers, be aware that the PDF structure will 
+not match the visual order of the document.
+
+> [!NOTE]
+> Previous versions of this template used `\tagstructbegin` and `\tagstructend`
+> to manually wrap floats with `Part` elements. This is no longer necessary.
 
 ### Provide Meaningful Alt Text
 

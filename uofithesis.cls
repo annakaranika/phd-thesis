@@ -9,6 +9,8 @@
 % sectsty is partially compatible with tagging, don't use \sectionrule
 \RequirePackage{sectsty}
 \RequirePackage{float}
+\floatplacement{figure}{H}
+\floatplacement{table}{H}
 
 % pgfplots configuration for accessible color schemes
 \RequirePackage{etoolbox}
