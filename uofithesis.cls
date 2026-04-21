@@ -249,6 +249,7 @@
 \newcounter{appendix}
 \newenvironment{appendices}{%
     \setcounter{appendix}{0}%
+    \renewcommand{\theappendix}{\Alph{appendix}}%
     \renewcommand{\thesection}{Appendix \Alph{appendix}}%
     \renewcommand{\thesubsection}{\Alph{appendix}.\arabic{subsection}}%
     \renewcommand{\section}[1]{%
