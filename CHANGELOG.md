@@ -3,6 +3,24 @@
 **Breaking changes** will be highlighted in each version, if there are any.
 Breaking change would mean a change is needed in the `.tex` file to accommodate the changes in the document class.
 
+## v1.7 - 2026-04-21
+
+### Breaking Changes
+
+#### Floats
+
+`float` placement has been set to `H` by default for tables and figures. If you
+previously relied on the default float placement, you may need to adjust your
+tables and figures.
+
+Wrapping floats in `Part` tags is no longer necessary, using `H` placement will
+place them in the correct location in the document.
+
+### Other Changes
+
+- Fixed references to appendices using the wrong numbering. They now use the
+  correct letter numbering by default.
+
 ## v1.6 - 2026-04-02
 
 ### Breaking Changes
