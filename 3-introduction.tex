@@ -9,20 +9,20 @@ The Internet of Things (IoT) has evolved well beyond its early phase, with over 
 We use the term \emph{smart space} to refer to any physical environment instrumented with IoT devices for automated sensing and actuation. Smart spaces span a wide range of scales and deployment contexts---from a residential home with a few dozen consumer devices to a commercial smart building with hundreds or thousands of sensors and actuators, to smart farms and industrial factories with large physical footprints. \Cref{intro:tab:taxonomy} provides a taxonomy of the smart space types addressed in this thesis.
 
 \begin{table}[t]
-\centering
-\tagpdfsetup{table-tagging=false}
-\caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
-\label{intro:tab:taxonomy}
-\begin{tabularx}{\linewidth}{lXl}
-\toprule
-\textbf{Smart Space} & \textbf{Key Control Challenges} & \textbf{This Thesis} \\
-\midrule
-Residential home (10s of devices)   & Navigating the control spectrum; debugging silent automation failures & \Cref{sec:cic}, \Cref{sec:rasc} \\[2pt]
-Commercial building (100s--1000s)    & Hub overload; cloud dependency; STA scalability                      & \Cref{sec:comesh}, \Cref{sec:rasc} \\[2pt]
-Smart farm (distributed, outdoors)  & Connectivity gaps; unattended local operation                        & \Cref{sec:comesh} \\[2pt]
-Smart factory (industrial)          & Strict data-locality requirements; operational continuity            & \Cref{sec:comesh} \\
-\bottomrule
-\end{tabularx}
+    \centering
+    \tagpdfsetup{table-tagging=false}
+    \begin{tabularx}{\linewidth}{p{0.23\linewidth}p{0.45\linewidth}p{0.25\linewidth}}
+        \toprule
+        \textbf{Smart Space} & \textbf{Key Control Challenges} & \textbf{This Thesis} \\
+        \midrule
+        Residential home (10s of devices)   & Navigating the control spectrum; debugging silent automation failures & \Cref{sec:cic}, \Cref{sec:rasc} \\[2pt]
+        Commercial building (100s--1000s)    & Hub overload; cloud dependency; STA scalability                      & \Cref{sec:comesh}, \Cref{sec:rasc} \\[2pt]
+        Smart farm (distributed, outdoors)  & Connectivity gaps; unattended local operation                        & \Cref{sec:comesh} \\[2pt]
+        Smart factory (industrial)          & Strict data-locality requirements; operational continuity            & \Cref{sec:comesh} \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
+    \label{intro:tab:taxonomy}
 \end{table}
 
 Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. STA workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
