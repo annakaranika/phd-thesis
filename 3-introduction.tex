@@ -6,14 +6,47 @@
 
 The Internet of Things (IoT) has evolved well beyond its early phase, with over 10 billion active devices in deployment today, expected to exceed 25 billion by 2030~\cite{IoTstats}. IoT permeates homes, workplaces, farms, Industry 4.0 settings, entertainment venues, and beyond~\cite{IoTfuture, farmbeats, lampropoulos2019internet}. Smart buildings alone account for over 1.26 billion connected devices, with forecasts reaching 4.12 billion by 2030 and an addressable market exceeding \$90 billion~\cite{Memoori, memoori2025iot}. As deployments scale, they increasingly span \emph{mesh networks} of heterogeneous devices---smart devices capable of compute and storage alongside simpler devices that only receive commands---creating densely populated edge computing environments across both residential and commercial settings.
 
+We use the term \emph{smart space} to refer to any physical environment instrumented with IoT devices for automated sensing and actuation. Smart spaces span a wide range of scales and deployment contexts---from a residential home with a few dozen consumer devices to a commercial smart building with hundreds or thousands of sensors and actuators, to smart farms and industrial factories with large physical footprints. \Cref{intro:tab:taxonomy} provides a taxonomy of the smart space types addressed in this thesis.
+
+\begin{table}[t]
+\centering
+\tagpdfsetup{table-tagging=false}
+\caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
+\label{intro:tab:taxonomy}
+\begin{tabularx}{\linewidth}{lXl}
+\toprule
+\textbf{Smart Space} & \textbf{Key Control Challenges} & \textbf{This Thesis} \\
+\midrule
+Residential home (10s of devices)   & Navigating the control spectrum; debugging silent automation failures & \Cref{sec:cic}, \Cref{sec:rasc} \\[2pt]
+Commercial building (100s--1000s)    & Hub overload; cloud dependency; STA scalability                      & \Cref{sec:comesh}, \Cref{sec:rasc} \\[2pt]
+Smart farm (distributed, outdoors)  & Connectivity gaps; unattended local operation                        & \Cref{sec:comesh} \\[2pt]
+Smart factory (industrial)          & Strict data-locality requirements; operational continuity            & \Cref{sec:comesh} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. STA workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
+
 Modern IoT stacks must be evaluated through two complementary lenses. \textbf{System-facing metrics}---latency, reliability, fault-tolerance, privacy, and cost-efficiency---ensure that automations trigger promptly, survive device or network failures, and protect sensitive telemetry. \textbf{User-facing metrics}---fine-grained control, observability, debuggability, and overall usability---determine whether occupants can understand and shape the behavior of their increasingly complex environments. Together, these metrics define the standard against which any scalable, people-centric IoT platform must be evaluated. This thesis contributes to both dimensions, combining systems design and implementation with empirical user research.
 
-Today's dominant IoT architecture routes every sensor reading and actuation request through a vendor cloud backend, which creates three intertwined pain points. First, \textbf{privacy risks} arise because raw telemetry must transit and persist in third-party infrastructure; keeping control logic on-premise eliminates this exposure entirely~\cite{HACloudless, csa2025matter}. Second, \textbf{reliability degrades} when every automation depends on an Internet path, particularly during network or cloud service outages~\cite{gcloud-down1}. Third, \textbf{cost scales unfavorably}: servicing 500 devices that ping once per second can incur fees approaching \$2{,}500 per month on mainstream IoT cloud tiers~\cite{AzureIoTHub}, while local control removes usage-based bills altogether. Together, these pressures make edge-native, on-premise control an attractive foundation for smart environments that must be private, dependable, and economically sustainable.
+Today's dominant IoT architecture routes every sensor reading and actuation request through a vendor cloud backend, which creates three intertwined pain points. First, \textbf{privacy risks} arise because raw telemetry must transit and persist in third-party infrastructure; keeping control logic on-premise eliminates this exposure entirely~\cite{HACloudless, csa2025matter}. In high-security industrial settings---semiconductor fabs and pharmaceutical facilities, for instance---operators routinely prohibit any data from leaving the premises to protect proprietary processes, a constraint cloud-centric platforms cannot satisfy by design. Second, \textbf{reliability degrades} when every automation depends on an Internet path, particularly during network or cloud service outages~\cite{gcloud-down1}. Third, \textbf{cost scales unfavorably}: servicing 500 devices that ping once per second can incur fees approaching \$2{,}500 per month on mainstream IoT cloud tiers~\cite{AzureIoTHub}, while local control removes usage-based bills altogether. Together, these pressures make edge-native, on-premise control an attractive foundation for smart environments that must be private, dependable, and economically sustainable. Crucially, the hardware needed to realize this vision is already in place: smart devices in both residential and commercial settings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}, offering a ready substrate for distributed control logic without requiring any additional infrastructure investment.
 
-Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps---in infrastructure architecture, user understanding, and control abstractions---is the central challenge this thesis addresses.
+Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
+
+The three works in this thesis target three \emph{orthogonal dimensions} of the smart space control problem---dimensions that together span the design space without overlap:
+
+\begin{itemize}
+    \item \textbf{Infrastructure:} \emph{Where} does STA logic execute? Cloud- and hub-centric deployments create bottlenecks and single points of failure. \Cref{sec:comesh} (CoMesh) shows that fully decentralized, hub-less control over large commercial edge meshes is feasible, resilient, and efficient.
+
+    \item \textbf{User interaction:} \emph{How} do occupants direct their smart space? Users operate along a spectrum from physical per-device interaction to centralized proxy-based hubs. \Cref{sec:cic} (Control in Context) characterizes how and why users navigate this spectrum in practice.
+
+    \item \textbf{Control abstraction:} \emph{What} does the underlying control primitive communicate? Today's RPC is fire-and-forget. \Cref{sec:rasc} introduces RASC, a new abstraction that exposes the full action lifecycle to enable observable, programmable automations.
+\end{itemize}
+
+No single work addresses all three dimensions, and advances in one do not substitute for advances in the others---they are complementary, and together they constitute a coherent thesis.
 
 \smallskip\noindent\textbf{Thesis Statement.}
-This thesis charts a practical path toward \emph{people-centric, edge-native IoT} by: (i)~decentralizing Sense-Trigger-Actuate control logic to eliminate hub bottlenecks and cloud dependencies; (ii)~grounding system design in empirical evidence of how real users navigate smart home control; and (iii)~introducing new abstractions that bring action-level observability and programmability to IoT automation.
+This thesis charts a practical path toward \emph{resilient, people-centric control of smart spaces} by: (i)~decentralizing STA infrastructure to eliminate hub bottlenecks and cloud dependencies; (ii)~grounding design in empirical evidence of how real users navigate the control spectrum; and (iii)~introducing a new control abstraction that brings action-level observability and programmability to IoT automations.
 
 
 \subsection{Thesis Contributions}
@@ -23,18 +56,21 @@ This thesis straddles the boundaries of distributed systems design and human-com
 
 \begin{table}[t]
     \centering
-    \begin{tabularx}{\linewidth}{lXl}
+    \tagpdfsetup{table-tagging=false}
+    \begin{tabularx}{\linewidth}{l|X|l}
         \toprule
         \textbf{Work} & \textbf{Objective} & \textbf{Evaluation} \\
-        \midrule
-        CoMesh~\cite{comesh}
+        \midrule\midrule
+        \multirow{2}{*}{CoMesh~\cite{comesh}}
         & Decentralized STA control plane for commercial edge IoT meshes
         & System measurements \\
-        Control in Context~\cite{controlincontext}
+        \midrule
+        \multirow{2}{*}{Control in Context~\cite{controlincontext}}
         & User study of smart home control scheme navigation
         & HCI analysis \\
-        Rascal~\cite{rasc}
-        & Observability abstraction and scheduler for IoT actions
+        \midrule
+        \multirow{2}{*}{RASC~\cite{rasc}}
+        & Observability abstraction and DAG-aware scheduler for IoT automations
         & System measurements \\
         \bottomrule
     \end{tabularx}
@@ -70,17 +106,17 @@ Control in Context's contributions are:
 \end{itemize}
 
 
-\subsubsection{Rasc: Enhancing Observability and Programmability in Smart Spaces}
+\subsubsection{RASC: Enhancing Observability and Programmability in Smart Spaces}
 \label{intro:sec:rasc}
 
-IoT platforms today rely on RPC, a fire-and-forget primitive that provides no feedback on whether a physical action has started, completed, or failed. This leaves both users and developers without the observability needed to build reliable routines, reason about device state, or diagnose failures. We present Rascal~\cite{rasc}, a system that implements RASC (Request-Ack-Start-Complete), a new abstraction for IoT device control that exposes the full lifecycle of every action.
+IoT platforms today rely on RPC, a fire-and-forget primitive that provides no feedback on whether a physical action has started, completed, or failed. This leaves both users and developers without the observability needed to build reliable routines, reason about device state, or diagnose failures. We introduce RASC~\cite{rasc} (Request-Ack-Start-Complete), a new abstraction for IoT device control that exposes the full lifecycle of every action, and Rascal, its implementation atop existing RPC-based IoT platforms.
 
-Rascal's contributions are:
+RASC's contributions are:
 \begin{itemize}
     \item The RASC abstraction, which extends RPC with four lifecycle states---Request, Acknowledgment, Start, and Complete---enabling both users and higher-level automation systems to reason about action progress in real time.
-    \item An adaptive polling strategy that determines when actions start, complete, or fail with minimal overhead, implemented atop existing RPC-based IoT APIs.
+    \item An adaptive polling strategy that detects when actions start, complete, or fail with minimal overhead, without requiring any device-side modifications.
     \item DAG-aware scheduling policies that express causal dependencies among actions, enabling routines that react dynamically to action outcomes rather than relying on fixed time windows.
-    \item Integration with Home Assistant, a widely used open-source smart home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
+    \item Integration with Home Assistant via Rascal, a widely used open-source smart home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
 \end{itemize}
 
 
@@ -90,7 +126,7 @@ Rascal's contributions are:
 The contributions of this thesis advance a local-first, people-centric vision for IoT. By demonstrating how privacy-preserving control, transparent automation, and programmable action abstractions can coexist on commodity hardware, this work benefits commercial ecosystems, everyday occupants, and the broader research community.
 
 \begin{itemize}
-    \item \textbf{Decentralized edge control (CoMesh).} Running STA logic on a cooperative mesh eliminates recurring cloud fees, reduces WAN bandwidth, and removes the single-hub failure point that drives costly support incidents. Sensitive telemetry never leaves the premises, easing regulatory exposure (GDPR, CCPA), while automations continue operating during ISP outages or cloud service discontinuations---safeguarding locks, alarms, and other critical automations. CoMesh also seeds new research on sustainable, low-carbon IoT by demonstrating that constrained devices can shoulder control tasks once reserved for data centers.
+    \item \textbf{Decentralized edge control (CoMesh).} Smart devices in homes and commercial buildings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}; CoMesh marshals this untapped capacity, running STA coordination directly on the devices already present without requiring dedicated control hardware. This eliminates recurring cloud fees, reduces WAN bandwidth, and removes the single-hub failure point that drives costly support incidents. Sensitive telemetry never leaves the premises, easing regulatory exposure (GDPR, CCPA), while automations continue operating during ISP outages or cloud service discontinuations---safeguarding locks, alarms, and other critical automations. CoMesh also seeds new research on sustainable, low-carbon IoT by demonstrating that constrained, mostly-idle devices can shoulder control tasks once reserved for data centers.
 
     \item \textbf{Human-centric control insights (Control in Context).} Ground-truth evidence on where occupants struggle lets product teams target improvements that reduce device returns and help-desk volume. By treating troubleshooting as a user experience problem, this work reveals opportunities for transparency-driven design that lower the barrier for less-technical users to adopt and rely on smart spaces. Clearer mental models and faster diagnostics make dense IoT environments more accessible and trustworthy.
 
@@ -103,4 +139,4 @@ Collectively, this thesis turns properties that were once vendor-locked---privac
 \subsection{Thesis Organization}
 \label{intro:sec:organization}
 
-The remainder of this dissertation is organized as follows. \Cref{sec:comesh} presents CoMesh, our decentralized STA control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \Cref{sec:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. \Cref{sec:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. The dissertation concludes with a discussion of future directions and a summary of contributions.
+The remainder of this dissertation is organized as follows. \Cref{sec:comesh} presents CoMesh, our decentralized STA control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \Cref{sec:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. \Cref{sec:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. The dissertation concludes with a summary of contributions and a discussion of future directions.

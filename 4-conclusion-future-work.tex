@@ -1,0 +1,67 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+\subsection{Summary of Contributions}
+\label{conc:sec:summary}
+
+This thesis has advanced a resilient, people-centric vision for the control of smart spaces---environments instrumented with IoT devices for automated sensing and actuation---across three orthogonal dimensions: infrastructure, user interaction, and control abstraction. Together, the three contributions form a coherent agenda to make smart space control decentralized, observable, and grounded in how real occupants actually live with their devices.
+
+\begin{enumerate}
+
+    \item \textbf{CoMesh (\Cref{sec:comesh})} presents the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate (STA) operations in large commercial edge IoT meshes. By organizing devices into self-managing coteries that use zero-message exchange, quorum-based agreement, epoch-based migration, and locality-sensitive hashing, CoMesh eliminates the single-hub bottleneck and cloud dependency that limit today's deployments. Formal analysis and Raspberry Pi experiments confirm its safety, liveness, scalability, and fault-tolerance. CoMesh demonstrates that resilient, edge-first control of large smart spaces is not only theoretically sound but practically deployable.
+
+    \item \textbf{Control in Context (\Cref{sec:cic})} provides the first empirical characterization of how smart home users navigate the full spectrum of control schemes---from physical per-device interaction to proxy-based centralized hubs---in the context of everyday tasks, device failures, and evolving home setups. Through a survey of $N=60$ smart home owners and semi-structured interviews with $N=8$ participants, this work reveals that control is a fluid, reflective process guided by situational factors rather than ecosystem boundaries. The findings expose the mismatch between platform design assumptions and real user behavior, and provide grounded design principles for future systems that treat the user---not the vendor ecosystem---as the center of design.
+
+    \item \textbf{RASC (\Cref{sec:rasc})} introduces a new abstraction for IoT device control that closes the gap between the fire-and-forget RPC primitive and the rich action-progress information that users and developers need. RASC exposes four lifecycle states---Request, Acknowledgment, Start, and Complete---and its implementation (Rascal) adds an adaptive polling strategy and DAG-aware scheduling layer atop existing IoT platforms without requiring device modifications. Evaluation on real smart home automation workloads shows that RASC detects action completion within 2--16 seconds over 90\% of cases, and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
+
+\end{enumerate}
+
+Collectively, this work turns three dimensions of smart space control---where STA logic runs, how users interact with it, and what the underlying primitive communicates---from sources of fragility and frustration into first-class design targets.
+
+
+\subsection{Future Research Directions}
+\label{conc:sec:future}
+
+Each contribution of this thesis opens new research directions. We outline the most promising below.
+
+
+\subsubsection{Centralization vs.\ Decentralization Decision Frameworks}
+\label{conc:sec:central-decent}
+
+A recurring theme across this thesis is the tension between centralized and decentralized control. CoMesh shows that full decentralization is feasible and efficient at scale; Control in Context reveals that users themselves navigate a centralized-to-physical spectrum in their daily lives. Yet neither contribution answers the engineering question: \emph{when should a deployment choose centralized control over decentralized, and vice versa?}
+
+This question has two flavors that we believe warrant separate treatment:
+
+\paragraph{System/control-plane axis.}
+CoMesh's main contribution is to demonstrate the \emph{feasibility} of decentralization for the STA control plane. A natural follow-on is a principled decision framework---potentially expressed as a decision tree or configuration advisor---that takes as input deployment parameters (number of devices, churn rate, network topology, latency budget, privacy constraints) and recommends an architecture along the centralized-to-decentralized spectrum. Such a framework would generalize CoMesh's insights and help operators of smart buildings, farms, and factories determine the critical crossover point at which decentralization becomes more cost-effective or resilient than hub-based alternatives.
+
+\paragraph{User-interface/management-plane axis.}
+Control in Context reveals that users fluidly move along the control spectrum, but today's platforms provide no structured support for this movement. A complementary decision framework for the interface plane would help platform designers understand when to surface physical control options versus proxy-based abstractions to a given user in a given context. Such a framework could be informed by the situational factors this thesis uncovers---task type, proximity, perceived reliability, troubleshooting state---and could form the basis of an adaptive smart home interface that meets users where they are rather than forcing them into a single control paradigm.
+
+
+\subsubsection{RASC-Powered Troubleshooting for Smart Homes}
+\label{conc:sec:troubleshooting}
+
+Control in Context reveals that troubleshooting is one of the most frustrating and consequential aspects of the smart home experience: failures lead users to abandon devices, switch platforms, and lose trust in automation entirely. Today's platforms provide no structured support for debugging; users are left to manually reconstruct what went wrong by trial and error.
+
+RASC's lifecycle visibility---knowing exactly when an action was requested, acknowledged, started, completed, or failed---is a natural foundation for a structured troubleshooting layer. Future work could build a smart home debugger atop RASC that: (i) records action timelines across devices during routine execution; (ii) surfaces the first point of divergence from expected behavior (e.g., an action that was acknowledged but never started); and (iii) proposes remediation steps or alternative control paths. Such a system would close the loop between the user-facing insights of Control in Context and the infrastructure-level observability of RASC, addressing one of the most concrete and impactful pain points uncovered by this thesis.
+
+
+\subsubsection{RASC as a General Distributed Abstraction}
+\label{conc:sec:rasc-general}
+
+RASC was designed for IoT settings, but its core insight---that long-running distributed actions have meaningful intermediate states that callers should be able to observe---applies broadly. In general distributed computing, remote procedure calls, microservice invocations, and workflow steps all exhibit the same four-phase structure: a request is issued, acknowledged, begins executing, and eventually completes or fails. Future work could explore RASC as a general-purpose alternative to RPC in settings beyond IoT, including distributed databases, cloud workflow orchestration, and robotics pipelines. The scheduling theory developed for RASC (DAG-TL, rescheduling under uncertainty) may also generalize to workflow engines that must reason about task durations and causal dependencies at runtime.
+
+
+\subsubsection{LLM-Assisted Automation Authoring Atop RASC}
+\label{conc:sec:llm-automation}
+
+RASC's lifecycle abstraction does more than expose progress to a human debugger---it provides a structured interface that language models can reason about when generating or refining automations. Today, writing smart home automations requires users to manually express preconditions, action sequences, and timing constraints in a platform-specific syntax; subtle mistakes (e.g., assuming an action has completed before it has) produce brittle or unsafe routines that fail silently. A promising future direction is to use large language models to synthesize automations from natural-language intent, grounding generation in the richer action model that RASC provides.
+
+Concretely, RASC exposes two primitives that make LLM-generated automations more robust: \emph{fallback actions}, triggered when an action fails to reach the Start or Complete state within an adaptive window, and \emph{co-actions}, dependencies that express causal ordering between actions in a DAG. An LLM aware of these primitives can produce automations that degrade gracefully---e.g., ``if the garage door fails to close, send an alert and lock the side door instead''---rather than silently doing nothing. The combination of natural-language intent, RASC's structured feedback, and the grounded user preferences surfaced by Control in Context creates a path toward an automation authoring assistant that can satisfy users' actual goals, not just their literal instructions.
+
+
+\subsubsection{Language Model Inference at the Smart Space Edge}
+\label{conc:sec:lmsoniot}
+
+The emergence of capable small language models (SLMs) that can run on commodity hardware opens a new frontier for smart spaces: on-device natural language interaction that does not require cloud connectivity. Building on the edge-native infrastructure established by CoMesh and the observability layer of RASC, future work---LMsOnIoT---aims to distribute language model inference across the heterogeneous, resource-constrained devices already present in a smart building or home. The key challenge is adaptive placement: choosing among pipeline parallelism, tensor parallelism, or mixed-mode execution on a per-layer basis to minimize inter-device communication under tight memory and wireless-bandwidth budgets. Combined with the idle-capacity insight that motivates CoMesh~\cite{hyperedge}, such a system could provide sub-100\,ms natural-language control of smart spaces that remains fully functional during cloud or ISP outages---a natural extension of the local-first, people-centric vision advanced by this thesis.

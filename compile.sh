@@ -14,5 +14,5 @@ lualatex -interaction=nonstopmode thesis.tex
 biber thesis
 lualatex -interaction=nonstopmode thesis.tex
 lualatex -interaction=nonstopmode thesis.tex
-biber thesis
-lualatex -interaction=nonstopmode thesis.tex
+# biber thesis
+# lualatex -interaction=nonstopmode thesis.tex

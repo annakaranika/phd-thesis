@@ -1,5 +1,52 @@
 \abstract{
-    The abstract must be placed immediately after the title page. 
-    There is no word limit for the abstract. 
-    No images or footnotes should appear in the abstract.
+The Internet of Things has instrumented billions of homes, buildings, farms, and factories
+with smart devices, creating densely populated edge computing environments where automated
+routines---chaining sensor readings to device actuations---determine how occupants live and
+work. Yet today's platforms fail along two complementary dimensions. On the
+\textit{system-facing} side, IoT control is routed through vendor clouds and central hubs
+that introduce latency, cost, and single points of failure, even as the compute capacity
+needed for local control already sits idle in the deployed devices themselves. On the
+\textit{user-facing} side, occupants navigate a rich spectrum of control options---from
+physical device interaction to proxy-based centralized hubs---with no structured system
+support for moving between them, while the fire-and-forget RPC primitive gives developers
+and users no feedback on whether physical actions have actually succeeded.
+
+This dissertation advances a \textit{resilient, people-centric} vision for smart space
+control through three orthogonal contributions, each targeting a distinct dimension of
+the problem.
+
+\textbf{CoMesh} addresses the \textit{infrastructure} dimension: where does
+Sense-Trigger-Actuate logic execute? We present the first fully decentralized, hub-less
+control plane for STA operations in large commercial edge IoT mesh networks. CoMesh
+organizes devices into self-managing coteries using zero-message exchange protocols,
+quorum-based agreement, epoch-based migration, and locality-sensitive hashing. We formally
+prove its safety, liveness, and progress properties, and evaluate it on Raspberry Pi
+deployments and large-scale simulations, demonstrating scalability, fault-tolerance, and
+low latency without cloud or hub dependency.
+
+\textbf{Control in Context} addresses the \textit{user-interaction} dimension: how do
+occupants navigate smart space control? We present a mixed-methods study characterizing
+how and why smart home users move along the spectrum from physical per-device interaction
+to proxy-based centralized control. Through a survey of $N=60$ smart home owners and
+semi-structured interviews with $N=8$ participants, we reveal that control is a fluid,
+situational process shaped by reliability, convenience, and cognitive load---not by
+ecosystem boundaries---and that today's platforms, designed around vendor interests
+rather than user needs, leave occupants to build their own workarounds and absorb the
+costs of inadequate infrastructure support.
+
+\textbf{RASC} addresses the \textit{control-abstraction} dimension: what does the
+underlying control primitive communicate? We introduce RASC (Request-Ack-Start-Complete),
+a new abstraction that exposes the full lifecycle of every IoT device action, and Rascal,
+its implementation atop existing RPC-based IoT platforms without requiring device
+modifications. An adaptive polling strategy detects action start, completion, and failure
+with minimal overhead; DAG-aware scheduling enables causally dependent automations that
+react dynamically to action outcomes. Evaluation on real smart home workloads shows action
+completion detection within 2--16 seconds over 90\% of cases and scheduling improvements
+of 10--55\% over state-of-the-art baselines.
+
+Together, these contributions turn the key dimensions of smart space control---where STA
+logic runs, how users interact with it, and what the control primitive communicates---from
+sources of fragility and frustration into first-class design targets, advancing the goal of
+smart spaces that are autonomous, observable, and designed around the people who inhabit
+them.
 }
