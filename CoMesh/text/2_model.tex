@@ -1,0 +1,42 @@
+\begin{table}[t!]
+    \centering
+    \small
+    \renewcommand\arraystretch{1.1}
+    \begin{tabular}{  m{3.5cm} m{12cm}  }
+        \hline
+        \strut \textbf{Term} & \textbf{Description} \\
+        \hline\hline
+        Device & Any IoT device in the system. \par \textit{Example:} lights, locks, shades, TVs, thermostats, fridges. \\
+        \hline
+        Command & A message sent to, and associated action executed by, one IoT 
+        device. \par \textit{Example:} close shades. \\
+        \hline
+        Routine & A sequence of commands. Triggered by time, or a set of triggering clauses, or manually. \par \textit{Example:} At 9pm, turn off all lights and lock all doors. \\
+        \hline
+        Smart Device ($S$) & A device that has (small) memory and computation capability. \par \textit{Examples:} fridges, thermostats, TVs. \\
+        \hline
+        Simple Device ($D$) & An IoT Device that is not a Smart Device, like a sensor or actuator. \par \textit{Examples:} lights, locks, shades. \\
+        \hline \hline
+    \end{tabular}
+    \caption{\it \small Key Terms used in this paper, with examples for \Cref{comesh:fig:smart-building}.}
+    \label{comesh:tab:terms}
+\end{table}
+
+\subsection{System Model}
+\label{comesh:sec:system-model}
+
+We assume a crash-recovery model: IoT devices may fail (crash) at any time, and then recover. We do not target Byzantine (malicious) faults. As is traditional in fault-tolerant literature, we assume that only up to $f$ simultaneous crash failures occur in the system. The value of $f$ can be calculated from deployment settings, e.g., in a smart building, by setting $f$ to the number of devices in the largest power domain. 
+
+\Cref{comesh:tab:terms} summarizes key terms used in the paper. We assume a subset of devices ($\geq 3$) are smart devices, equipped 
+with (small) memory and compute capability---other simple 
+IoT devices may co-exist,
+capable only of receiving commands, responding to queries, but not executing computations.
+
+Since IoT devices are typically fixed early in the operation of a smart building or smart farm, 
+we assume that the locations of devices are known (we perform mobility experiments later).
+We assume an asynchronous system with unsynchronized clocks, where messages may be dropped.
+
+Smart devices communicate via a mesh, i.e., a wireless ad-hoc network containing device-to-device Wifi links. Meshes are known to be robust even when large fractions of nodes fail~\cite{sengul2008adaptive}.
+However, links can be lossy. An ad-hoc routing protocol \cite{olsrd}
+exists among devices in this mesh.
+We assume any smart device can send a command to any IoT device.  Finally, \sysname{} is layered atop a weakly-consistent membership service, e.g., Fuse~\cite{fuse}, or Medley \cite{medley}.  Such a membership protocol, running over an ad-hoc network,  maintains a (nearly) full membership list (of all alive IoT device IDs) at each \smart{}, delivering updates only eventually. Like Medley~\cite{medley}, \sysname{} assumes known device locations. Either precise (e.g., via a digital twin and map), or approximate device locations from localization algorithms work~\cite{han2013localization}.

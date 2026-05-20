@@ -1,0 +1,161 @@
+%\documentclass[acmlarge, review, screen, anonymous]{acmart}
+%\documentclass[manuscript,review,anonymous]{acmart}
+\documentclass[sigconf]{acmart}
+\settopmatter{authorsperrow=4} % not sure if this is allowed but this looks much better
+%TC:macro \del [ignore]
+\input{macros}
+
+%\title{The Central Dilemma: Understanding Control Preferences in Smart Homes}
+\title{Control in Context: How Smart Home Users Navigate {Proxy-based} %and Per-device 
+Schemes}
+\date{September 2024}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+
+%\setcopyright{acmlicensed}
+%\copyrightyear{2025}
+%\acmYear{2025}
+%\acmDOI{XXXXXXX.XXXXXXX}
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+%\acmConference[CHI'26]{Proceedings of the ACM CHI conference on Human Factors in Computing Systems}{April 13--17,2026}{Woodstock, NY}
+
+\copyrightyear{2026}
+\acmYear{2026}
+\setcopyright{cc}
+\setcctype{by}
+\acmConference[CHI '26]{Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems}{April 13--17, 2026}{Barcelona, Spain}
+\acmBooktitle{Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI '26), April 13--17, 2026, Barcelona, Spain}
+%\acmPrice{}
+\acmDOI{10.1145/3772318.3790549}
+\acmISBN{979-8-4007-2278-3/2026/04}
+
+
+
+
+
+\begin{document}
+
+%authors
+\author{Ali Zaidi}
+\email{aliz2@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+\author{Anna Karanika}
+\email{annak8@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+\author{Ti-Chung Cheng}
+\email{tcheng10@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+\author{Yi-Shyuan Chiang}
+\email{ysc6@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+\author{Camille Cobb}
+\email{camillec@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+\author{Indranil Gupta}
+\email{indy@illinois.edu}
+\affiliation{%
+  \institution{University of Illinois at Urbana-Champaign}
+  \city{Urbana}
+  \state{IL}
+  \country{USA}
+}
+
+\author{Karrie Karahalios}
+\email{kkarahal@illinois.edu}
+\affiliation{%
+  \institution{Massachusetts Institute of Technology}
+  \city{Cambridge}
+  \state{MA}
+  \country{USA}
+}
+
+
+
+%\begin{abstract}
+%The rise of smart home devices in living spaces has been accompanied by a push towards more centralized solutions to control these devices, as opposed to the default per-device control schemes, for convenience. Despite this emphasis on centralized smart home device control amongst industry and research practitioners, little is known about how smart home users actually \textit{want} to control their devices, the factors that influence these expectations, and how these perceptions and expectations affect their smart home device experience. We surveyed smart home device owners ($N=43$) and conducted follow-up interviews with a subset of survey participants ($N=8$). We find that user preferences for smart home device control are highly contextual, with user values, situations, and perceptions all playing a role in how users prefer to control their devices. We also find that in cases where central control is naturally considered more convenient, such as managing multiple devices, some smart home users instead prefer to control their devices via per-device control. In addition, we uncover how smart home device control preferences affect troubleshooting experiences and suggest design principles for developing smart home control systems that are more user-centric.   
+%\end{abstract}
+
+\begin{abstract}
+    A homeowner controls their smart home devices along a spectrum of approaches, ranging from physical device control to various proxy-based control modalities. This paper studies \textit{how and why} users move along this spectrum in their day-to-day lives, building upon existing research that focused only on specific interactions. We surveyed smart home owners ($N=43$ users), and conducted follow-up interviews with a subset of the survey participants  ($N=8$). Our studies allow us to both distill specific contexts and experiences of smart home owners as they navigate the control spectrum, as well as to describe how their experiences (both positive and negative) shape their tendencies to control devices in a particular way. These insights lead us to propose practical implications for designers and researchers of smart home management systems, including the need to support flexible control scheme transitions, reduce switching costs, and account for temporal and spatial heterogeneity in the evaluation and design of control systems.
+\end{abstract}
+%\igc{recommend rewriting that next sentence -- it is a key finding. Also make sure some results in the paper harken back to this. As a reviweer I would be sure to look for evidence that this central finding is validated by the paper. Possible rewrite --} In some cases where central control may be thought to be more convenient, some smart home users actually prefer to control their devices via per-device control.
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10003120.10003121.10003122.10003334</concept_id>
+       <concept_desc>Human-centered computing~User studies</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10003120.10003130.10011762</concept_id>
+       <concept_desc>Human-centered computing~Empirical studies in collaborative and social computing</concept_desc>
+       <concept_significance>300</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Human-centered computing~User studies}
+\ccsdesc[300]{Human-centered computing~Empirical studies in collaborative and social computing}
+
+\ccsdesc[500]{Human-centered computing~Collaborative and social computing design and evaluation methods}
+\ccsdesc[500]{Human-centered computing~User studies}
+\ccsdesc[300]{Human-centered computing~Interaction design}
+
+\keywords{Smart homes, Smart home control, User studies, Qualitative
+study}
+
+\maketitle
+\input{text/1-introduction}
+\input{text/2-related_work}
+\input{text/3-methods}
+\input{text/4-updated-results}
+\input{text/5-discussion}
+%\input{text/oldTex/5-updated-discussion}
+\input{text/6-limitations_and_futurework}
+\input{text/7-conclusion}
+
+\begin{acks}
+This work was supported in part by NSF grants CNS 2504595, CNS 1908888, and gifts from Microsoft and Capital One. We thank our participants for their valuable input, and the reviewers for their feedback on earlier versions of this paper. 
+\end{acks}
+
+
+% TC:ignore
+% \todo{make sure all refs have links if needed}
+\bibliography{refs_titlecase}
+\bibliographystyle{ACM-Reference-Format}
+
+\appendix
+% \input{text/appendix/survey_questions}
+%\input{text/appendix/interview_script}
+\input{text/appendix/extra_results}
+% TC:endignore
+\end{document}

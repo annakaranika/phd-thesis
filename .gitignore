@@ -1,3 +1,7 @@
+.DS_Store
+.claude/
+.vscode/
+
 *.html
 *.aux
 *.fdb_latexmk
@@ -13,6 +17,15 @@
 *.bcf
 *.blg
 *.run.xml
+*.zip
 _minted/
 
 !thesis.pdf
+
+# 3rd-party conference/journal files not needed for the thesis
+CoMesh/IEEEtran.cls
+CoMesh/ACM-Reference-Format.bst
+CoMesh/New_IEEEtran_how-to.tex
+RASC/usenix_2020_09.sty
+RASC/usenixbadges.sty
+RASC/usenixbadges-*.pdf

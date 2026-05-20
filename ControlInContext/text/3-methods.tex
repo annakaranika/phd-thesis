@@ -1,0 +1,186 @@
+\subsection{Methods}
+\label{cic:sec:methods}
+We conducted a survey and follow-up interview study to understand the perceptions of smart home device users and their control schemes. We collected $N=60$ survey responses through Prolific, a commonly used crowdsourcing platform for collecting data for online human-subjects research~\cite{palan2018prolific, douglas2023data, eyal2021data} (\Cref{cic:table:participants}). We conducted follow-up interviews with a subset of $N=8$ survey respondents to extract specific insights between September 2023 and March 2024. {Our study's methodology is grounded in previous user-centered smart home research, which focuses more on eliciting high-level themes rather than drawing statistically significant conclusions~\cite{kennedy2021question, dermody2021factors, hennink2022sample}.} All study procedures were piloted internally and approved by our institution's Institutional Review Board (IRB).
+
+\begin{table}[t!]
+\begin{center}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular}{R{3.5cm}|p{12cm}}
+        \hline
+        \textbf{Age} & 18-24~(2\%), 25-34~(28\%), 35-44~(23\%), 45-54~(31\%), 55-64~(7\%), 65+~(9\%) \\ 
+        \hline
+        \multirow{2}{*}{\textbf{Education}} & High School or GED~(16\%), Some College~(22\%),
+        Associate's Degree~(7\%), Bachelor's Degree~(42\%),
+        Post-Graduate Degree~(11\%), Some High School~(2\%) \\
+        \hline
+        \textbf{Gender} & Male~(40\%), Female~(60\%) \\ 
+        \hline
+        \multirow{2}{*}{\textbf{Race}} & Black/African American~(4\%), White~(92\%), Asian~(2\%), Hispanic or Latino~(2\%) \\
+        \hline
+        \textbf{Living Situation} & House~(88\%), Apartment~(10\%),  Town Home~(2\%) \\
+        \hline
+        \textbf{Number of Smart Devices Owned} & 0-5~(16\%),  6-10~(19\%), 11-15~(31\%), 16-20~(21\%),
+        {21-25}~(7\%), 26-30~(2\%), 31-35~(2\%), 36-40~(2\%) \\
+        \hline
+    \end{tabular}
+\end{center}
+\caption{Summary of Survey Participant Demographics.}
+\label{cic:table:participants}
+\end{table}
+
+
+\subsubsection{Survey Methodology}
+\label{cic:sec:survey_method}
+Participants first completed a brief screening survey (median completion time: 65 seconds), which required them to provide their Prolific ID and indicate the number of smart home devices they owned.
+
+{Our goal was to study people with active smart home setups rather than casual single-device owners. We therefore restricted survey participation to adults who (1) were registered on Prolific and reported owning at least one internet-enabled device in Prolific’s prescreening questions~\cite{peer2023platform}, and (2) reported owning at least four smart home devices (e.g., smart lights, plugs, thermostats, cameras, speakers) in our screening survey. Participants were not limited to central-hub households, and those only using per-brand apps or direct device control were eligible.} $60$ participants completed this survey. 
+
+%\del{A subset of these survey respondents participated in a 30-minute follow-up interview. }
+Participants were paid \$0.40 USD (hourly rate of \$24 USD) for completing the screening survey and \$4.00 USD (hourly rate of \$16 USD) for completing the main survey. {We did not specifically recruit or target professional smart home installers or technicians. A small number of participants described installing devices themselves (e.g., DIY setups), but they still participated in the study as end users of those systems rather than in a professional capacity.}
+
+We had 43 valid survey responses from the 60 participants, excluding those who failed any of the arithmetic-based attention-check questions we included at random points in our survey (e.g., ``What is 2 + 7'')~\cite{abbey2017attention} or had inconsistent responses, such as differences in the number of or types of smart devices owned. All 60 survey participants were compensated for their time.
+
+\subsubsection{Survey details}
+The survey aimed to elicit participant preferences and perceptions related to smart home device control, as well as existing troubleshooting workflows and how device control preferences influence them. 
+The full survey is included in Appendix~\ref{appdx:survey}.
+
+
+\noindent\textbf{General Smart Home Setup.}
+The survey began by collecting information regarding each participant's general smart home setup. Participants listed smart home devices they currently use, where they lived, where each device was located, and what smart home device-related applications they currently have on their phones. 
+
+Participants reported what, when, and why they purchased their most recent smart home devices, then rated how well these devices met their goals and explained their ratings. We asked participants to focus on this single device to reduce survey cognitive load~\cite{lenzner2010cognitive} and provide detailed context. 
+
+
+\noindent\textbf{Current Methods for Device Control.}
+\label{cic:survey:control}
+The survey then asked participants how they \textit{controlled} the various smart devices in their home. Participants selected their control schemes for a specific device in their home from the following: routines, central control, per-device control, voice commands, and content streaming/casting. Participants were asked more broadly about their smart home control patterns, such as how they choose to control a device in a specific way when it could be controlled in multiple ways. This section concluded with participants reporting their awareness of home management systems, such as Amazon Alexa, and how they were made aware of these systems' existence. 
+
+\noindent\textbf{Device Failures and Troubleshooting Methods.}
+To understand device troubleshooting experiences (RQ2), the survey asked participants to describe issues they encountered with their smart devices. Participants recalled when their smart devices did not work as planned and their perceptions of the devices during the failure. They also indicated whether they had ever returned a smart device because it stopped working as intended. Participants then provided a step-by-step account of how they troubleshot the device's failure. They continued to report whether they had ever given up on getting a smart home device to work in their home, identifying the device if so.
+
+\noindent\textbf{Survey Wrap-Up and Interview Interest.}
+Finally, the survey asked whether the participant was the primary user of any homes other than their primary residence. If they were, participants were asked if there were any significant differences in how they controlled these devices compared to their primary residence. Then, participants were invited to provide their email if they were interested in participating in a follow-up interview with research team members. 
+
+\begin{table}[t]
+    \centering
+    \tagpdfsetup{table-tagging=false}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{ccccccccccccccc}
+            &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Plug(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Light(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Thermostat(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Door/Window\\ Sensor(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Motion\\ Sensor(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Smoke \\ Alarm(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Camera(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Security \\ System(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ TV/Casting \\ Device(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Speaker(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Tag(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Health \\ Device(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Washing \\ Machine/Dryer(s)\end{tabular} &
+            \begin{tabular}[c]{@{}c@{}}Smart \\ Dishwasher(s)\end{tabular} \\ \cline{2-15} 
+            \multicolumn{1}{c|}{P1} & x & x & x &   &   &   & x & x & x & x &   & x &   &   \\
+            \multicolumn{1}{c|}{P2} & x & x & x &   &   & x &   &   & x & x &   & x &   &   \\
+            \multicolumn{1}{c|}{P3} &   & x & x & x &   & x & x & x & x &   &   &   & x &   \\
+            \multicolumn{1}{c|}{P4} &   &   & x & x & x &   & x & x & x &   & x &   &   & x \\
+            \multicolumn{1}{c|}{P5} & x & x & x &   & x &   & x &   & x &   &   & x & x &   \\
+            \multicolumn{1}{c|}{P6} & x & x &   &   &   &   & x &   & x &   &   &   &   &   \\
+            \multicolumn{1}{c|}{P7} & x & x & x &   & x &   &   &   &   & x &   & x &   &   \\
+            \multicolumn{1}{c|}{P8} &   &   & x &   &   &   & x &   &   & x &   & x &   &  
+        \end{tabular}%
+    }
+    \caption{Smart device ownership of our 8 interview participants. For each smart device, an `x' indicates that the participant owns that device in their home. }
+    \label{cic:tab:interviewparticipantdevice}
+\end{table}
+
+
+%\subsubsection{Maintaining Survey Data Quality}
+
+
+%Within online research, concerns about data quality are not unfounded; previous research reveals how platforms such as Amazon Mechanical Turk have the potential to produce low-quality data, limiting the generalizability of results~\cite{chmielewski2020mturk}. However, when compared to other commonly used crowdsourcing platforms for online human-subjects research, Prolific is a platform that researchers can use to collect high-quality data~\cite{douglas2023data,eyal2021data}. 
+
+
+
+\subsubsection{Follow-up Interviews}
+$40$ survey participants expressed interest in the semi-structured follow-up interview {in exchange for an extra \$20 USD in compensation}. {We prioritized invitation to respondents with the largest reported smart home devices they owned, with the aim of capturing rich experiences across the control spectrum in multi-device ecosystems. Although later waves extended invitations to all participants eventually, only a subset responded, and we conducted 8 interviews.} Interview participants had a variety of devices in their homes, allowing us to elicit a range of perspectives (\Cref{cic:tab:interviewparticipantdevice}). {We used interviewees' survey responses to personalize specific questions during the study. For example, if a participant reported owning smart lights, we asked how they controlled them and why.} Each of the 8 interviews we conducted lasted around 30 minutes and was structured into the following sections (the full interview protocol is included in Appendix~\ref{cic:appdx:interview}): 
+
+\begin{itemize}
+    \item \textit{Smart Home Setup}: Participants were asked to describe their most recent smart device purchase, their motivation for purchasing it, how they set it up, and whether it met their intended goal. 
+    \item \textit{Smart Home Device Control}: Participants discussed how they controlled their smart home devices. Devices they mentioned in the survey were brought up to contextualize the discussion (\Cref{cic:survey:control}). Participants then described their ideal control scheme for their smart home devices. Participants could mention any control method and scheme that may or may not exist on the market. Participants described whether they controlled smart home devices in a way that allowed them to work together, i.e., through routines. Participants discussed how this setup was beneficial to them, if they did, and how they managed it, i.e., what method they used for central control. Finally, participants reflected on how their existing setup and preferences for smart home control methods affected their willingness to purchase new types of smart home devices. 
+    \item \textit{Smart Home Errors and Exceptions}: Participants described specific experiences when their smart home devices did not work as planned. This section asked participants to elaborate on experiences they had briefly described in the survey and to describe any errors or exceptions not included in the survey. In particular, we asked participants to explain any errors they had when integrating devices into their smart home infrastructure. 
+    \item \textit{Smart Home Troubleshooting}: The interview concluded with participants describing their troubleshooting workflow in detail and providing examples of when it was successful and when it was not. The detailed troubleshooting workflows and the impact of troubleshooting experiences on their perception of smart home devices and the corresponding control scheme were augmented by the participants' survey responses.
+\end{itemize}
+
+\subsubsection{Data Analysis}
+We conducted descriptive statistical analysis of the survey data, calculating mean and median ratings for Likert scale-based questions. For qualitative responses and interviews, we performed in-depth qualitative analysis using thematic analysis and open coding~\cite{khandkar2009open, deterding2021flexible}. Two members of the research team independently coded four interviews, followed by cross-coding two interviews to assess inter-rater reliability (IRR)~\cite{hallgren2012computing}, resulting in a Fleiss' Kappa of $0.44$, indicating moderate agreement~\cite{falotico2015fleiss}. 
+%\del{The research team conducted two separate rounds of coding and workflow extraction from all interviews: the initial round to identify general themes, and a second round that involved multi-layer coding to address our research questions.} 
+Codes were consolidated and discussed through team discussions, yielding codes and themes directly related to the research questions, as well as a concrete set of user workflows for troubleshooting smart home devices. These results provided high-level insights into user perceptions, user behavior, and control workflows for smart home devices (\Cref{cic:table:codes}). 
+
+While our interview and survey samples are not designed to support statistical inference, our findings should be interpreted as analytic generalizations about how smart home users navigate proxy-based and physical device control, not as precise estimates of how common each behavior is in the broader population. Our work sits among other qualitative smart home behavior research, providing in-depth insights into user experiences, privacy concerns, and adoption barriers~\cite{dermody2025multi, zheng2018user}.
+
+
+\renewcommand{\arraystretch}{0.75}
+\begin{table}
+    \footnotesize
+    \centering
+    \begin{tabular}{p{0.17\textwidth}|p{0.5\textwidth}|p{0.25\textwidth}}
+    \hline
+        \textbf{Theme} & \textbf{Codes} & \textbf{Meaning} \\ 
+        \hline\hline
+            & Central control: viewed positively or negatively  & \multirow{4}{4cm}{Participant describes how they view the described control scheme} \\
+            Control Scheme & Central control: viewed as useless or convenient \\
+            Perspective & Per-device control: viewed positively or negatively \\
+            & Per-device control: viewed as useless or convenient \\
+        \hline
+            & Advertisement & \multirow{4}{4cm}{How participant became aware of smart home device control scheme} \\ 
+            Awareness & Online research \\
+            Mechanism & Social media \\
+            & Word of mouth \\
+        \hline
+            \multirow{5}{*}{Usage Pattern} & Safety & \multirow{5}{4cm}{The described reasons for why participant uses a smart home device} \\
+            & Convenience \\
+            & Cleaning \\
+            & Communication \\
+            & Entertainment \\
+        \hline
+            \multirow{3}{*}{Usage Frequency} & Daily & \multirow{3}{4cm}{How often the participant uses the device} \\
+            & Weekly \\
+            & As needed \\
+        \hline
+            \multirow{5}{*}{User Type} & Primary user & \multirow{5}{4.2cm}{The type of user in the participant's home that benefits from the described smart home device} \\
+            & Partner/Spouse \\
+            & Child \\
+            & Pet \\
+            & Secondary/Passenger user \\
+        \hline
+            \multirow{5}{3cm}{Perception-driven Behavior}& Increased device usage due to positive perception & \multirow{5}{4cm}{How the participant's perception of the device affects their behavior} \\
+            & Decreased device usage due to negative perception \\
+            & Avoiding device type/brand for future purchases \\
+            & Seeking out device type/brand for future purchases \\
+            & Considering integration for future purchases \\
+        \hline
+            & Convenience & \multirow{4}{3.5cm}{Participant reasons for using a particular device control scheme} \\
+            Device Control & Increased functionality \\
+            Factors & Trust \\
+            & Device types \\
+        \hline
+            \multirow{7}{3cm}{Troubleshooting Steps} & Check and reconnect physical device & \multirow{7}{4cm}{How participants troubleshoot their devices} \\
+            & Check home management system \\
+            & Check application \\
+            & Contact IT support or conduct online research \\
+            & Check and restart home Wi-Fi \\
+            & Modify device commands or routines \\
+            & Give up \\
+        \hline
+            & Positive experience improving device perception & \multirow{4}{4cm}{Effects of troubleshooting experience} \\
+            Troubleshooting & Negative experience worsening device perception \\
+            -based Perception & Troubleshooting experience reduces trust\\
+            & Troubleshooting experience improves trust \\
+        \hline
+    \end{tabular}
+    \caption{Codebook generated from qualitative analysis.}
+    \label{cic:table:codes}
+\end{table}

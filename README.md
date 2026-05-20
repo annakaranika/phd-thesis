@@ -539,6 +539,26 @@ Use `\input{chapters/chapter1.tex}` or similar to include chapter files.
 
 ### Build Errors
 
+#### All citations show as `[0]` or "undefined" (biber cache corruption)
+
+This can happen after a macOS or TeX Live update. Biber ships as a self-contained binary that unpacks a Perl environment into a temp directory on first run. If that cache goes stale, biber crashes silently and produces an empty `thesis.bbl`, so every `\cite{}` renders as `[0]`.
+
+**Symptom:** running `biber thesis` prints only a few lines and stops after `Found BibTeX data source '...'` with no output file written. The crash message `Unicode::UCD: failed to find unicore/version in .../par-<hash>/...` may appear when running `biber thesis --debug`.
+
+**Fix:** delete the stale cache directory and re-run biber:
+
+```bash
+# Find and delete the biber PAR cache (the hash will differ on your machine)
+rm -rf /var/folders/*/*/T/par-$(id -un)
+
+# Then run the full compile cycle
+biber thesis
+lualatex -interaction=nonstopmode thesis.tex
+lualatex -interaction=nonstopmode thesis.tex
+```
+
+Biber will rebuild the cache automatically on the next run. If the path above doesn't match, run `biber thesis --debug` and look for the `par-<hash>` path in the error output.
+
 #### Update TeX Live / LaTeX Distribution
 
 Make sure your distribution of TeX Live (or MikTeX, MacTeX, etc.) is up to date.

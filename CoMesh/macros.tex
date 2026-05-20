@@ -1,0 +1,89 @@
+% =====================================================================
+% CoMesh-specific macros
+% Shared packages and commands live in ../macros.tex.
+% =====================================================================
+
+% --- CoMesh-only packages -------------------------------------------
+\usepackage{circledsteps}   % circled step numbers in figures
+\usepackage{orcidlink}      % ORCID icon + hyperlink in author info
+% \usepackage{flushend}     % removed: two-column balancing, not needed in thesis
+
+% --- CoMesh layout tweaks (caption/float spacing) -------------------
+\PassOptionsToPackage{hidelinks,pdfusetitle}{hyperref}  % belt-and-suspenders if loaded standalone
+\setlength{\belowcaptionskip}{-5pt}
+\setlength{\textfloatsep}{0.6\baselineskip}
+
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% --- CoMesh draft/review comments -----------------------------------
+% Toggle state is set in ../macros.tex (both true for drafting).
+\definecolor{new_green}{RGB}{26,152,80}
+
+\newcommand{\akc}[1]{
+\iftoggle{our_comments}{%
+    {\color{purple} Anna comment: #1}
+}{}}
+
+\newcommand{\akt}[1]{
+\iftoggle{our_contents}{%
+    {\color{red} Anna text: #1}
+}{}}
+\newcommand{\ig}[1]{
+\iftoggle{our_comments}{%
+    {\bf \color{cyan} IG Comment: #1}
+}{}}
+\newcommand{\igc}[1]{
+\iftoggle{our_comments}{%
+    {\bf \color{magenta} IG Comment: #1}
+}{}}
+\newcommand{\igt}[1]{\iftoggle{our_contents}{{\color{blue} #1}}{}}
+
+\newcommand{\todo}[1]{
+\iftoggle{our_comments}{
+    {\color{red} TODO: (#1)}
+}{}}
+
+\newcommand{\new}[1]{\iftoggle{our_contents}{{\color{blue} #1}}{}}
+
+% --- CoMesh system and concept names --------------------------------
+\newcommand{\sysname}{CoMesh}
+\newcommand{\ratiofF}{fail-node ratio}
+\newcommand{\RatiofF}{Fail-node ratio}
+\newcommand{\kgroup}{coterie}
+\newcommand{\kgroups}{coteries}
+\newcommand{\Kgroup}{Coterie}
+\newcommand{\Kgroups}{Coteries}
+\newcommand{\smart}{smart device}
+\newcommand{\smarts}{smart devices}
+\newcommand{\simple}{simple device}
+\newcommand{\bldg}{smart building}
+\newcommand{\Bldg}{Smart Building}
+\newcommand{\Mob}{MOB}
+\newcommand{\Grid}{Smart Farm}
+\newcommand{\Minigrid}{MSF}
+\newcommand{\Minifarm}{MSF}
+\newcommand{\MSF}{MSF}
+\newcommand{\Farm}{Smart Farm}
+\newcommand{\farm}{smart farm}
+\newcommand{\grid}{smart farm}
+\newcommand{\SmallT}{Sparse}
+\newcommand{\smallT}{sparse}
+\newcommand{\Light}{Sparse}
+\newcommand{\light}{sparse}
+\newcommand{\LargeT}{Dense}
+\newcommand{\largeT}{dense}
+\newcommand{\Dense}{Dense}
+\newcommand{\dense}{dense}
+
+\newcommand{\K}{k}
+\newcommand{\f}{f}
+\newcommand{\F}{F}
+
+% --- IEEEbiography helper (used in standalone paper format only) ----
+\newcommand{\ieeebio}[4]{%
+  \begin{IEEEbiography}[{\vspace{#3}\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{#2}}]{#1}%
+  #4
+  \end{IEEEbiography}
+}

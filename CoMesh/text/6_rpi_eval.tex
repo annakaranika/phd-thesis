@@ -1,0 +1,132 @@
+\subsection{Experimental Evaluation}
+\label{comesh:sec:expts}
+We present: 
+(i) Raspberry Pi Lab Deployments   (\Cref{comesh:sec:pidep}) driven by mini-maps of a smart building and a smart farm, 
+(ii) Large-scale Simulations  (\Cref{comesh:sec:simres}), \&  
+(iii) Map-based Simulations with real Routine workloads (\Cref{comesh:sec:mapsim}). 
+
+
+\subsubsection{Raspberry Pi Deployments}
+\label{comesh:sec:pidep}
+
+We implemented \sysname{} in  Raspberry Pi (RPi) 4, via  {12.9K lines of Java code}. Our deployments use commercial RPi 4 model B,
+with 2GB of LPDDR4 RAM, Broadcom BCM2711 quad-core CPU of 1.5GHz Cortex-A72 cores, and communicating via WiFi.
+To implement the central approach, we use an additional 17$^{th}$ Pi device as the central hub. 
+To create the mesh topology, we attenuate RPi's strong signal by consistently wrapping each device in aluminum foil to lower transmission power to 15dBm~\cite{Safehome}.
+We use OLSR routing~\cite{olsrd} as it is standard in Pi 4s.
+For membership, we use Medley~\cite{medley}.
+
+\sysname{} is configured to use \kgroups{} with expected $k=3$ smart devices per \kgroup, and a device \kgroup{} monitors its devices every second. The default locking is  SLA locking (\Cref{comesh:subsubsec:sla}).
+To avoid cold start biases, we start measurements 10 s after \sysname{} is initialized. Each data point involves at least 5 trial runs with different seeds. 
+Epoch length is 60 s.
+
+\begin{figure}[tb!]
+    \centering
+    \begin{subfigure}[b]{0.35\linewidth}
+        \centering
+        \includegraphics[width=\textwidth, angle = 270, origin=c]{CoMesh/figures/exp_eval/rpi_line_topo.JPG}
+        \caption{\small \textit{Mini \Bldg{} (\Mob). From \Cref{comesh:fig:IoTsetting}(a).}}
+        \label{comesh:subfig:line_topo}
+    \end{subfigure}
+    \hspace{5pt}
+    \begin{subfigure}[b]{0.35\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/rpi_grid_topo.JPG}
+        \caption{\small \textit{Mini \Grid{} (\Minigrid). From \Cref{comesh:fig:IoTsetting}(b).}}
+        \label{comesh:subfig:grid_topo}
+    \end{subfigure}
+    \par\medskip
+    \begin{subfigure}[b]{0.35\linewidth}
+        \centering
+        \includegraphics[width=0.78\textwidth]{CoMesh/figures/exp_eval/l_topo_measurements.png}
+        \caption{\small \textit{Mini \Bldg{} (\Mob). From \Cref{comesh:fig:IoTsetting}(a).}}
+        \label{comesh:subfig:line-topo-graph}
+    \end{subfigure}
+    \hspace{5pt}
+    \begin{subfigure}[b]{0.35\linewidth}
+        \centering
+        \includegraphics[width=0.78\textwidth]{CoMesh/figures/exp_eval/grid_topo_measurements.png}
+        \caption{\small \textit{Mini \Grid{} (\Minigrid).  From \Cref{comesh:fig:IoTsetting}(b)}.}
+        \label{comesh:subfig:grid-topo-graph}
+    \end{subfigure}
+    \caption{\small \it Deployment: Raspberry Pi Topologies. From \Cref{comesh:fig:IoTsetting}(a, b).}
+    \label{comesh:fig:rpi_topos}
+\end{figure}
+
+We implement the two Pi topologies shown in \Cref{comesh:fig:rpi_topos}, based on  \Cref{comesh:fig:IoTsetting}(a,b). They are: 
+(i) a {\it Mini \Bldg{}}  topology ({\it \Mob} in plots), based on the L-shaped map of the  \Bldg{}   from \Cref{comesh:fig:IoTsetting}(a); and (ii) a {\it Mini \Grid{} topology} ({\it \Minigrid} in plots) based on \Cref{comesh:fig:IoTsetting}(b), modeled via a 
+4 $\times$ 4 2D {Grid}. Each covers an area of 4 meters $\times$ 4 meters. 
+Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's. 
+
+\begin{figure}[tb!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/bandwidth_xrtn.png}
+        \caption{\small \it  Deployment:  Centralized (lines) vs. \sysname{} (bars): Bandwidth.  \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
+        }
+        \label{comesh:fig:bw_centralized_skytali}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xrtn.png}
+        \caption{\small \it Deployment: Lock Acquisition Time and Sync Delay. \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
+        }
+        \label{comesh:fig:la_sync_mul_rtns}
+    \end{minipage}
+\end{figure}
+
+\begin{figure*}[ht] % Use figure* for spanning two columns in a two-column document
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.83\textwidth]{CoMesh/figures/exp_eval/bandwidth_xdev_virt.pdf}
+        \caption{\small \it Deployment: Scalability of Per-(Virtual) Device Bandwidth. \MSF{} = Mini \Grid. Error bars---left: background, right: foreground.}
+        \label{comesh:fig:bw_scale}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xdev.png}
+        \caption{\small \it Deployment: Scalability of Lock Acquisition Time and Sync Delay. \MSF{} = Mini \Grid. 20 Routines.}
+        \label{comesh:fig:la_sync_scale}
+    \end{minipage}
+\end{figure*}
+
+\noindent{\bf \sysname{} Consumes Less Bandwidth than a Central Hub:} 
+\Cref{comesh:fig:bw_centralized_skytali} shows decentralized \sysname's bandwidth per smart device, both  end-to-end (E2E) messages, and ad-hoc routed (hop-to-hop/H2H) messages. For fair comparison, we model a central hub over a mesh network (\Cref{comesh:section:intro}) by instantiating \sysname{} with $k=1$ and one \kgroup, i.e., a single centralized device responsible for all routines' management. We observe that: a) \sysname{} reduces bandwidth by an order of magnitude (over 10$\times$) compared to the centralized approach. b) Both end-to-end bandwidth and hop-to-hop bandwidth are scalable and remain flat, as the number of routines grows. c) Bandwidth of foreground operations (e.g.,  locking) remains small compared to background bandwidth (e.g., device monitoring). 
+
+\noindent{\bf \sysname{} Scales with Routine Load: }
+\Cref{comesh:fig:la_sync_mul_rtns} shows two per-routine metrics.  The {\it Lock Acquisition time} is the average time for a routine to acquire a device lock after it becomes available. We observe the Lock Acquisition time varies
+ between 3.41 s - 13.02 s.
+As the routine count increases, the median
+remains stable for Mini \Grid{} (\MSF), and rises slightly for Mini \Bldg {} (\Mob) due to longer diameter and route competition.
+The second metric is  {\it Sync delay}, the handover time from a finishing routine to the next already-waiting (conflicting) routine starting its first command.
+We observe that with more  routines,  Sync Delay stays  stable for both \Mob{} and \MSF{},
+with medians between 10.23 s - 20.833 s.
+
+\noindent{\bf \sysname{} Scales with Number of Devices: } We scale up
+by overloading each (of the 16) Pi devices as multiple ``virtual devices'' (henceforth ``nodes''). The rest of \sysname's operation remained the same. We inject 20 routines over 10 mins in the \Minigrid{} topology.  \Cref{comesh:fig:bw_scale} shows that up to 144 devices both end-to-end (E2E) and hop-wise (H2H) bandwidth {\it drop} with scale, and plateau. Background bandwidth (lower stack) plateaus quickly as the number of node \kgroups{} increases at the same rate as nodes, thus spreading load evenly.  Foreground bandwidth drops much quicker as the fixed 20 routine \kgroups{} (20) are spread over an increasing number of nodes. 
+
+\Cref{comesh:fig:la_sync_scale} shows that both startup times for a routine---Lock Acquisition time and Sync delay---rise slowly but then plateau with scale.  Essentially, with more nodes, inter-routine conflicts become rarer.  
+Median Lock Acquisition time stays in  2.97 s - 34.71 s, and  Sync Delay median is in 8.01 s - 19.04 s.
+
+\begin{table}[tb!]
+    \centering
+    \footnotesize
+    \begin{tabular}{c c c c}
+        \hline
+        \bf{\Kgroup{} delay (seconds)} & \bf{median} & \bf{mean} & \bf{q90} \\
+        \hline
+        Quorum reply & 1.0805 & 1.4021 & 1.4962 \\
+        Leader election & 1.1675 & 1.4913 & 1.9249 \\
+        State transfer & 2.0750 & 2.8468 & 3.1390 \\
+        \hline
+    \end{tabular}
+    \caption{\it \small \Kgroup{} Latencies in  Mini \Grid{} topology.
+    }
+    \label{comesh:tab:kgroup_latencies}
+\end{table}
+
+\noindent{\bf \sysname{} Internal Operations are Fast: }
+\Cref{comesh:tab:kgroup_latencies} shows that in \MSF{} topology on the Pis, 
+\sysname's common operations are fast and take a median of 1.08 s for quorum, 1.17 s for election, and 2.08 s for state transfer during epoch change.

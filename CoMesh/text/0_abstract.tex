@@ -1,0 +1,13 @@
+\begin{abstract}
+
+While mesh networking for edge settings (e.g., smart buildings, farms, battlefields, etc.) has received much attention, the layer of control over such meshes remains largely centralized and cloud-based. This paper focuses on applications with commonplace {\it sense-trigger-actuate} (STA) workloads---like the abstraction of {\it routines} popular now in smart homes, but applied to larger-scale edge IoT deployments. We present \sysname, which tackles the challenge of building a decentralized mesh-based control plane for local, non-cloud, and hubless management of sense-trigger-actuate applications.  \sysname{} builds atop an abstraction called the {\it \kgroup},  which spreads STA load in a fine-grained way both across space and across time.
+A \kgroup{} uses a novel combination of techniques such as zero-message-exchange protocols (for fast proactive member selection),
+quorum-based agreement, and locality-sensitive hashing. 
+We analyze and theoretically prove safety and liveness properties of \sysname. 
+Our evaluation with both a Raspberry Pi-4 deployment and larger-scale simulations, using real building maps and real routine workloads, shows that \sysname{} is load-balanced, fast, fault-tolerant, and scalable. 
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+    mesh, IoT, edge, control plane, routines, fault-tolerance
+\end{IEEEkeywords}

@@ -1,0 +1,171 @@
+% ACM
+% \documentclass[sigplan,twocolumn,review,anonymous]{acmart}
+% \acmSubmissionID{}
+% \renewcommand\footnotetextcopyrightpermission[1]{}
+% % Optional: Remove the ACM reference between the abstract and the main text.
+% \settopmatter{printfolios=true,printacmref=false}
+% % Optional: Comment out the CCS concepts and keywords.
+
+% USENIX
+\documentclass[letterpaper,twocolumn,10pt]{article}
+
+\usepackage{usenix_2020_09}
+% \pdfpagewidth=7in
+% \pdfpageheight=9in
+\input{macros}
+
+
+
+%-------------------------------------------------------------------------------
+% \begin{filecontents}{\jobname.bib}
+%-------------------------------------------------------------------------------
+% @Book{arpachiDusseau18:osbook,
+%   author =       {Arpaci-Dusseau, Remzi H. and Arpaci-Dusseau Andrea C.},
+%   title =        {Operating Systems: Three Easy Pieces},
+%   publisher =    {Arpaci-Dusseau Books, LLC},
+%   year =         2015,
+%   edition =      {1.00},
+%   note =         {\url{http://pages.cs.wisc.edu/~remzi/OSTEP/}}
+% }
+% @InProceedings{waldspurger02,
+%   author =       {Waldspurger, Carl A.},
+%   title =        {Memory resource management in {VMware ESX} server},
+%   booktitle =    {USENIX Symposium on Operating System Design and
+%                   Implementation (OSDI)},
+%   year =         2002,
+%   pages =        {181--194},
+%   note =         {\url{https://www.usenix.org/legacy/event/osdi02/tech/waldspurger/waldspurger.pdf}}}
+% \end{filecontents}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------------------------
+
+%don't want date printed
+% \date{}
+
+%% EuroSys %%
+
+% %% The first command in your LaTeX source must be the \documentclass command.
+% \documentclass[sigplan,twocolumn,review,anonymous]{acmart}
+% \acmSubmissionID{1400}
+% \renewcommand\footnotetextcopyrightpermission[1]{}
+% % Optional: Remove the ACM reference between the abstract and the main text.
+% \settopmatter{printfolios=true,printacmref=false}
+% % Optional: Comment out the CCS concepts and keywords.
+
+% %% NOTE that a single column version may be required for 
+% %% submission and peer review. This can be done by changing
+% %% the \doucmentclass[...]{acmart} in this template to 
+% %% \documentclass[manuscript,screen]{acmart}
+% %% 
+% %% To ensure 100% compatibility, please check the white list of
+% %% approved LaTeX packages to be used with the Master Article Template at
+% %% https://www.acm.org/publications/taps/whitelist-of-latex-packages 
+% %% before creating your document. The white list page provides 
+% %% information on how to submit additional LaTeX packages for 
+% %% review and adoption.
+% %% Fonts used in the template cannot be substituted; margin 
+% %% adjustments are not allowed.
+% %%
+% %%
+% %% \BibTeX command to typeset BibTeX logo in the docs
+% \AtBeginDocument{%
+%   \providecommand\BibTeX{{%
+%     \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+% %% Rights management information.  This information is sent to you
+% %% when you complete the rights form.  These commands have SAMPLE
+% %% values in them; it is your responsibility as an author to replace
+% %% the commands and values with those provided to you when you
+% %% complete the rights form.
+% \setcopyright{acmcopyright}
+% \copyrightyear{2018}
+% \acmYear{2018}
+% \acmDOI{XXXXXXX.XXXXXXX}
+
+% %% These commands are for a PROCEEDINGS abstract or paper.
+% \acmConference[Conference acronym 'XX]{Make sure to enter the correct
+%   conference title from your rights confirmation email}{June 03--05,
+%   2018}{Woodstock, NY}
+% %
+% %  Uncomment \acmBooktitle if the title of the proceedings is different
+% %  from ``Proceedings of ...''!
+% %
+% %\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+% %  June 03--05, 2018, Woodstock, NY} 
+% \acmPrice{15.00}
+% \acmISBN{978-1-4503-XXXX-X/18/06}
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+
+%%
+%% end of the preamble, start of the body of the document source.
+% \begin{document}
+
+\input{0_title_abstract}
+
+% % show page numbers
+% \thispagestyle{plain}
+% \pagestyle{plain}
+\pagestyle{empty}
+
+\input{1_intro}
+\input{2_system_model}
+\input{3_goals}
+\input{4_design}
+\input{5_case_studies}
+\input{6_implementation}
+\input{7_evaluation}
+\input{8_discussion}
+\input{9_related_work}
+\input{10_conclusion}
+
+\input{11_acks}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+% \bibliographystyle{ACM-Reference-Format} 
+\bibliographystyle{plain}
+\bibliography{12_bibiliography_short}
+
+% \balance
+\input{13_appendix}
+
+
+\end{document}
+\endinput
+%%
+%% End of file `paper.tex'.

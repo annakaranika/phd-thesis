@@ -1,0 +1,139 @@
+% =====================================================================
+% CORE THESIS MACROS
+% Single source of truth for all shared packages and commands.
+% Project-specific macros live in each project's own macros.tex.
+% =====================================================================
+
+% --- Typography (thesis template) ------------------------------------
+% fontsetup can slow down compilation; omit when writing drafts
+\usepackage{fontsetup}
+% unicode-math is required for math accessibility tagging
+\usepackage{unicode-math}
+
+% --- Graphics (CoMesh, ControlInContext, RASC) ----------------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{stfloats}       % bottom placement of figure*
+
+% --- Math (CoMesh, RASC) --------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}             % bold math vectors (\bm{})
+
+% --- Algorithms (CoMesh, RASC) --------------------------------------
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+% --- Tables (CoMesh, ControlInContext, RASC) ------------------------
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{textcomp}
+% [table] enables \rowcolor / \columncolor; needed by CoMesh
+\usepackage[table]{xcolor}
+
+% --- Diagrams and plots (CoMesh, RASC, thesis template) -------------
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Lists (CoMesh, ControlInContext, RASC) -------------------------
+\usepackage{enumitem}
+
+% --- Bibliography and cross-references ------------------------------
+\usepackage{csquotes}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+% natbib=true enables \citet / \citep as aliases for biblatex commands
+\usepackage[backend=biber,style=ieee,defernumbers=true,natbib=true]{biblatex}
+\usepackage[bottom]{footmisc}
+% cleveref must load after hyperref; used by ControlInContext (\Cref)
+\usepackage{cleveref}
+
+% --- Chemistry (thesis template) ------------------------------------
+% Note: at time of writing, chemistry packages are not compatible with
+% accessibility tagging, but there are no alternatives.
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+
+% --- Utilities (various projects) -----------------------------------
+\usepackage{etoolbox}   % \providetoggle / \newtoggle (CoMesh, ControlInContext)
+\usepackage{url}        % long URL formatting (CoMesh)
+
+% =====================================================================
+% DRAFT / REVIEW TOGGLES
+% our_comments: show colored reviewer/author annotations
+% our_contents: show new/deleted text in color (blue=add, red=delete)
+% Both are ON here for active drafting; turn off for final submission
+% by setting \togglefalse in both lines below.
+% Each project's macros.tex defines the commands that use these toggles.
+% =====================================================================
+\providetoggle{our_comments}
+\providetoggle{our_contents}
+\toggletrue{our_comments}
+\toggletrue{our_contents}
+
+% =====================================================================
+% SHARED THEOREM ENVIRONMENTS (CoMesh, RASC)
+% Defined once here to avoid redefinition errors when both are active.
+% =====================================================================
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{fact}{Fact}
+\newtheorem{invariant}{Invariant}
+
+% Number all floats, equations, and theorems as Chapter.N
+% \thesection expands to "Chapter 1", so we override each \the<counter>
+% to use \arabic{section} directly, giving clean "1.1" format.
+\numberwithin{figure}{section}
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+\numberwithin{table}{section}
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\numberwithin{equation}{section}
+% \AtBeginDocument needed: tagging system patches amsmath at \begin{document}
+% and would otherwise overwrite \theequation
+\AtBeginDocument{\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}}
+\numberwithin{algorithm}{section}
+\renewcommand{\thealgorithm}{\arabic{section}.\arabic{algorithm}}
+\numberwithin{theorem}{section}
+\renewcommand{\thetheorem}{\arabic{section}.\arabic{theorem}}
+\numberwithin{lemma}{section}
+\renewcommand{\thelemma}{\arabic{section}.\arabic{lemma}}
+\numberwithin{definition}{section}
+\renewcommand{\thedefinition}{\arabic{section}.\arabic{definition}}
+\numberwithin{fact}{section}
+\renewcommand{\thefact}{\arabic{section}.\arabic{fact}}
+\numberwithin{invariant}{section}
+\renewcommand{\theinvariant}{\arabic{section}.\arabic{invariant}}
+% corollary is defined as [theorem]-parented; override to number by section instead
+\numberwithin{corollary}{section}
+\renewcommand{\thecorollary}{\arabic{section}.\arabic{corollary}}
+
+% =====================================================================
+% SHARED REFERENCE ABBREVIATIONS (CoMesh, RASC)
+% =====================================================================
+\newcommand{\Figure}{Fig.}
+\newcommand{\Figures}{Figures}
+\newcommand{\Section}{Sec.}
+\newcommand{\Algorithm}{Algo.}
+\newcommand{\Theorem}{Theorem}
+\newcommand{\Corollary}{Corollary}
+\newcommand{\Safety}{Safety}
+\newcommand{\Liveness}{Liveness}
+\newcommand{\Rule}{Rule}
+\newcommand{\Table}{Table}
+\newcommand{\Equation}{Eqn.}
+\newcommand{\Fact}{Fact}
+\newcommand{\Invariant}{Inv.}
+\newcommand{\Appendix}{Appendix}
+
+% cleveref names for the uofithesis appendix counter
+\crefname{appendix}{appendix}{appendices}
+\Crefname{appendix}{Appendix}{Appendices}
+

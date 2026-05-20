@@ -1,0 +1,58 @@
+\subsection{Managing Devices and Routines in \sysname}
+\label{comesh:section:mngmt}
+
+We now describe how \sysname{} builds sense-trigger-actuate management of devices and routines atop \Cref{comesh:section:design}'s \kgroups.
+
+\subsubsection{Device Management}
+\label{comesh:sec:devmgmt}
+
+In \sysname{}, each device is assigned to its unique \kgroup{}, named the {\it device \kgroup}. This \kgroup{} is responsible for continually sensing the device, i.e., tracking the up/down status of the device, and the latest state of the device (e.g., temperature readings for a thermostat).
+The leader of the device's \kgroup{} (henceforth called the {\it device leader}) keeps track of the device's latest status. The device leader 
+periodically ``polls'' the device for its state. (Alternately, if the device supports it, it may receive ``pushes'' of state change from the device itself.) If the device does not respond within 2 RTTs, the device is presumed failed, and the device leader notifies all \smart{}s in the topology via a flooded message. If the detected state of the device $D$ (received in the ack) differs from its latest recorded state at the device leader, the device leader sends this new state to all leaders of the routines which contain $D$  in their triggering clauses.
+
+\subsubsection{Routine Management}
+\label{comesh:sec:routinemgt}
+\label{comesh:subsection:rtn_mngmt}
+Recall that a routine consists of an arbitrary boolean trigger clause
+(on multiple devices and their states) and a set of commands to execute after the routine is triggered. Call the set of devices in the former the {\it trigger set}
+and the latter devices as the {\it command set}.
+(These sets may or may not overlap.)
+
+\sysname{} assigns each routine to its unique \kgroup{}, named the {\it routine \kgroup}. This \kgroup{} is tasked with
+triggering, and actuation (execution) of the routine. The sensing is done
+by device \kgroups{}  (\Cref{comesh:sec:devmgmt}). The leader of the routine's \kgroup{} (henceforth the {\it routine leader}) communicates with the device leaders of its trigger set in normal times (when the routine is not triggered). Once the routine is triggered, the routine leader communicates with the device leaders of the command set. 
+
+
+{
+Recall that \sysname{} needs to prevent conflicting routines (actuating intersecting device sets) from executing concurrently. 
+\sysname{} uses ``virtual'' locking of devices (inspired by \cite{Safehome}). Before a routine starts, it needs to acquire locks for all devices it might affect, and when it ends it releases all locks.} 
+Thus a routine may be in one of the following states (maintained at its \kgroup): 
+(i)~\texttt{NOT\_TRIGGERED}, (ii)~\texttt{ACQUIRING\_LOCKS},
+(iii)~\texttt{EXECUTING}, and  (iv)~\texttt{RELEASING\_LOCKS}. 
+
+The routine leader contacts the device leaders of each device in the routine's trigger set.  Whenever a device leader sends an updated state to the routine leader (\Cref{comesh:sec:devmgmt}), the latter checks if this state change satisfies the trigger clause for the routine.
+
+Once a routine is triggered, its routine leader changes its state from  \texttt{NOT\_TRIGGERED}, to  \texttt{ACQUIRING\_LOCKS}, and replicates the state to
+all \kgroup{} members. The routine leader awaits ($\f + 1$) responses, including itself, then
+acquires (virtual) locks to all devices in the routine's command set, and executes the commands. Finally, when the routine is finished the routine leader releases all locks to the command set's device leaders. 
+
+The lock for a given device is only maintained in that device \kgroup{} (rather than the routine \kgroup)---this allows multiple routines to compete for locks. For a routine to acquire a device's lock, the routine leader contacts the device leader. (If the routine leader is unaware of the current device leader, it contacts all device \kgroup{} members,  known via  \Cref{comesh:subsection:member_selection}'s
+zero-message exchange protocol, to find the leader.) 
+The message is retried until a response is returned or the coterie member is detected as failed. In that case, a new member is recruited, synced to the current state, and queried anew.
+
+The device leader maintains a {\it wait list} of routines requesting a lock, and grants only one lock at a time (in FIFO order). When a routine leader releases a lock  (at  \texttt{RELEASING\_LOCKS} stage), the device leader dequeues the next entry from the wait list, sends a request to all its device \kgroup{} members, and waits for $(f+1)$ acks, before giving the lock to this requesting routine leader.
+When a routine leader has acquired all locks for its actuated devices, it changes the routine's state to \texttt{EXECUTING}, communicates this to all routine \kgroup{} members, waits for $(f+1)$ acks,
+and then starts issuing the commands for the routine. 
+{Each command is routed from the routine leader 
+directly 
+to the device. } 
+
+\sysname{} can acquire locks either serially or parallelly: 
+
+\noindent {\bf 1. Sequential Lock-Acquiring (SLA) Strategy: }
+\label{comesh:subsubsec:sla}
+The routine leader acquires locks sequentially. If locks are acquired in increasing order of device ID, this prevents deadlocks (no cycles) among routines with conflicting device sets. The SLA strategy can be slow when there are no or few conflicts.
+
+\noindent {\bf 2. Optimistic Lock-Acquiring (OLA) Strategy: }
+\label{comesh:subsubsec:ola}
+This approach attempts to acquire all locks for its (desired) devices simultaneously. If any lock request fails, the routine leader releases all locks it acquired, and retries all again. To prevent message implosion, retries occur after a backoff timeout. OLA can be slow when routines' command sets overlap. 

@@ -1,0 +1,53 @@
+% =====================================================================
+% ControlInContext-specific macros
+% Shared packages and commands live in ../macros.tex.
+% cleveref (\Cref) is also loaded there (must follow hyperref).
+% =====================================================================
+
+% --- ControlInContext-only packages ---------------------------------
+\usepackage{soul}       % \st{} strikethrough, \hl{} highlight
+\usepackage{pdfpages}   % \includepdf for inserting full PDF pages
+% \usepackage{balance}  % removed: two-column balancing, not needed in thesis
+
+% --- ControlInContext draft/review comments -------------------------
+% Toggle state is set in ../macros.tex (both true for drafting).
+
+\newcommand{\feedback}[1]{
+\iftoggle{our_comments}{%
+    {\color{brown} Feedback: #1}
+}{}}
+
+% \add{text}: shows text in blue during drafting; shows plain text in final
+\newcommand{\add}[1]{\iftoggle{our_contents}{{\color{blue} #1}}{#1}}
+
+% \del{text}: shows deleted text in red during drafting; hides it in final
+\newcommand{\del}[1]{
+\iftoggle{our_contents}{%
+    {\color{red} DELETING: #1}%
+}{}}
+
+% --- ControlInContext list style ------------------------------------
+\setlist[itemize]{leftmargin=15pt}
+
+% --- Research question counter --------------------------------------
+\newcounter{Qcounter}
+
+% \printQPrefix[label]{Section title}: prints "Section title: Q<n>" as a paragraph header
+\newcommand{\printQPrefix}[2][]{%
+    \refstepcounter{Qcounter}%
+    \paragraph{#2: Q\arabic{Qcounter}}%
+    \if\relax\detokenize{#1}\relax\else\label{#1}\fi%
+}
+
+% \printQcounter{label}: prints "Q<n>" as a paragraph header
+\newcommand{\printQcounter}[1]{%
+    \refstepcounter{Qcounter}%
+    \paragraph{\texorpdfstring{Q\arabic{Qcounter}}{}}%
+    \label{#1}%
+}
+
+% --- ControlInContext column types ----------------------------------
+% Note: RASC defines \newcolumntype{C} with m{} (centered, middle-aligned).
+% If RASC is enabled simultaneously, rename one of these to avoid conflict.
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}

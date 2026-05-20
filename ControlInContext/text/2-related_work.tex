@@ -1,0 +1,114 @@
+\subsection{Related Work}
+We build upon prior literature on user experiences within smart homes and associated control modalities.
+
+\subsubsection{Smart Homes, Devices, and Control}
+\label{cic:sec:relatedWorks-smarthome}
+We define \textit{smart home devices} as \textit{``sensors, monitors, interfaces, appliances, and devices networked together to enable automation as well as localized and remote control''}~\cite{hargreaves2017introduction}. These include but are not limited to smart lights, smart home security systems, smart thermostats, smart TVs, and smart speakers~\cite{buil2023digital}. 
+We use the term \textit{smart home ecosystem} to describe the interconnected set of devices, platforms, applications, cloud services, data flows, and household members that together provide and control smart functionality in a home. An ecosystem can span multiple brands and control loci (e.g., hubs, vendor apps, device-local interfaces), and changes as devices are added, removed, or reconfigured over time.
+
+
+As smart devices become integrated into homes, user interaction and control over these systems emerge as key areas of study. Integrating smart devices into households is a domestication process involving pilot users to drive the setup and passenger users adopting these devices, sometimes even without understanding them~\cite{koshy2021we}. Household members gradually adapt their routines around these devices, exercising control over how smart devices fit into their daily lives~\cite{chiang2020exploring}. 
+Research highlights that users can have different expectations of smart device behaviors when two routines run simultaneously because they have different values~\cite{zaidi2023user}. These devices, marketed for convenience, inherently come with user expectations regarding ease of use and seamless integration ~\cite{coskun2018smart, mattson_2016}. Additionally, studies revealed that stakeholders like cohabitants, bystanders, and non-users could not control how they interact with smart home devices placed in different locations in households~\cite{meng2023multi}. Users tend to group their devices based on their location, functionality, and/or use contexts to expedite control~\cite{wozniak2023inhabiting}. A common thread among this prior research is the central role of control in shaping individual experiences with smart home devices~\cite{davidoff2006principles}.
+Despite the growing variety of smart home devices and control methods, there is limited literature examining \textit{how} users navigate control schemes for individual devices or groups of devices within their homes. In this paper, we identify key factors that shape device control workflows and explore how users' experiences, including troubleshooting, influence their perceptions of these control schemes.
+
+\subsubsection{Smart Home Control Schemes}
+
+\begin{table}
+    % \centering
+    \small
+    \renewcommand{\arraystretch}{1}
+    \begin{tabular}{p{0.35\linewidth}p{0.3\linewidth}p{0.25\linewidth}}
+        \hline
+        \textbf{Papers} &  \textbf{Focus} & \textbf{Contribution}\\
+         \hline
+         % paper name & central|per device & system| empirical | literature \\
+         \hline
+         \cite{geeng2019s,wozniak2023inhabiting} & Central, limited Physical & Empirical \\
+         \hline
+         \cite{fakhrhosseini2024taxonomy,HomeOS} & Central & Empirical \\
+         \hline
+         \cite{Safehome,alshehri2016access,anthi2018eclipseiot,basu2020trustless,vrSmartHome,DepSys,raj2018voice,Beam,TaskCruncher,SemanticStream} & Central & System \\
+         % SafeHome~\cite{ahsan2019home} & Central & System \\
+         % Access Control for IoT~\cite{alshehri2016access} & Central & System \\
+         % Trustless IoT~\cite{basu2020trustless} & Central & System \\
+         % Touch Free Smart Home~\cite{vrSmartHome} & Central & System \\
+         % DepSys~\cite{munir2014depsys} & Central & System \\
+         % Voice-Controlled CPS~\cite{raj2018voice} & Central & System \\
+         % Beam~\cite{shen2016beam} & Central & System \\
+         % Online sensing~\cite{TaskCruncher} & Central & System \\
+         % EclipseIoT~\cite{anthi2018eclipseiot} & Central & System \\
+         % Semantic Streams~\cite{SemanticStream} & Central & System \\
+         \hline
+         \cite{gunge2016smart,zavalyshyn2022sok} & Central & Literature Review \\
+         \hline
+         \cite{apthorpe2018keeping} & Cloud, Local, Physical & Evaluation \\
+         \hline
+         \cite{ur2014practical} & Central & Evaluation \\
+         \hline
+         \cite{acar2020peek,oconnor2019homesnitch} & Second party & System \\
+         % Peek-a-boo~\cite{acar2020peek} & Per-Device & System \\
+         % HomeSnitch~\cite{oconnor2019homesnitch} & Per-Device & System \\
+         \hline
+         \cite{enduser} & -- & Empirical \\
+         % IoTSHS~\cite{khan2018design} & Central & System \\
+         % Dependency Management~\cite{DepManagement} & Central & System \\
+         % Door Access Control~\cite{marrapu2018smart} & Per-Device & System \\
+         \hline
+    \end{tabular}
+    \caption{Prior work mostly assumes one control scheme of the spectrum exclusively. It does not study the relationship between the two, even when both are discussed in the same work.}
+    \label{cic:tab:related_work}
+\end{table}
+
+Smart home control schemes refer to the guiding paradigm for categorizing mechanisms to control smart home devices.
+{
+In this paper, we focus on the spectrum of \textit{proxy-based control}, visualized in~\Cref{cic:fig:proxy-based-control-spectrum}. The spectrum represents the levels of centralization or indirection in smart device control. Essentially, \textit{proxy-based control} refers to how user commands are sent to devices through a proxy, such as an application, voice assistant, routine/automation, etc.
+On one end of the spectrum sits \textit{physical device control}, which refers to the direct interaction between the user and target device  (first party), without any intermediaries or indirection (i.e., zero proxies), regardless of the interface modality, i.e., touch, voice, etc.
+On the other end of the spectrum, \textit{central control} (or \textit{third-party cloud control}), represents the highest level of centralization, with multiple layers or proxies of control systems between the user and the target device. \textit{Central control} is an extreme type of proxy-based control, where a single interface allows users to control multiple smart home devices, possibly of different brands, directly or indirectly.
+The points in between the two extremes refer to vendor-specific (second-party) interfaces, or per-brand control, that execute locally in the same network as the target device through Zigbee, Bluetooth, etc., or in the cloud, adding one or two network hops to the control path, respectively.
+}
+
+{Our focus on this spectrum of control builds upon existing theoretical HCI models. In this paper, we focus on the information ecology model in smart homes. Information ecology theory envisions smart homes as continuously evolving technologies that must interact with existing human and technical processes~\cite{wang2021connecting, huang2023research, 8130821}. Our control spectrum refines this view by specifying \textit{where} actions are executed in the ecology (the locus of execution) and \textit{how} seams in infrastructure are hidden or revealed during everyday use and troubleshooting. The control spectrum also reinforces concepts introduced in other models used often in user-centered smart home research, such as the Technology Acceptance Model (TAM)~\cite{davis1989technology, shuhaiber2019understanding, zhou2024study, tak2023framework} and Activity Theory (AT)~\cite{kaptelinin2012activity, demeure2014activity, maier2023analysing}.} 
+
+%Similarly, the control spectrum reinforces theoretical concepts in the Technology Acceptance Model (TAM), which discusses how users adopt technologies based on perceived usefulness and ease of use~\cite{davis1989technology}. TAM has driven much of user-centered smart home research~\cite{shuhaiber2019understanding, zhou2024study,tak2023framework}; our work also does so, showing how technology acceptance is tied to control loci.}
+
+Smart devices can be controlled through varying levels of these two types of control, which users must understand and navigate to build their desired smart home setup~\cite{wozniak2023inhabiting}.
+These reflect common methods of controlling smart devices, including smartphone applications, voice assistants, smart hubs, routines/automation, and physical controllers in the market today. We detail part of the landscape of existing research surrounding smart home control in \Cref{cic:tab:related_work}.
+
+Such an abstraction reduces complexity for smart home device users and provides a single, cohesive user experience. 
+Apple Home\footnote{https://www.apple.com/home-app/}, Google Home\footnote{https://home.google.com/welcome/}, and Samsung SmartThings\footnote{https://www.samsung.com/us/smartthings/} are examples of central control schemes. Across systems, security and HCI, research focuses on centralized control, such as surfacing the need for finer-grained access control within households~\cite{sikder2022s}, designing more transparent and privacy-focused data processing for centralized smart home control~\cite{jin2022peekaboo} or proposing a unified interface where applications, commonly known as routines, interact with different smart home devices~\cite{HomeOS}.
+%\del{\textit{Per-device control} refers to smart home device users controlling and interacting with these objects directly, through their physical control if available. This scheme} 
+{In contrast, physical control} allows users to maintain coarse-grained control over their device even in the face of network failures~\cite{geeng2019s}.
+% Somewhere between central and per-device control stands the \textit{per-brand control} scheme.
+% \textit{{Per-brand control} offers users the ability to interact with all smart devices produced by the brand,} most of the time through a software interface associated with that brand. Commercial examples include Philips Hue light bulbs with Bluetooth\footnote{https://www.philips-hue.com}, allowing individuals to interact directly with different Hue smart product types (e.g., via the brand's app).
+%, but without a hub or centralized control interface. 
+A downside is that users must maintain multiple applications in their smartphone if their smart devices come from different brands, which quickly becomes exhausting~\cite{wozniak2023inhabiting}.
+
+Early research on smart home devices shows that direct and unmediated interactions with devices are often perceived more positively than interactions mediated by a single source of indirect response~\cite{lee2017companionship}. 
+This suggests that users' preferences may vary depending on whether they interact with devices through a highly centralized \textit{proxy-based} interface or use control schemes with fewer proxies involved, yielding more direct feedback. {Matter~\cite{matter} has been introduced in an effort to bring central control to the local network and reduce the intermediaries, yet vendors still expose only certain APIs through that integration, making little to no difference from the interface perspective.}
+Few studies have examined the dynamics between these control schemes. 
+As shown in \Cref{cic:tab:related_work}, prior work primarily focuses on a particular end of the spectrum.
+Prior work has examined reasons why users may interconnect or purposefully separate their smart devices~\cite{wozniak2023inhabiting, shi2023investigating}. However, such research focused on specific tasks in a controlled environment, limiting its ability to capture the challenges users face in real-world scenarios, for example, when devices fail. These troubleshooting experiences play a crucial role in shaping users' perceptions of 
+control schemes along the spectrum, which we explore in detail in the next section.
+
+\subsubsection{Troubleshooting Smart Home Devices}
+Troubleshooting, the process where smart device users try to identify and resolve errors within smart devices, is a common part of the smart home device management experience~\cite{teigen2024troubleshooting}. It contains several different steps and involves working with both software, i.e., device applications, and hardware, i.e., the physical device~\cite{smart-troubleshooting}.
+Device failures erode expectations and trust among smart device owners, as they have high expectations of how the device will improve their lives at home when they initially purchase it~\cite {abdallah2017lessons, teigen2024troubleshooting}.
+
+
+A seamless troubleshooting experience, where users can easily isolate and address issues, can increase positive perceptions of the device~\cite{he2019smart}. {However, it is often during the troubleshooting process that the boundaries and imperfections, i.e., the seams, of smart home devices are exposed to the user. Research has identified seams as both something that must be hidden from the user~\cite{ansari2025seamless, kim2012seamless}, as well as an opportunity to support enhanced user understanding of their devices~\cite{garg2022social, lu2008hide, lu2009human}. We do not assume that either perspective on seams is correct; instead, we investigate how smart home device control schemes affect the seam hiding and revealing practices of devices and users.}
+
+
+%The control scheme used for the troubleshooting process can significantly impact the troubleshooting experience~\cite{balta2013social}.
+% User expectations of smart home devices are that they provide additional convenience and rarely, if ever, fail~\cite{teigen2024troubleshooting}. Thus, when they do fail, users' perceptions of these devices erode. However, this erosion can be addressed with positive troubleshooting experiences, which are significantly impacted by the control scheme used for the device~\cite{balta2013social}. 
+
+
+
+
+Schemes along the control spectrum can offer drastically different troubleshooting experiences and seam-hiding practices, affecting user perceptions of these control schemes differently~\cite{balta2013social}. While it may offer increased convenience, central control can be especially challenging due to only a single point of failure~\cite{malik2023iot}. When an error or exception occurs in the central controller, all devices controlled via central control are at risk of failing. In addition, when a single device connected to the central controller fails, the user must look not only at the failing device but also at the central controller to find the source of the issue. Direct device control provides a more localized approach to troubleshooting, allowing users to examine only one device at a time. However, in large-scale home failures, such as power outages or network failures, such control schemes require the user to troubleshoot each device individually. Control schemes {involving very few proxies, such as second-party proxy-based control, or \textit{per-brand control}}, often offer more fine-grained functionality than other schemes, making troubleshooting more efficient and intuitive. When a Roomba stops mid-clean, the iRobot Home app shows the exact error code\footnote{https://homesupport.irobot.com/s/article/21044}; a central controller like Alexa/Google typically only starts/stops the vacuum or reports `device not responding'\footnote{https://www.amazon.com/gp/help/customer/display.html?nodeId=GJRYAWXYCQKQF28E}.
+
+While previous work has focused solely on the technical aspects of troubleshooting~\cite{muller2011collecting, alves2018homenetrescue}, this paper investigates how users' choice of control schemes in smart homes affects their troubleshooting experiences. We extract generalized troubleshooting workflows grounded in real-world user experiences. Additionally, we discuss with users how these troubleshooting experiences have affected their perceptions of their devices and the ways they control them. {This perspective allows us to connect concrete troubleshooting workflows to broader theories of seams and infrastructure, and to derive design implications for how future systems might better support these transitions.}
+
+
+
+% \subsection{User Desires and Expectations around Smart Home Control}
+% When deciding whether to purchase and use a smart device in their home, users weigh the pros and cons of adding such a device. Some common considerations of users include the price of a device, what convenience it offers, the risks it poses, and how it integrates into their existing smart home infrastructure. When considering how the device integrates into their existing infrastructure, a user must also consider how to control the device. 
