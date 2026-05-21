@@ -39,6 +39,7 @@ Epoch lengths are fixed system-wide. (Different \kgroups{} can migrate at differ
 \begin{algorithm}[t]
     \footnotesize
     \caption{\small \sysname{} \Kgroup{} Migration}
+    \medskip
     \label{comesh:alg:migration}
     \algtext*{EndIf} % hide EndIf but keep block structure
     \algtext*{EndElse} % same for Else
@@ -99,6 +100,7 @@ Classical LSH~\cite{datar_locality-sensitive_2004} hashes similar multi-dimensio
 \begin{algorithm}[t]
     \footnotesize
     \caption{\small \sysname{} LSH Majority Selection Rule}
+    \medskip
     \label{comesh:alg:lsh_majority_selection}
     \algtext*{EndIf} % hide EndIf but keep block structure
     \algtext*{EndElse} % same for Else
@@ -143,6 +145,10 @@ To reduce the probability of differing vectors being bucketed together, \sysname
 
 \begin{table}[t]
     \centering
+    \caption{\small \it Summary of LSH parameters used in \sysname.}
+    \bigskip
+    \label{comesh:tab:lsh_params}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \setlength{\tabcolsep}{4pt}
     \begin{tabular}{c l c}
         \hline
@@ -153,8 +159,6 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \( m \)           & Number of concatenated hash functions  & 2   \\
         \( l \)           & Number of independent hash groups      & 2   \\ \hline
     \end{tabular}
-    \caption{\small \it Summary of LSH parameters used in \sysname.}
-    \label{comesh:tab:lsh_params}
 \end{table}
 
 \begin{figure}[tb!]
@@ -163,6 +167,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \centering
         \includegraphics[width=\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_kdis_k_l_r.png}
         \caption{\small \it Average quorum distance.}
+        \medskip
         \label{comesh:subfig:quorum_dis_500klr}
     \end{subfigure}
     \hspace{0.5cm}
@@ -171,9 +176,11 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \hspace{-8pt}
         \includegraphics[width=1.04\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_koverlap_k_l_r.png}
         \caption{\small \it Average \kgroup{} overlap.}
+        \medskip
         \label{comesh:subfig:overlap_500klr}
     \end{subfigure}
     \caption{\small \it Average quorum distance and \kgroup{} overlap for different selection policies and parameters. $N$ = 500, \#smart devices = 200.}
+    \medskip
     \label{comesh:fig: ave_quorum_dis_and_overlap_klr}
 \end{figure}
 

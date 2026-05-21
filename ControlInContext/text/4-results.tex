@@ -13,6 +13,7 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \includegraphics[width=0.225\textwidth]{ControlInContext/figures/control_schemes_popularity.pdf}
     \includegraphics[width=0.27\textwidth]{ControlInContext/figures/control_methods_popularity.pdf}
     \caption{Percentage of participants using each control scheme/method.}
+    \medskip
     \label{cic:fig:control-scheme-popularity}
 \end{figure}
 
@@ -42,6 +43,7 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \includegraphics[width=0.235\linewidth]{ControlInContext/figures/control_methods_vs_dev_kind_pc.pdf}
     \caption{Percentage of participants using each control scheme/method vs.\ device kind.
     Participants may refer to a device with a different description from how they most commonly use it, leading to an occasional discrepancy between the device kind and the control method used; for example, a participant may refer to Alexa as only a smart speaker when it is also a hub~\cite{wang2020want,singh2018users, georgiev2018smart}.}
+    \medskip
     \label{cic:fig:control-scheme-popularity-vs-dev-kind}
 \end{figure}
 
@@ -137,6 +139,9 @@ We identify five recurring categories of confusion and elaborate on each below. 
 
 % \begin{table}[t]
 % \centering
+ \caption{\add{Taxonomy of user confusion in executing smart home functionality.}}
+    \bigskip
+ \label{cic:tab:confusion}
 % \color{blue}
 % \begin{tabular}{R{4.8cm}|p{10.5cm}}
 % \hline
@@ -167,45 +172,45 @@ We identify five recurring categories of confusion and elaborate on each below. 
 % \textit{Example:} ``If I add a routine in the Tapo app, [my wife] can't change it.'' (N3) \\
 % \hline
 % \end{tabular}
-% \caption{\add{Taxonomy of user confusion in executing smart home functionality.}}
-% \label{cic:tab:confusion}
-% \end{table}
+%%% \end{table}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[t]
-\centering
-\footnotesize
-\begin{tabular}{R{3.5cm}|p{5.8cm}|p{6cm}}
-\hline
-\textbf{Category} & \textbf{Description} & \textbf{Example Quote} \\
-\hline\hline
-Fragmented control (central vs. vendor)
-& Users unsure which interface (central vs. vendor) exposes functionality. 
-& \textit{``In the Nest app you can see the history... but not on Google Home.''} (P5) \\
-\hline
+    \centering
+    \caption{Taxonomy of user confusion in executing smart home functionality.}
+    \bigskip
+    \label{cic:tab:confusion}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    \footnotesize
+    \begin{tabular}{R{3.5cm}|p{5.8cm}|p{6cm}}
+        \hline
+        \textbf{Category} & \textbf{Description} & \textbf{Example Quote} \\
+        \hline\hline
+        Fragmented control (central vs. vendor)
+        & Users unsure which interface (central vs. vendor) exposes functionality. 
+        & \textit{``In the Nest app you can see the history... but not on Google Home.''} (P5) \\
+        \hline
 
-Hidden / hard-to-find features
-& Poor discoverability of routines, shortcuts, or advanced options. 
-& \textit{``Every time I go to set a routine, I have to relearn it.''} (P3) \\
-\hline
+        Hidden / hard-to-find features
+        & Poor discoverability of routines, shortcuts, or advanced options. 
+        & \textit{``Every time I go to set a routine, I have to relearn it.''} (P3) \\
+        \hline
 
-Missing or partial integrations
-& Features expected to exist but absent or incomplete. 
-& \textit{``I can stream the camera, but I can't move it with voice.''} (P5) \\
-\hline
+        Missing or partial integrations
+        & Features expected to exist but absent or incomplete. 
+        & \textit{``I can stream the camera, but I can't move it with voice.''} (P5) \\
+        \hline
 
-\raggedleft Ecosystem lock-in \& workarounds
-& \raggedright Vendor ecosystems discourage cross-platform setups; workarounds reduce control. 
-& \textit{``They assume you're Hue or IKEA exclusively.''} (P7) \\
-\hline
+        \raggedleft Ecosystem lock-in \& workarounds
+        & \raggedright Vendor ecosystems discourage cross-platform setups; workarounds reduce control. 
+        & \textit{``They assume you're Hue or IKEA exclusively.''} (P7) \\
+        \hline
 
-Multi-user household challenges
-& Routines or settings tied to single accounts, limiting family use. 
-& \textit{``If I add a routine in the Tapo app, [my wife] can't change it.''} (P5) \\
-\hline
-\end{tabular}
-\caption{Taxonomy of user confusion in executing smart home functionality.}
-\label{cic:tab:confusion}
+        Multi-user household challenges
+        & Routines or settings tied to single accounts, limiting family use. 
+        & \textit{``If I add a routine in the Tapo app, [my wife] can't change it.''} (P5) \\
+        \hline
+    \end{tabular}
 \end{table}
 
 \noindent\textbf{1) Fragmented control between central and vendor apps.}  

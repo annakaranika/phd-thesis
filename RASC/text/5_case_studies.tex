@@ -8,6 +8,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \begin{subfigure}[t]{0.3\linewidth}
         {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/sched-ra.pdf}}
         \caption{\small $R_A$.}
+        \medskip
         \label{rasc:fig:ra-sched}
     \end{subfigure}%
     % \hfill
@@ -17,6 +18,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
         % \vspace{0.2cm}
         {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/rb-tl-invalid.pdf}}
         \caption{\small $R_B$ \& invalid TL.}
+        \medskip
         \label{rasc:fig:tl-invalid}
     \end{subfigure}%
     \hfill
@@ -25,6 +27,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \begin{subfigure}[t]{0.32\linewidth}
         {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/TL_valid.pdf}}
         \caption{\small $R_B$ \& valid TL.}
+        \medskip
         \label{rasc:fig:tl-valid}
     \end{subfigure} 
     \par\medskip
@@ -33,6 +36,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \begin{subfigure}[b]{0.35\linewidth}
         {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/rb-dag-tl-invalid-new.pdf}}
         \caption{\small $R_B'$ \& invalid \scheduler.}
+        \medskip
         \label{rasc:fig:dag-tl-invalid}
     \end{subfigure}%
     \hspace{0.02\linewidth}
@@ -42,11 +46,13 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
         \centering
         {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/DAG-TL_valid-new.pdf}}
         \caption{\small $R_B'$ \& invalid \scheduler.}
+        \medskip
         \label{rasc:fig:dag-tl-valid}
     \end{subfigure}
     % \hspace{0.1cm}
     
     \caption{\bf \small Example Routines and Schedule for TL vs \scheduler. {\it Action symbols feature a letter that stands for the routine they are a part of and a number to denote which device they execute on, e.g., $A1$ is part of routine $R_A$ and executes on device $D1$.}}
+    \medskip
     \label{rasc:fig:TL-vs-DAG-TL}
 \end{figure}
 
@@ -167,6 +173,7 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
     \centering
     \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_routines.pdf}
     \caption{\small Routine graphs.}
+    \medskip
     \label{rasc:fig:resched-routines}
   \end{subfigure}
   \hspace{0.1cm}
@@ -174,6 +181,7 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
     \centering
     \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_og_schedule.pdf}
     \caption{\small Original schedule.}
+    \medskip
     \label{rasc:fig:resched-og-sched}
   \end{subfigure}
 
@@ -184,6 +192,7 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
     \centering
     \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_a2_end.pdf}
     \caption{\small Preprocessing phase.}
+    \medskip
     \label{rasc:fig:resched-a2-end}
   \end{subfigure}
   % \hfill
@@ -192,10 +201,12 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
     \centering
     \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_sjfw_out.pdf}
     \caption{\small Rescheduling phase.}
+    \medskip
     \label{rasc:fig:resched-sjfw-out}
   \end{subfigure}
 
   \caption{\small \textbf{Rescheduling in \sysname:} Example Routines.}
+  \medskip
   \label{rasc:fig:resched}
 \end{figure}
 
@@ -205,6 +216,7 @@ For the routines in \Cref{rasc:fig:resched-routines} and the original \scheduler
 
 \begin{algorithm}[t]
     \caption{\bf Shortest Task First (STF) with Serializability}
+    \medskip
     \label{rasc:algo:sjfw}
     \footnotesize
     \algtext*{EndIf} % hide EndIf but keep block structure
@@ -266,6 +278,7 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV a.pdf}
         \caption{\small Routine graphs.}
+        \medskip
         \label{rasc:fig:rv-graphs}
     \end{subfigure}
     \hfill
@@ -273,6 +286,7 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV b.pdf}
         \caption{\small Original \scheduler{} schedule.}
+        \medskip
         \label{rasc:fig:rv-dag-tl}
     \end{subfigure}
     \hfill
@@ -280,6 +294,7 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV c.pdf}
         \caption{\small $A_1$ completes early $\rightarrow$ only RV.}
+        \medskip
         \label{rasc:fig:rv-early}
     \end{subfigure}
     \hfill
@@ -289,9 +304,11 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
         \caption{
             \small $A_1$ completes late $\rightarrow$ Push + RV.
         }
+        \medskip
         \label{rasc:fig:rv-late}
     \end{subfigure}
     \caption{\bf \small RV rescheduling. {\it For (d), upon $A_1$'s late completion detection by an estimated $dt$, $C_1,A_2,B_2,B_3$ are first pushed forward by $dt$ before RV is performed.}}
+    \medskip
     \label{rasc:fig:rv}
 \end{figure}
 

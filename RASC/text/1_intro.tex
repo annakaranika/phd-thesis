@@ -18,6 +18,7 @@ or manually by the user.
     \includegraphics[width=0.7\linewidth]{RASC/figures/intro/action-length-var.pdf}
     \caption{\bf \small IoT actions vary in length. {\it Actions: door: close, elevator: up 1 floor, shade: open, thermostat: heat  68.x to 69.y \textdegree Fahrenheit.} 
     }
+    \medskip
     \label{rasc:fig:action-length-variability}
 \end{figure}
 
@@ -50,7 +51,7 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     \centering
     \footnotesize
     % \setlength{\tabcolsep}{1pt} % default is 6pt
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1,2}}
     \begin{tabular}{|c|l||c|c|c|c|}
         \hline
         \textbf{Property} & \textbf{Goal} & \textbf{\RPCa} & \textbf{\RPCs} & \textbf{\RPCc} & \textbf{\abstraction} \\ \hline \hline
@@ -71,6 +72,7 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
         \centering
         \includegraphics[width=0.5\textwidth]{RASC/figures/applications/energy-saving-vacuum-rasc.pdf}
         \caption{\small Single routine for energy-saving vacuum atop RASC.}
+        \medskip
         \label{rasc:fig:energy-saving-vacuum-rasc}
     \end{subfigure}
     \begin{subfigure}[b]{\linewidth}
@@ -84,6 +86,7 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     \end{subfigure}
     \caption{\bf \small Routine example with dependencies on \textit{Acknowledgment} (A), \textit{Start} (S) and \textit{Completion} (C) among actions. {\it The vacuum requires light to navigate.}  
     }
+    \medskip
     \label{rasc:fig:energy-saving-vacuum}
 \end{figure}
 

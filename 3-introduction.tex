@@ -6,24 +6,28 @@
 
 The Internet of Things (IoT) has evolved well beyond its early phase, with over 10 billion active devices in deployment today, expected to exceed 25 billion by 2030~\cite{IoTstats}. IoT permeates homes, workplaces, farms, Industry 4.0 settings, entertainment venues, and beyond~\cite{IoTfuture, farmbeats, lampropoulos2019internet}. Smart buildings alone account for over 1.26 billion connected devices, with forecasts reaching 4.12 billion by 2030 and an addressable market exceeding \$90 billion~\cite{Memoori, memoori2025iot}. As deployments scale, they increasingly span \emph{mesh networks} of heterogeneous devices---smart devices capable of compute and storage alongside simpler devices that only receive commands---creating densely populated edge computing environments across both residential and commercial settings.
 
-We use the term \emph{smart space} to refer to any physical environment instrumented with IoT devices for automated sensing and actuation. Smart spaces span a wide range of scales and deployment contexts---from a residential home with a few dozen consumer devices to a commercial smart building with hundreds or thousands of sensors and actuators, to smart farms and industrial factories with large physical footprints. \Cref{intro:tab:taxonomy} provides a taxonomy of the smart space types addressed in this thesis.
-
-\begin{table}[t]
+\begin{table}[h]
     \centering
-    \tagpdfsetup{table-tagging=false}
-    \begin{tabularx}{\linewidth}{p{0.23\linewidth}p{0.45\linewidth}p{0.25\linewidth}}
+    \caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
+    \bigskip
+    \label{intro:tab:taxonomy}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    \begin{tabularx}{\linewidth}{p{0.3\linewidth}p{0.45\linewidth}p{0.15\linewidth}}
         \toprule
         \textbf{Smart Space} & \textbf{Key Control Challenges} & \textbf{This Thesis} \\
         \midrule
-        Residential home (10s of devices)   & Navigating the control spectrum; debugging silent automation failures & \Cref{sec:cic}, \Cref{sec:rasc} \\[2pt]
-        Commercial building (100s--1000s)    & Hub overload; cloud dependency; STA scalability                      & \Cref{sec:comesh}, \Cref{sec:rasc} \\[2pt]
-        Smart farm (distributed, outdoors)  & Connectivity gaps; unattended local operation                        & \Cref{sec:comesh} \\[2pt]
-        Smart factory (industrial)          & Strict data-locality requirements; operational continuity            & \Cref{sec:comesh} \\
+        Residential home \par (10s of devices)   & Navigating the control spectrum; \par debugging silent automation failures & \ref{chapter:cic}, \par \ref{chapter:rasc} \\[2pt]
+        \midrule
+        Commercial building \par (100s--1000s)   & Hub overload; cloud dependency; \par STA scalability                       & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\[2pt]
+        \midrule
+        Smart farm \par (distributed, outdoors)  & Connectivity gaps; \par unattended local operation                         & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\[2pt]
+        \midrule
+        Smart factory \par (industrial)          & Strict data-locality requirements; \par operational continuity             & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\
         \bottomrule
     \end{tabularx}
-    \caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
-    \label{intro:tab:taxonomy}
 \end{table}
+
+We use the term \emph{smart space} to refer to any physical environment instrumented with IoT devices for automated sensing and actuation. Smart spaces span a wide range of scales and deployment contexts---from a residential home with a few dozen consumer devices to a commercial smart building with hundreds or thousands of sensors and actuators, to smart farms and industrial factories with large physical footprints. \Cref{intro:tab:taxonomy} provides a taxonomy of the smart space types addressed in this thesis.
 
 Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. STA workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
 
@@ -33,18 +37,6 @@ Today's dominant IoT architecture routes every sensor reading and actuation requ
 
 Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
 
-The three works in this thesis target three \emph{orthogonal dimensions} of the smart space control problem---dimensions that together span the design space without overlap:
-
-\begin{itemize}
-    \item \textbf{Infrastructure:} \emph{Where} does STA logic execute? Cloud- and hub-centric deployments create bottlenecks and single points of failure. \Cref{sec:comesh} (CoMesh) shows that fully decentralized, hub-less control over large commercial edge meshes is feasible, resilient, and efficient.
-
-    \item \textbf{User interaction:} \emph{How} do occupants direct their smart space? Users operate along a spectrum from physical per-device interaction to centralized proxy-based hubs. \Cref{sec:cic} (Control in Context) characterizes how and why users navigate this spectrum in practice.
-
-    \item \textbf{Control abstraction:} \emph{What} does the underlying control primitive communicate? Today's RPC is fire-and-forget. \Cref{sec:rasc} introduces RASC, a new abstraction that exposes the full action lifecycle to enable observable, programmable automations.
-\end{itemize}
-
-No single work addresses all three dimensions, and advances in one do not substitute for advances in the others---they are complementary, and together they constitute a coherent thesis.
-
 \smallskip\noindent\textbf{Thesis Statement.}
 This thesis charts a practical path toward \emph{resilient, people-centric control of smart spaces} by: (i)~decentralizing STA infrastructure to eliminate hub bottlenecks and cloud dependencies; (ii)~grounding design in empirical evidence of how real users navigate the control spectrum; and (iii)~introducing a new control abstraction that brings action-level observability and programmability to IoT automations.
 
@@ -52,11 +44,72 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
 \subsection{Thesis Contributions}
 \label{intro:sec:contributions}
 
-This thesis straddles the boundaries of distributed systems design and human-computer interaction (HCI) research, combining system methodologies with user studies. \Cref{intro:tab:contributions} summarizes the three main contributions and their evaluation modalities.
+\begin{figure}[th]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  layer/.style={
+    draw, rounded corners=4pt,
+    text width=13cm,
+    inner xsep=10pt, inner ysep=8pt,
+    align=left,
+  },
+  badge/.style={
+    font=\scriptsize\itshape,
+    fill=white, draw=gray!40,
+    rounded corners=2pt,
+    inner sep=3pt,
+    anchor=north east,
+  },
+  arrow/.style={->, thick, gray!60, shorten >=3pt, shorten <=3pt},
+  node distance=0.3cm,
+]
 
-\begin{table}[t]
+\node[layer, fill=orange!7, draw=orange!35] (cic) {%
+  \textbf{Control in Context} (\ref{chapter:cic})\\
+  \textit{User interaction: \emph{how} do occupants control their space?}\\[2pt]
+  $N{=}60$ survey; $N{=}8$ interviews; \\
+  physical $\longleftrightarrow$ proxy-based control spectrum};
+\node[badge] at (cic.north east) {Management Plane};
+
+\node[layer, fill=blue!7, draw=blue!30, below=of cic] (comesh) {%
+  \textbf{CoMesh} (\ref{chapter:comesh})\\
+  \textit{\emph{Where} should STA logic execute?}\\[2pt]
+  Fully decentralized control plane; coterie-based coordination;
+  zero-message member selection; fault-tolerant STA};
+\node[badge] at (comesh.north east) {Coordination};
+
+\node[layer, fill=teal!7, draw=teal!30, below=of comesh] (rasc) {%
+  \textbf{RASC} (\ref{chapter:rasc})\\
+  \textit{\emph{What} does the control primitive communicate?}\\[2pt]
+  Observable action lifecycle (Request--Ack--Start--Complete);
+  adaptive polling; DAG-aware scheduling};
+\node[badge] at (rasc.north east) {Middleware};
+
+\node[layer, fill=gray!12, draw=gray!40, below=of rasc] (dev) {%
+  \textbf{Smart Space:} IoT Devices \& Mesh Network
+%   \hfill\textit{residential $\cdot$ commercial $\cdot$ industrial}
+};
+
+\draw[arrow] (cic.south) -- (comesh.north);
+\draw[arrow] (comesh.south) -- (rasc.north);
+\draw[arrow] (rasc.south) -- (dev.north);
+
+\end{tikzpicture}
+\caption{The three thesis contributions as layers of the smart space control stack.
+  CoMesh addresses coordination (where STA logic runs);
+  RASC provides the control middleware (what the primitive communicates);
+  Control in Context characterizes user interaction (how occupants direct their space).}
+\medskip
+\label{intro:fig:stack}
+\end{figure}
+
+\begin{table}[th]
     \centering
-    \tagpdfsetup{table-tagging=false}
+    \caption{Contributions of this thesis, their objectives, and evaluation methodology.}
+    \bigskip
+    \label{intro:tab:contributions}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \begin{tabularx}{\linewidth}{l|X|l}
         \toprule
         \textbf{Work} & \textbf{Objective} & \textbf{Evaluation} \\
@@ -74,9 +127,25 @@ This thesis straddles the boundaries of distributed systems design and human-com
         & System measurements \\
         \bottomrule
     \end{tabularx}
-    \caption{Contributions of this thesis, their objectives, and evaluation methodology.}
-    \label{intro:tab:contributions}
 \end{table}
+
+This thesis makes three concrete contributions to the control of smart spaces, each tackling a distinct research question (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
+
+\begin{itemize}
+    \item \textbf{Decentralized STA coordination (\ref{chapter:comesh}).}
+    \emph{Where should STA logic execute?}
+    Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate operations over large commercial edge IoT meshes, demonstrating that resilient, edge-first coordination is both theoretically sound and practically deployable.
+
+    \item \textbf{User-centered understanding of the control spectrum (\ref{chapter:cic}).}
+    \emph{How do occupants actually navigate the control of their smart space?}
+    System designers have long assumed proxy-based central control is users' primary mode of interaction, yet real users navigate a rich spectrum from physical per-device interaction to centralized hubs. Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this spectrum in practice, grounding future system design in observed behavior rather than assumptions.
+
+    \item \textbf{Observable and programmable control middleware (\ref{chapter:rasc}).}
+    \emph{What should the underlying control primitive communicate?}
+    The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and users without feedback on whether actions have taken effect. RASC~\cite{rasc} is a new control middleware that exposes the full action lifecycle, enabling reliable, observable automations with causal dependencies---without requiring any device modifications.
+\end{itemize}
+
+These contributions are independent and complementary: none subsumes another, and together they address coordination, user interaction, and the control primitive layer of smart space control. \Cref{intro:fig:stack} situates each contribution as a layer of the smart space control stack.
 
 
 \subsubsection{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
@@ -139,4 +208,4 @@ Collectively, this thesis turns properties that were once vendor-locked---privac
 \subsection{Thesis Organization}
 \label{intro:sec:organization}
 
-The remainder of this dissertation is organized as follows. \Cref{sec:comesh} presents CoMesh, our decentralized STA control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \Cref{sec:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. \Cref{sec:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. The dissertation concludes with a summary of contributions and a discussion of future directions.
+The remainder of this dissertation is organized as follows. \ref{chapter:comesh} presents CoMesh, our decentralized STA control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \ref{chapter:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. \ref{chapter:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. The dissertation concludes with a summary of contributions and a discussion of future directions.

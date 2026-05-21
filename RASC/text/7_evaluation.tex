@@ -28,6 +28,7 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
     \includegraphics[width=0.7\linewidth]{RASC/figures/evaluation/rascal_poll_efficiency_scatter_plot.pdf}
     \caption{\bf \small \sysname's Adaptive Polling vs. Baseline Periodic Polling. \it \sysname{} is better (lower and to the left) in 4 of 5 cases. 
     }
+    \medskip
     \label{rasc:fig:polls-per-action}
 \end{figure}
 
@@ -36,7 +37,7 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
     % \footnotesize
     % \setlength{\tabcolsep}{2pt}
     \renewcommand{\arraystretch}{1.02}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1,2},table/header-columns={1}}
     \begin{tabular}{|l||r|c|c|c|c|r|}
         \hline
         \multirow{2}{*}{\textbf{Action}} & \centering \textbf{Avg.} & \multicolumn{2}{c|}{\textbf{Detection Time}} & \multicolumn{2}{c|}{\textbf{Computation Time}} & \multirow{2}{*}{\textbf{Speedup}} \\
@@ -58,6 +59,7 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
     \includegraphics[width=0.7\linewidth]{RASC/figures/evaluation/MIA_results.pdf}
     \caption{\bf \small Effect of Extreme Rate Limiting: \sysname's Detection time under varying $Q_w$ (user-specified tolerance threshold).
     }
+    \medskip
     \label{rasc:fig:rate-limiting}
 \end{figure}
 
@@ -87,6 +89,7 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_2_1.pdf}
         \caption{\small \sysname{} convergence time.}
+        \medskip
         \label{rasc:fig:convergence}
     \end{subfigure}%
     \hfill
@@ -94,9 +97,11 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_2_3.pdf}
         \caption{\small \sysname{} convergence  when action length drifts.}
+        \medskip
         \label{rasc:fig:distribution-shift}
     \end{subfigure}
     \caption{\bf \small \sysname{} Convergence. \it \sysname{} converges quickly, requiring just over 20 (new) data points. }
+    \medskip
     \label{rasc:fig:rasc-convergence}
 \end{figure}
 
@@ -106,6 +111,7 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_4_50_fixed.pdf}
         \caption{\small The interruption happens at the 50\% of the action.}
+        \medskip
         \label{rasc:fig:action-interruption-fixed}
     \end{subfigure}%
     \hfill
@@ -113,6 +119,7 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_4_80_fixed.pdf}
         \caption{\small The interruption happens at the 80\% of the action.}
+        \medskip
         \label{rasc:fig:action-interruption-fixed-80}
     \end{subfigure}
     \caption{\bf \small \sysname{} performance (polls) vs. Interruption Length relative to action length (\%).
@@ -120,12 +127,13 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
     \label{rasc:fig:action-interruption}
 \end{figure}
 
-\begin{figure*}[t!]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=\linewidth]{RASC/figures/evaluation/interruption.pdf}
     \caption{\bf \small Action Failure False Positive Rate during interruption. Left to right: interruption happens (resp.) at the 50\%, 80\%, and 90\% points of action. {\it False positives are generally low. Exception: when interruptions are long and towards the action's end. }}
+    \medskip
     \label{rasc:fig:action-interruption-simulated}
-\end{figure*}
+\end{figure}
 
 
 \noindent \textbf{Data Drift.} 
@@ -154,16 +162,19 @@ We observe the False Positive rate rises with longer interruptions, especially w
         \includegraphics[width=0.8\linewidth]{RASC/figures/evaluation/arrival_times_plot.pdf}
         \captionsetup{width=.9\linewidth}
         \caption{\small The timeline of routine arrivals for the two datasets.}
+        \medskip
         \label{rasc:fig:routine-arrival}
     \end{subfigure}%
     \hfill
     \begin{subfigure}{0.49\linewidth}
         \includegraphics[width=0.8\linewidth]{RASC/figures/evaluation/cdf_action_len_larger_font.pdf}
-        \caption{\small The sum of action lengths per routine as a CDF plot. } 
+        \caption{\small The sum of action lengths per routine as a CDF plot. }
+        \medskip
         \label{rasc:fig:routine-action-lengths}
     \end{subfigure}
     \caption{\bf \small Our Routine Benchmark.
     }
+    \medskip
     \label{rasc:fig:routine-dataset}
 \end{figure}
 
@@ -179,7 +190,7 @@ intended to capture ``peak'' times of activity, such as morning, lunch, evening.
     \centering
     % \footnotesize
     % \setlength{\tabcolsep}{5pt}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1,2},table/header-columns={1,2}}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
         \multirow{2}{*}{Dataset} & \multirow{2}{*}{Polling Strategy} & \multicolumn{3}{c|}{CPU (\%)} & \multicolumn{3}{c|}{Memory (MB)} \\
@@ -206,6 +217,7 @@ intended to capture ``peak'' times of activity, such as morning, lunch, evening.
     \caption{\bf \small \sysname's relative resource utilization across varying routine loads. 
     {\it \sysname's CPU overhead is consistently low, while memory usage scales sub-linearly with the \# concurrent routines.}
     }
+    \medskip
     \label{rasc:fig:scalability-overhead}
 \end{figure}
 

@@ -5,8 +5,8 @@
 % =====================================================================
 
 % --- Typography (thesis template) ------------------------------------
-% fontsetup can slow down compilation; omit when writing drafts
-\usepackage{fontsetup}
+% fontsetup can slow down compilation; uncomment for final submission
+% \usepackage{fontsetup}
 % unicode-math is required for math accessibility tagging
 \usepackage{unicode-math}
 
@@ -15,7 +15,7 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{stfloats}       % bottom placement of figure*
+% \usepackage{stfloats}     % bottom placement of figure* (not used)
 
 % --- Math (CoMesh, RASC) --------------------------------------------
 \usepackage{amsmath}
@@ -30,7 +30,7 @@
 % --- Tables (CoMesh, ControlInContext, RASC) ------------------------
 \usepackage{array}
 \usepackage{booktabs}
-\usepackage{makecell}
+% \usepackage{makecell}   % not used in thesis
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{textcomp}
@@ -39,8 +39,9 @@
 
 % --- Diagrams and plots (CoMesh, RASC, thesis template) -------------
 \usepackage{tikz}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning}
+% \usepackage{pgfplots}         % not used; all graphs are \includegraphics
+% \pgfplotsset{compat=1.18}
 
 % --- Lists (CoMesh, ControlInContext, RASC) -------------------------
 \usepackage{enumitem}
@@ -57,12 +58,12 @@
 % --- Chemistry (thesis template) ------------------------------------
 % Note: at time of writing, chemistry packages are not compatible with
 % accessibility tagging, but there are no alternatives.
-\usepackage[version=4]{mhchem}
-\usepackage{chemfig}
+% \usepackage[version=4]{mhchem}   % not used in thesis
+% \usepackage{chemfig}             % not used in thesis
 
 % --- Utilities (various projects) -----------------------------------
 \usepackage{etoolbox}   % \providetoggle / \newtoggle (CoMesh, ControlInContext)
-\usepackage{url}        % long URL formatting (CoMesh)
+% \usepackage{url}      % not used; hyperref handles URLs
 
 % =====================================================================
 % DRAFT / REVIEW TOGGLES
@@ -136,4 +137,10 @@
 % cleveref names for the uofithesis appendix counter
 \crefname{appendix}{appendix}{appendices}
 \Crefname{appendix}{Appendix}{Appendices}
+
+% % Top-level \section commands are thesis chapters.
+% % uofithesis already formats \thesection as "Chapter X", so suppress the
+% % cleveref prefix entirely and let the counter label speak for itself.
+% \crefformat{section}{#2#1#3}
+% \Crefformat{section}{#2#1#3}
 

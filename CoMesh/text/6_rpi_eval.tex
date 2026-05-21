@@ -50,6 +50,7 @@ Epoch length is 60 s.
         \label{comesh:subfig:grid-topo-graph}
     \end{subfigure}
     \caption{\small \it Deployment: Raspberry Pi Topologies. From \Cref{comesh:fig:IoTsetting}(a, b).}
+    \medskip
     \label{comesh:fig:rpi_topos}
 \end{figure}
 
@@ -64,6 +65,7 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
         \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/bandwidth_xrtn.png}
         \caption{\small \it  Deployment:  Centralized (lines) vs. \sysname{} (bars): Bandwidth.  \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
         }
+        \medskip
         \label{comesh:fig:bw_centralized_skytali}
     \end{minipage}
     \hfill
@@ -72,25 +74,28 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
         \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xrtn.png}
         \caption{\small \it Deployment: Lock Acquisition Time and Sync Delay. \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
         }
+        \medskip
         \label{comesh:fig:la_sync_mul_rtns}
     \end{minipage}
 \end{figure}
 
-\begin{figure*}[ht] % Use figure* for spanning two columns in a two-column document
+\begin{figure}[ht]
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=0.83\textwidth]{CoMesh/figures/exp_eval/bandwidth_xdev_virt.pdf}
         \caption{\small \it Deployment: Scalability of Per-(Virtual) Device Bandwidth. \MSF{} = Mini \Grid. Error bars---left: background, right: foreground.}
+        \medskip
         \label{comesh:fig:bw_scale}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xdev.png}
         \caption{\small \it Deployment: Scalability of Lock Acquisition Time and Sync Delay. \MSF{} = Mini \Grid. 20 Routines.}
+        \medskip
         \label{comesh:fig:la_sync_scale}
     \end{minipage}
-\end{figure*}
+\end{figure}
 
 \noindent{\bf \sysname{} Consumes Less Bandwidth than a Central Hub:} 
 \Cref{comesh:fig:bw_centralized_skytali} shows decentralized \sysname's bandwidth per smart device, both  end-to-end (E2E) messages, and ad-hoc routed (hop-to-hop/H2H) messages. For fair comparison, we model a central hub over a mesh network (\Cref{comesh:section:intro}) by instantiating \sysname{} with $k=1$ and one \kgroup, i.e., a single centralized device responsible for all routines' management. We observe that: a) \sysname{} reduces bandwidth by an order of magnitude (over 10$\times$) compared to the centralized approach. b) Both end-to-end bandwidth and hop-to-hop bandwidth are scalable and remain flat, as the number of routines grows. c) Bandwidth of foreground operations (e.g.,  locking) remains small compared to background bandwidth (e.g., device monitoring). 
@@ -112,6 +117,11 @@ Median Lock Acquisition time stays in  2.97 s - 34.71 s, and  Sync Delay median 
 
 \begin{table}[tb!]
     \centering
+    \caption{\it \small \Kgroup{} Latencies in  Mini \Grid{} topology.
+    }
+    \bigskip
+    \label{comesh:tab:kgroup_latencies}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \footnotesize
     \begin{tabular}{c c c c}
         \hline
@@ -122,9 +132,6 @@ Median Lock Acquisition time stays in  2.97 s - 34.71 s, and  Sync Delay median 
         State transfer & 2.0750 & 2.8468 & 3.1390 \\
         \hline
     \end{tabular}
-    \caption{\it \small \Kgroup{} Latencies in  Mini \Grid{} topology.
-    }
-    \label{comesh:tab:kgroup_latencies}
 \end{table}
 
 \noindent{\bf \sysname{} Internal Operations are Fast: }

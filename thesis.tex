@@ -29,7 +29,7 @@
 \raggedright
 \setlength{\parindent}{1.5em}
 
-\title{Adaptive Systems Architectures for Heterogeneous and Constrained Environments}
+\title{Rethinking Smart Space Control: Adaptive Systems Architectures and Interfaces}
 \author{Anna Karanika}
 \department{Computer Science}
 
@@ -61,11 +61,13 @@
 \begin{document}
 
 \justifying
+\pagenumbering{roman}
 
 % Uncomment the copyrightpage macro to include an automatic copyright page
 % before the title
 \copyrightpage
 \maketitle
+\setcounter{page}{2}
 
 \input{0-abstract.tex}
 \input{1-acknowledgments.tex}
@@ -73,10 +75,12 @@
 
 \tableofcontents
 
+\clearpage
+\pagenumbering{arabic}
 \input{3-introduction.tex}
 
 \section{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
-\label{sec:comesh}
+\label{chapter:comesh}
 \input{CoMesh/text/0_preface.tex}
 \input{CoMesh/text/1_intro.tex}
 \input{CoMesh/text/2_model.tex}
@@ -90,7 +94,7 @@
 
 
 \section{Control in Context: How Smart Home Users Navigate Proxy-Based Control Schemes}
-\label{sec:cic}
+\label{chapter:cic}
 \input{ControlInContext/text/0-preface.tex}
 \input{ControlInContext/text/1-introduction.tex}
 \input{ControlInContext/text/2-related_work.tex}
@@ -102,7 +106,7 @@
 
 
 \section{RASC: Enhancing Observability and Programmability in Smart Spaces}
-\label{sec:rasc}
+\label{chapter:rasc}
 \renewcommand{\sysname}{Rascal}  % redefine per-chapter in the document body
 \input{RASC/text/0_preface.tex}
 \input{RASC/text/1_intro.tex}
@@ -118,7 +122,9 @@
 
 \input{4-conclusion-future-work.tex}
 
-\printbibliography[heading=bibintoc,title={References}]
+\ifdefined\draftmode\else
+  \printbibliography[heading=bibintoc,title={References}]
+\fi
 
 \appendices{
     \section{Control In Context---Supplemental Material}
