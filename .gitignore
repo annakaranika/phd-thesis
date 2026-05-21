@@ -7,7 +7,7 @@
 *.fdb_latexmk
 *.fls
 *.log
-*.pdf
+# *.pdf
 *.synctex.gz
 *.ps
 *.dvi
@@ -29,3 +29,4 @@ CoMesh/New_IEEEtran_how-to.tex
 RASC/usenix_2020_09.sty
 RASC/usenixbadges.sty
 RASC/usenixbadges-*.pdf
+RASC/acmguide.pdf
