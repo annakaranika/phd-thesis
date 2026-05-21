@@ -37,7 +37,8 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
     % \footnotesize
     % \setlength{\tabcolsep}{2pt}
     \renewcommand{\arraystretch}{1.02}
-    \tagpdfsetup{table/header-rows={1,2},table/header-columns={1}}
+    % \tagpdfsetup{table/header-rows={1,2},table/header-columns={1}}
+    \tagpdfsetup{table-tagging=false}
     \begin{tabular}{|l||r|c|c|c|c|r|}
         \hline
         \multirow{2}{*}{\textbf{Action}} & \centering \textbf{Avg.} & \multicolumn{2}{c|}{\textbf{Detection Time}} & \multicolumn{2}{c|}{\textbf{Computation Time}} & \multirow{2}{*}{\textbf{Speedup}} \\
@@ -190,7 +191,8 @@ intended to capture ``peak'' times of activity, such as morning, lunch, evening.
     \centering
     % \footnotesize
     % \setlength{\tabcolsep}{5pt}
-    \tagpdfsetup{table/header-rows={1,2},table/header-columns={1,2}}
+    % \tagpdfsetup{table/header-rows={1,2},table/header-columns={1,2}}
+    \tagpdfsetup{table-tagging=false}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
         \multirow{2}{*}{Dataset} & \multirow{2}{*}{Polling Strategy} & \multicolumn{3}{c|}{CPU (\%)} & \multicolumn{3}{c|}{Memory (MB)} \\
