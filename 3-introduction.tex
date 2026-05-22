@@ -112,7 +112,9 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
     \label{intro:tab:contributions}
     % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \tagpdfsetup{table-tagging=false}
-    \begin{tabularx}{\linewidth}{l|X|l}
+    \renewcommand{\arraystretch}{1.3}
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{4.2cm}|X|>{\raggedright\arraybackslash}m{4cm}}
         \hline
         \textbf{Work} & \textbf{Objective} & \textbf{Evaluation} \\
         \hline\hline
@@ -121,7 +123,7 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
         & System measurements \\
         \hline
         Control in Context~\cite{controlincontext}
-        & User study of smart home control scheme navigation
+        & User study of smart home control interface navigation
         & HCI analysis \\
         \hline
         RASC~\cite{rasc}
@@ -134,20 +136,24 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
 This thesis makes three concrete contributions to the control of smart spaces, each tackling a distinct research question (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
 
 \begin{itemize}
-    \item \textbf{Decentralized STA coordination (\ref{chapter:comesh}).}
+    \item \textbf{Decentralized STA coordination---infrastructure layer (\ref{chapter:comesh}).}
     \emph{Where should STA logic execute?}
     Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate operations over large commercial edge IoT meshes, demonstrating that resilient, edge-first coordination is both theoretically sound and practically deployable.
 
-    \item \textbf{User-centered understanding of the control spectrum (\ref{chapter:cic}).}
-    \emph{How do occupants actually navigate the control of their smart space?}
-    System designers have long assumed proxy-based central control is users' primary mode of interaction, yet real users navigate a rich spectrum from physical per-device interaction to centralized hubs. Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this spectrum in practice, grounding future system design in observed behavior rather than assumptions.
+    \item \textbf{Understanding how users choose their management interface (\ref{chapter:cic}).}
+    \emph{Which interface do occupants use to command their devices, and why?}
+    This is a \emph{management-plane} question, distinct from CoMesh's infrastructure-layer question.
+    Smart home users interact through a spectrum of command interfaces---from pressing a physical button on a device, to a per-brand mobile app, to a centralized hub application such as Google Home or Alexa that routes all commands through a cloud backend.
+    These represent different interface architectures, each with different latency, reliability, and failure-mode characteristics.
+    System designers have long assumed centralized hub interfaces are users' primary mode, yet real behavior is far more nuanced.
+    Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this interface spectrum in practice, grounding future interface and system design in observed behavior rather than assumptions.
 
     \item \textbf{Observable and programmable control middleware (\ref{chapter:rasc}).}
     \emph{What should the underlying control primitive communicate?}
     The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and users without feedback on whether actions have taken effect. RASC~\cite{rasc} is a new control middleware that exposes the full action lifecycle, enabling reliable, observable automations with causal dependencies---without requiring any device modifications.
 \end{itemize}
 
-These contributions are independent and complementary: none subsumes another, and together they address coordination, user interaction, and the control primitive layer of smart space control. \Cref{intro:fig:stack} situates each contribution as a layer of the smart space control stack.
+These contributions are independent and complementary: none subsumes another. Together they address the IoT control stack at three distinct layers---the infrastructure layer (where STA logic runs), the management interface layer (which interface users choose to command their devices), and the control primitive layer (what feedback the underlying call provides). \Cref{intro:fig:stack} situates each contribution accordingly.
 
 
 \subsubsection{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
