@@ -35,11 +35,11 @@ There is rich literature at the networking layer, e.g., on how to build, configu
         \label{comesh:fig:smart-farm}
     \end{subfigure}
     \begin{subfigure}{0.49\linewidth}
-        \vspace{0.2cm}
+        % \vspace{0.2cm}
         \centering
         \includegraphics[width=\textwidth]{CoMesh/figures/intro/smart-factory.pdf}
         \caption{\it \small {Smart Factory.}}
-        \medskip
+        % \medskip
         \label{comesh:fig:smart-factory}
     \end{subfigure}
     \caption{\it \small {Three Commercial Edge Settings:
@@ -54,7 +54,7 @@ There is rich literature at the networking layer, e.g., on how to build, configu
 series of actions, sending
 commands to several devices. Third, because some of these actions may be long-running (e.g., mechanical movements, repetitive actions, or time-based actions such as water sprinklers), the control plane needs to initiate and monitor {\it actuation} of these commands (at multiple devices)  quickly and efficiently. The key challenge is to actuate in an order that {\it avoids conflicting actions on devices~\cite{Transactuations, Safehome}}.
 
-This STA abstraction is commonly programmed via {\it routines}, available in Amazon Alexa~\cite{Alexa}, Google Home \cite{GoogleHome}, etc. A  routine is a sequence of {\it commands} that actuates multiple devices,  wherein each command executes an action on one device. Multiple routines may be active at any given time, while others remain dormant (waiting to be triggered). A routine may be triggered either based on sensor values (Boolean predicate), or at particular times, or a combination of these, or manually by a human.
+This STA abstraction is commonly programmed via {\it routines}, available in Amazon Alexa \cite{Alexa}, Google Home \cite{GoogleHome}, etc. A  routine is a sequence of {\it commands} that actuates multiple devices,  wherein each command executes an action on one device. Multiple routines may be active at any given time, while others remain dormant (waiting to be triggered). A routine may be triggered either based on sensor values (Boolean predicate), or at particular times, or a combination of these, or manually by a human.
 
 This paper focuses on management of such routine-based workloads running over large commercial edge IoT meshes. \Cref{comesh:fig:IoTsetting} shows three emerging edge mesh scenarios---a smart building, a smart farm, and a smart factory.
 Some examples of routines follow. A  smart office will have routines running day and night, e.g., to: (i) raise and lower shades and thermostat, in response to sunlight and temperature; (ii) change interior lighting as a function of occupancy; (iii) enable security cameras and lock gates at 9 pm. 
@@ -84,7 +84,6 @@ and keeping operations+data private and local.
         \includegraphics[width=\textwidth]{CoMesh/figures/intro/CPU_cmp_xdev_bar.pdf}
         \caption{ \small \it Fixed: 20 total routines.
         }
-        \medskip
         \label{comesh:subfig:cpu-central}
     \end{subfigure}
     \hspace{0.5cm}
@@ -92,7 +91,6 @@ and keeping operations+data private and local.
         \centering
         \includegraphics[width=\textwidth]{CoMesh/figures/intro/CPU_cmp_xrtn_bar.pdf}
         \caption{\small \it Fixed: 16 total devices.}
-        \medskip
         \label{comesh:subfig:cpu-cmp}
     \end{subfigure}
     \caption{\small \it 

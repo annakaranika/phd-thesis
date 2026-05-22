@@ -33,6 +33,7 @@ In IoT settings, it is impossible to distinguish a failed device from one that i
     \includegraphics[width=0.65\linewidth]{RASC/figures/intro/smart space setup.pdf}
     \caption{\bf \small Communication between a smart device and a client app. {\it Each arrowed line is an RPC in today's stacks. This paper replaces dashed lines with the new \abs{} abstraction.}
     }
+    \medskip
     \label{rasc:fig:iot setup}
 \end{figure}
 
@@ -125,7 +126,6 @@ $L_k^*=U$.
 
 \begin{algorithm}[t!]
     \caption{\bf Adaptive Polling Algorithm}
-    \medskip
     \label{rasc:algo:adaptive-polling-algorithm}
     \footnotesize
     \algtext*{EndIf} % hide EndIf but keep block structure
@@ -218,6 +218,7 @@ with a smaller $k^*$. The algorithm recursively updates $k^*$ until it finds a $
     \centering
     \includegraphics[width=0.7\linewidth]{RASC/figures/design/rasc.pdf}
     \caption{\bf \small Placement Example, $k = 4$. {\it Red lines are \abstraction{}  polls (after action start). Action completes between second and third poll.}}
+    \medskip
     \label{rasc:fig:poll}
 \end{figure}
 

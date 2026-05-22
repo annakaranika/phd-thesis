@@ -34,11 +34,14 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
 
 \begin{table}[tb!]
     \centering
-    % \footnotesize
+    \small
     % \setlength{\tabcolsep}{2pt}
     \renewcommand{\arraystretch}{1.02}
     % \tagpdfsetup{table/header-rows={1,2},table/header-columns={1}}
     \tagpdfsetup{table-tagging=false}
+    \caption{\bf \small {\sysname's Adaptive Polling vs. Baseline V-opt-calculated Polling, Detection vs. Computation Time. All times are in seconds. Bold font indicates the lowest value for each action/metric combination. \it \sysname{} has similar detection times, but V-opt's computation time is impractical, especially for long actions.}}
+    \bigskip
+    \label{rasc:tab:V-opt}
     \begin{tabular}{|l||r|c|c|c|c|r|}
         \hline
         \multirow{2}{*}{\textbf{Action}} & \centering \textbf{Avg.} & \multicolumn{2}{c|}{\textbf{Detection Time}} & \multicolumn{2}{c|}{\textbf{Computation Time}} & \multirow{2}{*}{\textbf{Speedup}} \\
@@ -51,8 +54,6 @@ Action \texttt{shade down}'s detection time is higher with adaptive polling but 
         Shade down  &  27.45 & \textbf{1.54} &  2.58         & \textbf{2.93e-02} & 1.63e+01 & 554.99 \\ \hline
         Therm 68,69 & 432.17 & \textbf{16.19}&    --         & \textbf{9.04}     & {2hr+}   & 796.34 \\ \hline
     \end{tabular}
-    \caption{\bf \small {\sysname's Adaptive Polling vs. Baseline V-opt-calculated Polling, Detection vs. Computation Time. All times are in seconds. Bold font indicates the lowest value for each action/metric combination. \it \sysname{} has similar detection times, but V-opt's computation time is impractical, especially for long actions.}}
-    \label{rasc:tab:V-opt}
 \end{table}
 
 \begin{figure}[tb!]
@@ -90,7 +91,6 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_2_1.pdf}
         \caption{\small \sysname{} convergence time.}
-        \medskip
         \label{rasc:fig:convergence}
     \end{subfigure}%
     \hfill
@@ -98,7 +98,6 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_2_3.pdf}
         \caption{\small \sysname{} convergence  when action length drifts.}
-        \medskip
         \label{rasc:fig:distribution-shift}
     \end{subfigure}
     \caption{\bf \small \sysname{} Convergence. \it \sysname{} converges quickly, requiring just over 20 (new) data points. }
@@ -112,7 +111,6 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_4_50_fixed.pdf}
         \caption{\small The interruption happens at the 50\% of the action.}
-        \medskip
         \label{rasc:fig:action-interruption-fixed}
     \end{subfigure}%
     \hfill
@@ -120,7 +118,6 @@ i.e., mean and variance both differ by less than 5\% upon consecutive samples.
         \centering
         \includegraphics[width=\linewidth]{RASC/figures/evaluation/4_4_80_fixed.pdf}
         \caption{\small The interruption happens at the 80\% of the action.}
-        \medskip
         \label{rasc:fig:action-interruption-fixed-80}
     \end{subfigure}
     \caption{\bf \small \sysname{} performance (polls) vs. Interruption Length relative to action length (\%).
@@ -163,14 +160,13 @@ We observe the False Positive rate rises with longer interruptions, especially w
         \includegraphics[width=0.8\linewidth]{RASC/figures/evaluation/arrival_times_plot.pdf}
         \captionsetup{width=.9\linewidth}
         \caption{\small The timeline of routine arrivals for the two datasets.}
-        \medskip
         \label{rasc:fig:routine-arrival}
     \end{subfigure}%
     \hfill
     \begin{subfigure}{0.49\linewidth}
+        \centering
         \includegraphics[width=0.8\linewidth]{RASC/figures/evaluation/cdf_action_len_larger_font.pdf}
         \caption{\small The sum of action lengths per routine as a CDF plot. }
-        \medskip
         \label{rasc:fig:routine-action-lengths}
     \end{subfigure}
     \caption{\bf \small Our Routine Benchmark.
@@ -189,10 +185,14 @@ intended to capture ``peak'' times of activity, such as morning, lunch, evening.
 
 \begin{table}[tb!]
     \centering
-    % \footnotesize
+    \small
     % \setlength{\tabcolsep}{5pt}
     % \tagpdfsetup{table/header-rows={1,2},table/header-columns={1,2}}
     \tagpdfsetup{table-tagging=false}
+    \caption{\bf \small \sysname's resource utilization under different polling strategies. Bold font indicates the lowest value for each dataset/ metric combination. {\it \sysname{} either incurs the lowest CPU or memory (among baselines), or is comparable to
+    the lowest option.}}
+    \bigskip
+    \label{rasc:tab:resource-overheads}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
         \multirow{2}{*}{Dataset} & \multirow{2}{*}{Polling Strategy} & \multicolumn{3}{c|}{CPU (\%)} & \multicolumn{3}{c|}{Memory (MB)} \\
@@ -208,9 +208,6 @@ intended to capture ``peak'' times of activity, such as morning, lunch, evening.
          & none & \textbf{2.72} & \textbf{1.3} & 22.39 & 17.87 & 18.21 & 19.07 \\
         \hline
     \end{tabular}
-    \caption{\bf \small \sysname's resource utilization under different polling strategies. Bold font indicates the lowest value for each dataset/ metric combination. {\it \sysname{} either incurs the lowest CPU or memory (among baselines), or is comparable to
-    the lowest option.}}
-    \label{rasc:tab:resource-overheads}
 \end{table}
 
 \begin{figure}[tb!]
@@ -292,9 +289,9 @@ The random+bursty dataset achieves faster rescheduling time as the schedule is t
 
 \begin{figure}[t]
     \centering
-    \begin{minipage}[t]{0.5\textwidth}
+    \begin{minipage}[t]{0.6\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{RASC/figures/evaluation/schedule_metric_Latency_rascal.pdf}
+        \includegraphics[width=0.87\linewidth]{RASC/figures/evaluation/schedule_metric_Latency_rascal.pdf}
         \captionof{figure}{\small \bf Latency comparison. \it \sysname{} achieves at least 25\% and 55\% lower mean and q95 values, resp.}
         \label{rasc:fig:latency_comparison}
     \end{minipage}

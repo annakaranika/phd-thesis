@@ -36,7 +36,7 @@ Modern IoT stacks must be evaluated through two complementary lenses. \textbf{Sy
 
 Today's dominant IoT architecture routes every sensor reading and actuation request through a vendor cloud backend, which creates three intertwined pain points. First, \textbf{privacy risks} arise because raw telemetry must transit and persist in third-party infrastructure; keeping control logic on-premise eliminates this exposure entirely~\cite{HACloudless, csa2025matter}. In high-security industrial settings---semiconductor fabs and pharmaceutical facilities, for instance---operators routinely prohibit any data from leaving the premises to protect proprietary processes, a constraint cloud-centric platforms cannot satisfy by design. Second, \textbf{reliability degrades} when every automation depends on an Internet path, particularly during network or cloud service outages~\cite{gcloud-down1}. Third, \textbf{cost scales unfavorably}: servicing 500 devices that ping once per second can incur fees approaching \$2{,}500 per month on mainstream IoT cloud tiers~\cite{AzureIoTHub}, while local control removes usage-based bills altogether. Together, these pressures make edge-native, on-premise control an attractive foundation for smart environments that must be private, dependable, and economically sustainable. Crucially, the hardware needed to realize this vision is already in place: smart devices in both residential and commercial settings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}, offering a ready substrate for distributed control logic without requiring any additional infrastructure investment.
 
-Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
+Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations\allowbreak ---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
 
 \smallskip\noindent\textbf{Thesis Statement.}
 This thesis charts a practical path toward \emph{resilient, people-centric control of smart spaces} by: (i)~decentralizing STA infrastructure to eliminate hub bottlenecks and cloud dependencies; (ii)~grounding design in empirical evidence of how real users navigate the control spectrum; and (iii)~introducing a new control abstraction that brings action-level observability and programmability to IoT automations.
@@ -46,63 +46,63 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
 \label{intro:sec:contributions}
 
 \begin{figure}[th]
-\centering
-\begin{tikzpicture}[
-  every node/.style={font=\small},
-  layer/.style={
-    draw, rounded corners=4pt,
-    text width=13cm,
-    inner xsep=10pt, inner ysep=8pt,
-    align=left,
-  },
-  badge/.style={
-    font=\scriptsize\itshape,
-    fill=white, draw=gray!40,
-    rounded corners=2pt,
-    inner sep=3pt,
-    anchor=north east,
-  },
-  arrow/.style={->, thick, gray!60, shorten >=3pt, shorten <=3pt},
-  node distance=0.3cm,
-]
+  \centering
+  \begin{tikzpicture}[
+    every node/.style={font=\small},
+    layer/.style={
+      draw, rounded corners=4pt,
+      text width=13cm,
+      inner xsep=10pt, inner ysep=8pt,
+      align=left,
+    },
+    badge/.style={
+      font=\scriptsize\itshape,
+      fill=white, draw=gray!40,
+      rounded corners=2pt,
+      inner sep=3pt,
+      anchor=north east,
+    },
+    arrow/.style={->, thick, gray!60, shorten >=3pt, shorten <=3pt},
+    node distance=0.3cm,
+  ]
 
-\node[layer, fill=orange!7, draw=orange!35] (cic) {%
-  \textbf{Control in Context} (\ref{chapter:cic})\\
-  \textit{User interaction: \emph{how} do occupants control their space?}\\[2pt]
-  $N{=}60$ survey; $N{=}8$ interviews; \\
-  physical $\longleftrightarrow$ proxy-based control spectrum};
-\node[badge] at (cic.north east) {Management Plane};
+    \node[layer, fill=orange!7, draw=orange!35] (cic) {%
+      \textbf{Control in Context} (\ref{chapter:cic})\\
+      \textit{\emph{How} do occupants control their space?}\\[2pt]
+      $N{=}60$ survey; $N{=}8$ interviews; \\
+      physical $\longleftrightarrow$ proxy-based control spectrum};
+    \node[badge] at (cic.north east) {Management};
 
-\node[layer, fill=blue!7, draw=blue!30, below=of cic] (comesh) {%
-  \textbf{CoMesh} (\ref{chapter:comesh})\\
-  \textit{\emph{Where} should STA logic execute?}\\[2pt]
-  Fully decentralized control plane; coterie-based coordination;
-  zero-message member selection; fault-tolerant STA};
-\node[badge] at (comesh.north east) {Coordination};
+    \node[layer, fill=blue!7, draw=blue!30, below=of cic] (comesh) {%
+      \textbf{CoMesh} (\ref{chapter:comesh})\\
+      \textit{\emph{Where} should STA logic execute?}\\[2pt]
+      Fully decentralized control plane; coterie-based coordination;
+      zero-message member selection; fault-tolerant STA};
+    \node[badge] at (comesh.north east) {Coordination};
 
-\node[layer, fill=teal!7, draw=teal!30, below=of comesh] (rasc) {%
-  \textbf{RASC} (\ref{chapter:rasc})\\
-  \textit{\emph{What} does the control primitive communicate?}\\[2pt]
-  Observable action lifecycle (Request--Ack--Start--Complete);
-  adaptive polling; DAG-aware scheduling};
-\node[badge] at (rasc.north east) {Middleware};
+    \node[layer, fill=teal!7, draw=teal!30, below=of comesh] (rasc) {%
+      \textbf{RASC} (\ref{chapter:rasc})\\
+      \textit{\emph{What} does the control primitive communicate?}\\[2pt]
+      Observable action lifecycle (Request--Ack--Start--Complete);
+      adaptive polling; DAG-aware scheduling};
+    \node[badge] at (rasc.north east) {Middleware};
 
-\node[layer, fill=gray!12, draw=gray!40, below=of rasc] (dev) {%
-  \textbf{Smart Space:} IoT Devices \& Mesh Network
-%   \hfill\textit{residential $\cdot$ commercial $\cdot$ industrial}
-};
+    \node[layer, fill=gray!12, draw=gray!40, below=of rasc] (dev) {%
+      \textbf{Smart Space:} IoT Devices \& Mesh Network
+    %   \hfill\textit{residential $\cdot$ commercial $\cdot$ industrial}
+    };
 
-\draw[arrow] (cic.south) -- (comesh.north);
-\draw[arrow] (comesh.south) -- (rasc.north);
-\draw[arrow] (rasc.south) -- (dev.north);
+    \draw[arrow] (cic.south) -- (comesh.north);
+    \draw[arrow] (comesh.south) -- (rasc.north);
+    \draw[arrow] (rasc.south) -- (dev.north);
 
-\end{tikzpicture}
-\caption{The three thesis contributions as layers of the smart space control stack.
-  CoMesh addresses coordination (where STA logic runs);
-  RASC provides the control middleware (what the primitive communicates);
-  Control in Context characterizes user interaction (how occupants direct their space).}
-\medskip
-\label{intro:fig:stack}
+  \end{tikzpicture}
+  \caption{The three thesis contributions as layers of the smart space control stack.
+    CoMesh addresses coordination (where STA logic runs);
+    RASC provides the control middleware (what the primitive communicates);
+    Control in Context characterizes user interaction (how occupants direct their space).}
+  \medskip
+  \label{intro:fig:stack}
 \end{figure}
 
 \begin{table}[th]
@@ -113,21 +113,21 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
     % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \tagpdfsetup{table-tagging=false}
     \begin{tabularx}{\linewidth}{l|X|l}
-        \toprule
+        \hline
         \textbf{Work} & \textbf{Objective} & \textbf{Evaluation} \\
-        \midrule\midrule
-        \multirow{2}{*}{CoMesh~\cite{comesh}}
+        \hline\hline
+        CoMesh~\cite{comesh}
         & Decentralized STA control plane for commercial edge IoT meshes
         & System measurements \\
-        \midrule
-        \multirow{2}{*}{Control in Context~\cite{controlincontext}}
+        \hline
+        Control in Context~\cite{controlincontext}
         & User study of smart home control scheme navigation
         & HCI analysis \\
-        \midrule
-        \multirow{2}{*}{RASC~\cite{rasc}}
+        \hline
+        RASC~\cite{rasc}
         & Observability abstraction and DAG-aware scheduler for IoT automations
         & System measurements \\
-        \bottomrule
+        \hline
     \end{tabularx}
 \end{table}
 

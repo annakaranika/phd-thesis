@@ -48,7 +48,7 @@ At runtime, the YAML is compiled into a dependency DAG; \scheduler{} monitors th
 
 \noindent \textbf{Action length PDF.}
 We obtain each action's probability distribution function by storing historical durations for (ack→start) and (start→complete). 
-Actions are keyed by \(\langle\textit{device},\,\textit{action},\,\textit{transition}\rangle\). 
+Actions are keyed by \(\langle\textit{device},\allowbreak\textit{action},\allowbreak\textit{transition}\rangle\). 
 Consequently, \dynpoller{} requires a brief training phase (several trials) before it can return accurate results.
 
 \noindent \textbf{Asynchronous poll placement computation.}

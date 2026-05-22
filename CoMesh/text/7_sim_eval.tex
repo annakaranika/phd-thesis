@@ -99,13 +99,13 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
     \end{minipage}
 \end{figure}
 
-\noindent{\bf Client Delay: } 
+\noindent{\bf Client Delay.} 
 Suppose there are no routines active. Then, if one routine's trigger conditions are activated, the time until executing its first command is the {\it client delay}---this measures a routine's cold-start time. Client delay  includes time for the routine \kgroup{} to
 detect (and replicate) the trigger, lock all of its actuated devices, and start execution. 
 In \Cref{comesh:fig:pl-sr-comp}, we observe that \sysname{}'s client delay scales (increases gently) with device count, regardless of topology or locking strategy.
 As expected, optimistic locking (OLA) is faster than sequential locking (SLA) because client delay excludes conflicting routines. Among the 3 topologies, grid has higher client delay than random and clustered (which are similar), because the latter two have local density variations that form node ``clusters'' in the network which tend to speed up communication. Even though OLA is faster, we could prove liveness only for SLA~\cite{arxiv}. Users should employ OLA only in low-packet-drop networks, while SLA is robust, general-purpose, and still scalable. Scale goes up to 750 devices, similar to our dense smart building topology from \Cref{comesh:sec:mapsim}.
 
-\noindent{\bf Churn Effect on Client/Sync Delays: } 
+\noindent{\bf Churn Effect on Client/Sync Delays.} 
 Churn refers to back-to-back smart device arrivals, departures, and failures. Even if membership lists are updated quickly (by underlying membership protocol Medley~\cite{medley}), \kgroup{} operations still incur overhead.
 \Cref{comesh:fig:client_sync_delay_failures} shows that when 40\% of the \smart{}s  are churned 
 in a grid topology (SLA locking),  client delay increases only 25\%, as some routines face the overhead of failover (election and state transfer).
@@ -116,7 +116,7 @@ we triggered two back-to-back instances of the identical routine.
 Sync delay excludes triggering of routine and associated \kgroup{} quorum. Client delay excludes lock release latency and associated quorums. }
 
 {
-\noindent{\bf Effect of Stale Membership due to Drops and Churn: } 
+\noindent{\bf Effect of Stale Membership due to Drops and Churn.} 
 {\it False detections} by the underlying membership may arise from dropped messages that make a failed device indistinguishable from a lossy one. This leads to inconsistent membership, and may slow \sysname's zero-message exchange mechanisms.
 Yet, with 1000 devices and 80\% of them smart, \Cref{comesh:fig:churn} shows that raising packet drop rate (on all hops) from 0\%-5\%, along with churn fraction (\% smart devices failed during a run) keeps both client delay and sync delay stable.
 Our churn and packet loss rates are much higher than in commercial deployments, which target 99.9\% uptime for devices~\cite{segarra2024uptime}. } 
@@ -124,14 +124,14 @@ Our churn and packet loss rates are much higher than in commercial deployments, 
 
 \begin{figure}[tb!]
     \centering
-    \includegraphics[width=0.75\linewidth]{CoMesh/figures/exp_eval/client_delay_wmobility.pdf}
+    \includegraphics[width=0.6\linewidth]{CoMesh/figures/exp_eval/client_delay_wmobility.pdf}
     \caption{\small \it Mobility: Client delay vs. relative distance moved.
     }
     \medskip
     \label{comesh:fig:mobility}
 \end{figure}
 
-\noindent{\bf Device Mobility: }
+\noindent{\bf Device Mobility.}
 \Cref{comesh:fig:mobility} shows the effect of device mobility, evaluated at different points of \sysname{} operation. With 250 devices organized in a $5 \times 5 \times 10$ grid, we instantly move a fraction of the devices, each randomly by distance in the interval $[0,X]$. After the instant move, routing 
 tables are updated (for correct routing), but {\it we do not update the soft state of \sysname{} and keep it stale}.
 \Cref{comesh:fig:mobility} shows 8 combinations created by injecting the mobility either at the start of or during a \sysname{} operation (B,D), during epoch change or routine triggering (E,R), and excluding or including routine leader (M,L). For space, we only plot client delay (sync delay showed similar behavior). We observe that with up to 10\% mobility \sysname{} raises client delay by less than 25\%. The degradation gets worse at higher mobility (40\%), but \sysname{} stays safe.
@@ -146,7 +146,7 @@ We conclude that \sysname{} can tolerate moderate mobility.
         \medskip
         \label{comesh:subfig:temporal-load-balance-locality}
     \end{subfigure}
-    \hfill
+    \hspace{2cm}
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
         \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/spatial_load_balance_combined.png}
@@ -160,7 +160,7 @@ We conclude that \sysname{} can tolerate moderate mobility.
     \label{comesh:fig:load-balance}
 \end{figure}
 
-\noindent{\bf Load Distribution: } \Cref{comesh:fig:load-balance} measures two kinds of load distribution over a run:
+\noindent{\bf Load Distribution.} \Cref{comesh:fig:load-balance} measures two kinds of load distribution over a run:
 {(1) {\it Temporal load} is the time that a smart device serves in a particular role.}
 {(2) {\it Spatial load} is the number of concurrent \kgroups{}  a smart device is present in.}
 {
@@ -191,7 +191,7 @@ The plots show LSH's clustering of \kgroups{} closer to target devices prolongs 
     \end{minipage}
 \end{figure}
 
-\noindent{\bf {\Kgroup{} Operations}: }
+\noindent{\bf {\Kgroup{} Operations}.}
 \Cref{comesh:fig:in_kgroup_ks}  measures \kgroup{} internal performance (default parameters:   \Cref{comesh:tab:def_param_vals}). All \kgroup{} operations---election, quorum,  state transfer---scale   as \kgroup{} size is increased from 3 ($f=1$) to 11 ($f=5$). Quorums are scalable because requests and replies are sent in parallel. Leader election delays are scalable as the Bully algorithm is fast in the common case.
 State transfer delay is a function of the amount of state, but does not depend on coterie size $k$.
 

@@ -20,7 +20,7 @@ With correct membership lists, this takes zero messages.
 
 \label{comesh:subsection:leadr_elctn}
 
-\noindent{\bf Leader Election: }
+\noindent{\bf Leader Election.}
 The \kgroup{}'s goal is to fault-tolerantly replicate the state of its assigned entity (device or routine). To make its operations efficient, each \kgroup{} elects a leader, selected as that non-faulty \kgroup{} member with the lowest hashed value $Hash (S, D)$. 
 Along with using the zero-exchange mechanism for election, \sysname{} ensures the leader is actually alive by running the (well-known)  
 Bully election algorithm to quickly confirm the leader~\cite{Bully}. Bully election is attractive as it is fast in the common case: 1 RTT for lowest-hashed \kgroup{} device (leader) to inform others in the \kgroup{}.
@@ -28,7 +28,7 @@ Under failures Bully algorithm takes a worst case of 5 RTTs.
 
 \label{comesh:subsection:quorum}
 
-\noindent{\bf Quorum Agreement: } Fast agreement in a \kgroup{} is done via quorums. In a \kgroup{} of size $k=2\f+1$, anyone in a group (typically the leader) sends a message to all $M$ members, and waits for acknowledgments from at least $(\f+1)$ members. Thus with $\f$ failures, at least one surviving \kgroup{} member knows about the latest decisions in the \kgroup{}, and can communicate it to future leaders.
+\noindent{\bf Quorum Agreement.} Fast agreement in a \kgroup{} is done via quorums. In a \kgroup{} of size $k=2\f+1$, anyone in a group (typically the leader) sends a message to all $M$ members, and waits for acknowledgments from at least $(\f+1)$ members. Thus with $\f$ failures, at least one surviving \kgroup{} member knows about the latest decisions in the \kgroup{}, and can communicate it to future leaders.
 
 \subsubsection{Epoch-based \Kgroup{} Migration}
 \label{comesh:subsection:periodicity}
@@ -39,7 +39,6 @@ Epoch lengths are fixed system-wide. (Different \kgroups{} can migrate at differ
 \begin{algorithm}[t]
     \footnotesize
     \caption{\small \sysname{} \Kgroup{} Migration}
-    \medskip
     \label{comesh:alg:migration}
     \algtext*{EndIf} % hide EndIf but keep block structure
     \algtext*{EndElse} % same for Else
@@ -100,7 +99,6 @@ Classical LSH~\cite{datar_locality-sensitive_2004} hashes similar multi-dimensio
 \begin{algorithm}[t]
     \footnotesize
     \caption{\small \sysname{} LSH Majority Selection Rule}
-    \medskip
     \label{comesh:alg:lsh_majority_selection}
     \algtext*{EndIf} % hide EndIf but keep block structure
     \algtext*{EndElse} % same for Else
@@ -168,7 +166,6 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \centering
         \includegraphics[width=\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_kdis_k_l_r.png}
         \caption{\small \it Average quorum distance.}
-        \medskip
         \label{comesh:subfig:quorum_dis_500klr}
     \end{subfigure}
     \hspace{0.5cm}
@@ -177,7 +174,6 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \hspace{-8pt}
         \includegraphics[width=1.04\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_koverlap_k_l_r.png}
         \caption{\small \it Average \kgroup{} overlap.}
-        \medskip
         \label{comesh:subfig:overlap_500klr}
     \end{subfigure}
     \caption{\small \it Average quorum distance and \kgroup{} overlap for different selection policies and parameters. $N$ = 500, \#smart devices = 200.}

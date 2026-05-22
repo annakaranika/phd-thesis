@@ -61,7 +61,7 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
 
 \begin{figure}[tb!]
     \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/bandwidth_xrtn.png}
         \caption{\small \it  Deployment:  Centralized (lines) vs. \sysname{} (bars): Bandwidth.  \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
         }
@@ -69,7 +69,7 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
         \label{comesh:fig:bw_centralized_skytali}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}[b]{0.46\textwidth}
         \centering
         \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xrtn.png}
         \caption{\small \it Deployment: Lock Acquisition Time and Sync Delay. \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
@@ -81,26 +81,26 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
 
 \begin{figure}[ht]
     \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}[b]{0.52\textwidth}
         \centering
-        \includegraphics[width=0.83\textwidth]{CoMesh/figures/exp_eval/bandwidth_xdev_virt.pdf}
+        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/bandwidth_xdev_virt.pdf}
         \caption{\small \it Deployment: Scalability of Per-(Virtual) Device Bandwidth. \MSF{} = Mini \Grid. Error bars---left: background, right: foreground.}
         \medskip
         \label{comesh:fig:bw_scale}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.45\textwidth}
-        \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xdev.png}
+    \begin{minipage}[b]{0.44\textwidth}
+        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/client_sync_delay_xdev.png}
         \caption{\small \it Deployment: Scalability of Lock Acquisition Time and Sync Delay. \MSF{} = Mini \Grid. 20 Routines.}
         \medskip
         \label{comesh:fig:la_sync_scale}
     \end{minipage}
 \end{figure}
 
-\noindent{\bf \sysname{} Consumes Less Bandwidth than a Central Hub:} 
+\noindent{\bf \sysname{} Consumes Less Bandwidth than a Central Hub.} 
 \Cref{comesh:fig:bw_centralized_skytali} shows decentralized \sysname's bandwidth per smart device, both  end-to-end (E2E) messages, and ad-hoc routed (hop-to-hop/H2H) messages. For fair comparison, we model a central hub over a mesh network (\Cref{comesh:section:intro}) by instantiating \sysname{} with $k=1$ and one \kgroup, i.e., a single centralized device responsible for all routines' management. We observe that: a) \sysname{} reduces bandwidth by an order of magnitude (over 10$\times$) compared to the centralized approach. b) Both end-to-end bandwidth and hop-to-hop bandwidth are scalable and remain flat, as the number of routines grows. c) Bandwidth of foreground operations (e.g.,  locking) remains small compared to background bandwidth (e.g., device monitoring). 
 
-\noindent{\bf \sysname{} Scales with Routine Load: }
+\noindent{\bf \sysname{} Scales with Routine Load.}
 \Cref{comesh:fig:la_sync_mul_rtns} shows two per-routine metrics.  The {\it Lock Acquisition time} is the average time for a routine to acquire a device lock after it becomes available. We observe the Lock Acquisition time varies
  between 3.41 s - 13.02 s.
 As the routine count increases, the median
@@ -109,7 +109,7 @@ The second metric is  {\it Sync delay}, the handover time from a finishing routi
 We observe that with more  routines,  Sync Delay stays  stable for both \Mob{} and \MSF{},
 with medians between 10.23 s - 20.833 s.
 
-\noindent{\bf \sysname{} Scales with Number of Devices: } We scale up
+\noindent{\bf \sysname{} Scales with Number of Devices.} We scale up
 by overloading each (of the 16) Pi devices as multiple ``virtual devices'' (henceforth ``nodes''). The rest of \sysname's operation remained the same. We inject 20 routines over 10 mins in the \Minigrid{} topology.  \Cref{comesh:fig:bw_scale} shows that up to 144 devices both end-to-end (E2E) and hop-wise (H2H) bandwidth {\it drop} with scale, and plateau. Background bandwidth (lower stack) plateaus quickly as the number of node \kgroups{} increases at the same rate as nodes, thus spreading load evenly.  Foreground bandwidth drops much quicker as the fixed 20 routine \kgroups{} (20) are spread over an increasing number of nodes. 
 
 \Cref{comesh:fig:la_sync_scale} shows that both startup times for a routine---Lock Acquisition time and Sync delay---rise slowly but then plateau with scale.  Essentially, with more nodes, inter-routine conflicts become rarer.  
@@ -135,6 +135,6 @@ Median Lock Acquisition time stays in  2.97 s - 34.71 s, and  Sync Delay median 
     \end{tabular}
 \end{table}
 
-\noindent{\bf \sysname{} Internal Operations are Fast: }
+\noindent{\bf \sysname{} Internal Operations are Fast.}
 \Cref{comesh:tab:kgroup_latencies} shows that in \MSF{} topology on the Pis, 
 \sysname's common operations are fast and take a median of 1.08 s for quorum, 1.17 s for election, and 2.08 s for state transfer during epoch change.
