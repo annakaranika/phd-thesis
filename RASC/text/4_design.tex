@@ -5,7 +5,7 @@ The goals of action progress updates and failure detection (\Cref{rasc:tab:prope
 
 \begin{figure}[th]
     \centering
-    \includegraphics[width=0.9\linewidth]{RASC/figures/design/RASC abstraction.pdf}
+    \includegraphics[width=0.9\linewidth,alt={Diagram of the RASC abstraction layered over RPCs. RASC provides three responses: acknowledgment, start, completion, and/or failure. The frequent RPCs shown on the right are the adaptive polls that RASC issues in the background to track an action's progress.}]{RASC/figures/design/RASC abstraction.pdf}
     \caption{\bf \small \abstraction{} over RPCs. {\it Frequent RPCs on right are polls.}
     }
     \medskip
@@ -30,7 +30,7 @@ In IoT settings, it is impossible to distinguish a failed device from one that i
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\linewidth]{RASC/figures/intro/smart space setup.pdf}
+    \includegraphics[width=0.65\linewidth,alt={Diagram of communication between a smart device and a client app. Each arrowed line is an RPC in today's stacks; the dashed lines are the ones this work replaces with the new RASC abstraction. A client device app or smart hub communicates either directly with the device (hub-to-device) or via a vendor cloud service (hub-to-cloud-to-device). The device app may also first communicate with the smart hub.}]{RASC/figures/intro/smart space setup.pdf}
     \caption{\bf \small Communication between a smart device and a client app. {\it Each arrowed line is an RPC in today's stacks. This paper replaces dashed lines with the new \abs{} abstraction.}
     }
     \medskip
@@ -94,7 +94,7 @@ L_i^{\!*} =
 }
 \end{theorem}
 
-\begin{proof}[Proof Sketch (Full proof in \Cref{rasc:app:rasc-proofs})]
+\begin{proof}
 Per \eqref{rasc:eq:Q}, only the $i$-th and $(i+1)$-th terms of $Q$ depend on $L_i$:
 \[
 A_i=\int_{L_{i-1}}^{L_i} (L_i-t)\,p(t)\,dt,\qquad
@@ -135,11 +135,11 @@ $L_k^*=U$.
         \Procedure{FindPolls}{dist, $U$, $Q_w$, $slo$}
             \State \Return RFindPolls(dist, $U$, 0, $ceil(U/Q_w)$,$Q_w$, $slo$)
         \EndProcedure
-        \Procedure{RFindPolls}{dist, $U$, left, right, $Q_w$, $slo$}
+        \Procedure{RFindPolls}{dist, $U$, left, right, $Q_w$, $slo$} \label{rasc:algo:rfindpolls:start}
             \State $k^*$ = (left + right) / 2
             \State $\mathcal{L}$ = GetPollingInterval(dist, $k^*$, $U$, left, right)
 
-            \State valid = examineQw(dist, $\mathcal{L}$, $Q_w$, $slo$)
+            \State valid = examineQw(dist, $\mathcal{L}$, $Q_w$, $slo$) \label{rasc:algo:examine-qw}
 
             \If{left == right $\And$ valid}
                 \State \Return $\mathcal{L}$
@@ -157,19 +157,19 @@ $L_k^*=U$.
 
             \State \Return RFindPolls(dist, $U$, $k^*+1$, right, $Q_w$, $slo$)
             
-        \EndProcedure
+        \EndProcedure \label{rasc:algo:rfindpolls:end}
         \Procedure{GetPollingInterval}{dist, $k$, $U$, left, right}
             \State $\mathcal{L}$ = zeros(k)
-            \State $L_1$ = (left + right) / 2
+            \State $L_1$ = (left + right) / 2 \label{rasc:algo:L1-init}
 
             \State too\_large = False
-            \For{i in range(2, $k$ + 1)}
+            \For{i in range(2, $k$ + 1)} \label{rasc:algo:Li-recurrence:start}
                 \State $L_i$ = calculateByRecurrenceRelation()
                 \If{$L_i$ > $U$}
                     \State too\_large = True
                     \State \textbf{break}
-                \EndIf
-            \EndFor
+                \EndIf 
+            \EndFor \label{rasc:algo:Li-recurrence:end}
             \If{isclose($L_k$, U)}
                 \State \Return $\mathcal{L}$
             \EndIf
@@ -183,7 +183,7 @@ $L_k^*=U$.
 
 Next, to find the best sequence $\{L_i^{\!*}\}$ 
 we use {\it binary search}. This leverages our empirical observations that there is a linear relationship between $L_1$ and $L_k$. 
-\Cref{rasc:algo:adaptive-polling-algorithm} initially sets the left and right boundaries to 0 and $U$, respectively. In line 18, $L_1$ is set to the midpoint of the current left and right values. Using the recurrence equation from \eqref{rasc:eq:recurrence}, lines 20-29 calculate subsequent values based on $L_1$. We then check if $L_k$ is close enough to $U$.\footnote{The closeness is measured via the 
+\Cref{rasc:algo:adaptive-polling-algorithm} initially sets the left and right boundaries to 0 and $U$, respectively. In line~\ref{rasc:algo:L1-init}, $L_1$ is set to the midpoint of the current left and right values. Using the recurrence equation from \eqref{rasc:eq:recurrence}, lines \ref{rasc:algo:Li-recurrence:start}-\ref{rasc:algo:Li-recurrence:end} calculate subsequent values based on $L_1$. We then check if $L_k$ is close enough to $U$.\footnote{The closeness is measured via the 
 terminal tolerance $\varepsilon$. 
 In our implementation, we set $\varepsilon=\num{e-5}$ (default in numpy np.isclose()).} 
 If it is, we return $\{L_i\}$.  If not, we adjust the left and right boundaries and recursively search for the correct $L_1$.
@@ -210,14 +210,14 @@ We need to meet the user-specified {\it detection tolerance} $Q_w$ (gap between 
 More critical actions (e.g., involving locks, fire alarms, exhaust fans) use smaller values (e.g., < 1 s) while less critical actions (e.g., adjusting light brightness, the position of window shades, ovens) can use larger values.
 We account for this by ensuring that $\forall i: L_{i+1} - L_i \leq Q_w$ {and $L_{i+1} - L_i >$ minimum polling interval allowed by the existing API (naturally, a $Q_w < $ min polling interval is unsupportable).}
 
-Given $Q_w$, we use binary search to determine the smallest $k$ that meets $Q_w$---see  lines 4-15 in \Cref{rasc:algo:adaptive-polling-algorithm}. Line 8  examines the $\mathcal{L}=\{L_i\}$ found by $GetPollingInterval$ to make sure any interval between any two polls is smaller than $Q_w$. If $\mathcal{L}$ is valid and left = right, we return  $\mathcal{L}$. If 
+Given $Q_w$, we use binary search to determine the smallest $k$ that meets $Q_w$---see  lines \ref{rasc:algo:rfindpolls:start}-\ref{rasc:algo:rfindpolls:end} in \Cref{rasc:algo:adaptive-polling-algorithm}. Line~\ref{rasc:algo:examine-qw} examines the $\mathcal{L}=\{L_i\}$ found by $GetPollingInterval$ to make sure any interval between any two polls is smaller than $Q_w$. If $\mathcal{L}$ is valid and left = right, we return  $\mathcal{L}$. If 
 left does not equal right, this means we might be able to find  $\mathcal{L}$ 
 with a smaller $k^*$. The algorithm recursively updates $k^*$ until it finds a $k^*$ that respects $Q_w$ and also cannot be smaller. The algorithm terminates when reducing $k^{*}$ by 1 would violate  $Q_w$.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.7\linewidth]{RASC/figures/design/rasc.pdf}
-    \caption{\bf \small Placement Example, $k = 4$. {\it Red lines are \abstraction{}  polls (after action start). Action completes between second and third poll.}}
+    \includegraphics[width=0.7\linewidth,alt={Poll-placement example for RASC with k equal to 4. Red lines are RASC polls issued after the action starts; the action completes between the third and fourth poll. The action is expected to complete between the first and second poll with much higher probability following a bell curve, and the polling interval is larger for the end of the action, where the action truly completes. If the action never made progress after the fourth poll, it would be detected after exponential increase in polling interval up to $Q_w$.}]{RASC/figures/design/rasc.pdf}
+    \caption{\bf \small Placement Example, $k = 4$. {\it Red lines are \abstraction{}  polls (after action start). Action completes between third and fourth poll.}}
     \medskip
     \label{rasc:fig:poll}
 \end{figure}
@@ -252,7 +252,7 @@ using an oracle \texttt{examineQw} that returns \texttt{true} exactly when there
 Then the search returns $k^*(\text{slo},Q_w)$ together with an $\text{slo}$-feasible placement.
 \end{theorem}
 
-\begin{proof}[Proof Sketch]
+\begin{proof}
 \noindent\textbf{Monotonicity.} If $k'<k$, any $k'$-poll placement can be extended to $k$ polls by inserting additional polls; this cannot reduce $C(\mathcal{L})$, hence $A_k(Q_w)\ge A_{k'}(Q_w)$. The oracle predicate is therefore nondecreasing in $k$.
 
 \noindent\textbf{Bracketing.} For $k=\lceil U/Q_w\rceil$, equal spacing $L_i=iU/k$ yields $\bigcup_i ((L_i-Q_w)^+,L_i]\supseteq(0,U]$, so $\mathrm{Cover}(\mathcal{L})=1\ge \text{slo}$. Thus the upper bracket is feasible, while $k=0$ is not.

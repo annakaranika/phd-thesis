@@ -234,14 +234,14 @@ probability that \sysname{} still works correctly {under $F$ total failures,} i.
     \centering
     \begin{subfigure}[b]{0.48\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/analysis/pf_1_new.pdf}
+        \includegraphics[width=\textwidth,alt={Line plot. x-axis: number of simultaneous failures F (0 to 40); y-axis: \sysname{} availability (0 to 1). Three inverse S-shaped curves for f=1 (blue), f=5 (orange), and f=9 (green), each holding at availability 1.0 and then dropping sharply to 0. The drop-off shifts right as f grows: f=1 falls around F=8 to 12, f=5 around F=20 to 27, and f=9 around F=28 to 32, so a larger f tolerates more simultaneous failures.}]{CoMesh/figures/analysis/pf_1_new.pdf}
         \caption{{\small \it Availability under different number of simultaneous failures.}}
         \label{comesh:subfig:prob-on-f}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.5\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/analysis/pf_varyG_new.pdf}
+        \includegraphics[width=\textwidth,alt={Line plot. x-axis: number of groups G (10 to 100); y-axis: the number of simultaneous failures F that \sysname{} tolerates while still meeting a target availability percentile (0 to 40). Three decreasing step curves: 50th percentile (blue, top) falls from about 29 to 19, 90th percentile (orange, middle) from about 22 to 15, and 99th percentile (green, bottom) from about 15 to 11. All decline as the number of groups grows and then flatten.}]{CoMesh/figures/analysis/pf_varyG_new.pdf}
         \caption{{\small \it Impact of different number of groups in the system ($f=5$).}}
         \label{comesh:subfig:prob-varyg}
     \end{subfigure}

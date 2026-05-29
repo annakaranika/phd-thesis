@@ -8,10 +8,10 @@ Our analysis of survey and interview data focuses on how users navigate the spec
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.667\textwidth]{ControlInContext/figures/control_schemes_legend_split.pdf}
+    \includegraphics[width=0.667\textwidth,alt={Legend mapping the abbreviations used in the adjacent charts to their control schemes and control methods.}]{ControlInContext/figures/control_schemes_legend_split.pdf}
     \vfill
-    \includegraphics[width=0.3\textwidth]{ControlInContext/figures/control_schemes_popularity.pdf}
-    \includegraphics[width=0.36\textwidth]{ControlInContext/figures/control_methods_popularity.pdf}
+    \includegraphics[width=0.3\textwidth,alt={Bar chart. x-axis: control scheme, C (central) and D (other); y-axis: percentage of participants (0 to 50). Central (C) is used by about 28 percent and other (D) by about 23 percent, so the two are close with central slightly higher.}]{ControlInContext/figures/control_schemes_popularity.pdf}
+    \includegraphics[width=0.36\textwidth,alt={Bar chart. x-axis: control method, R (routines), V (voice command), and S (content streaming/casting); y-axis: percentage of participants. Voice command is tallest at about 51 percent, routines about 33 percent, and content streaming the shortest at about 18 percent.}]{ControlInContext/figures/control_methods_popularity.pdf}
     \caption{Percentage of participants using each control scheme/method.}
     \medskip
     \label{cic:fig:control-scheme-popularity}
@@ -19,10 +19,10 @@ Our analysis of survey and interview data focuses on how users navigate the spec
 
 \begin{figure}[ht] %{0.5\textwidth}
     \centering
-    \includegraphics[width=0.667\linewidth]{ControlInContext/figures/control_schemes_legend_split.pdf}
+    \includegraphics[width=0.667\linewidth,alt={Legend mapping the abbreviations used in the adjacent charts to their control schemes and control methods.}]{ControlInContext/figures/control_schemes_legend_split.pdf}
     \par
-    \includegraphics[width=0.268\linewidth]{ControlInContext/figures/control_schemes_vs_dev_no_bins.pdf}
-    \includegraphics[width=0.24\linewidth]{ControlInContext/figures/control_methods_vs_dev_no_bins.pdf}
+    \includegraphics[width=0.268\linewidth,alt={Heatmap. Columns: control scheme C (central) and D (other); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage of participants (colorbar about 18 to 33). The darkest cell is central control for 16-38 devices (about 33 percent), and central stays less dark for 11-15 devices, so central use rises with more devices owned. Other control is lightest for the 11-15 device bin.}]{ControlInContext/figures/control_schemes_vs_dev_no_bins.pdf}
+    \includegraphics[width=0.24\linewidth,alt={Heatmap. Columns: control method R (routines), V (voice), S (streaming); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage (colorbar about 8 to 53). The voice (V) column is darkest across all device bins (about 45 to 53 percent), routines (R) are moderate (about 30 to 38 percent) but showing an increasing trend as the number of owned devices increases, and streaming (S) is lightest, especially for the 11-15 device bin.}]{ControlInContext/figures/control_methods_vs_dev_no_bins.pdf}
     \caption{Percentage of survey participants using central or other control schemes and several control methods vs. number of owned devices. Each cell's color shows the percentage of participants falling into it who choose the respective control scheme or method. The percentages for the different options of control schemes and methods do not add up to 100\% since the participants could provide multiple answers.}
     % \Description{Heatmaps showing percentages of participants using different control schemes and methods by number of owned devices.
     % 
@@ -38,10 +38,10 @@ Our analysis of survey and interview data focuses on how users navigate the spec
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.667\linewidth]{ControlInContext/figures/control_schemes_legend_split.pdf}
+    \includegraphics[width=0.667\linewidth,alt={Legend mapping the abbreviations used in the adjacent charts to their control schemes and control methods.}]{ControlInContext/figures/control_schemes_legend_split.pdf}
     \par
-    \includegraphics[width=0.333\linewidth]{ControlInContext/figures/control_schemes_vs_dev_kind_pc.pdf}
-    \includegraphics[width=0.313\linewidth]{ControlInContext/figures/control_methods_vs_dev_kind_pc.pdf}
+    \includegraphics[width=0.333\linewidth,alt={Heatmap. Columns: control scheme C (central) and D (other). Rows (top to bottom): camera, dishwasher, display, hub, light, lock, motion sensor, plug/switch, router, security, speaker, thermostat, TV, vacuum. Cell color encodes percentage; empty cells mean zero. Darkest cells: hub under C (approximately 80 percent) and router under both C and D (approximately 70 percent). Lock has a very dark D cell (non-central). Camera and display show moderate values for both. Security, vacuum, and dishwasher appear only under D (non-central). Speaker and TV appear only under C (central). Thermostat and motion sensor have no colored cells.}]{ControlInContext/figures/control_schemes_vs_dev_kind_pc.pdf}
+    \includegraphics[width=0.313\linewidth,alt={Heatmap. Columns: control method R (routines), V (voice), S (streaming/casting). Rows top to bottom use the same device order as the adjacent schemes heatmap: camera, dishwasher, display, hub, light, lock, motion sensor, plug/switch, router, security, speaker, thermostat, TV, vacuum. Colorbar 0 to 100 percent. Camera: all three methods near 0. Dishwasher: R very dark (near 100 percent), V and S absent. Display: R light, V very dark (about 80 percent), S medium-dark (about 40 percent). Hub and lock: absent or near 0 for all methods. Light: R medium-dark, V medium-light. Motion sensor: R and V both very dark (about 80 percent). Plug/switch: R moderate, V moderate. Router: R dark, V and S absent. Security: R dark, S dark (about 40 percent), V absent. Speaker: R light, V moderate. Thermostat: R very dark (about 80 percent), V and S absent. TV: S very dark (about 50 percent), R and V very light. Vacuum: R medium-light, V and S absent.}]{ControlInContext/figures/control_methods_vs_dev_kind_pc.pdf}
     \caption{Percentage of participants using each control scheme/method vs.\ device kind.
     Participants may refer to a device with a different description from how they most commonly use it, leading to an occasional discrepancy between the device kind and the control method used; for example, a participant may refer to Alexa as only a smart speaker when it is also a hub~\cite{wang2020want,singh2018users, georgiev2018smart}.}
     \medskip
@@ -99,20 +99,17 @@ Control schemes with very few to no proxies played a crucial role in this contex
 \begin{figure}[th!]
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=0.7\linewidth]{ControlInContext/figures/survey_troubleshooting_steps_popularity.pdf}
+        \includegraphics[width=0.7\linewidth,alt={Bar chart. x-axis: six troubleshooting steps in descending order of frequency; y-axis: percentage of participants (0 to 50). ``Investigate device power'' and ``investigate network connection'' are tied tallest at approximately 50 percent. ``Research'' is next at approximately 38 percent, ``investigate device-to-service connection'' at approximately 25 percent, ``contact support'' at approximately 19 percent, and ``customized solutions'' is shortest at approximately 7 percent. The chart illustrates a decreasing trend in user action frequency as steps become more specific or require external assistance.}]{ControlInContext/figures/survey_troubleshooting_steps_popularity.pdf}
         \caption{Percentage of participants utilizing each troubleshooting step. Each participant may only contribute once towards this metric.}
-        % \Description{Bar chart showing the percentage of users performing each troubleshooting step. The most common steps are 'Investigate device power' and 'Investigate network connection', both at 50 percent. These are followed by 'Research' at 38 percent, 'Investigate device-to-service connection' at 25 percent, 'Contact support' at 19 percent, and 'Customized solutions' at 6 percent. The chart illustrates a decreasing trend in user action frequency as steps become more specific or require external assistance.}
         \label{cic:fig:survey-troubleshooting-steps-popularity}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=0.6\linewidth]{ControlInContext/figures/survey_troubleshooting_step_sequence.pdf}
+        \includegraphics[width=0.6\linewidth,alt={Directed node-link flow diagram of troubleshooting step sequences. Six circular nodes: ``Research'' (top-left), ``Investigate network connection'' (center-top), ``Investigate device power'' (top-right), ``Investigate device-to-service connection'' (center-bottom), ``Contact support'' (bottom-left), ``Customized solutions'' (bottom-right). A red inner ring marks a node as a common initial step; a green outer ring marks a common final step. ``Investigate device power'' has both rings and a self-loop (participants repeat this step), making it both a frequent start and sometimes end. ``Investigate network connection'' and ``Investigate device-to-service connection'' also have both rings. ``Research'' and ``Contact support'' have green outer rings only (frequent endpoints). Arrow thickness encodes transition frequency (scale 1 to 6 occurrences). The thickest arrows run between ``Investigate device power'' and ``Investigate network connection'' (bidirectional, about 5 to 6 occurrences) and between those two and ``Investigate device-to-service connection''; thinner arrows connect ``Research'' to ``Contact support'' and to ``Investigate network connection''.}]{ControlInContext/figures/survey_troubleshooting_step_sequence.pdf}
         \caption{Troubleshooting step sequence. % %
         A node has a red ring around it if it has been described as an initial step in at least one participant's troubleshooting process. A green ring around a node means it was the final step of one or more participants' troubleshooting process. An arrow links two nodes A, B if at least one participant has gone from step A to step B. The line width of each ring or arrow represents the absolute number of its occurrences across our participants' processes.
-        % \todo{write about the skewness of the participant pool who are the main users of the devices}
         }
-        % \Description{Flow diagram showing troubleshooting steps and their transition frequencies. Nodes represent steps such as 'Investigate device power', 'Investigate network connection', 'Research', 'Investigate device-to-service connection', 'Contact support', and 'Customized solutions'. Arrows indicate the flow between steps, with line thickness corresponding to frequency of occurrence, ranging from 1 to 6. 'Investigate device power' is the most common initial step, marked with a red inner border, and 'Customized solutions' is the most common final step, marked with a green outer border. Some steps, such as 'Investigate network connection' and 'Investigate device-to-service connection', serve both as intermediates and endpoints. A legend clarifies the line weight and color coding for initial and final steps.}
         \label{cic:fig:survey-troubleshooting-sequence}
     \end{subfigure}
     \caption{Troubleshooting steps results from survey responses. As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.
@@ -181,7 +178,8 @@ We identify five recurring categories of confusion and elaborate on each below. 
     \caption{Taxonomy of user confusion in executing smart home functionality.}
     \bigskip
     \label{cic:tab:confusion}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    % \tagpdfsetup{table-tagging=false}
     \footnotesize
     \begin{tabular}{R{3.4cm}|p{5.8cm}|p{6cm}}
         \hline

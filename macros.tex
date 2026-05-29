@@ -26,6 +26,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
+\makeatletter
+\renewcommand*{\theHALG@line}{\thealgorithm.\arabic{ALG@line}}
+\makeatother
 
 % --- Tables (CoMesh, ControlInContext, RASC) ------------------------
 \usepackage{array}
@@ -35,7 +38,7 @@
 \usepackage{tabularx}
 \usepackage{textcomp}
 % [table] enables \rowcolor / \columncolor; needed by CoMesh
-\usepackage[table]{xcolor}
+% \usepackage[table]{xcolor}
 
 % --- Diagrams and plots (CoMesh, RASC, thesis template) -------------
 \usepackage{tikz}

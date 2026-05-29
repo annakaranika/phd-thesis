@@ -6,7 +6,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \raggedleft
     % \hspace{0.1cm}
     \begin{subfigure}[t]{0.3\linewidth}
-        {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/sched-ra.pdf}}
+        {\includegraphics[width=\textwidth,alt={Graph of routine R_A, whose action symbols are labeled by routine letter and device number (e.g., A1 is part of routine R_A and runs on device D1). R_A is a sequence of three actions on D1, D2, and D3.}]{RASC/figures/applications/tl-vs-dag-tl/sched-ra.pdf}}
         \caption{\small $R_A$.}
         \medskip
         \label{rasc:fig:ra-sched}
@@ -16,7 +16,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \hfill
     \begin{subfigure}[t]{0.33\linewidth}
         % \vspace{0.2cm}
-        {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/rb-tl-invalid.pdf}}
+        {\includegraphics[width=\textwidth,alt={Routine R_B together with an invalid timeline (TL) schedule. R_B is a sequence of three actions on D2, D1, and D3. TL tries to place B2 before A2 and B1 after A1, which creates a serialization conflict with R_A, and TL needs to backtrack after two steps to the first step.}]{RASC/figures/applications/tl-vs-dag-tl/rb-tl-invalid.pdf}}
         \caption{\small $R_B$ \& invalid TL.}
         \medskip
         \label{rasc:fig:tl-invalid}
@@ -25,7 +25,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     % \rule{1pt}{0.14\linewidth}
     % \hfill
     \begin{subfigure}[t]{0.32\linewidth}
-        {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/TL_valid.pdf}}
+        {\includegraphics[width=\textwidth,alt={Routine R_B together with a valid timeline (TL) schedule. R_B is now placed entirely after R_A, without serialization conflicts.}]{RASC/figures/applications/tl-vs-dag-tl/TL_valid.pdf}}
         \caption{\small $R_B$ \& valid TL.}
         \medskip
         \label{rasc:fig:tl-valid}
@@ -34,7 +34,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     % \rule{1pt}{0.14\linewidth}
     % \hfill
     \begin{subfigure}[b]{0.35\linewidth}
-        {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/rb-dag-tl-invalid-new.pdf}}
+        {\includegraphics[width=\textwidth,alt={Routine R_B-prime together with an invalid DAG-TL schedule. R_B-prime executes on D2 and D3 concurrently and after they are complete executes on D1. DAG-TL tries to schedule B2' and B3' earlier than A2 and A3 respectively but B1' after A1', which conflicts with R_A. DAG-TL needs to backtrack after three steps. It is unclear which of B1''s parent branches to backtrack to.}]{RASC/figures/applications/tl-vs-dag-tl/rb-dag-tl-invalid-new.pdf}}
         \caption{\small $R_B'$ \& invalid \scheduler.}
         \medskip
         \label{rasc:fig:dag-tl-invalid}
@@ -44,7 +44,7 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     % \hfill
     \begin{subfigure}[b]{0.3\linewidth}
         \centering
-        {\includegraphics[width=\textwidth]{RASC/figures/applications/tl-vs-dag-tl/DAG-TL_valid-new.pdf}}
+        {\includegraphics[width=\textwidth,alt={Routine R_B-prime together with a valid DAG-TL schedule. DAG-TL now places R_B entirely after R_A, without serialization conflicts.}]{RASC/figures/applications/tl-vs-dag-tl/DAG-TL_valid-new.pdf}}
         \caption{\small $R_B'$ \& invalid \scheduler.}
         \medskip
         \label{rasc:fig:dag-tl-valid}
@@ -171,7 +171,7 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
   % Row 1
   \begin{subfigure}[b]{0.41\linewidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{RASC/figures/applications/Reschedule_routines.pdf}
+    \includegraphics[width=0.9\textwidth,alt={Routine dependency graphs used in the rescheduling example. Routine $R_A$ is sequential: $A1 \to A2 \to A3$. Routine $R_B$ is parallel, on D1 and D2, and must complete on D3 after that. Routine $R_C$ first executes on D2 and later in parallel on D1 and D3.}]{RASC/figures/applications/Reschedule_routines.pdf}
     \bigskip
     \caption{\small Routine graphs.}
     \label{rasc:fig:resched-routines}
@@ -179,7 +179,7 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
   \hspace{0.5cm}
   \begin{subfigure}[b]{0.41\linewidth}
     \centering
-    \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_og_schedule.pdf}
+    \includegraphics[width=\textwidth,alt={The original schedule for the rescheduling example, before any action completes early or late. $A1 \to B1$ and $A2 \to B2$, $A3 \to C2$ and $B3 \to C1$ and $C3$.}]{RASC/figures/applications/Reschedule_og_schedule.pdf}
     \caption{\small Original schedule.}
     \label{rasc:fig:resched-og-sched}
   \end{subfigure}
@@ -189,14 +189,14 @@ To preserve the \emph{established} serial order among routines, \sysname{} recor
   % Row 2
   \begin{subfigure}[b]{0.41\linewidth}
     \centering
-    \includegraphics[width=\textwidth]{RASC/figures/applications/Reschedule_a2_end.pdf}
+    \includegraphics[width=\textwidth,alt={A2 finishes early, triggering rescheduling. The preprocessing phase of rescheduling shifts A2's end position, and detects the immutable serialization order based on the executed actions so far: $R_A \to R_B \to R_C$.}]{RASC/figures/applications/Reschedule_a2_end.pdf}
     \caption{\small Preprocessing phase.}
     \label{rasc:fig:resched-a2-end}
   \end{subfigure}
   % \hfill
   \hspace{0.5cm}
   \begin{subfigure}[b]{0.41\linewidth}
-    \includegraphics[width=0.83\textwidth]{RASC/figures/applications/Reschedule_sjfw_out.pdf}
+    \includegraphics[width=0.83\textwidth,alt={The rescheduling phase, showing the schedule after Shortest-Job-First-with-serializability rescheduling: $A1 \to B1$ and $A2 \to B2$, $A3 \to C2$ and $B3 \to C1$ and $C3$, similar to the original schedule.}]{RASC/figures/applications/Reschedule_sjfw_out.pdf}
     \caption{\small Rescheduling phase.}
     \label{rasc:fig:resched-sjfw-out}
   \end{subfigure}
@@ -242,13 +242,13 @@ For the routines in \Cref{rasc:fig:resched-routines} and the original \scheduler
     \EndFor
     
     \Statex \textbf{Phase 2: List scheduling (single priority queue).}
-    \While{$Ready \neq \emptyset$}
-      \State $a^\star \gets \arg\min_{a \in Ready} \ (start\_cand[a], len(a))$ \Comment{Earliest start, then shortest task}
+    \While{$Ready \neq \emptyset$} \label{rasc:algo:sjfw:while}
+      \State $a^\star \gets \arg\min_{a \in Ready} \ (start\_cand[a], len(a))$ \Comment{Earliest start, then shortest task} \label{rasc:algo:sjfw:pop}
       \State $s \gets start\_cand[a^\star]$; \ $f \gets s + len(a^\star)$
-      \State Place $a^\star$ on timeline of $dev(a^\star)$ at $[s,f)$
+      \State Place $a^\star$ on timeline of $dev(a^\star)$ at $[s,f)$ \label{rasc:algo:sjfw:place}
       \State $FIN[a^\star] \gets f$; \ $next\_free[dev(a^\star)] \gets f$
       \State Remove $a^\star$ from $Ready$
-      \ForAll{successors $b$ of $a^\star$ in $Pred(\cdot)$}
+      \ForAll{successors $b$ of $a^\star$ in $Pred(\cdot)$} \label{rasc:algo:sjfw:succ}
         \State $indeg[b] \gets indeg[b]-1$
         \State $EST[b] \gets \max(EST[b], \ FIN[a^\star])$
         \If{$indeg[b]=0$}
@@ -265,13 +265,13 @@ For the routines in \Cref{rasc:fig:resched-routines} and the original \scheduler
 First, we augment the Shortest Task First (STF) algorithm (known to be optimal~\cite{Tanenbaum2006}) to honor inter- and intra-routine dependencies
 (\Cref{rasc:algo:sjfw}). 
 We prioritize actions 
-by estimated length; we repeatedly (i) pick the head, (ii) place it in the earliest common free slot across required devices, and (iii) update downstream dependencies, until the queue empties.
+by estimated length; we repeatedly (i) pick the head (line \ref{rasc:algo:sjfw:pop}), (ii) place it in the earliest common free slot across required devices (line \ref{rasc:algo:sjfw:place}), and (iii) update downstream dependencies (line \ref{rasc:algo:sjfw:succ}), until the queue empties (line \ref{rasc:algo:sjfw:while}).
 In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not placing $C2$ before $B2$ despite $C2$ being shorter (\Cref{rasc:fig:resched-sjfw-out}).
 
 \begin{figure}[t!]
     \begin{subfigure}[t]{0.18\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV a.pdf}
+        \includegraphics[width=\linewidth,alt={Routine dependency graphs for the resource-vectors (RV) rescheduling example. $R_A: A1 \to A2$. $R_B: B2 \to B3$. $R_C: C3 \to C1$. }]{RASC/figures/applications/RASCal RV a.pdf}
         \caption{\small Routine graphs.}
         \medskip
         \label{rasc:fig:rv-graphs}
@@ -279,7 +279,7 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
     \hfill
     \begin{subfigure}[t]{0.26\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV b.pdf}
+        \includegraphics[width=\linewidth,alt={The original DAG-TL schedule for the RV example, before any timing deviation: $A1 \to C1$ (after $C3$), $A2$ (after $A1$) $\to B2$, $C3 \to B3$ (after $B2$). }]{RASC/figures/applications/RASCal RV b.pdf}
         \caption{\small Original \scheduler{} schedule.}
         \medskip
         \label{rasc:fig:rv-dag-tl}
@@ -287,7 +287,7 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
     \hfill
     \begin{subfigure}[t]{0.25\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV c.pdf}
+        \includegraphics[width=\linewidth,alt={Rescheduling when action $A1$ completes early, requiring only RV: $A2, B2, B3$ are pulled forward and other actions are unaffected.}]{RASC/figures/applications/RASCal RV c.pdf}
         \caption{\small $A_1$ completes early $\rightarrow$ only RV.}
         \medskip
         \label{rasc:fig:rv-early}
@@ -295,10 +295,8 @@ In \Cref{rasc:fig:resched}, STF respects the immutable serialization order, not 
     \hfill
     \begin{subfigure}[t]{0.28\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{RASC/figures/applications/RASCal RV d.pdf}
-        \caption{
-            \small $A_1$ completes late $\rightarrow$ Push + RV.
-        }
+        \includegraphics[width=\linewidth,alt={Rescheduling when action $A1$ completes late: $C_1, A_2, B_2,$ and $B_3$ are first pushed forward by the estimated delay $dt$, then RV is performed.}]{RASC/figures/applications/RASCal RV d.pdf}
+        \caption{\small $A_1$ completes late $\rightarrow$ Push + RV.}
         \medskip
         \label{rasc:fig:rv-late}
     \end{subfigure}

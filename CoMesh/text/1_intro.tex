@@ -22,14 +22,14 @@ There is rich literature at the networking layer, e.g., on how to build, configu
     \centering
     \begin{subfigure}{0.49\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/intro/smart-building.pdf}
+        \includegraphics[width=\textwidth,alt={Map/floor plan of a smart office building used as a commercial edge setting, showing the layout across which IoT sensors and actuators are deployed.}]{CoMesh/figures/intro/smart-building.pdf}
         \caption{\it \small {Smart Building.}}
         \medskip
         \label{comesh:fig:smart-building}
     \end{subfigure}
     \begin{subfigure}{0.49\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/intro/smart-farm.pdf}
+        \includegraphics[width=\textwidth,alt={Map of a smart farm used as a commercial edge setting, showing the fields and areas across which IoT sensors and actuators are distributed.}]{CoMesh/figures/intro/smart-farm.pdf}
         \caption{\it \small {Smart Farm.}}
         \medskip
         \label{comesh:fig:smart-farm}
@@ -37,7 +37,7 @@ There is rich literature at the networking layer, e.g., on how to build, configu
     \begin{subfigure}{0.49\linewidth}
         % \vspace{0.2cm}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/intro/smart-factory.pdf}
+        \includegraphics[width=\textwidth,alt={Illustration of a smart factory as a commercial edge setting, with networked industrial IoT devices distributed across the production floor.}]{CoMesh/figures/intro/smart-factory.pdf}
         \caption{\it \small {Smart Factory.}}
         % \medskip
         \label{comesh:fig:smart-factory}
@@ -81,7 +81,7 @@ and keeping operations+data private and local.
     \centering
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/intro/CPU_cmp_xdev_bar.pdf}
+        \includegraphics[width=\textwidth,alt={Grouped bar chart with error bars. x-axis: number of devices (1, 4, 16, 64, 144); y-axis: CPU load percent (0 to 60). Three bars per group: \sysname{}, 3-Hubs, and Central. At 1 device all three are comparable (about 8 to 12 percent). As devices increase, \sysname{} stays flat and low (roughly 6 to 10 percent), while 3-Hubs rises to about 33 percent and Central climbs steeply to about 35 percent at 16 devices and 51 to 54 percent at 64 to 144 devices.}]{CoMesh/figures/intro/CPU_cmp_xdev_bar.pdf}
         \caption{ \small \it Fixed: 20 total routines.
         }
         \label{comesh:subfig:cpu-central}
@@ -89,7 +89,7 @@ and keeping operations+data private and local.
     \hspace{0.5cm}
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/intro/CPU_cmp_xrtn_bar.pdf}
+        \includegraphics[width=\textwidth,alt={Grouped bar chart with error bars. x-axis: number of routines (1, 5, 10, 15, 20); y-axis: CPU load percent (0 to 60). \sysname{} stays flat at about 9 percent across all routine counts, 3-Hubs ranges from about 14 to 25 percent (rising with more routines), and Central stays highest at roughly 33 to 37 percent throughout.}]{CoMesh/figures/intro/CPU_cmp_xrtn_bar.pdf}
         \caption{\small \it Fixed: 16 total devices.}
         \label{comesh:subfig:cpu-cmp}
     \end{subfigure}
@@ -120,8 +120,8 @@ Our paper takes the next big step in making cloudless commercial edges hubless a
     \bigskip
 \label{comesh:tab:n-hubs-vs-comesh}
 \footnotesize
-% \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-\tagpdfsetup{table-tagging=false}
+\tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+% \tagpdfsetup{table-tagging=false}
 \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{2.5cm}
                                @{}>{\raggedright\arraybackslash\hsize=0.97\hsize}X
                                @{}>{\raggedright\arraybackslash\hsize=1.03\hsize}X@{}}
@@ -197,7 +197,7 @@ Our source code and datasets are available at \href{dprg.cs.uiuc.edu/traces/go.p
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=0.8\linewidth]{CoMesh/figures/intro/Coteries.pdf}
+    \includegraphics[width=0.8\linewidth,alt={Diagram of CoMesh's Sense-Trigger-Actuate control workflow over an ad-hoc mesh network. Sensing, triggering, and actuation responsibilities are handled by coteries of nearby devices rather than a central hub; ad-hoc network links are shown faintly in the background and all coteries are drawn as hyper-local.}]{CoMesh/figures/intro/Coteries.pdf}
     \caption{\small \it Control Flow of \sysname's Sense-Trigger-Actuate Actions. Ad-hoc network links are shown in the background. (For simplicity, all \kgroups{} are shown as hyper-local.)
     }
     \medskip

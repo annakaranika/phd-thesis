@@ -11,8 +11,8 @@ The Internet of Things (IoT) has evolved well beyond its early phase, with over 
     \caption{Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
     \bigskip
     \label{intro:tab:taxonomy}
-    % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    % \tagpdfsetup{table-tagging=false}
     \begin{tabularx}{\linewidth}{p{0.3\linewidth}p{0.45\linewidth}p{0.15\linewidth}}
         \toprule
         \textbf{Smart Space} & \textbf{Key Control Challenges} & \textbf{This Thesis} \\
@@ -48,6 +48,7 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
 \begin{figure}[th]
   \centering
   \begin{tikzpicture}[
+    alt={A vertical stack of four nested layers representing the smart space control stack. From top to bottom: Control in Context (the management layer, addressing how occupants control their space); CoMesh (the coordination layer, addressing where STA logic should execute); RASC (the middleware layer, addressing what the control primitive communicates); and at the base, the smart space itself, comprising IoT devices and the mesh network. Downward arrows connect each layer to the one beneath it.},
     every node/.style={font=\small},
     layer/.style={
       draw, rounded corners=4pt,
@@ -110,8 +111,8 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
     \caption{Contributions of this thesis, their objectives, and evaluation methodology.}
     \bigskip
     \label{intro:tab:contributions}
-    % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    % \tagpdfsetup{table-tagging=false}
     \renewcommand{\arraystretch}{1.3}
     \renewcommand{\tabularxcolumn}[1]{m{#1}}
     \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{4.2cm}|X|>{\raggedright\arraybackslash}m{4cm}}

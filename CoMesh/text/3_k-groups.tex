@@ -49,8 +49,8 @@ Epoch lengths are fixed system-wide. (Different \kgroups{} can migrate at differ
         \State $L_{\mathcal{D}} \gets \text{leader\_election}(\mathcal{M}_{\mathcal{D}})$
         \If{$S==L_{old}$}
             \State Replicate $state_{\mathcal{D}}$ to $L_{\mathcal{D}}$ \Comment{(a)}
-            \State Receive and ack \texttt{CHANGEOVER} from $L_{\mathcal{D}}$ \Comment{(e)}
-            \State Send \texttt{CHANGEOVER} to $\mathcal{M}_{old}$  \Comment{(f)}
+            \State Receive and ack \texttt{CHANGEOVER} from $L_{\mathcal{D}}$ \Comment{(e)} \label{comesh:alg:migration:e}
+            \State Send \texttt{CHANGEOVER} to $\mathcal{M}_{old}$  \Comment{(f)} \label{comesh:alg:migration:f}
         \ElsIf{$S==L_{\mathcal{D}}$}
             \State Receive $state_{\mathcal{D}}$ from $L_{old}$ \Comment{(b)}
             \State Replicate $state_{\mathcal{D}}$ to quorum of $\mathcal{M}_{\mathcal{D}}$ \Comment{(c)}
@@ -62,7 +62,7 @@ Epoch lengths are fixed system-wide. (Different \kgroups{} can migrate at differ
 First, we extend the hash function for the selection to include the epoch number $E$, making it $Hash (E, S, D)$. $E$ is incremented by 1 on each epoch change. When an epoch expires, \Cref{comesh:alg:migration} executes.
 Epoch changes are initiated asynchronously by the leader of the old \kgroup{}.
 When the new \kgroup{} leader acknowledges to the old \kgroup{} leader 
-that it has received all the state (line 5), the old \kgroup{} leader can delete its old \kgroup{} state. After line 6, an old \kgroup{} node can delete its old state for that \kgroup{}. During \Cref{comesh:alg:migration}'s execution,
+that it has received all the state (line~\ref{comesh:alg:migration:e}), the old \kgroup{} leader can delete its old \kgroup{} state. After line~\ref{comesh:alg:migration:f}, an old \kgroup{} node can delete its old state for that \kgroup{}. During \Cref{comesh:alg:migration}'s execution,
 no monitoring operations occur in the \kgroup{}. This means that old \kgroup{} members and the old leader cease all \kgroup{} operations at exactly the epoch changeover boundary. In practice, the epoch change is fast enough that this gap in monitoring
 is small, as shown by our experimental results.
 After the migration, all normal \kgroup{} operations resume. 
@@ -146,8 +146,8 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \caption{\small \it Summary of LSH parameters used in \sysname.}
     \bigskip
     \label{comesh:tab:lsh_params}
-    % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    % \tagpdfsetup{table-tagging=false}
     \setlength{\tabcolsep}{4pt}
     \begin{tabular}{c l c}
         \hline
@@ -164,7 +164,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \centering
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_kdis_k_l_r.png}
+        \includegraphics[width=\textwidth,alt={Three stacked line subplots of average quorum distance versus a varied LSH parameter (x-axis 1 to 6), each comparing the RANDOM policy (blue, flat at about 4.2) against  (orange). Top, varying m:  rises from about 1.5 to 3.5. Middle, varying l:  falls from about 2.2 to 1.5. Bottom, varying r:  falls from about 3.7 to 1.7.  keeps quorum distance below RANDOM in all cases.}]{CoMesh/figures/k-groups/500_grid5,10,10lsh_kdis_k_l_r.png}
         \caption{\small \it Average quorum distance.}
         \label{comesh:subfig:quorum_dis_500klr}
     \end{subfigure}
@@ -172,7 +172,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
         \hspace{-8pt}
-        \includegraphics[width=1.04\textwidth]{CoMesh/figures/k-groups/500_grid5,10,10lsh_koverlap_k_l_r.png}
+        \includegraphics[width=1.04\textwidth,alt={Three stacked line subplots of average \kgroup{} overlap versus a varied LSH parameter (x-axis 1 to 6), each comparing the RANDOM policy (blue, flat near 0.1) against  (orange). Top, varying m:  falls from about 0.8 to 0.55. Middle, varying l:  rises from about 0.6 to 0.8. Bottom, varying r:  rises from about 0.4 to 0.8.  consistently yields much higher overlap (about 0.4 to 0.8) than RANDOM (about 0.1).}]{CoMesh/figures/k-groups/500_grid5,10,10lsh_koverlap_k_l_r.png}
         \caption{\small \it Average \kgroup{} overlap.}
         \label{comesh:subfig:overlap_500klr}
     \end{subfigure}
@@ -184,5 +184,5 @@ To reduce the probability of differing vectors being bucketed together, \sysname
 \Cref{comesh:subfig:quorum_dis_500klr,comesh:subfig:overlap_500klr} show that increasing $m$
 over-clusters devices while raising $l,r$ does the reverse. By default \sysname{} sets $m=2, l=2, r=4$.
 This has clear benefits---our results 
-show that in 2D grid topologies of different sizes,  LSH has a smaller intra-group quorum distance than random \kgroup{} selection. 
+show that in 2D grid topologies of different sizes, LSH has a smaller intra-group quorum distance than random \kgroup{} selection. 
 

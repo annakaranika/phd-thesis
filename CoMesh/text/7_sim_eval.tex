@@ -7,8 +7,8 @@
     \caption{\small \it Default parameter values for simulation.}
     \bigskip
     \label{comesh:tab:def_param_vals}
-    % \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    % \tagpdfsetup{table-tagging=false}
     \begin{tabular}{r l}
         \hline
         \textbf{Parameter} & \textbf{Default value} \\
@@ -51,7 +51,7 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
     \centering
     \begin{subfigure}[b]{0.31\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{CoMesh/figures/exp_eval/client_delay_cmp_grid_sla_vs_ola.pdf}
+        \includegraphics[width=\linewidth,alt={Grouped box-and-whisker plot for a grid topology. x-axis: total number of devices (50, 250, 500, 750); y-axis: delay in time units (0 to 400). Two series: SLA (blue) and OLA (green). OLA medians stay low (about 30 to 75) while SLA medians rise from about 85 to 150 as devices grow, so the optimistic strategy (OLA) consistently gives lower client delay than sequential (SLA).}]{CoMesh/figures/exp_eval/client_delay_cmp_grid_sla_vs_ola.pdf}
         \caption{\small \textit{Grid} topology.}
         \medskip
         \label{comesh:subfig:client_delay_grid}
@@ -59,7 +59,7 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
     \hfill
     \begin{subfigure}[b]{0.31\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{CoMesh/figures/exp_eval/client_delay_cmp_random_sla_vs_ola.pdf}
+        \includegraphics[width=\linewidth,alt={Grouped box-and-whisker plot for a random topology. x-axis: total number of devices (50, 250, 500, 750); y-axis: delay in time units (0 to 400). SLA (blue) medians rise from about 55 to 90 while OLA (green) medians stay around 20 to 42; OLA again gives consistently lower client delay than SLA.}]{CoMesh/figures/exp_eval/client_delay_cmp_random_sla_vs_ola.pdf}
         \caption{\small \textit{Random} topology.}
         \medskip
         \label{comesh:subfig:client_delay_random}
@@ -67,7 +67,7 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
     \hfill
     \begin{subfigure}[b]{0.31\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{CoMesh/figures/exp_eval/client_delay_cmp_clustered_sla_vs_ola.pdf}
+        \includegraphics[width=\linewidth,alt={Grouped box-and-whisker plot for a clustered topology. x-axis: total number of devices (50, 250, 500, 750); y-axis: delay in time units (0 to 400). SLA (blue) medians rise from about 65 to 90 while OLA (green) medians stay stable around 25 to 40; OLA gives consistently lower client delay than SLA.}]{CoMesh/figures/exp_eval/client_delay_cmp_clustered_sla_vs_ola.pdf}
         \caption{\small \textit{Clustered} topology.}
         \medskip
         \label{comesh:subfig:client_delay_cluster}
@@ -83,7 +83,7 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
 \begin{figure}[ht] % Use figure for spanning two columns in a two-column document
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/client_sync_delays_failure_old.png}
+        \includegraphics[width=\textwidth,alt={Grouped box-and-whisker plot for a grid topology with 40 percent device churn. x-axis: number of devices (50, 250, 500, 750); y-axis: delay in time units (0 to about 450). Two series: client delay (green) and sync delay (orange). Both medians rise with device count, from roughly 75 at 50 devices to about 155 (client) and 225 (sync) at 750 devices, with outliers above 400.}]{CoMesh/figures/exp_eval/client_sync_delays_failure_old.png}
         \caption{\small \it Client Delay
         and Sync Delay when 40\% of the \smart{}s in a grid topology experience churn (either a join or a failure).}
         \medskip
@@ -92,7 +92,7 @@ We use LSHMix (\Cref{comesh:subsection:lsh}).
     \hfill
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{CoMesh/figures/exp_eval/client_sync_delay_churn.png}
+        \includegraphics[width=\linewidth,alt={Grouped box-and-whisker plot. x-axis: churn fraction and packet drop rate pairs, from (0.0, 0.0) up to (0.2, 0.05); y-axis: delay in time units (0 to 3000). Two series: client delay (green) and sync delay (orange). Client-delay medians rise modestly from about 600 to about 1000 as churn increases, while sync-delay medians stay around 500 to 650; outliers reach about 2500.}]{CoMesh/figures/exp_eval/client_sync_delay_churn.png}
         \caption{\small \it Client and Sync Delays of routines under failure vs\. Churn fraction and packet Drop rate (80\% smart devices).}
         \medskip
         \label{comesh:fig:churn}
@@ -124,7 +124,7 @@ Our churn and packet loss rates are much higher than in commercial deployments, 
 
 \begin{figure}[tb!]
     \centering
-    \includegraphics[width=0.6\linewidth]{CoMesh/figures/exp_eval/client_delay_wmobility.pdf}
+    \includegraphics[width=0.6\linewidth,alt={Two side-by-side line subplots of client delay versus the maximum distance devices move (as a fraction of the topology dimension: 0.0, 0.05, 0.1, 0.2, 0.4); y-axis: client delay in time units (150 to 350). Eight series cover combinations of when mobility is injected (before or during epoch change or routine triggering) and whether the routine leader is included in the move. Left subplot (10 percent of devices moved): all curves start near 195 and rise modestly to about 220 to 265. Right subplot (40 percent moved): curves rise more steeply, reaching about 270 to 310 at the largest distance. Delay grows with both the fraction of devices moved and the distance moved.}]{CoMesh/figures/exp_eval/client_delay_wmobility.pdf}
     \caption{\small \it Mobility: Client delay vs. relative distance moved.
     }
     \medskip
@@ -141,7 +141,7 @@ We conclude that \sysname{} can tolerate moderate mobility.
     \centering
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/temporal_load_balance_combined.png}
+        \includegraphics[width=\textwidth,alt={CDF plot. x-axis: temporal load in time units (0 to about 520,000); y-axis: cumulative probability (0 to 1). Three sets of curves curves by role: leader_only (blue, lowest load, roughly 0 to 130,000), member_only (orange, roughly 100,000 to 400,000), and leader/member (green, highest, roughly 150,000 to 520,000). Star markers denote the random policy and triangle markers the LSH policy; for each role LSH and random give similar median load but random is quite balanced across time whereas LSH is S-shaped, so LSH balances temporal load comparably to random despite a longer tail.}]{CoMesh/figures/exp_eval/temporal_load_balance_combined.png}
         \caption{\small \textit{Temporal} Load.}
         \medskip
         \label{comesh:subfig:temporal-load-balance-locality}
@@ -149,7 +149,7 @@ We conclude that \sysname{} can tolerate moderate mobility.
     \hspace{2cm}
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/spatial_load_balance_combined.png}
+        \includegraphics[width=\textwidth,alt={CDF plot. x-axis: number of concurrent \kgroups{} a device belongs to (0 to about 40); y-axis: cumulative probability (0 to 1). Three S-shaped sets of curves by role: leader_only (blue, lowest, about 0 to 7), member_only (orange, about 5 to 20), and leader/member (green, highest, about 5 to 25). Star markers mark the random policy and triangles the LSH policy; LSH and random track closely for each role, indicating comparable spatial load distribution.}]{CoMesh/figures/exp_eval/spatial_load_balance_combined.png}
         \caption{\small \textit{Spatial} Load.}
         \medskip
         \label{comesh:subfig:spatial-load-balance-locality}
@@ -170,21 +170,21 @@ The plots show LSH's clustering of \kgroups{} closer to target devices prolongs 
 \begin{figure}[ht]
     \centering
     \begin{minipage}{0.49\textwidth}
-        \includegraphics[width=0.99\textwidth]{CoMesh/figures/exp_eval/in_kgroup_variable_k_smaller.png}
+        \includegraphics[width=0.99\textwidth,alt={Grouped box-and-whisker plot. x-axis: \kgroup{} size K from 3 (f=1) to 11 (f=5); y-axis: delay in time units (0 to about 36). Three series: quorum-plus-reply delay (green) and leader-election delay (blue), both low at about 5 to 7, and state-transfer delay (red), the highest, with medians rising from about 16 to 20 as K grows. Within-\kgroup{} delay is dominated by state transfer and increases with K.}]{CoMesh/figures/exp_eval/in_kgroup_variable_k_smaller.png}
         \caption{\small \it Delays of operations within a \Kgroup{} for different $\K$.\\}
         \medskip
         \label{comesh:fig:in_kgroup_ks}
     \end{minipage}
     \hfill
     \begin{minipage}{0.49\textwidth}
-        \includegraphics[width=1.02\textwidth]{CoMesh/figures/exp_eval/in_kgroup_policies_new.png}
+        \includegraphics[width=1.02\textwidth,alt={Grouped box-and-whisker plot comparing two selection policies (K=5). x-axis: member and leader selection (random vs locality); y-axis: delay in time units (0 to about 52). Three series: quorum-plus-reply (green), leader-election (blue), and state-transfer (red) delay. Under random selection medians are about 10 (green and blue) and 24 (red); under locality they drop to about 5 and 12, so locality-based selection roughly halves all three delays.}]{CoMesh/figures/exp_eval/in_kgroup_policies_new.png}
         \caption{\small \it Delays of operations within a \Kgroup{} for different policies of entity clustering, member selection, and leader election.}
         \medskip
         \label{comesh:fig:in_kgroup_policies}
     \end{minipage}
-    \begin{minipage}{0.49\textwidth}
+    \begin{minipage}{\textwidth}
         \vspace{0.5cm}
-        \includegraphics[width=1.03\textwidth]{CoMesh/figures/exp_eval/in_kgroup_wf_smaller.png}
+        \includegraphics[width=0.5\textwidth,alt={Grouped box-and-whisker plot (K=5). x-axis: node churn percentage (0, 20, 40, 60); y-axis: delay in time units (0 to about 44). Three series: quorum-plus-reply (green) and leader-election (blue) delay stay low and flat at about 5 to 6 across all churn levels, while state-transfer delay (red) rises from about 12 at no churn to about 18 to 20 once churn is present and then stays flat, so within-\kgroup{} operations are largely robust to churn.}]{CoMesh/figures/exp_eval/in_kgroup_wf_smaller.png}
         \caption{\small \it \Kgroup{} Internal Operations vs. Smart Device  Churn.\\}
         \medskip
         \label{comesh:fig:in_kgroup_failure}
@@ -216,7 +216,7 @@ Our simulator (\Cref{comesh:sec:simres}) includes this map with two topologies:
     \centering
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=0.775\textwidth]{CoMesh/figures/exp_eval/rtn_sizes.png}
+        \includegraphics[width=0.775\textwidth,alt={CDF plot. x-axis: routine size, i.e., the number of devices a routine actuates (0 to 22); y-axis: cumulative probability (0 to 1). Two step curves: Sparse (blue) and Dense (orange) topologies. Both reach close to 1.0 by a routine size of 2, with the Dense curve already near 0.7 at size 1, so almost all routines actuate just one or two devices and very few are larger.}]{CoMesh/figures/exp_eval/rtn_sizes.png}
         \caption{\small \it CDF of how many devices a routine actuates. 
         }
         \medskip
@@ -225,7 +225,7 @@ Our simulator (\Cref{comesh:sec:simres}) includes this map with two topologies:
     \hfill
     \begin{subfigure}[b]{0.57\linewidth}
         \centering
-        \includegraphics[width=\textwidth]{CoMesh/figures/exp_eval/rtn_conflicts.png}
+        \includegraphics[width=\textwidth,alt={CDF plot. x-axis: number of pairwise routine conflicts (0 to 5); y-axis: cumulative probability (0 to 1). Two step curves: Sparse (blue) reaches 1.0 by 2 conflicts, while Dense (orange) climbs to about 0.5 by 2 conflicts and then has a long tail, reaching 1.0 only at 5. The dense topology produces more conflicting routine pairs than the sparse one.}]{CoMesh/figures/exp_eval/rtn_conflicts.png}
         \caption{\small \it CDF of the number of conflicting actuated devices between routine pairs.
         }
         \medskip
@@ -234,7 +234,7 @@ Our simulator (\Cref{comesh:sec:simres}) includes this map with two topologies:
     \par\medskip
     \begin{subfigure}[b]{\linewidth}
         \centering
-        \includegraphics[width=0.9\linewidth]{CoMesh/figures/exp_eval/rtn_conflict_graph.png}
+        \includegraphics[width=0.9\linewidth,alt={Node-link graph of routine conflict classes. Each node is a circle whose color encodes trigger condition: red for heating, blue for cooling, purple for time, green for motion, and light green for light. Labeled nodes include Heating (Slow): 46 routines, Open Shades: 46, Cooling (Fast): 47, Light On: 59, Light Off based on motion: 46, Light Off based on time: 58, Heating (Fast): 47, Temp Overnight: 46, Temp Autoheat: 47, Temp Autocool: 47, Cooling (Slow): 47, Close Shades: 3, Close Shades Halfway: 3. Edges connect classes that share conflicting devices; the thicker the edge the more conflicting devices between those two classes. The graph is dense in the center around the heatinga and cooling classes, and sparser at the periphery for small-routine classes around shades and lights classes.}]{CoMesh/figures/exp_eval/rtn_conflict_graph.png}
         \caption{\small \it Routine conflicts for the \SmallT{} (bottom right 3 classes) and \LargeT{} topologies. Circle = routine class; Color = trigger condition; Count = number of routines; Thicker edges = more conflicting devices.   
         }
         \medskip
@@ -259,7 +259,7 @@ We calibrated the simulator so that
 
 \begin{figure}[th!]
     \centering
-    \includegraphics[scale=0.5]{CoMesh/figures/exp_eval/client_sync_delay_comparison_logy.png}
+    \includegraphics[scale=0.5,alt={Grouped box-and-whisker plot with a logarithmic y-axis. x-axis: device wireless range in feet (40, 100, 120); y-axis: delay in seconds (about 0.01 to 10). Four series: wait time for sparse (green) and dense (orange) topologies, and sync delay for sparse (blue) and dense (red) topologies. Wait-time medians are low at about 0.1 to 0.15 seconds while sync-delay medians are higher at about 1 to 1.5 seconds; all stay roughly flat across the three wireless ranges.}]{CoMesh/figures/exp_eval/client_sync_delay_comparison_logy.png}
     \caption{\small \it \Bldg{} (Map-driven) Simulation (\Cref{comesh:fig:IoTsetting}(a)): Wait times and Sync delays vs. device transmission range. (1 time unit in simulation $\simeq$ 1 ms of real time). Upper end shows max. 
     }
     \medskip

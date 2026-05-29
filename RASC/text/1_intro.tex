@@ -15,7 +15,7 @@ or manually by the user.
 
 \begin{figure}[th]
     \centering
-    \includegraphics[width=0.7\linewidth]{RASC/figures/intro/action-length-var.pdf}
+    \includegraphics[width=0.7\linewidth,alt={CDF plot with a compressed x-axis that uses axis breaks to show widely separated ranges of smart device action lengths. y-axis: CDF (0 to 1). Four curves: door (blue, 4 to 5 seconds, a tight steep S-curve), elevator (orange, 17 to 21 seconds), shade (green, 30 to 33 seconds), and thermostat (red, 125 to 3493 seconds, a long spread). Each action has a distinct, non-overlapping length range, and lengths span nearly three orders of magnitude across device types.}]{RASC/figures/intro/action-length-var.pdf}
     \caption{\bf \small IoT actions vary in length. {\it Actions: door: close, elevator: up 1 floor, shade: open, thermostat: heat  68.x to 69.y \textdegree Fahrenheit.} 
     }
     \medskip
@@ -51,8 +51,8 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     \centering
     \footnotesize
     % \setlength{\tabcolsep}{1pt} % default is 6pt
-    % \tagpdfsetup{table/header-rows={1},table/header-columns={1,2}}
-    \tagpdfsetup{table-tagging=false}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1,2}}
+    % \tagpdfsetup{table-tagging=false}
     \begin{tabular}{|c|l||c|c|c|c|}
         \hline
         \textbf{Property} & \textbf{Goal} & \textbf{\RPCa} & \textbf{\RPCs} & \textbf{\RPCc} & \textbf{\abstraction} \\ \hline \hline
@@ -71,7 +71,7 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     \centering
         \begin{subfigure}[b]{\linewidth}
         \centering
-        \includegraphics[width=0.5\textwidth]{RASC/figures/applications/energy-saving-vacuum-rasc.pdf}
+        \includegraphics[width=0.5\textwidth,alt={Diagram of a single energy-saving vacuum routine expressed atop RASC, where action dependencies on Acknowledgment, Start, and Completion let one routine capture the behavior cleanly.}]{RASC/figures/applications/energy-saving-vacuum-rasc.pdf}
         \caption{\small Single routine for energy-saving vacuum atop RASC.}
         \medskip
         \label{rasc:fig:energy-saving-vacuum-rasc}
@@ -79,7 +79,7 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     \begin{subfigure}[b]{\linewidth}
         \centering
         \vspace{0.2cm}
-        \includegraphics[width=0.9\textwidth]{RASC/figures/applications/energy-saving-vacuum-rpc.pdf}
+        \includegraphics[width=0.9\textwidth,alt={Diagram of the same energy-saving vacuum behavior built with traditional RPCs, requiring multiple extra routines (shown in pink) with complex or unavailable triggers; suboptimal triggers cause cross-routine conflicts or actions firing unintentionally.}]{RASC/figures/applications/energy-saving-vacuum-rpc.pdf}
         \caption{\small 
         Ineffective RPC-based energy-saving vacuum routines. Pink routines need complex---or unavailable---triggers (\textcolor{darkred}{?}; e.g., ``vacuum in living room'' $\land$ ``cleaning/returning''). With suboptimal triggers, cross-routine conflicts (\rotatebox{90}{\bf \textcolor{darkred}{$\approx$}}) arise or actions fire unintentionally.
         }
