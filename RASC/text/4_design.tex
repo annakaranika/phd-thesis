@@ -3,7 +3,7 @@
 
 The goals of action progress updates and failure detection (\Cref{rasc:tab:properties}) can be served via a mechanism that {\it periodically polls} the device for its current state. This polling needs to (i) satisfy user-specified tolerances for detecting failures, (ii) balance detection latency vs. device/network load, and (iii) adapt to evolving action time distributions (i.e., wrong estimates). 
 
-\begin{figure}[th]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth,alt={Diagram of the RASC abstraction layered over RPCs. RASC provides three responses: acknowledgment, start, completion, and/or failure. The frequent RPCs shown on the right are the adaptive polls that RASC issues in the background to track an action's progress.}]{RASC/figures/design/RASC abstraction.pdf}
     \caption{\bf \small \abstraction{} over RPCs. {\it Frequent RPCs on right are polls.}
@@ -28,7 +28,7 @@ So during the start detection state, \sysname{} also checks if either of the sta
 
 In IoT settings, it is impossible to distinguish a failed device from one that is not executing actions at all. So \sysname{} detects the failure of {\it actions}, but does not declare a device as being failed. \sysname{} reports failures to the user (who may take subsequent actions like restarting the device).
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.65\linewidth,alt={Diagram of communication between a smart device and a client app. Each arrowed line is an RPC in today's stacks; the dashed lines are the ones this work replaces with the new RASC abstraction. A client device app or smart hub communicates either directly with the device (hub-to-device) or via a vendor cloud service (hub-to-cloud-to-device). The device app may also first communicate with the smart hub.}]{RASC/figures/intro/smart space setup.pdf}
     \caption{\bf \small Communication between a smart device and a client app. {\it Each arrowed line is an RPC in today's stacks. This paper replaces dashed lines with the new \abs{} abstraction.}
