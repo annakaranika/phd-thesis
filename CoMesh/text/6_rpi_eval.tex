@@ -17,8 +17,18 @@ We use OLSR routing~\cite{olsrd} as it is standard in Pi 4s.
 For membership, we use Medley~\cite{medley}.
 
 \sysname{} is configured to use \kgroups{} with expected $k=3$ smart devices per \kgroup, and a device \kgroup{} monitors its devices every second. The default locking is  SLA locking (\Cref{comesh:subsubsec:sla}).
-To avoid cold start biases, we start measurements 10 s after \sysname{} is initialized. Each data point involves at least 5 trial runs with different seeds. 
+To avoid cold start biases, we start measurements 10 s after \sysname{} is initialized. Each data point involves at least 5 trial runs with different seeds.
 Epoch length is 60 s.
+
+\noindent{\bf Routine workload.} Multiple routines may be triggered independently and simultaneously; the same routine is never re-triggered within 10 s of its own previous invocation. For each routine, its number of triggering (resp. actuated) devices is drawn from a Gaussian distribution ranging from a low of 2 (resp. 1) to a high of $N/4$, with a mean of 2 and a standard deviation of 1; triggering and actuated devices are then chosen uniformly at random. We inject new device-state events uniformly every $[0.5, 1]$ s. \Cref{comesh:fig:rtn_iat} shows the CDF of the resulting routine inter-arrival times for each of our device counts ($N = 4, 16, 64, 144$).
+
+\begin{figure}[tb!]
+    \centering
+    \includegraphics[width=0.55\linewidth,alt={CDF plot of routine inter-arrival times. x-axis: inter-arrival time in seconds (0 to 60); y-axis: cumulative probability (0 to 1). Four step curves, one per device count (4, 16, 64, and 144 devices). All curves rise steeply within the first 10 to 20 seconds and approach 1.0, with the 64-device curve having the longest tail (reaching 1.0 only near 50 seconds) and the smaller device counts concentrating most inter-arrivals below about 15 seconds.}]{CoMesh/figures/exp_eval/rtns_r20_iat_cdf.png}
+    \caption{\small \it Deployment: CDF of routine inter-arrival times (seconds) for different device counts ($N = 4, 16, 64, 144$).}
+    \medskip
+    \label{comesh:fig:rtn_iat}
+\end{figure}
 
 \begin{figure}[tb!]
     \centering

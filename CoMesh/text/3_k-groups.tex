@@ -120,6 +120,8 @@ Classical LSH~\cite{datar_locality-sensitive_2004} hashes similar multi-dimensio
     \end{algorithmic}
 \end{algorithm}
 
+Note that \Cref{comesh:alg:lsh_majority_selection} selects only the $(f{+}1)$-member {\it majority} of a \kgroup{} locally (via LSH); the remaining $f$ members are spread across the network by the base consistent hash (\Cref{comesh:subsection:member_selection}). This split is deliberate: keeping the $(f{+}1)$-quorum local makes the common-case intra-\kgroup{} operations fast, while spreading the other $f$ members ensures that a {\it correlated} failure of a single locality cannot wipe out an entire \kgroup. For example, an entire power domain may lose power at once; by our rule of thumb for setting $f$ (\Cref{comesh:sec:system-model}), a power domain holds fewer than $f{+}1$ smart devices, so at least one nearby \kgroup{} member always survives such an outage.
+
 At each epoch, we also desire a \kgroup{} to migrate only ``nearby'' so that STA traffic stays local, and state transfer to new \kgroup{} is fast.
 
 The device's location vector is $d$-dimensional and the \textit{state vector} of a smart device is a $2d$-dimensional vector that combines the device's location with the average location of all devices it monitors, to preserve locality. 
@@ -177,12 +179,50 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \label{comesh:subfig:overlap_500klr}
     \end{subfigure}
     \caption{\small \it Average quorum distance and \kgroup{} overlap for different selection policies and parameters. $N$ = 500, \#smart devices = 200.}
-    \medskip
+    % \medskip
     \label{comesh:fig: ave_quorum_dis_and_overlap_klr}
+\end{figure}
+
+\begin{figure}[tb!]
+    \centering
+    \begin{subfigure}[b]{0.42\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={Line plot of average quorum distance versus number of devices (50 to 1000). Two series: the RANDOM policy rises roughly linearly from about 2.4 at 50 devices to about 5.4 at 1000 devices, while the LSHMix policy stays low and nearly flat between about 1.7 and 2.0 across all system sizes.}]{CoMesh/figures/k-groups/50_grid5,5,2lsh_topology_distance.png}
+        \caption{\small \it Average quorum distance.}
+        \label{comesh:subfig:quorum_dis_size}
+        \vspace{0.05cm}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[b]{0.42\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={Line plot of average k-group overlap (the number of members shared between two consecutive epochs) versus number of devices (50 to 1000). Both policies decrease as the number of devices grows, but LSHMix stays consistently above random: LSHMix falls from about 1.8 to 0.6 while random falls from about 1.3 to below 0.1, so LSHMix retains more members across epochs at every system size.}]{CoMesh/figures/k-groups/50_grid5,5,2lsh_topology_overlaps.png}
+        \caption{\small \it Average \kgroup{} overlap.}
+        \label{comesh:subfig:overlap_size}
+    \end{subfigure}
+    \caption{\small \it Average quorum distance and \kgroup{} overlap for different system sizes $N$ (2D grid, default $m=2, l=2, r=4$, 40\% smart devices).}
+    \medskip
+    \label{comesh:fig:lsh_vs_size}
 \end{figure}
 
 \Cref{comesh:subfig:quorum_dis_500klr,comesh:subfig:overlap_500klr} show that increasing $m$
 over-clusters devices while raising $l,r$ does the reverse. By default \sysname{} sets $m=2, l=2, r=4$.
-This has clear benefits---our results 
-show that in 2D grid topologies of different sizes, LSH has a smaller intra-group quorum distance than random \kgroup{} selection. 
+This has clear benefits across {\it system sizes}. \Cref{comesh:fig:lsh_vs_size} evaluates 2D grid topologies ranging from 50 to 1000 devices, with the default parameters. The average quorum distance (\Cref{comesh:subfig:quorum_dis_size}) grows roughly linearly with system size under random selection (from about 2.4 to 5.4), but stays small and nearly flat under LSHMix (about 1.7 to 2.0). The average \kgroup{} {\it overlap}---the number of members a \kgroup{} retains across two consecutive epochs, which lowers state-transfer cost at epoch changes---is consistently higher under LSHMix than random (\Cref{comesh:subfig:overlap_size}).
+
+\begin{table}[tb!]
+    \centering
+    \caption{\small \it Average number of \kgroup{} member candidates for different system sizes $N$ (40\% smart devices).}
+    \bigskip
+    \label{comesh:tab:lsh_candidates}
+    \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
+    \footnotesize
+    \begin{tabular}{l c c c c c}
+        \hline
+        \textbf{\# devices ($N$)} & 50 & 250 & 500 & 750 & 1000 \\ \hline
+        \textbf{\# candidates} & 13.0 & 34.1 & 50.8 & 52.8 & 66.9 \\
+        \hline
+    \end{tabular}
+    \bigskip
+\end{table}
+
+Although LSHMix's overlap drops for large $N$ (\Cref{comesh:subfig:overlap_size}), it remains well above random's. The drop is explained by \Cref{comesh:tab:lsh_candidates}: as the system grows, each \kgroup{} has more candidate members, so the probability of re-selecting the same device in consecutive epochs shrinks. One can also tune LSH parameters to reduce the candidate count without hurting quorum distance---e.g., at $N=1000$ with $m=3, l=2, r=4$, the average number of candidates is 21 and the average quorum distance is 2.4 (vs.\ 5.3 for random \kgroup{} selection).
 

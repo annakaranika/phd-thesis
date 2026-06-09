@@ -19,6 +19,8 @@
 *.run.xml
 *.zip
 _minted/
+.venv/
+recovery-notes.md
 
 !thesis.pdf
 
@@ -30,3 +32,5 @@ RASC/usenix_2020_09.sty
 RASC/usenixbadges.sty
 RASC/usenixbadges-*.pdf
 RASC/acmguide.pdf
+
+**/old versions/

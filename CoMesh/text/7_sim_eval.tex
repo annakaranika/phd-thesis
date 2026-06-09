@@ -141,18 +141,34 @@ We conclude that \sysname{} can tolerate moderate mobility.
     \centering
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth,alt={CDF plot. x-axis: temporal load in time units (0 to about 520,000); y-axis: cumulative probability (0 to 1). Three sets of curves curves by role: leader_only (blue, lowest load, roughly 0 to 130,000), member_only (orange, roughly 100,000 to 400,000), and leader/member (green, highest, roughly 150,000 to 520,000). Star markers denote the random policy and triangle markers the LSH policy; for each role LSH and random give similar median load but random is quite balanced across time whereas LSH is S-shaped, so LSH balances temporal load comparably to random despite a longer tail.}]{CoMesh/figures/exp_eval/temporal_load_balance_combined.png}
-        \caption{\small \textit{Temporal} Load.}
-        \medskip
-        \label{comesh:subfig:temporal-load-balance-locality}
+        \includegraphics[width=\textwidth,alt={CDF plot of temporal load under the LSH/locality policy. x-axis: temporal load in time units (0 to about 520,000); y-axis: cumulative probability (0 to 1). Three S-shaped curves with longer tails than under random: leader_only (blue, about 0 to 130,000), member_only (orange, about 100,000 to 380,000), and leader/member (green, about 150,000 to 520,000). Medians are close to those under random, but the tails are longer.}]{CoMesh/figures/exp_eval/temporal_load_balance_locality.png}
+        \caption{\small \textit{Temporal} Load, LSH.}
+        % \medskip
+        \label{comesh:subfig:temporal-load-locality}
     \end{subfigure}
-    \hspace{2cm}
+    \hspace{1cm}
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
-        \includegraphics[width=\textwidth,alt={CDF plot. x-axis: number of concurrent \kgroups{} a device belongs to (0 to about 40); y-axis: cumulative probability (0 to 1). Three S-shaped sets of curves by role: leader_only (blue, lowest, about 0 to 7), member_only (orange, about 5 to 20), and leader/member (green, highest, about 5 to 25). Star markers mark the random policy and triangles the LSH policy; LSH and random track closely for each role, indicating comparable spatial load distribution.}]{CoMesh/figures/exp_eval/spatial_load_balance_combined.png}
-        \caption{\small \textit{Spatial} Load.}
-        \medskip
-        \label{comesh:subfig:spatial-load-balance-locality}
+        \includegraphics[width=\textwidth,alt={CDF plot of spatial load under the LSH/locality policy. x-axis: number of concurrent \kgroups{} a device belongs to (0 to about 40); y-axis: cumulative probability (0 to 1). Three S-shaped curves by role: leader_only (blue, about 0 to 10), member_only (orange, about 0 to 25), and leader/member (green, about 0 to 35). The distributions are slightly more spread out than under random.}]{CoMesh/figures/exp_eval/spatial_load_balance_locality.png}
+        \caption{\small \textit{Spatial} Load, LSH.}
+        % \medskip
+        \label{comesh:subfig:spatial-load-locality}
+    \end{subfigure}
+    \par\medskip
+    \begin{subfigure}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={CDF plot of temporal load under the random policy. x-axis: temporal load in time units (0 to about 520,000); y-axis: cumulative probability (0 to 1). Three nearly vertical (low-variance) curves by role: leader_only (blue, around 40,000 to 55,000), member_only (orange, around 190,000 to 210,000), and leader/member (green, around 240,000 to 270,000). The steep curves indicate load is tightly balanced across devices.}]{CoMesh/figures/exp_eval/temporal_load_balance_random.png}
+        \caption{\small \textit{Temporal} Load, Random.}
+        % \medskip
+        \label{comesh:subfig:temporal-load-random}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={CDF plot of spatial load under the random policy. x-axis: number of concurrent \kgroups{} a device belongs to (0 to about 40); y-axis: cumulative probability (0 to 1). Three S-shaped curves by role: leader_only (blue, about 0 to 7), member_only (orange, about 3 to 18), and leader/member (green, about 5 to 22).}]{CoMesh/figures/exp_eval/spatial_load_balance_random.png}
+        \caption{\small \textit{Spatial} Load, Random.}
+        % \medskip
+        \label{comesh:subfig:spatial-load-random}
     \end{subfigure}
     \caption{\small \it \sysname{}'s Load Distribution in Time \& Space: LSH/locality vs. Random (member \& leader selection). Grid topology.
     }
@@ -161,34 +177,35 @@ We conclude that \sysname{} can tolerate moderate mobility.
 \end{figure}
 
 \noindent{\bf Load Distribution.} \Cref{comesh:fig:load-balance} measures two kinds of load distribution over a run:
-{(1) {\it Temporal load} is the time that a smart device serves in a particular role.}
-{(2) {\it Spatial load} is the number of concurrent \kgroups{}  a smart device is present in.}
-{
-The plots show LSH's clustering of \kgroups{} closer to target devices prolongs tail load vs. random due to repeated elections. Yet LSH's median temporal load for member and leader/member are similar to random's, showing LSH balances load well. 
-}
+(1) {\it Temporal load} is the time that a smart device serves in a particular role.
+(2) {\it Spatial load} is the number of concurrent \kgroups{}  a smart device is present in.
+The plots show LSH's clustering of \kgroups{} closer to target devices prolongs tail load vs. random (\Cref{comesh:subfig:temporal-load-locality,comesh:subfig:spatial-load-locality}) due to repeated elections. Yet LSH's median temporal load for member and leader/member are similar to random's (\Cref{comesh:subfig:temporal-load-random}), showing LSH balances load well.
 
-\begin{figure}[ht]
+\begin{figure}[tb!]
     \centering
     \begin{minipage}{0.49\textwidth}
+        \centering
         \includegraphics[width=0.99\textwidth,alt={Grouped box-and-whisker plot. x-axis: \kgroup{} size K from 3 (f=1) to 11 (f=5); y-axis: delay in time units (0 to about 36). Three series: quorum-plus-reply delay (green) and leader-election delay (blue), both low at about 5 to 7, and state-transfer delay (red), the highest, with medians rising from about 16 to 20 as K grows. Within-\kgroup{} delay is dominated by state transfer and increases with K.}]{CoMesh/figures/exp_eval/in_kgroup_variable_k_smaller.png}
         \caption{\small \it Delays of operations within a \Kgroup{} for different $\K$.\\}
-        \medskip
+        % \medskip
         \label{comesh:fig:in_kgroup_ks}
     \end{minipage}
     \hfill
     \begin{minipage}{0.49\textwidth}
+        \centering
         \includegraphics[width=1.02\textwidth,alt={Grouped box-and-whisker plot comparing two selection policies (K=5). x-axis: member and leader selection (random vs locality); y-axis: delay in time units (0 to about 52). Three series: quorum-plus-reply (green), leader-election (blue), and state-transfer (red) delay. Under random selection medians are about 10 (green and blue) and 24 (red); under locality they drop to about 5 and 12, so locality-based selection roughly halves all three delays.}]{CoMesh/figures/exp_eval/in_kgroup_policies_new.png}
         \caption{\small \it Delays of operations within a \Kgroup{} for different policies of entity clustering, member selection, and leader election.}
-        \medskip
+        % \medskip
         \label{comesh:fig:in_kgroup_policies}
     \end{minipage}
     \begin{minipage}{\textwidth}
+        \centering
         \vspace{0.5cm}
         \includegraphics[width=0.5\textwidth,alt={Grouped box-and-whisker plot (K=5). x-axis: node churn percentage (0, 20, 40, 60); y-axis: delay in time units (0 to about 44). Three series: quorum-plus-reply (green) and leader-election (blue) delay stay low and flat at about 5 to 6 across all churn levels, while state-transfer delay (red) rises from about 12 at no churn to about 18 to 20 once churn is present and then stays flat, so within-\kgroup{} operations are largely robust to churn.}]{CoMesh/figures/exp_eval/in_kgroup_wf_smaller.png}
         \caption{\small \it \Kgroup{} Internal Operations vs. Smart Device  Churn.\\}
-        \medskip
         \label{comesh:fig:in_kgroup_failure}
     \end{minipage}
+    \medskip
 \end{figure}
 
 \noindent{\bf {\Kgroup{} Operations}.}
@@ -250,7 +267,8 @@ Our simulator (\Cref{comesh:sec:simres}) includes this map with two topologies:
 
 We created a routine workload mix based on devices and frequently observed actions
 from this building.  \Cref{comesh:fig:rtn_stats}(a,b) show a CDF of device count actuated by a routine, and pairwise routine conflicts. 
-\Cref{comesh:fig:rtn_conflicts} shows major routine classes (only 2 representatives shown out of many), and typical conflicts. 
+\Cref{comesh:fig:rtn_conflicts} shows major routine classes (only 2 representatives shown out of many), and typical conflicts.
+For concreteness, we describe a few sample routine classes. When motion is undetected for at least an hour and a room's light is on, a routine turns it off; conversely, when motion is detected, another routine turns the room's lights on. Other routines turn off room and corridor lights overnight. These per-room routines conflict with building-wide routines---e.g., ones that turn off all lights everywhere between 2--6 AM---and similar local--global conflicting pairs arise for thermostats and shades. All routines are triggered by sensors.
 The \largeT{} (respectively \smallT{}) topology has 545 active routines (resp. 163),
 containing 1-23 commands with mean  1.47 and median 1  (resp. for \smallT: 1-12, median: 2, mean: 2.07). 
 We calibrated the simulator so that  
