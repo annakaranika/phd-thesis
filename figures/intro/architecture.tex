@@ -1,0 +1,109 @@
+% Smart-space control-stack figure for the Introduction (intro:fig:stack).
+% Device icons live in figures/intro/*.png ; requires fontawesome5 and the
+% tikz libraries arrows.meta, shapes.geometric, fit, backgrounds, calc (loaded in macros.tex).
+\newcommand{\devm}[1]{\includegraphics[height=0.6cm]{figures/intro/#1}}
+\newcommand{\devs}[1]{\includegraphics[height=0.66cm]{figures/intro/#1}}
+\tikzset{
+ hub/.pic={\fill[black!82,rounded corners=2.5pt](-0.18,-0.12) rectangle (0.18,0.06);\fill[green!60!black](0.11,-0.03) circle (0.022);\draw[black!82,line width=0.6pt](-0.13,0.06)--(-0.16,0.16);\draw[black!82,line width=0.6pt](0.0,0.06)--(0.0,0.17);},
+}
+
+\begin{figure}[th!]
+  \centering
+  \resizebox{\linewidth}{!}{%
+  \begin{tikzpicture}[
+  alt={Diagram of the smart-space control stack as four stacked layers joined top to bottom by arrows. Top layer, Control in Context (theme: usability), asks how occupants view and use control interfaces: a person points to a spectrum running from physical device control, through a vendor app, to a hub or cloud, i.e. from physical to proxy-based central control. Second layer, CoMesh (theme: scalability and fault tolerance), asks where control logic should run: a mesh of smart-home devices is organized into two overlapping coteries of compute-capable smart devices that share members (one coterie groups a smart speaker, fridge, and vacuum; the other groups a camera, fridge, and vacuum), while simpler sensors and actuators are interspersed, and there is no central hub. Third layer, RASC (theme: observability and programmability), asks how control logic and occupants observe and program actions: a controller sends an action to a device along an observable lifecycle of Request, Acknowledge, Start, and Complete. Bottom layer, Smart Space, shows the IoT devices, mesh network, and people that the upper layers operate over.},
+  font=\sffamily, dlarge/.style={font=\Large}, dmed/.style={font=\large},
+  ttl/.style={font=\bfseries}, chref/.style={font=\small, text=black!55},
+  q/.style={font=\itshape\small, text=black!75, align=left}, lbl/.style={font=\footnotesize, text=black!65},
+  tlbl/.style={font=\scriptsize, text=black!70},
+  badge/.style={font=\scriptsize\itshape, anchor=north east, fill=white, draw=gray!45, rounded corners=2pt, inner sep=2.5pt},
+  flow/.style={-{Stealth[length=2.6mm]}, gray!65, thick},
+]
+\def\w{16.5}
+\fill[orange!8, draw=orange!55, rounded corners=5pt] (0,1.5) rectangle (\w,-1.5);
+\fill[blue!8,   draw=blue!50,   rounded corners=5pt] (0,-1.9) rectangle (\w,-5.7);
+\fill[teal!9,   draw=teal!55,   rounded corners=5pt] (0,-6.1) rectangle (\w,-9.0);
+\fill[gray!12,  draw=gray!60,   rounded corners=5pt] (0,-9.4) rectangle (\w,-13.2);
+\draw[flow] (1.9,-1.5) -- (1.9,-1.9);
+\draw[flow] (1.9,-5.7) -- (1.9,-6.1);
+\draw[flow] (1.9,-9.0) -- (1.9,-9.4);
+
+% ===== L1 Control in Context =====
+\node[ttl, anchor=west] at (0.35,0.85) {Control in Context};
+\node[chref, anchor=west] at (0.35,0.3) {\ref{chapter:cic}};
+\node[q, anchor=west, text width=4.8cm] at (0.35,-0.5) {How do occupants view and use control interfaces?};
+\node[badge] at (\w-0.15,1.42) {Usability};
+\node[dlarge] (u1) at (6.2,0.2) {\faIcon{user}};
+\node (c1) at (8.6,0.35) {\devm{smart-bulb}};
+\node[dmed] (c2) at (11.2,0.4) {\faIcon{mobile-alt}};
+\node (c3) at (14.0,0.4) {\tikz{\path(0,0) pic[scale=1.25]{hub};}};
+\node[tlbl] at (8.6,-0.25) {device};
+\node[tlbl] at (11.2,-0.2) {vendor app};
+\node[tlbl] at (14.0,-0.25) {hub / cloud};
+\draw[flow] (u1) -- (7.5,0.2);
+\draw[{Stealth[length=2mm]}-{Stealth[length=2mm]}, black!55] (7.8,-0.8) -- (14.6,-0.8);
+\node[tlbl] at (8.6,-1.1) {physical};
+\node[tlbl] at (13.4,-1.1) {proxy-based (central)};
+
+% ===== L2 CoMesh : same device mesh + overlapping coteries =====
+\node[ttl, anchor=west] at (0.35,-2.7) {CoMesh};
+\node[chref, anchor=west] at (0.35,-3.25) {\ref{chapter:comesh}};
+\node[q, anchor=west, text width=4.8cm] at (0.35,-4.1) {Where should control\\logic run?};
+\node[badge] at (\w-0.15,-1.98) {Scalability + Fault Tolerance};
+\node (cspk) at (6.7,-3.6) {\devm{smart-coffee-maker}};
+\node (cbu)  at (7.4,-2.5) {\devm{smart-bulb}};
+\node (ccf)  at (8.1,-4.3) {\devm{smart-speaker}};
+\node (cfr)  at (9.5,-3.5) {\devm{smart-fridge}};
+\node (cvac) at (9.9,-4.4) {\devm{smart-vacuum}};
+\node (ccam) at (11.3,-3.0){\devm{camera}};
+\node (clk)  at (12.7,-3.7){\devm{smart-lock}};
+\node (cmo)  at (13.7,-3.0){\devm{motion-sensor}};
+\draw[gray!55] (cspk)--(cbu) (cspk)--(ccf) (cbu)--(cfr) (ccf)--(cfr) (ccf)--(cvac) (cfr)--(cvac) (cfr)--(ccam) (cvac)--(ccam) (ccam)--(clk) (ccam)--(cmo) (clk)--(cmo) (cbu)--(ccam);
+\node[draw=blue!75, dashed, line width=0.7pt, rounded corners=4pt, fit=(ccf)(cfr)(cvac), inner sep=1.5pt] (cot1) {};
+\node[draw=teal!70!blue, dash dot, line width=0.7pt, rounded corners=4pt, fit=(ccam)(cfr)(cvac), inner sep=2.5pt] (cot2) {};
+\node[tlbl, text=blue!75] at (8.4,-5.05) {coterie};
+\node[tlbl, text=teal!70!blue] at (11.0,-5.05) {coterie};
+\node (nh) at (15.2,-3.7) {\tikz{\path(0,0) pic[scale=1.3]{hub};}};
+\draw[red!75, very thick] (14.85,-4.0) -- (15.55,-3.4);
+\node[lbl, text=red!75] at (15.2,-4.35) {no hub};
+
+% ===== L3 RASC =====
+\node[ttl, anchor=west] at (0.35,-6.8) {RASC};
+\node[chref, anchor=west] at (0.35,-7.35) {\ref{chapter:rasc}};
+\node[q, anchor=west, text width=5.2cm] at (0.35,-8.2) {How do control and occupants\\observe and program actions?};
+\node[badge] at (\w-0.15,-6.18) {Observability + Programmability};
+\node[dlarge] (rc) at (6.8,-7.3) {\faIcon{server}};
+\node[lbl] at (6.8,-7.95) {control};
+\node (rd) at (9.5,-7.3) {\devm{smart-bulb}};
+\node[lbl] at (9.5,-7.95) {device};
+\draw[flow] (rc) -- (rd);
+\draw[teal!60, thick] (10.1,-7.3) -- (15.6,-7.3);
+\foreach \x/\l in {10.4/R, 11.6/A, 12.9/S, 15.4/C}{
+  \node[circle, fill=teal!60, inner sep=1.7pt] at (\x,-7.3){};
+  \node[text=teal!80, font=\footnotesize\bfseries] at (\x,-6.95){\l};}
+\node[lbl] at (13.0,-8.0) {Request $\cdot$ Ack $\cdot$ Start $\cdot$ Complete};
+
+% ===== L4 Smart Space : same mesh, no coteries =====
+\begin{scope}[yshift=-0.7cm]
+\node[ttl, anchor=west] at (0.35,-9.8) {Smart Space};
+\node[lbl, anchor=west, text width=4.8cm] at (0.35,-11.0) {IoT devices +\\ mesh network +\\ people};
+\node[dlarge] (ehum) at (15.1,-10.6) {\faIcon{user}};
+\node (espk) at (6.9,-10.6) {\devs{smart-coffee-maker}};
+\node (ebu)  at (7.4,-9.5) {\devs{smart-bulb}};
+\node (ecf)  at (8.1,-11.3) {\devs{smart-speaker}};
+\node (efr)  at (9.5,-10.5) {\devs{smart-fridge}};
+\node (evac) at (9.9,-11.4) {\devs{smart-vacuum}};
+\node (ecam) at (11.3,-10.0){\devs{camera}};
+\node (elk)  at (12.7,-10.7){\devs{smart-lock}};
+\node (emo)  at (13.7,-10.0){\devs{motion-sensor}};
+\draw[gray!50] (espk)--(ebu) (espk)--(ecf) (ebu)--(efr) (ecf)--(efr) (ecf)--(evac) (efr)--(evac) (efr)--(ecam) (evac)--(ecam) (ecam)--(elk) (ecam)--(emo) (elk)--(emo) (ebu)--(ecam);
+\end{scope}
+\end{tikzpicture}}
+  \caption{\bf \small The three thesis contributions as layers of the smart-space control stack.
+    {\it Control in Context (\emph{usability}) characterizes how occupants view and use control interfaces;
+    CoMesh (\emph{scalability \& fault tolerance}) decentralizes where control logic runs, across overlapping coteries of smart devices and with no central hub;
+    and RASC (\emph{observability \& programmability}) exposes how control logic and occupants observe and program each action's lifecycle (Request--Ack--Start--Complete).
+    All three operate over the same smart space of IoT devices, mesh network, and people.}}
+  \bigskip
+  \label{intro:fig:stack}
+\end{figure}
