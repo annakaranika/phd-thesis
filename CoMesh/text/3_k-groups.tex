@@ -14,7 +14,7 @@ temporal migration (\Cref{comesh:subsection:periodicity}), failure response  (\C
 While some communication is unavoidable in any distributed system that aims to be fault-tolerant (e.g., pinging, membership, etc.), our key observation is that expensive distributed computing protocols
 (e.g., leader election, member selection, etc.) can be replaced with inexpensive ``zero-message'' variants.
 
-\noindent \textbf{Load-balanced Member Selection via Zero-message Exchange}: A smart device with ID $S$ discovers if it is present in a \kgroup{} for a target device with ID $D$ by calculating a consistent hash: $Hash (S, D)$~\cite{chord,dynamo}. The alphabetically {\it lowest} $k$ hashed IDs across the entire system are then the approved \kgroup{} members. This design is inspired by the idea of cryptographic sortition~\cite{cryptosort}.
+\noindent \textbf{Load-balanced Member Selection via Zero-message Exchange.} A smart device with ID $S$ discovers if it is present in a \kgroup{} for a target device with ID $D$ by calculating a consistent hash: $Hash (S, D)$~\cite{chord,dynamo}. The alphabetically {\it lowest} $k$ hashed IDs across the entire system are then the approved \kgroup{} members. This design is inspired by the idea of cryptographic sortition~\cite{cryptosort}.
 Notice that, given a fixed hash function (e.g., a cryptographic hash like SHA-1), {\it any} arbitrary smart device can calculate the {\it entire} membership of {\it any} \kgroup{} by calculating this hash function on all known node IDs.
 With correct membership lists, this takes zero messages.
 
@@ -85,10 +85,10 @@ Since \sysname{} is running over an ad-hoc network, two  issues arise:
 (i) the sheer number of devices and routines creates too many \kgroup{}s,  
 (ii) if \kgroup{} members are randomly selected (hashed), they will be spread out, making intra-\kgroup{} coordination slow and bandwidth-hungry.
 
-\noindent {\bf 1. Limiting the Number of \Kgroup{}s:} We use a
+\noindent {\bf 1. Limiting the Number of \Kgroup{}s. } We use a
 genetic k-means clustering algorithm~\cite{KMeans} to group the devices. Each resultant device group is assigned to one \kgroup. For routines, we pick a random device from its trigger set as its representative, and that device's \kgroup{} becomes the routine's \kgroup. 
 
-\noindent {\bf 2. Locality-Sensitive Hashing: } Selecting \kgroup{}s randomly (\Cref{comesh:subsection:member_selection}) spreads the \kgroup{} members all over the network, slowing down
+\noindent {\bf 2. Locality-Sensitive Hashing. } Selecting \kgroup{}s randomly (\Cref{comesh:subsection:member_selection}) spreads the \kgroup{} members all over the network, slowing down
 {both intra-group (election, quorum) and inter-leader operations}.
 A challenge is to make \kgroup{} selection {\it local} while retaining spatial load-balancing benefits of hashing. %To do so, w
 We use physical device locations and adapt ideas from {\it locality-sensitive hashing (LSH)}~\cite{datar_locality-sensitive_2004}. 
@@ -145,7 +145,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
 
 \begin{table}[t]
     \centering
-    \caption{\small \it Summary of LSH parameters used in \sysname.}
+    \caption{\bf \small Summary of LSH parameters used in \sysname.}
     \bigskip
     \label{comesh:tab:lsh_params}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
@@ -167,7 +167,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Three stacked line subplots of average quorum distance versus a varied LSH parameter (x-axis 1 to 6), each comparing the RANDOM policy (blue, flat at about 4.2) against  (orange). Top, varying m:  rises from about 1.5 to 3.5. Middle, varying l:  falls from about 2.2 to 1.5. Bottom, varying r:  falls from about 3.7 to 1.7.  keeps quorum distance below RANDOM in all cases.}]{CoMesh/figures/k-groups/500_grid5,10,10lsh_kdis_k_l_r.png}
-        \caption{\small \it Average quorum distance.}
+        \caption{\small Average quorum distance.}
         \label{comesh:subfig:quorum_dis_500klr}
     \end{subfigure}
     \hspace{0.5cm}
@@ -175,10 +175,10 @@ To reduce the probability of differing vectors being bucketed together, \sysname
         \centering
         \hspace{-8pt}
         \includegraphics[width=1.04\textwidth,alt={Three stacked line subplots of average \kgroup{} overlap versus a varied LSH parameter (x-axis 1 to 6), each comparing the RANDOM policy (blue, flat near 0.1) against  (orange). Top, varying m:  falls from about 0.8 to 0.55. Middle, varying l:  rises from about 0.6 to 0.8. Bottom, varying r:  rises from about 0.4 to 0.8.  consistently yields much higher overlap (about 0.4 to 0.8) than RANDOM (about 0.1).}]{CoMesh/figures/k-groups/500_grid5,10,10lsh_koverlap_k_l_r.png}
-        \caption{\small \it Average \kgroup{} overlap.}
+        \caption{\small Average \kgroup{} overlap.}
         \label{comesh:subfig:overlap_500klr}
     \end{subfigure}
-    \caption{\small \it Average quorum distance and \kgroup{} overlap for different selection policies and parameters. $N$ = 500, \#smart devices = 200.}
+    \caption{\bf \small Average quorum distance and \kgroup{} overlap for different selection policies and parameters. {\it $N$ = 500, \#smart devices = 200.}}
     % \medskip
     \label{comesh:fig: ave_quorum_dis_and_overlap_klr}
 \end{figure}
@@ -188,7 +188,7 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \begin{subfigure}[b]{0.42\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Line plot of average quorum distance versus number of devices (50 to 1000). Two series: the RANDOM policy rises roughly linearly from about 2.4 at 50 devices to about 5.4 at 1000 devices, while the LSHMix policy stays low and nearly flat between about 1.7 and 2.0 across all system sizes.}]{CoMesh/figures/k-groups/50_grid5,5,2lsh_topology_distance.png}
-        \caption{\small \it Average quorum distance.}
+        \caption{\small Average quorum distance.}
         \label{comesh:subfig:quorum_dis_size}
         \vspace{0.05cm}
     \end{subfigure}
@@ -196,10 +196,10 @@ To reduce the probability of differing vectors being bucketed together, \sysname
     \begin{subfigure}[b]{0.42\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Line plot of average k-group overlap (the number of members shared between two consecutive epochs) versus number of devices (50 to 1000). Both policies decrease as the number of devices grows, but LSHMix stays consistently above random: LSHMix falls from about 1.8 to 0.6 while random falls from about 1.3 to below 0.1, so LSHMix retains more members across epochs at every system size.}]{CoMesh/figures/k-groups/50_grid5,5,2lsh_topology_overlaps.png}
-        \caption{\small \it Average \kgroup{} overlap.}
+        \caption{\small Average \kgroup{} overlap.}
         \label{comesh:subfig:overlap_size}
     \end{subfigure}
-    \caption{\small \it Average quorum distance and \kgroup{} overlap for different system sizes $N$ (2D grid, default $m=2, l=2, r=4$, 40\% smart devices).}
+    \caption{\bf \small Average quorum distance and \kgroup{} overlap for different system sizes $N$. {\it 2D grid, default $m=2, l=2, r=4$, 40\% smart devices}.}
     \medskip
     \label{comesh:fig:lsh_vs_size}
 \end{figure}
@@ -210,7 +210,7 @@ This has clear benefits across {\it system sizes}. \Cref{comesh:fig:lsh_vs_size}
 
 \begin{table}[tb!]
     \centering
-    \caption{\small \it Average number of \kgroup{} member candidates for different system sizes $N$ (40\% smart devices).}
+    \caption{\bf \small Average number of \kgroup{} member candidates for different system sizes $N$ (40\% smart devices).}
     \bigskip
     \label{comesh:tab:lsh_candidates}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}

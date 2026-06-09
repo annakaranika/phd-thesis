@@ -23,14 +23,14 @@ There is rich literature at the networking layer, e.g., on how to build, configu
     \begin{subfigure}{0.49\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Map/floor plan of a smart office building used as a commercial edge setting, showing the layout across which IoT sensors and actuators are deployed.}]{CoMesh/figures/intro/smart-building.pdf}
-        \caption{\it \small {Smart Building.}}
+        \caption{\small {Smart Building.}}
         \medskip
         \label{comesh:fig:smart-building}
     \end{subfigure}
     \begin{subfigure}{0.49\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Map of a smart farm used as a commercial edge setting, showing the fields and areas across which IoT sensors and actuators are distributed.}]{CoMesh/figures/intro/smart-farm.pdf}
-        \caption{\it \small {Smart Farm.}}
+        \caption{\small {Smart Farm.}}
         \medskip
         \label{comesh:fig:smart-farm}
     \end{subfigure}
@@ -38,18 +38,18 @@ There is rich literature at the networking layer, e.g., on how to build, configu
         % \vspace{0.2cm}
         \centering
         \includegraphics[width=\textwidth,alt={Illustration of a smart factory as a commercial edge setting, with networked industrial IoT devices distributed across the production floor.}]{CoMesh/figures/intro/smart-factory.pdf}
-        \caption{\it \small {Smart Factory.}}
+        \caption{\small {Smart Factory.}}
         % \medskip
         \label{comesh:fig:smart-factory}
     \end{subfigure}
-    \caption{\it \small {Three Commercial Edge Settings:
-    (a)  \Bldg~\cite{Memoori}, (b)  \Grid~\cite{SMG21}, (c) Smart  Factory~\cite{lampropoulos2019internet}. We later use the \Bldg{} map from (a) and \Grid{} from (b) to drive experiments. }
+    \caption{\bf \small Three Commercial Edge Settings:
+    (a)  \Bldg~\cite{Memoori}, (b)  \Grid~\cite{SMG21}, (c) Smart  Factory~\cite{lampropoulos2019internet}. {\it We later use the \Bldg{} map from (a) and \Grid{} from (b) to drive experiments. }
     }
     \label{comesh:fig:IoTsetting}
 \end{figure}
 
 
-{\noindent \bf Sense-Trigger-Actuation of Routines:} Sitting {\it above} this mesh network is the  {\it control plane}---this typically needs to execute three kinds of actions:
+{\noindent \bf Sense-Trigger-Actuation of Routines.} Sitting {\it above} this mesh network is the  {\it control plane}---this typically needs to execute three kinds of actions:
 {\it Sense-Trigger-Actuate} (or STA). The control plane needs to first {\it sense}: continuously collect measurements from multiple devices. Applications specify predicates, which are arbitrary Boolean clauses involving multiple device readings. Whenever a predicate is satisfied, the control plane  needs to {\it trigger} a programmed
 series of actions, sending
 commands to several devices. Third, because some of these actions may be long-running (e.g., mechanical movements, repetitive actions, or time-based actions such as water sprinklers), the control plane needs to initiate and monitor {\it actuation} of these commands (at multiple devices)  quickly and efficiently. The key challenge is to actuate in an order that {\it avoids conflicting actions on devices~\cite{Transactuations, Safehome}}.
@@ -61,7 +61,7 @@ This STA abstraction is commonly programmed via {\it routines}, available in Sam
 \begin{figure}[tb!]
     \centering
     \includegraphics[width=0.95\linewidth,alt={Programming workflow diagram. On the left, a routine named ``Auto Irrigation'' is authored in the Samsung SmartThings app interface, with an ``If'' section listing soil-sensor humidity conditions and a ``Then'' section listing irrigation-actuator commands. A user icon in the middle connects the SmartThings interface to a box labeled \sysname{} on the right. Below, an arrow shows the SmartThings routine exported as SmartThings internal JSON, which is then converted into \sysname{}'s own JSON specification; both JSON snippets are shown side by side.}]{CoMesh/figures/intro/smartThings.png}
-    \caption{\small \it \sysname{} Programming Workflow: routines are authored in an existing GUI such as the Samsung SmartThings app, and SmartThings' internal JSON is converted to \sysname's JSON specification before being promulgated to devices.}
+    \caption{\bf \small \sysname{} Programming Workflow. {\it Routines are authored in an existing GUI such as the Samsung SmartThings app, and SmartThings' internal JSON is converted to \sysname's JSON specification before being promulgated to devices.}}
     \medskip
     \label{comesh:fig:prog-workflow}
 \end{figure}
@@ -75,7 +75,7 @@ For a routine that is sensor- and/or time-triggered, its trigger clauses need to
 Another key  challenge in scheduling these routines is to avoid
 {\it conflicts among routines}, i.e., {\it two routines that actuate intersecting sets of devices should not be allowed to execute concurrently, but instead be executed serially}. Handling conflicts is an important and difficult problem, but existing solutions~\cite{Safehome} are centralized and hub-based.  
 
-{\noindent \bf Towards Cloudless and Hubless STA Operations: }  
+{\noindent \bf Towards Cloudless and Hubless STA Operations. }  
 Commercial edge settings have a strong requirement of uninterrupted operation. This has led to recent efforts that build ``Cloudless IoT'' solutions across both industry~\cite{Thingsquare}
 and open source~\cite{HACloudless,csa2025matter}.
 Benefits of cloudlessness include: lower latency, stability (cloud outages do not affect local operations), persistence (no effect of changing cloud services and APIs), lowered cost for providers (no cost of running on cloud services\footnote{Provider cost for a customer with 500 devices pinged every second, plus routine actuation, can be as high as \$2500 per month~\cite{AzureIoTHub}.}), 
@@ -92,7 +92,7 @@ and keeping operations+data private and local.
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Grouped bar chart with error bars. x-axis: number of devices (1, 4, 16, 64, 144); y-axis: CPU load percent (0 to 60). Three bars per group: \sysname{}, 3-Hubs, and Central. At 1 device all three are comparable (about 8 to 12 percent). As devices increase, \sysname{} stays flat and low (roughly 6 to 10 percent), while 3-Hubs rises to about 33 percent and Central climbs steeply to about 35 percent at 16 devices and 51 to 54 percent at 64 to 144 devices.}]{CoMesh/figures/intro/CPU_cmp_xdev_bar.pdf}
-        \caption{ \small \it Fixed: 20 total routines.
+        \caption{ \small Fixed: 20 total routines.
         }
         \label{comesh:subfig:cpu-central}
     \end{subfigure}
@@ -100,11 +100,10 @@ and keeping operations+data private and local.
     \begin{subfigure}[b]{0.4\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Grouped bar chart with error bars. x-axis: number of routines (1, 5, 10, 15, 20); y-axis: CPU load percent (0 to 60). \sysname{} stays flat at about 9 percent across all routine counts, 3-Hubs ranges from about 14 to 25 percent (rising with more routines), and Central stays highest at roughly 33 to 37 percent throughout.}]{CoMesh/figures/intro/CPU_cmp_xrtn_bar.pdf}
-        \caption{\small \it Fixed: 16 total devices.}
+        \caption{\small Fixed: 16 total devices.}
         \label{comesh:subfig:cpu-cmp}
     \end{subfigure}
-    \caption{\small \it 
-    Raspberry Pis: Our decentralized \sysname{} reduces CPU utilization significantly compared to the centralized Hub and 3-Hubs.}
+    \caption{\bf \small Raspberry Pis CPU utilization. {\it Our decentralized \sysname{} reduces CPU utilization significantly compared to the centralized Hub and 3-Hubs.}}
     \medskip
     \label{comesh:fig:resources}
 \end{figure}
@@ -126,7 +125,7 @@ Our paper takes the next big step in making cloudless commercial edges hubless a
 
 \begin{table}[t]
 \centering
-\caption{\small \it N-hubs vs.\ \sysname{} design trade-offs.}
+\caption{\bf \small N-hubs vs.\ \sysname{} design trade-offs.}
     \bigskip
 \label{comesh:tab:n-hubs-vs-comesh}
 \footnotesize
@@ -188,7 +187,7 @@ A cloudless+hubless STA solution requires that all actions:
 
 
 
-\noindent {\bf Contributions: } We present \sysname, the first system to realize
+\noindent {\bf Contributions. } We present \sysname, the first system to realize
 a {\it fully decentralized} (i.e., hub-less and local)    control plane for  monitoring and management of  routines
 over large edge meshes. The contributions of this paper are: 
 \begin{itemize}
@@ -208,7 +207,7 @@ Our source code and datasets are available at \href{dprg.cs.uiuc.edu/traces/go.p
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.8\linewidth,alt={Diagram of CoMesh's Sense-Trigger-Actuate control workflow over an ad-hoc mesh network. Sensing, triggering, and actuation responsibilities are handled by coteries of nearby devices rather than a central hub; ad-hoc network links are shown faintly in the background and all coteries are drawn as hyper-local.}]{CoMesh/figures/intro/Coteries.pdf}
-    \caption{\small \it Control Flow of \sysname's Sense-Trigger-Actuate Actions. Ad-hoc network links are shown in the background. (For simplicity, all \kgroups{} are shown as hyper-local.)
+    \caption{\bf \small Control Flow of \sysname's Sense-Trigger-Actuate Actions. {\it Ad-hoc network links are shown in the background. (For simplicity, all \kgroups{} are shown as hyper-local.)}
     }
     \medskip
     \label{comesh:fig:coteries}
@@ -217,7 +216,7 @@ Our source code and datasets are available at \href{dprg.cs.uiuc.edu/traces/go.p
 \subsection{Challenges and \sysname's Overview}
 \label{comesh:sec:motivation}
 
-\noindent {\bf Challenges of Decentralization: } 
+\noindent {\bf Challenges of Decentralization. }
 \sysname's goal is to design a hub-less, fully decentralized, local,  STA management system that relies on neither a single central hub nor a cloud. \sysname{} contains {\it local} distributed protocols running among smart devices which have compute and memory resources (other simple devices without such resources may also co-exist)---\sysname{} requires only a fraction of devices to be smart. Smart devices may include 
 IoT devices, Raspberry Pis, home hubs, handheld devices (phones, tablets), etc.
 
@@ -225,7 +224,7 @@ IoT devices, Raspberry Pis, home hubs, handheld devices (phones, tablets), etc.
 (2) {\it conflict-free} actuation of routines: no  two routines that actuate intersecting sets of devices should be simultaneously active~\cite{Transactuations, Safehome};
 (3) {\it load balance}: of STA overhead both across devices and across  time; (4) {\it robustness}: {to tolerate failures} of devices; and (5) {\it physical awareness:} network  load that is    {aware of the physical layout of devices}. 
 
-\noindent {\bf \sysname's Overview:} 
+\noindent {\bf \sysname's Overview.}
 Now we summarize key internal components of \sysname. 
 Internally \sysname{} balances the STA load across both {\it space and time}. 
 Spatial balancing divides the STA load (of an erstwhile hub) across multiple smart devices. Since some devices may be more popular (appear in more routines), and some routines run more frequently, temporal balancing spreads the load from these ``popular'' devices and routines across \smarts. 

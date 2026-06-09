@@ -14,7 +14,7 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \vfill
     \includegraphics[width=0.3\textwidth,alt={Bar chart. x-axis: control scheme, C (central) and D (other); y-axis: percentage of participants (0 to 50). Central (C) is used by about 28 percent and other (D) by about 23 percent, so the two are close with central slightly higher.}]{ControlInContext/figures/control_schemes_popularity.pdf}
     \includegraphics[width=0.36\textwidth,alt={Bar chart. x-axis: control method, R (routines), V (voice command), and S (content streaming/casting); y-axis: percentage of participants. Voice command is tallest at about 51 percent, routines about 33 percent, and content streaming the shortest at about 18 percent.}]{ControlInContext/figures/control_methods_popularity.pdf}
-    \caption{Percentage of participants using each control scheme/method.}
+    \caption{\bf \small Percentage of participants using each control scheme/method.}
     \medskip
     \label{cic:fig:control-scheme-popularity}
 \end{figure}
@@ -25,7 +25,7 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \par
     \includegraphics[width=0.268\linewidth,alt={Heatmap. Columns: control scheme C (central) and D (other); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage of participants (colorbar about 18 to 33). The darkest cell is central control for 16-38 devices (about 33 percent), and central stays less dark for 11-15 devices, so central use rises with more devices owned. Other control is lightest for the 11-15 device bin.}]{ControlInContext/figures/control_schemes_vs_dev_no_bins.pdf}
     \includegraphics[width=0.24\linewidth,alt={Heatmap. Columns: control method R (routines), V (voice), S (streaming); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage (colorbar about 8 to 53). The voice (V) column is darkest across all device bins (about 45 to 53 percent), routines (R) are moderate (about 30 to 38 percent) but showing an increasing trend as the number of owned devices increases, and streaming (S) is lightest, especially for the 11-15 device bin.}]{ControlInContext/figures/control_methods_vs_dev_no_bins.pdf}
-    \caption{Percentage of survey participants using central or other control schemes and several control methods vs. number of owned devices. Each cell's color shows the percentage of participants falling into it who choose the respective control scheme or method. The percentages for the different options of control schemes and methods do not add up to 100\% since the participants could provide multiple answers.}
+    \caption{\bf \small Percentage of survey participants using central or other control schemes and several control methods vs. number of owned devices. {\it Each cell's color shows the percentage of participants falling into it who choose the respective control scheme or method. The percentages for the different options of control schemes and methods do not add up to 100\% since the participants could provide multiple answers.}}
     % \Description{Heatmaps showing percentages of participants using different control schemes and methods by number of owned devices.
     % 
     % The left heatmap compares control schemes: Central Control (C) and Other Control (D). Each row corresponds to a range of owned devices: 4-10, 11-15, and 16-38. Darker shades represent higher percentages. The highest usage of Central Control occurs in the 16-38 device group, followed by the 11-15 group. Other Control is most used by participants with either 4-10 or 16-38 devices, with lower use in the 11-15 range.
@@ -36,6 +36,7 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     % }
 
     \label{cic:fig:control-scheme-popularity-vs-dev-no}
+    \bigskip
 \end{figure}
 
 \begin{figure}[ht]
@@ -44,8 +45,8 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \par
     \includegraphics[width=0.333\linewidth,alt={Heatmap. Columns: control scheme C (central) and D (other). Rows (top to bottom): camera, dishwasher, display, hub, light, lock, motion sensor, plug/switch, router, security, speaker, thermostat, TV, vacuum. Cell color encodes percentage; empty cells mean zero. Darkest cells: hub under C (approximately 80 percent) and router under both C and D (approximately 70 percent). Lock has a very dark D cell (non-central). Camera and display show moderate values for both. Security, vacuum, and dishwasher appear only under D (non-central). Speaker and TV appear only under C (central). Thermostat and motion sensor have no colored cells.}]{ControlInContext/figures/control_schemes_vs_dev_kind_pc.pdf}
     \includegraphics[width=0.313\linewidth,alt={Heatmap. Columns: control method R (routines), V (voice), S (streaming/casting). Rows top to bottom use the same device order as the adjacent schemes heatmap: camera, dishwasher, display, hub, light, lock, motion sensor, plug/switch, router, security, speaker, thermostat, TV, vacuum. Colorbar 0 to 100 percent. Camera: all three methods near 0. Dishwasher: R very dark (near 100 percent), V and S absent. Display: R light, V very dark (about 80 percent), S medium-dark (about 40 percent). Hub and lock: absent or near 0 for all methods. Light: R medium-dark, V medium-light. Motion sensor: R and V both very dark (about 80 percent). Plug/switch: R moderate, V moderate. Router: R dark, V and S absent. Security: R dark, S dark (about 40 percent), V absent. Speaker: R light, V moderate. Thermostat: R very dark (about 80 percent), V and S absent. TV: S very dark (about 50 percent), R and V very light. Vacuum: R medium-light, V and S absent.}]{ControlInContext/figures/control_methods_vs_dev_kind_pc.pdf}
-    \caption{Percentage of participants using each control scheme/method vs.\ device kind.
-    Participants may refer to a device with a different description from how they most commonly use it, leading to an occasional discrepancy between the device kind and the control method used; for example, a participant may refer to Alexa as only a smart speaker when it is also a hub~\cite{wang2020want,singh2018users, georgiev2018smart}.}
+    \caption{\bf \small Percentage of participants using each control scheme/method vs.\ device kind.
+    {\it Participants may refer to a device with a different description from how they most commonly use it, leading to an occasional discrepancy between the device kind and the control method used; for example, a participant may refer to Alexa as only a smart speaker when it is also a hub~\cite{wang2020want,singh2018users, georgiev2018smart}.}}
     \medskip
     \label{cic:fig:control-scheme-popularity-vs-dev-kind}
 \end{figure}
@@ -71,7 +72,7 @@ This app-minimizing behavior is also visible at the level of the whole survey sa
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.62\textwidth,alt={Scatter plot with an overlaid cumulative-distribution line. The x-axis groups survey participants by the number of smart home apps installed on their phone (0, 1-4, 5-8, more than 8); the left y-axis is the number of devices owned. Each point is a participant, colored by app-count group, and a black X marks the median number of devices in each group. The medians rise from about 5 devices at 0 apps to about 13 at 1-4 apps, 16 at 5-8 apps, and 17 at more than 8 apps. A red cumulative-distribution line (right y-axis, 0 to 1) reaches about 0.73 at the 1-4 apps group, indicating roughly three quarters of participants have at most four smart home apps installed.}]{ControlInContext/figures/smart_home_apps_cdf_vs_dev_no.pdf}
-    \caption{Survey: number of smart home apps installed vs.\ number of devices owned. Points are participants (black X = per-group median); the red line is the CDF over the number of installed apps. Most participants keep only 1--4 apps even as device counts grow.}
+    \caption{\bf \small Survey: number of smart home apps installed vs.\ number of devices owned. {\it Points are participants (black X = per-group median); the red line is the CDF over the number of installed apps. Most participants keep only 1--4 apps even as device counts grow.}}
     \medskip
     \label{cic:fig:apps-vs-devices}
 \end{figure}
@@ -87,23 +88,24 @@ While participants demonstrated flexibility in their control strategies, their d
 
 \begin{table}[t]
     \centering
-    \caption{\it Survey: common reasons participants gave for why they controlled a device in a particular way ($N=43$ valid survey responses).}
+    \caption{\bf \small Survey: common reasons participants gave for why they controlled a device in a particular way. {\it $N=43$ valid survey responses.}}
     \bigskip
     \label{cic:tab:control-reasons}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
     \small
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{l c p{8cm}}
+    \begin{tabular}{m{4cm} m{3cm} m{8cm}}
         \hline
         \textbf{Reason} & \textbf{Frequency (\%)} & \textbf{Example quote} \\
         \hline\hline
-        Ease of use & 8 (19\%) & ``It's the simplest and easiest way to use.'' \\
-        Location of device & 9 (21\%) & ``If I am nearby I use touch controls, otherwise voice commands.'' \\
-        Maximize device control & 13 (30\%) & ``Complete control over the entire system, without using 10 apps.'' \\
-        As a backup plan & 12 (28\%) & ``If Alexa isn't working to ask to turn on we can use the app.'' \\
-        Force of habit & 4 (9\%) & ``Voice commands are easier than to hunt out the app on my phone.'' \\
+        Ease of use & 8 (19\%) & \textit{``It's the simplest and easiest way to use.''} \\ \hline
+        Location of device & 9 (21\%) & \textit{``If I am nearby I use touch controls, otherwise voice commands.''} \\ \hline
+        Maximize device control & 13 (30\%) & \textit{``Complete control over the entire system, without using 10 apps.''} \\ \hline
+        As a backup plan & 12 (28\%) & \textit{``If Alexa isn't working to ask to turn on we can use the app.''} \\ \hline
+        Force of habit & 4 (9\%) & \textit{``Voice commands are easier than to hunt out the app on my phone.''} \\ \hline
         \hline
     \end{tabular}
+    \medskip
 \end{table}
 
 Participants commonly cited convenience as the most compelling reason for adopting centralized control. This was particularly true as the number of devices in a smart home increased. For example, interview participant P8, who had a large-scale smart home setup, preferred centralized control because it streamlined routine tasks and allowed control through a single interface: ``\textit{It's just obviously the convenience.}'' Survey responses supported this perspective, showing a clear increase in central control-based methods' use among participants with more than 15 devices (\Cref{cic:fig:control-scheme-popularity-vs-dev-no}). Centralized interfaces reduced the friction of opening and switching between multiple apps and offered the possibility of controlling the whole house with fewer steps.
@@ -145,10 +147,11 @@ Control schemes with very few to no proxies played a crucial role in this contex
         }
         \label{cic:fig:survey-troubleshooting-sequence}
     \end{subfigure}
-    \caption{Troubleshooting steps results from survey responses. As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.
+    \caption{\bf \small Troubleshooting steps results from survey responses. {\it As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.}
     }
     % \Description{Troubleshooting steps result from survey responses. As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.}
     \label{cic:fig:survey-troubleshooting}
+    \medskip
 \end{figure}
 
 Survey data mirrored these patterns. \Cref{cic:fig:survey-troubleshooting-steps-popularity} shows that $50\%$ of participants restarted the device as part of their troubleshooting process, while $36\%$ restarted or reconnected their device to the internet. Only $12\%$ reported contacting tech support, indicating that most participants tried to resolve issues independently using a set of well-practiced responses. \Cref{cic:fig:survey-troubleshooting-sequence} visualizes the common sequences users followed when troubleshooting. Initial steps often included power or connectivity checks, followed by deeper exploration through brand-specific apps, web research ($22\%$), and more.
@@ -208,7 +211,7 @@ We identify five recurring categories of confusion and elaborate on each below. 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[t]
     \centering
-    \caption{Taxonomy of user confusion in executing smart home functionality.}
+    \caption{\bf \small Taxonomy of user confusion in executing smart home functionality.}
     \bigskip
     \label{cic:tab:confusion}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}

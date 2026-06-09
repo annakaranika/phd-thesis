@@ -25,7 +25,7 @@ Epoch length is 60 s.
 \begin{figure}[tb!]
     \centering
     \includegraphics[width=0.55\linewidth,alt={CDF plot of routine inter-arrival times. x-axis: inter-arrival time in seconds (0 to 60); y-axis: cumulative probability (0 to 1). Four step curves, one per device count (4, 16, 64, and 144 devices). All curves rise steeply within the first 10 to 20 seconds and approach 1.0, with the 64-device curve having the longest tail (reaching 1.0 only near 50 seconds) and the smaller device counts concentrating most inter-arrivals below about 15 seconds.}]{CoMesh/figures/exp_eval/rtns_r20_iat_cdf.png}
-    \caption{\small \it Deployment: CDF of routine inter-arrival times (seconds) for different device counts ($N = 4, 16, 64, 144$).}
+    \caption{\bf \small Deployment: CDF of routine inter-arrival times (seconds) for different device counts. {\it $N = 4, 16, 64, 144$}.}
     \medskip
     \label{comesh:fig:rtn_iat}
 \end{figure}
@@ -35,37 +35,37 @@ Epoch length is 60 s.
     \begin{subfigure}[b]{0.35\linewidth}
         \centering
         \includegraphics[width=\textwidth, angle = 270, origin=c,alt={Photograph of the Raspberry Pi testbed arranged in a line topology, representing the Mini \Bldg{} (\Mob) deployment.}]{CoMesh/figures/exp_eval/rpi_line_topo.JPG}
-        \caption{\small \textit{Mini \Bldg{} (\Mob). From \Cref{comesh:fig:IoTsetting}(a).}}
+        \caption{\small Mini \Bldg{} (\Mob). From \Cref{comesh:fig:smart-building}.}
         \label{comesh:subfig:line_topo}
     \end{subfigure}
     \hspace{5pt}
     \begin{subfigure}[b]{0.35\linewidth}
         \centering
         \includegraphics[width=\textwidth,alt={Photograph of the Raspberry Pi testbed arranged in a grid topology, representing the Mini \Grid{} (\Minigrid) deployment.}]{CoMesh/figures/exp_eval/rpi_grid_topo.JPG}
-        \caption{\small \textit{Mini \Grid{} (\Minigrid). From \Cref{comesh:fig:IoTsetting}(b).}}
+        \caption{\small Mini \Grid{} (\Minigrid). From \Cref{comesh:fig:smart-farm}.}
         \label{comesh:subfig:grid_topo}
     \end{subfigure}
     \par\medskip
     \begin{subfigure}[b]{0.35\linewidth}
         \centering
         \includegraphics[width=0.78\textwidth,alt={Schematic of the measured node placement and inter-node link distances for the Raspberry Pi deployment's Mini \Bldg{} (\Mob) topology.}]{CoMesh/figures/exp_eval/l_topo_measurements.png}
-        \caption{\small \textit{Mini \Bldg{} (\Mob). From \Cref{comesh:fig:IoTsetting}(a).}}
+        \caption{\small Mini \Bldg{} (\Mob). From \Cref{comesh:fig:smart-building}.}
         \label{comesh:subfig:line-topo-graph}
     \end{subfigure}
     \hspace{5pt}
     \begin{subfigure}[b]{0.35\linewidth}
         \centering
         \includegraphics[width=0.78\textwidth,alt={Schematic of the measured node placement and inter-node link distances for the Raspberry Pi deployment's Mini \Grid{} (\Minigrid) topology.}]{CoMesh/figures/exp_eval/grid_topo_measurements.png}
-        \caption{\small \textit{Mini \Grid{} (\Minigrid).  From \Cref{comesh:fig:IoTsetting}(b)}.}
+        \caption{\small Mini \Grid{} (\Minigrid). From \Cref{comesh:fig:smart-farm}.}
         \label{comesh:subfig:grid-topo-graph}
     \end{subfigure}
-    \caption{\small \it Deployment: Raspberry Pi Topologies. From \Cref{comesh:fig:IoTsetting}(a, b).}
+    \caption{\bf \small Deployment: Raspberry Pi Topologies. {\it From \Cref{comesh:fig:smart-building,comesh:fig:smart-farm}.}}
     \medskip
     \label{comesh:fig:rpi_topos}
 \end{figure}
 
-We implement the two Pi topologies shown in \Cref{comesh:fig:rpi_topos}, based on  \Cref{comesh:fig:IoTsetting}(a,b). They are: 
-(i) a {\it Mini \Bldg{}}  topology ({\it \Mob} in plots), based on the L-shaped map of the  \Bldg{}   from \Cref{comesh:fig:IoTsetting}(a); and (ii) a {\it Mini \Grid{} topology} ({\it \Minigrid} in plots) based on \Cref{comesh:fig:IoTsetting}(b), modeled via a 
+We implement the two Pi topologies shown in \Cref{comesh:fig:rpi_topos}, based on  \Cref{comesh:fig:smart-building,comesh:fig:smart-farm}. They are: 
+(i) a {\it Mini \Bldg{}}  topology ({\it \Mob} in plots), based on the L-shaped map of the  \Bldg{}   from \Cref{comesh:fig:smart-building}; and (ii) a {\it Mini \Grid{} topology} ({\it \Minigrid} in plots) based on \Cref{comesh:fig:smart-farm}, modeled via a 
 4 $\times$ 4 2D {Grid}. Each covers an area of 4 meters $\times$ 4 meters. 
 Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's. 
 
@@ -73,7 +73,7 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
     \centering
     \begin{minipage}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth,alt={Line-and-bar chart. x-axis: number of routines (1, 5, 10, 15, 20); y-axis: sent messages per second on a log scale (1 to 16). The two centralized end-to-end lines (Mini \Bldg{} and Mini \Grid{}) sit near 16 messages per second and stay roughly flat as routines increase, while all of \sysname{}'s bars (end-to-end and hop-to-hop, foreground and background, for both deployments) stay low between about 1 and 2 messages per second and also flat, roughly an order of magnitude below the centralized lines.}]{CoMesh/figures/exp_eval/bandwidth_xrtn.png}
-        \caption{\small \it  Deployment:  Centralized (lines) vs. \sysname{} (bars): Bandwidth.  \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
+        \caption{\bf \small  Deployment:  Centralized (lines) vs. \sysname{} (bars): Bandwidth.  {\it \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.}
         }
         \medskip
         \label{comesh:fig:bw_centralized_skytali}
@@ -82,7 +82,7 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
     \begin{minipage}[b]{0.46\textwidth}
         \centering
         \includegraphics[width=1.02\textwidth,alt={Grouped box-and-whisker plot. x-axis: number of routines (1, 5, 10, 15, 20); y-axis: delay in seconds on a log scale (about 1 to over 100). Four series per group: Mini \Bldg{} and Mini \Grid{} lock-acquisition time, and Mini \Bldg{} and Mini \Grid{} sync delay. Medians are stable and sit roughly between 3 and 20 seconds, and the spread and outliers grow with more routines, with some outliers reaching about 100 to 200 seconds at 15 to 20 routines.}]{CoMesh/figures/exp_eval/client_sync_delay_xrtn.png}
-        \caption{\small \it Deployment: Lock Acquisition Time and Sync Delay. \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.
+        \caption{\bf \small Deployment: Lock Acquisition Time and Sync Delay. {\it \Mob{} = Mini \Bldg, \MSF{} = Mini \Grid.}
         }
         \medskip
         \label{comesh:fig:la_sync_mul_rtns}
@@ -94,14 +94,14 @@ Note the \Mob{} topology's diameter (in hops) is higher than \Minigrid's.
     \begin{minipage}[b]{0.52\textwidth}
         \centering
         \includegraphics[width=\textwidth,alt={Stacked bar chart with error bars. x-axis: number of (virtual) devices (4, 16, 64, 144); y-axis: sent messages per second per device (0 to 8). Two stacked bars per group for the Mini \Grid{} deployment: end-to-end (orange, foreground stacked over background) and hop-to-hop (blue). Per-device bandwidth decreases as devices grow: end-to-end falls from about 4 at 4 devices to about 2 at 144, and hop-to-hop from about 7.4 to about 3, so per-device cost drops with scale.}]{CoMesh/figures/exp_eval/bandwidth_xdev_virt.pdf}
-        \caption{\small \it Deployment: Scalability of Per-(Virtual) Device Bandwidth. \MSF{} = Mini \Grid. Error bars---left: background, right: foreground.}
+        \caption{\bf \small Deployment: Scalability of Per-(Virtual) Device Bandwidth. {\it \MSF{} = Mini \Grid. Error bars---left: background, right: foreground.}}
         \medskip
         \label{comesh:fig:bw_scale}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.44\textwidth}
         \includegraphics[width=\textwidth,alt={Grouped box-and-whisker plot. x-axis: number of devices (4, 16, 64, 144); y-axis: delay in seconds on a log scale (about 0.1 to over 100). Two series per group for the Mini \Grid{} deployment with 20 routines: lock-acquisition time (orange) and sync delay (blue). Medians range from a few seconds to about 30 seconds and stay stable as device count increases, with outliers reaching roughly 100 to 200 seconds at 64 to 144 devices.}]{CoMesh/figures/exp_eval/client_sync_delay_xdev.png}
-        \caption{\small \it Deployment: Scalability of Lock Acquisition Time and Sync Delay. \MSF{} = Mini \Grid. 20 Routines.}
+        \caption{\bf \small Deployment: Scalability of Lock Acquisition Time and Sync Delay. {\it \MSF{} = Mini \Grid. 20 Routines.}}
         \medskip
         \label{comesh:fig:la_sync_scale}
     \end{minipage}
@@ -127,7 +127,7 @@ Median Lock Acquisition time stays in  2.97 s - 34.71 s, and  Sync Delay median 
 
 \begin{table}[tb!]
     \centering
-    \caption{\it \small \Kgroup{} Latencies in  Mini \Grid{} topology.
+    \caption{\bf \small \Kgroup{} Latencies in  Mini \Grid{} topology.
     }
     \bigskip
     \label{comesh:tab:kgroup_latencies}

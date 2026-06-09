@@ -49,10 +49,10 @@ to the device. }
 
 \sysname{} can acquire locks either serially or parallelly: 
 
-\noindent {\bf 1. Sequential Lock-Acquiring (SLA) Strategy: }
+\noindent {\bf 1. Sequential Lock-Acquiring (SLA) Strategy. }
 \label{comesh:subsubsec:sla}
 The routine leader acquires locks sequentially. If locks are acquired in increasing order of device ID, this prevents deadlocks (no cycles) among routines with conflicting device sets. The SLA strategy can be slow when there are no or few conflicts.
 
-\noindent {\bf 2. Optimistic Lock-Acquiring (OLA) Strategy: }
+\noindent {\bf 2. Optimistic Lock-Acquiring (OLA) Strategy. }
 \label{comesh:subsubsec:ola}
 This approach attempts to acquire all locks for its (desired) devices simultaneously. If any lock request fails, the routine leader releases all locks it acquired, and retries all again. To prevent message implosion, retries occur after a backoff timeout. OLA can be slow when routines' command sets overlap. 
