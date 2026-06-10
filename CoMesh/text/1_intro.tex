@@ -1,7 +1,7 @@
 \subsection{Introduction}
 \label{comesh:section:intro}
 
-Commercial edge deployments with Internet of Things (IoT) devices are rapidly growing in size and density. There are over 10 B IoT devices today, expected to exceed 25 B by 2030~\cite{IoTstats}. Commercial settings are the next frontier beyond smart homes (\Cref{comesh:fig:IoTsetting}). For example, smart buildings already account for 1.26 B devices, and are forecast to grow by 2027 to 2.5 B devices and a \$90+ B market~\cite{Memoori}.
+Commercial edge deployments with Internet of Things (IoT) devices are rapidly growing in size and density. There are around 21 B connected IoT devices today, forecast to reach roughly 40 B by 2030~\cite{iotanalytics2025}. Commercial settings are the next frontier beyond smart homes (\Cref{comesh:fig:IoTsetting}). For example, smart buildings already account for around 2 B devices, and are forecast to reach 4.12 B devices by 2030, with the building IoT market exceeding \$100 B~\cite{memoori2025iot}.
 Other emerging areas for IoT deployment in  commercial edges include smart farms with sensors and robots~\cite{farmbeats},
 Industry 4.0~\cite{lampropoulos2019internet},
 battlefields~\cite{IoBT},
@@ -17,36 +17,6 @@ Industry commonly uses  IEEE 802.15.4, WirelessHart~\cite{song2008wirelesshart},
 scalable, and enables
 control without requiring a central operating unit (or hub), which may be prohibitive to set up, be overloaded, or prolong latencies. These mesh networks usually contain a mixture of devices that are ``smart'' devices capable of (small amounts of) compute and storage, along with  ``simple'' devices that can only receive commands. 
 There is rich literature at the networking layer, e.g., on how to build, configure, and perform routing in mesh networks~\cite{akyildiz2005survey,lynch2024case}.
-
-\begin{figure}[t!]
-    \centering
-    \begin{subfigure}{0.49\linewidth}
-        \centering
-        \includegraphics[width=\textwidth,alt={Map/floor plan of a smart office building used as a commercial edge setting, showing the layout across which IoT sensors and actuators are deployed.}]{CoMesh/figures/intro/smart-building.pdf}
-        \caption{\small {Smart Building.}}
-        \medskip
-        \label{comesh:fig:smart-building}
-    \end{subfigure}
-    \begin{subfigure}{0.49\linewidth}
-        \centering
-        \includegraphics[width=\textwidth,alt={Map of a smart farm used as a commercial edge setting, showing the fields and areas across which IoT sensors and actuators are distributed.}]{CoMesh/figures/intro/smart-farm.pdf}
-        \caption{\small {Smart Farm.}}
-        \medskip
-        \label{comesh:fig:smart-farm}
-    \end{subfigure}
-    \begin{subfigure}{0.49\linewidth}
-        % \vspace{0.2cm}
-        \centering
-        \includegraphics[width=\textwidth,alt={Illustration of a smart factory as a commercial edge setting, with networked industrial IoT devices distributed across the production floor.}]{CoMesh/figures/intro/smart-factory.pdf}
-        \caption{\small {Smart Factory.}}
-        % \medskip
-        \label{comesh:fig:smart-factory}
-    \end{subfigure}
-    \caption{\bf \small Three Commercial Edge Settings:
-    (a)  \Bldg~\cite{Memoori}, (b)  \Grid~\cite{SMG21}, (c) Smart  Factory~\cite{lampropoulos2019internet}. {\it We later use the \Bldg{} map from (a) and \Grid{} from (b) to drive experiments. }
-    }
-    \label{comesh:fig:IoTsetting}
-\end{figure}
 
 
 {\noindent \bf Sense-Trigger-Actuation of Routines.} Sitting {\it above} this mesh network is the  {\it control plane}---this typically needs to execute three kinds of actions:

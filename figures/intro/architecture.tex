@@ -16,23 +16,23 @@
   ttl/.style={font=\bfseries}, chref/.style={font=\small, text=black!55},
   q/.style={font=\itshape\small, text=black!75, align=left}, lbl/.style={font=\footnotesize, text=black!65},
   tlbl/.style={font=\scriptsize, text=black!70},
-  badge/.style={font=\scriptsize\itshape, anchor=north east, fill=white, draw=gray!45, rounded corners=2pt, inner sep=2.5pt},
+  badge/.style={font=\scriptsize, align=right, anchor=north east, fill=white, draw=gray!45, rounded corners=2pt, inner sep=2.5pt},
   flow/.style={-{Stealth[length=2.6mm]}, gray!65, thick},
 ]
 \def\w{16.5}
 \fill[orange!8, draw=orange!55, rounded corners=5pt] (0,1.5) rectangle (\w,-1.5);
-\fill[blue!8,   draw=blue!50,   rounded corners=5pt] (0,-1.9) rectangle (\w,-5.7);
-\fill[teal!9,   draw=teal!55,   rounded corners=5pt] (0,-6.1) rectangle (\w,-9.0);
-\fill[gray!12,  draw=gray!60,   rounded corners=5pt] (0,-9.4) rectangle (\w,-13.2);
+\fill[blue!8,   draw=blue!50,   rounded corners=5pt] (0,-1.9) rectangle (\w,-6.2);
+\fill[teal!9,   draw=teal!55,   rounded corners=5pt] (0,-6.6) rectangle (\w,-10.0);
+\fill[gray!12,  draw=gray!60,   rounded corners=5pt] (0,-10.4) rectangle (\w,-14.2);
 \draw[flow] (1.9,-1.5) -- (1.9,-1.9);
-\draw[flow] (1.9,-5.7) -- (1.9,-6.1);
-\draw[flow] (1.9,-9.0) -- (1.9,-9.4);
+\draw[flow] (1.9,-6.2) -- (1.9,-6.6);
+\draw[flow] (1.9,-10.0) -- (1.9,-10.4);
 
 % ===== L1 Control in Context =====
 \node[ttl, anchor=west] at (0.35,0.85) {Control in Context};
 \node[chref, anchor=west] at (0.35,0.3) {\ref{chapter:cic}};
 \node[q, anchor=west, text width=4.8cm] at (0.35,-0.5) {How do occupants view and use control interfaces?};
-\node[badge] at (\w-0.15,1.42) {Usability};
+\node[badge] at (\w-0.15,1.42) {\textbf{Management plane}\\\itshape usability};
 \node[dlarge] (u1) at (6.2,0.2) {\faIcon{user}};
 \node (c1) at (8.6,0.35) {\devm{smart-bulb}};
 \node[dmed] (c2) at (11.2,0.4) {\faIcon{mobile-alt}};
@@ -49,7 +49,8 @@
 \node[ttl, anchor=west] at (0.35,-2.7) {CoMesh};
 \node[chref, anchor=west] at (0.35,-3.25) {\ref{chapter:comesh}};
 \node[q, anchor=west, text width=4.8cm] at (0.35,-4.1) {Where should control\\logic run?};
-\node[badge] at (\w-0.15,-1.98) {Scalability + Fault Tolerance};
+\node[badge] at (\w-0.15,-1.98) {\textbf{Control plane}\\\itshape scalability \& fault tolerance};
+\begin{scope}[yshift=-0.5cm]
 \node (cspk) at (6.7,-3.6) {\devm{smart-coffee-maker}};
 \node (cbu)  at (7.4,-2.5) {\devm{smart-bulb}};
 \node (ccf)  at (8.1,-4.3) {\devm{smart-speaker}};
@@ -66,12 +67,15 @@
 \node (nh) at (15.2,-3.7) {\tikz{\path(0,0) pic[scale=1.3]{hub};}};
 \draw[red!75, very thick] (14.85,-4.0) -- (15.55,-3.4);
 \node[lbl, text=red!75] at (15.2,-4.35) {no hub};
+\end{scope}
 
 % ===== L3 RASC =====
+\begin{scope}[yshift=-0.5cm]
 \node[ttl, anchor=west] at (0.35,-6.8) {RASC};
 \node[chref, anchor=west] at (0.35,-7.35) {\ref{chapter:rasc}};
 \node[q, anchor=west, text width=5.2cm] at (0.35,-8.2) {How do control and occupants\\observe and program actions?};
-\node[badge] at (\w-0.15,-6.18) {Observability + Programmability};
+\node[badge] at (\w-0.15,-6.18) {\textbf{Action plane}\\\itshape observability \& programmability};
+\begin{scope}[yshift=-0.5cm]
 \node[dlarge] (rc) at (6.8,-7.3) {\faIcon{server}};
 \node[lbl] at (6.8,-7.95) {control};
 \node (rd) at (9.5,-7.3) {\devm{smart-bulb}};
@@ -82,9 +86,11 @@
   \node[circle, fill=teal!60, inner sep=1.7pt] at (\x,-7.3){};
   \node[text=teal!80, font=\footnotesize\bfseries] at (\x,-6.95){\l};}
 \node[lbl] at (13.0,-8.0) {Request $\cdot$ Ack $\cdot$ Start $\cdot$ Complete};
+\end{scope}
+\end{scope}
 
 % ===== L4 Smart Space : same mesh, no coteries =====
-\begin{scope}[yshift=-0.7cm]
+\begin{scope}[yshift=-1.7cm]
 \node[ttl, anchor=west] at (0.35,-9.8) {Smart Space};
 \node[lbl, anchor=west, text width=4.8cm] at (0.35,-11.0) {IoT devices +\\ mesh network +\\ people};
 \node[dlarge] (ehum) at (15.1,-10.6) {\faIcon{user}};
@@ -99,11 +105,8 @@
 \draw[gray!50] (espk)--(ebu) (espk)--(ecf) (ebu)--(efr) (ecf)--(efr) (ecf)--(evac) (efr)--(evac) (efr)--(ecam) (evac)--(ecam) (ecam)--(elk) (ecam)--(emo) (elk)--(emo) (ebu)--(ecam);
 \end{scope}
 \end{tikzpicture}}
-  \caption{\bf \small The three thesis contributions as layers of the smart-space control stack.
-    {\it Control in Context (\emph{usability}) characterizes how occupants view and use control interfaces;
-    CoMesh (\emph{scalability \& fault tolerance}) decentralizes where control logic runs, across overlapping coteries of smart devices and with no central hub;
-    and RASC (\emph{observability \& programmability}) exposes how control logic and occupants observe and program each action's lifecycle (Request--Ack--Start--Complete).
-    All three operate over the same smart space of IoT devices, mesh network, and people.}}
+  \caption{\bf \small Three user-aware planes of smart-space control, designed around the needs of the people who inhabit the space.
+    {\it The \emph{management plane} (Control in Context) characterizes how occupants view and use control interfaces; the \emph{control plane} (CoMesh) decentralizes where control logic runs; and the \emph{action plane} (RASC) exposes each action's Request--Ack--Start--Complete lifecycle. All three operate over a shared smart space of devices, mesh network, and people.}}
   \bigskip
   \label{intro:fig:stack}
 \end{figure}

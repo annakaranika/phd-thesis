@@ -4,9 +4,46 @@
 \subsection{Background and Motivation}
 \label{intro:sec:background}
 
-The Internet of Things (IoT) has evolved well beyond its early phase, with over 10 billion active devices in deployment today, expected to exceed 25 billion by 2030~\cite{IoTstats}. IoT permeates homes, workplaces, farms, Industry 4.0 settings, entertainment venues, and beyond~\cite{IoTfuture, farmbeats, lampropoulos2019internet}. Smart buildings alone account for over 1.26 billion connected devices, with forecasts reaching 4.12 billion by 2030 and an addressable market exceeding \$90 billion~\cite{Memoori, memoori2025iot}. As deployments scale, they increasingly span \emph{mesh networks} of heterogeneous devices---smart devices capable of compute and storage alongside simpler devices that only receive commands---creating densely populated edge computing environments across both residential and commercial settings.
+The Internet of Things (IoT) has evolved well beyond its early phase, with around 21 billion connected devices in deployment as of 2025, forecast to reach roughly 40 billion by 2030~\cite{iotanalytics2025}. IoT permeates homes, workplaces, farms, Industry 4.0 settings, entertainment venues, and beyond~\cite{IoTfuture, farmbeats, lampropoulos2019internet}. Smart commercial buildings alone account for around 2 billion connected devices today, projected to reach 4.12 billion by 2030, with the building IoT market growing from roughly \$64 billion in 2024 to over \$100 billion by 2030~\cite{memoori2025iot}. As deployments scale, they increasingly span \emph{mesh networks} of heterogeneous devices---smart devices capable of compute and storage alongside simpler devices that only receive commands---creating densely populated edge computing environments across both residential and commercial settings; \Cref{comesh:fig:IoTsetting} illustrates three such commercial settings---a smart building, a smart farm, and a smart factory.
 
-\begin{table}[h]
+\begin{figure}[th!]
+    \centering
+    \begin{subfigure}{0.49\linewidth}
+        % \vspace{0.2cm}
+        \centering
+        \includegraphics[width=0.75\textwidth,alt={Illustration of a smart home as a residential edge setting, with networked IoT devices distributed across the home.}]{figures/intro/smart-home.png}
+        \caption{\small {Smart Home.}}
+        \label{comesh:fig:smart-home}
+        \medskip
+    \end{subfigure}
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={Map/floor plan of a smart office building used as a commercial edge setting, showing the layout across which IoT sensors and actuators are deployed.}]{CoMesh/figures/intro/smart-building.pdf}
+        \caption{\small {Smart Building.}}
+        \medskip
+        \label{comesh:fig:smart-building}
+    \end{subfigure}
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,alt={Map of a smart farm used as a commercial edge setting, showing the fields and areas across which IoT sensors and actuators are distributed.}]{CoMesh/figures/intro/smart-farm.pdf}
+        \caption{\small {Smart Farm.}}
+        \label{comesh:fig:smart-farm}
+    \end{subfigure}
+    \begin{subfigure}{0.49\linewidth}
+        % \vspace{0.2cm}
+        \centering
+        \includegraphics[width=\textwidth,alt={Illustration of a smart factory as a commercial edge setting, with networked industrial IoT devices distributed across the production floor.}]{CoMesh/figures/intro/smart-factory.pdf}
+        \caption{\small {Smart Factory.}}
+        \label{comesh:fig:smart-factory}
+    \end{subfigure}
+    \caption{\bf \small Four Edge Settings:
+    (a) Smart Home~\cite{iotanalytics2025}, (b) Smart Building~\cite{Memoori}, (c)  Smart Farm~\cite{SMG21}, (d) Smart  Factory~\cite{lampropoulos2019internet}. {\it The Smart Building map from (b) and Smart Farm from (c) drive the experiments in the CoMesh chapter (\ref{chapter:comesh}). }
+    }
+    \label{comesh:fig:IoTsetting}
+    \bigskip
+\end{figure}
+
+\begin{table}[th!]
     \centering
     \caption{\bf \small Taxonomy of smart spaces addressed in this thesis and the control challenges each presents.}
     \bigskip
@@ -39,7 +76,7 @@ Today's dominant IoT architecture routes every sensor reading and actuation requ
 Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations\allowbreak ---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
 
 \smallskip\noindent\textbf{Thesis Statement.}
-This thesis charts a practical path toward \emph{resilient, people-centric control of smart spaces} by: (i)~decentralizing STA infrastructure to eliminate hub bottlenecks and cloud dependencies; (ii)~grounding design in empirical evidence of how real users navigate the control spectrum; and (iii)~introducing a new control abstraction that brings action-level observability and programmability to IoT automations.
+This thesis is the first to drive network and systems design for smart spaces from the needs of the people who inhabit them. It advances this vision across three \emph{independent} planes of the smart-space stack: the \emph{action plane} (RASC), a control abstraction that brings action-level observability and programmability to IoT automations; the \emph{control plane} (CoMesh), a decentralized infrastructure that removes hub bottlenecks and cloud dependence; and the \emph{management plane} (Control in Context), an empirical account of how real occupants navigate the control spectrum.
 
 
 \subsection{Thesis Contributions}
@@ -47,7 +84,7 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
 
 \input{figures/intro/architecture.tex}
 
-\begin{table}[th]
+\begin{table}[th!]
     \centering
     \caption{\bf \small Contributions of this thesis, their objectives, and evaluation methodology.}
     \bigskip
@@ -56,46 +93,48 @@ This thesis charts a practical path toward \emph{resilient, people-centric contr
     % \tagpdfsetup{table-tagging=false}
     \renewcommand{\arraystretch}{1.3}
     \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{4.2cm}|X|>{\raggedright\arraybackslash}m{4cm}}
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.8cm}|>{\raggedright\arraybackslash}m{2.5cm}|X|>{\raggedright\arraybackslash}m{3cm}}
         \hline
-        \textbf{Work} & \textbf{Objective} & \textbf{Evaluation} \\
+        \textbf{Work} & \textbf{Plane} & \textbf{Objective} & \textbf{Evaluation} \\
         \hline\hline
+        RASC~\cite{rasc}
+        & Action
+        & Observability \& programmability abstraction for IoT device actions
+        & System measurements \\
+        \hline
         CoMesh~\cite{comesh}
+        & Control
         & Decentralized control plane for commercial edge IoT meshes
         & System measurements \\
         \hline
         Control in Context~\cite{controlincontext}
-        & User study of smart home control interface navigation
+        & Management
+        & User study of smart home control-interface navigation
         & HCI analysis \\
-        \hline
-        RASC~\cite{rasc}
-        & Observability abstraction and DAG-aware scheduler for IoT automations
-        & System measurements \\
         \hline
     \end{tabularx}
 \end{table}
 
-This thesis makes three concrete contributions to the control of smart spaces, each tackling a distinct research question (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
+This thesis makes three concrete contributions to the control of smart spaces---one at each plane of the smart-space stack, unified by a single user-aware vision (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
 
 \begin{itemize}
-    \item \textbf{Scalable, fault-tolerant control---infrastructure layer (\ref{chapter:comesh}).}
+    \item \textbf{The action plane: observable, programmable control (\ref{chapter:rasc}).}
+    \emph{How do control and occupants observe and program actions?}
+    The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and occupants without feedback on whether actions have actually taken effect. RASC~\cite{rasc} is a new control abstraction that exposes the full action lifecycle, so that automations---and the people who write them---can observe whether an action started, completed, or failed, and program causal dependencies among actions, all without requiring any device modifications.
+
+    \item \textbf{The control plane: scalable, fault-tolerant control (\ref{chapter:comesh}).}
     \emph{Where should control logic run?}
     Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate operations over large commercial edge IoT meshes: it spreads control across the devices themselves, so the system \emph{scales} to thousands of devices and \emph{tolerates} device failures, churn, and mobility without any central point of failure.
 
-    \item \textbf{Usable control interfaces---management layer (\ref{chapter:cic}).}
+    \item \textbf{The management plane: usable control interfaces (\ref{chapter:cic}).}
     \emph{How do occupants view and use control interfaces?}
-    This is a \emph{management-plane} question, distinct from CoMesh's infrastructure-layer question.
     Smart home users interact through a spectrum of command interfaces---from pressing a physical button on a device, to a per-brand mobile app, to a centralized hub application such as Google Home or Alexa that routes all commands through a cloud backend.
     These represent different interface architectures, each with different latency, reliability, and failure-mode characteristics.
     System designers have long assumed centralized hub interfaces are users' primary mode, yet real behavior is far more nuanced.
     Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this interface spectrum in practice, grounding future interface and system design in observed behavior rather than assumptions.
-
-    \item \textbf{Observable, programmable control---middleware layer (\ref{chapter:rasc}).}
-    \emph{How do control and occupants observe and program actions?}
-    The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and occupants without feedback on whether actions have actually taken effect. RASC~\cite{rasc} is a new control middleware that exposes the full action lifecycle, so that automations---and the people who write them---can observe whether an action started, completed, or failed, and program causal dependencies among actions, all without requiring any device modifications.
 \end{itemize}
 
-These contributions are independent and complementary: none subsumes another. Together they address the IoT control stack at three distinct layers---the infrastructure layer (where control logic runs), the management-interface layer (how occupants view and use control interfaces), and the control-primitive layer (how actions are observed and programmed). \Cref{intro:fig:stack} situates each contribution accordingly.
+These are independent contributions unified by a single vision---user-aware design---rather than a pipeline: no insight ``flows'' from one to the next, and none subsumes another. Together they make three planes of the smart-space stack---the \emph{action plane} (how actions are observed and programmed), the \emph{control plane} (where control logic runs), and the \emph{management plane} (how occupants view and use control interfaces)---resilient, observable, and built around the people who inhabit the space. \Cref{intro:fig:stack} situates each contribution accordingly.
 
 
 \subsubsection{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
