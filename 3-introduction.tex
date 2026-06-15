@@ -76,7 +76,7 @@ Today's dominant IoT architecture routes every sensor reading and actuation requ
 Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations\allowbreak ---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
 
 \smallskip\noindent\textbf{Thesis Statement.}
-This thesis is the first to drive network and systems design for smart spaces from the needs of the people who inhabit them. It advances this vision across three \emph{independent} planes of the smart-space stack: the \emph{action plane} (RASC), a control abstraction that brings action-level observability and programmability to IoT automations; the \emph{control plane} (CoMesh), a decentralized infrastructure that removes hub bottlenecks and cloud dependence; and the \emph{management plane} (Control in Context), an empirical account of how real occupants navigate the control spectrum.
+This thesis is the first to drive network and systems design for smart spaces from the needs of the people who inhabit them. It advances this vision across three \emph{independent} planes of the smart-space stack: the \emph{device actuation plane} (RASC), a control abstraction that brings action-level observability and programmability to IoT automations; the \emph{peer coordination plane} (CoMesh), a decentralized infrastructure that removes hub bottlenecks and cloud dependence; and the \emph{human interaction plane} (Control in Context), an empirical account of how real occupants navigate the control spectrum.
 
 
 \subsection{Thesis Contributions}
@@ -98,17 +98,17 @@ This thesis is the first to drive network and systems design for smart spaces fr
         \textbf{Work} & \textbf{Plane} & \textbf{Objective} & \textbf{Evaluation} \\
         \hline\hline
         RASC~\cite{rasc}
-        & Action
+        & Device actuation
         & Observability \& programmability abstraction for IoT device actions
         & System measurements \\
         \hline
         CoMesh~\cite{comesh}
-        & Control
+        & Peer coordination
         & Decentralized control plane for commercial edge IoT meshes
         & System measurements \\
         \hline
         Control in Context~\cite{controlincontext}
-        & Management
+        & Human interaction
         & User study of smart home control-interface navigation
         & HCI analysis \\
         \hline
@@ -118,15 +118,15 @@ This thesis is the first to drive network and systems design for smart spaces fr
 This thesis makes three concrete contributions to the control of smart spaces---one at each plane of the smart-space stack, unified by a single user-aware vision (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
 
 \begin{itemize}
-    \item \textbf{The action plane: observable, programmable control (\ref{chapter:rasc}).}
+    \item \textbf{The device actuation plane: observable, programmable control (\ref{chapter:rasc}).}
     \emph{How do control and occupants observe and program actions?}
     The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and occupants without feedback on whether actions have actually taken effect. RASC~\cite{rasc} is a new control abstraction that exposes the full action lifecycle, so that automations---and the people who write them---can observe whether an action started, completed, or failed, and program causal dependencies among actions, all without requiring any device modifications.
 
-    \item \textbf{The control plane: scalable, fault-tolerant control (\ref{chapter:comesh}).}
+    \item \textbf{The peer coordination plane: scalable, fault-tolerant control (\ref{chapter:comesh}).}
     \emph{Where should control logic run?}
     Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate operations over large commercial edge IoT meshes: it spreads control across the devices themselves, so the system \emph{scales} to thousands of devices and \emph{tolerates} device failures, churn, and mobility without any central point of failure.
 
-    \item \textbf{The management plane: usable control interfaces (\ref{chapter:cic}).}
+    \item \textbf{The human interaction plane: usable control interfaces (\ref{chapter:cic}).}
     \emph{How do occupants view and use control interfaces?}
     Smart home users interact through a spectrum of command interfaces---from pressing a physical button on a device, to a per-brand mobile app, to a centralized hub application such as Google Home or Alexa that routes all commands through a cloud backend.
     These represent different interface architectures, each with different latency, reliability, and failure-mode characteristics.
@@ -134,7 +134,7 @@ This thesis makes three concrete contributions to the control of smart spaces---
     Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this interface spectrum in practice, grounding future interface and system design in observed behavior rather than assumptions.
 \end{itemize}
 
-These are independent contributions unified by a single vision---user-aware design---rather than a pipeline: no insight ``flows'' from one to the next, and none subsumes another. Together they make three planes of the smart-space stack---the \emph{action plane} (how actions are observed and programmed), the \emph{control plane} (where control logic runs), and the \emph{management plane} (how occupants view and use control interfaces)---resilient, observable, and built around the people who inhabit the space. \Cref{intro:fig:stack} situates each contribution accordingly.
+These are independent contributions unified by a single vision---user-aware design---rather than a pipeline: no insight ``flows'' from one to the next, and none subsumes another. Together they make three planes of the smart-space stack---the \emph{device actuation plane} (how actions are observed and programmed), the \emph{peer coordination plane} (where control logic runs), and the \emph{human interaction plane} (how occupants view and use control interfaces)---resilient, observable, and built around the people who inhabit the space. \Cref{intro:fig:stack} situates each contribution accordingly.
 
 
 \subsubsection{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
