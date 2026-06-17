@@ -1,26 +1,27 @@
 \abstract{
 The Internet of Things has instrumented billions of homes, buildings, farms, and factories
-with smart devices, yet today's platforms fail to meet the needs of the people who rely on
-them. Control logic is concentrated in vendor clouds and hubs that add latency, cost, and
-single points of failure; fire-and-forget RPCs leave developers and occupants without
-feedback on whether actions take effect; and users navigate a rich control spectrum with no
-structured support. This thesis argues that smart-space control should be designed around the
-needs of the people who inhabit the space, across three planes of the smart-space
-stack---the \emph{device actuation}, \emph{peer coordination}, and \emph{human interaction} planes.
+with smart devices, yet today's platforms fail to meet smart space users' needs. Control logic is concentrated in vendor clouds and hubs that add latency, cost, and
+single points of failure; fire-and-forget remote procedure calls (RPCs) leave developers and
+occupants without feedback on whether actions take effect; and users navigate a control interface
+spectrum with no structured support. This thesis argues that smart-space control should be
+designed around the needs of the people who occupy the space, across three planes of the
+smart-space stack---the \emph{device action}, \emph{smart-space automation}, and
+\emph{human interaction} planes.
 
-Our work straddles distributed systems and human-computer interaction. On the
-\emph{device actuation plane}, RASC (Request-Ack-Start-Complete) replaces fire-and-forget RPC with an
-abstraction that exposes the full action lifecycle atop existing platforms, so control logic
-and occupants can observe and program what their devices do; proofs and experiments confirm
-fast, low-overhead lifecycle detection and large scheduling gains over state-of-the-art
-baselines. On the \emph{peer coordination plane}, CoMesh is the first fully decentralized, hub-less
-Sense-Trigger-Actuate control plane for large commercial edge IoT meshes; using group-based
-coordination with zero-message exchange and locality-sensitive hashing, it keeps control
-local, scalable, and fault-tolerant---removing the hub bottlenecks and cloud dependency that
-cost occupants latency, money, and uptime. On the \emph{human interaction plane}, Control in Context,
-a study of smart home owners (survey and interviews), shows that control is a fluid,
-situational process shaped by reliability and cognitive load rather than ecosystem
-boundaries, grounding interface design in how people actually behave.
+We propose new abstractions and insights at each of these three planes, spanning distributed
+systems and human-computer interaction. On the \emph{device action plane}, RASC
+(Request-Ack-Start-Complete) replaces fire-and-forget RPC with an abstraction that exposes the
+full action lifecycle atop existing platforms, so automations and occupants can observe and
+program what their devices do; proofs and experiments confirm fast, low-overhead lifecycle
+detection and large scheduling gains over state-of-the-art baselines. On the
+\emph{smart-space automation plane}, CoMesh removes the hub bottlenecks, cloud dependency, and
+outages of today's centralized control: it is the first fully decentralized, hub-less control
+plane for large commercial edge IoT meshes, using group-based coordination with zero-message
+exchange and locality-sensitive hashing to keep control local, scalable, and fault-tolerant.
+On the \emph{human interaction plane}, we perform a study of real smart home owners via
+surveys and interviews, and derive insights showing that control is a fluid, situational
+process shaped by reliability and cognitive load rather than ecosystem boundaries, motivating
+how future smart-space operating systems should actually be built.
 Though independent, the three contributions share one vision: each makes a plane of
 smart-space control resilient, observable, and built around real user needs.
 }

@@ -4,31 +4,25 @@
 \subsection{Summary of Contributions}
 \label{conc:sec:summary}
 
-This thesis has advanced a single vision---designing the control of smart spaces (environments instrumented with IoT devices for automated sensing and actuation) around the needs of the people who inhabit them---across three \emph{independent} planes of the smart-space stack: the \emph{device actuation plane}, the \emph{peer coordination plane}, and the \emph{human interaction plane}. The three contributions are unified by this vision, not by a flow of insight from one to the next; together they make smart-space control decentralized, observable, and grounded in how real occupants actually live with their devices.
+This thesis has advanced a single vision---designing the control of smart spaces (environments instrumented with IoT devices for automated sensing and actuation) around the needs of the people who inhabit them---across three \emph{independent} planes of the smart-space stack: the \emph{device action plane}, the \emph{smart-space automation plane}, and the \emph{human interaction plane}. The three contributions are unified by this vision, not by a flow of insight from one to the next; together they make smart-space control decentralized, observable, and grounded in how real occupants actually live with their devices.
 
 \begin{enumerate}
 
-    \item \textbf{The device actuation plane---RASC (\ref{chapter:rasc})} introduces a new abstraction for IoT device control that closes the gap between the fire-and-forget RPC primitive and the rich action-progress information that users and developers need. RASC exposes four lifecycle states---Request, Acknowledgment, Start, and Complete---and its implementation (Rascal) adds an adaptive polling strategy and DAG-aware scheduling layer atop existing IoT platforms without requiring device modifications. Evaluation on real smart home automation workloads shows that RASC detects action completion within 2--16 seconds over 90\% of cases, and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
+    \item \textbf{The device action plane---RASC (\ref{chapter:rasc})} introduces a new abstraction for IoT device control that closes the gap between the fire-and-forget RPC primitive and the rich action-progress information that users and developers need. RASC exposes four lifecycle states---Request, Acknowledgment, Start, and Complete---and its implementation (Rascal) adds an adaptive polling strategy and DAG-aware scheduling layer atop existing IoT platforms without requiring device modifications. Evaluation on real smart home automation workloads shows that RASC detects action completion within 2--16 seconds over 90\% of cases, and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
 
-    \item \textbf{The peer coordination plane---CoMesh (\ref{chapter:comesh})} presents the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate (STA) operations in large commercial edge IoT meshes. By organizing devices into self-managing coteries that use zero-message exchange, quorum-based agreement, epoch-based migration, and locality-sensitive hashing, CoMesh eliminates the single-hub bottleneck and cloud dependency that limit today's deployments. Formal analysis and Raspberry Pi experiments confirm its safety, liveness, scalability, and fault-tolerance. CoMesh demonstrates that resilient, edge-first control of large smart spaces is not only theoretically sound but practically deployable.
+    \item \textbf{The smart-space automation plane---CoMesh (\ref{chapter:comesh})} presents the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate (STA) operations in large commercial edge IoT meshes. By organizing devices into self-managing coteries that use zero-message exchange, quorum-based agreement, epoch-based migration, and locality-sensitive hashing, CoMesh eliminates the single-hub bottleneck and cloud dependency that limit today's deployments. Formal analysis and Raspberry Pi experiments confirm its safety, liveness, scalability, and fault-tolerance. CoMesh demonstrates that resilient, edge-first control of large smart spaces is not only theoretically sound but practically deployable.
 
     \item \textbf{The human interaction plane---Control in Context (\ref{chapter:cic})} provides the first empirical characterization of how smart home users navigate the full spectrum of control schemes---from physical per-device interaction to proxy-based centralized hubs---in the context of everyday tasks, device failures, and evolving home setups. Through a survey of $N=60$ smart home owners and semi-structured interviews with $N=8$ participants, this work reveals that control is a fluid, reflective process guided by situational factors rather than ecosystem boundaries. The findings expose the mismatch between platform design assumptions and real user behavior, and provide grounded design principles for future systems that treat the user---not the vendor ecosystem---as the center of design.
 
 \end{enumerate}
 
-Collectively, this work turns three planes of smart-space control---the device actuation plane (how actions are observed and programmed), the peer coordination plane (where control logic runs), and the human interaction plane (how occupants interact with it)---from sources of fragility and frustration into design targets shaped by the needs of the people who inhabit the space.
+Collectively, this work turns three planes of smart-space control---the device action plane (how actions are observed and programmed), the smart-space automation plane (where control logic runs), and the human interaction plane (how occupants interact with it)---from sources of fragility and frustration into design targets shaped by the needs of the people who inhabit the space.
 
 
 \subsection{Future Research Directions}
 \label{conc:sec:future}
 
 Each contribution opens new research directions; we outline the most promising below, several of which we are actively pursuing.
-
-
-\subsubsection{Toward User-Centered Smart-Home Platforms}
-\label{conc:sec:user-platforms}
-
-Control in Context's findings open a research agenda for the next generation of smart-home platforms (or ``home OSes'')---systems designed around how people actually exercise control rather than around vendor ecosystems. Promising directions include: (i)~surfacing \emph{capability ceilings} and providing principled \emph{bridges} to device-local controls when a hub cannot reach a feature; (ii)~making \emph{provenance and interoperability legible}---attributing who or what executed an action and running pre-flight ``weakest-link'' checks before multi-brand routines; (iii)~a \emph{brand-agnostic integration layer} that adapts to whatever each vendor exposes rather than assuming full cooperation; (iv)~treating routines and devices as \emph{shared resources}, with role-based access and change histories for multi-user homes; and (v)~explicitly \emph{supporting transitions} along the control spectrum rather than locking users into a single scheme. A complementary open question is a principled framework for \emph{when} a deployment should decentralize its control plane, given device count, churn, latency, and privacy constraints.
 
 
 \subsubsection{Richer Observability and Controllability (RASC++)}
@@ -43,6 +37,12 @@ RASC opens the black-box RPC into a \emph{gray-box} abstraction with visibility 
 RASC's core insight---that long-running distributed actions have meaningful intermediate states callers should observe---applies well beyond IoT. RPCs, microservice invocations, and workflow steps share the same request/acknowledge/start/complete structure, so RASC and its DAG-aware scheduling could serve as a general alternative to fire-and-forget RPC in distributed databases, cloud workflow orchestration, and robotics pipelines.
 
 
+\subsubsection{Toward User-Centered Smart-Home Platforms}
+\label{conc:sec:user-platforms}
+
+Control in Context's findings open a research agenda for the next generation of smart-home platforms (``home operating systems'')---systems designed around how people actually exercise control rather than around vendor ecosystems. Promising directions include: (i)~surfacing \emph{capability ceilings} and providing principled \emph{bridges} to device-local controls when a hub cannot reach a feature; (ii)~making \emph{provenance and interoperability transparent}---attributing who or what executed an action and running pre-flight ``weakest-link'' checks before multi-brand routines; (iii)~a \emph{brand-agnostic integration layer} that adapts to whatever each vendor exposes rather than assuming full cooperation; (iv)~treating routines and devices as \emph{shared resources}, with role-based access and change histories for multi-user homes; and (v)~explicitly \emph{supporting transitions} along the control spectrum rather than locking users into a single scheme. A complementary open question is a principled framework for \emph{when} a deployment should decentralize its control plane, given device count, churn, latency, and privacy constraints. More than our own next step, we see this as a call to the systems and HCI communities to build smart-space operating systems that explicitly address these concerns.
+
+
 \subsubsection{LLM-Assisted and Declarative Automation Authoring}
 \label{conc:sec:llm-automation}
 
@@ -52,4 +52,4 @@ RASC's structured action model is a natural substrate for higher-level authoring
 \subsubsection{Language-Model Inference at the Smart-Space Edge}
 \label{conc:sec:lmsoniot}
 
-Capable small language models now run on commodity hardware, enabling on-device natural-language interaction without the cloud. Building on CoMesh's edge-native infrastructure and RASC's observability, future work could distribute language-model inference across the heterogeneous, often-idle devices already present in a smart space~\cite{hyperedge}---adaptively choosing pipeline, tensor, or mixed-mode placement to fit tight memory and wireless budgets---for low-latency natural-language control that survives cloud or ISP outages.
+Capable small language models now run on commodity hardware, enabling on-device natural-language interaction without the cloud. Building on RASC's observability and CoMesh's edge-native infrastructure, future work could distribute language-model inference across the heterogeneous, often-idle devices already present in a smart space~\cite{hyperedge}---adaptively choosing pipeline, tensor, or mixed-mode placement to fit tight memory and wireless budgets---for low-latency natural-language control that survives cloud or Internet service provider outages.

@@ -49,7 +49,7 @@
 \node[ttl, anchor=west] at (0.35,-2.7) {CoMesh};
 \node[chref, anchor=west] at (0.35,-3.25) {\ref{chapter:comesh}};
 \node[q, anchor=west, text width=4.8cm] at (0.35,-4.1) {Where should control\\logic run?};
-\node[badge] at (\w-0.15,-1.98) {\textbf{Peer coordination plane}\\\itshape scalability \& fault tolerance};
+\node[badge] at (\w-0.15,-1.98) {\textbf{Smart-space automation plane}\\\itshape scalability \& fault tolerance};
 \begin{scope}[yshift=-0.5cm]
 \node (cspk) at (6.7,-3.6) {\devm{smart-coffee-maker}};
 \node (cbu)  at (7.4,-2.5) {\devm{smart-bulb}};
@@ -73,8 +73,8 @@
 \begin{scope}[yshift=-0.5cm]
 \node[ttl, anchor=west] at (0.35,-6.8) {RASC};
 \node[chref, anchor=west] at (0.35,-7.35) {\ref{chapter:rasc}};
-\node[q, anchor=west, text width=5.2cm] at (0.35,-8.2) {How do control and occupants\\observe and program actions?};
-\node[badge] at (\w-0.15,-6.18) {\textbf{Device actuation plane}\\\itshape observability \& programmability};
+\node[q, anchor=west, text width=5.2cm] at (0.35,-8.2) {How do automations and occupants\\observe and program actions?};
+\node[badge] at (\w-0.15,-6.18) {\textbf{Device action plane}\\\itshape observability \& programmability};
 \begin{scope}[yshift=-0.5cm]
 \node[dlarge] (rc) at (6.8,-7.3) {\faIcon{server}};
 \node[lbl] at (6.8,-7.95) {control};
@@ -106,7 +106,7 @@
 \end{scope}
 \end{tikzpicture}}
   \caption{\bf \small Three user-aware planes of smart-space control, designed around the needs of the people who inhabit the space.
-    {\it The \emph{human interaction plane} (Control in Context) characterizes how occupants view and use control interfaces; the \emph{peer coordination plane} (CoMesh) decentralizes where control logic runs; and the \emph{device actuation plane} (RASC) exposes each action's Request--Ack--Start--Complete lifecycle. All three operate over a shared smart space of devices, mesh network, and people.}}
+    {\it The \emph{device action plane} (RASC) exposes each action's Request--Ack--Start--Complete lifecycle; the \emph{smart-space automation plane} (CoMesh) decentralizes where control logic runs; and the \emph{human interaction plane} (Control in Context) characterizes how occupants view and use control interfaces. All three operate over a shared smart space of devices, mesh network, and people.}}
   \bigskip
   \label{intro:fig:stack}
 \end{figure}

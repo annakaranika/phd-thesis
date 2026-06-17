@@ -53,6 +53,10 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
     % \setlength{\tabcolsep}{1pt} % default is 6pt
     \tagpdfsetup{table/header-rows={1},table/header-columns={1,2}}
     % \tagpdfsetup{table-tagging=false}
+    \captionof{table}
+    {\bf \small Desired Properties. {\it  $\sim$ means non-trivial design needed.}
+    }
+    \bigskip
     \begin{tabular}{|c|l||c|c|c|c|}
         \hline
         \textbf{Property} & \textbf{Goal} & \textbf{\RPCa} & \textbf{\RPCs} & \textbf{\RPCc} & \textbf{\abstraction} \\ \hline \hline
@@ -61,9 +65,6 @@ Today's RPC implementations are {\it forced to choose}  mapping of the Reply to 
         \multirow{2}{*}{\it Programmability} & Diverse dependencies (\Cref{rasc:sec:causality}) & \xmark & \xmark & \xmark & \cmark \\ \cline{2-6}
         & Dynamic scheduling (\Cref{rasc:sec:dyn-sched}) & \xmark & \xmark & $\sim$   & \cmark \\ \hline
     \end{tabular}
-    \captionof{table}
-    {\bf \small Desired Properties. {\it  $\sim$ means non-trivial design needed.}
-    }
     \label{rasc:tab:properties}
 \end{table}
 

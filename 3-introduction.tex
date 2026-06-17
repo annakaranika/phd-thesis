@@ -56,7 +56,7 @@ The Internet of Things (IoT) has evolved well beyond its early phase, with aroun
         \midrule
         Residential home \par (10s of devices)   & Navigating the control spectrum; \par debugging silent automation failures & \ref{chapter:cic}, \par \ref{chapter:rasc} \\[2pt]
         \midrule
-        Commercial building \par (100s--1000s)   & Hub overload; cloud dependency; \par STA scalability                       & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\[2pt]
+        Commercial building \par (100s--1000s)   & Hub overload; cloud dependency; \par control scalability                   & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\[2pt]
         \midrule
         Smart farm \par (distributed, outdoors)  & Connectivity gaps; \par unattended local operation                         & \ref{chapter:comesh}, \par \ref{chapter:rasc} \\[2pt]
         \midrule
@@ -67,16 +67,16 @@ The Internet of Things (IoT) has evolved well beyond its early phase, with aroun
 
 We use the term \emph{smart space} to refer to any physical environment instrumented with IoT devices for automated sensing and actuation. Smart spaces span a wide range of scales and deployment contexts---from a residential home with a few dozen consumer devices to a commercial smart building with hundreds or thousands of sensors and actuators, to smart farms and industrial factories with large physical footprints. \Cref{intro:tab:taxonomy} provides a taxonomy of the smart space types addressed in this thesis.
 
-Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. STA workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
+Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. These workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
 
-Modern IoT stacks must be evaluated through two complementary lenses. \textbf{System-facing metrics}---latency, reliability, fault-tolerance, privacy, and cost-efficiency---ensure that automations trigger promptly, survive device or network failures, and protect sensitive telemetry. \textbf{User-facing metrics}---fine-grained control, observability, debuggability, and overall usability---determine whether occupants can understand and shape the behavior of their increasingly complex environments. Together, these metrics define the standard against which any scalable, people-centric IoT platform must be evaluated. This thesis contributes to both dimensions, combining systems design and implementation with empirical user research.
+Modern IoT stacks must be evaluated through two complementary lenses. \textbf{System-facing metrics}---latency, reliability, fault-tolerance, privacy, and cost-efficiency---ensure that automations trigger promptly, survive device or network failures, and protect sensitive telemetry. \textbf{User-facing metrics}---fine-grained control, observability, debuggability, and overall usability---determine whether occupants can understand and shape the behavior of their increasingly complex environments. Together, these metrics define the standard against which any scalable, human-centered IoT platform must be evaluated. This thesis contributes to both dimensions, combining systems design and implementation with empirical human-computer interaction (HCI) research.
 
 Today's dominant IoT architecture routes every sensor reading and actuation request through a vendor cloud backend, which creates three intertwined pain points. First, \textbf{privacy risks} arise because raw telemetry must transit and persist in third-party infrastructure; keeping control logic on-premise eliminates this exposure entirely~\cite{HACloudless, csa2025matter}. In high-security industrial settings---semiconductor fabs and pharmaceutical facilities, for instance---operators routinely prohibit any data from leaving the premises to protect proprietary processes, a constraint cloud-centric platforms cannot satisfy by design. Second, \textbf{reliability degrades} when every automation depends on an Internet path, particularly during network or cloud service outages~\cite{gcloud-down1}. Third, \textbf{cost scales unfavorably}: servicing 500 devices that ping once per second can incur fees approaching \$2{,}500 per month on mainstream IoT cloud tiers~\cite{AzureIoTHub}, while local control removes usage-based bills altogether. Together, these pressures make edge-native, on-premise control an attractive foundation for smart environments that must be private, dependable, and economically sustainable. Crucially, the hardware needed to realize this vision is already in place: smart devices in both residential and commercial settings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}, offering a ready substrate for distributed control logic without requiring any additional infrastructure investment.
 
 Beyond infrastructure placement, the programmability of smart spaces remains a fundamental challenge. IoT automations---routines that chain sensor readings to device actuations\allowbreak ---are central to how occupants live with their environments. Yet the tools available to both users and developers today are impoverished in two ways. First, users navigate a rich spectrum of control options, from physical device interfaces to centralized proxy-based hubs, with limited system support for moving between them fluidly. Platforms today are designed around vendor ecosystems and commercial integration goals, not around the actual, context-dependent ways people rely on their devices. Second, the control primitive underlying virtually all automation platforms---the Remote Procedure Call (RPC)---gives no feedback on whether a physical action has actually taken effect~\cite{birrell1984implementing}. This leaves both users and developers without the observability needed to build reliable, debuggable workflows. Closing these gaps is the central challenge this thesis addresses.
 
 \smallskip\noindent\textbf{Thesis Statement.}
-This thesis is the first to drive network and systems design for smart spaces from the needs of the people who inhabit them. It advances this vision across three \emph{independent} planes of the smart-space stack: the \emph{device actuation plane} (RASC), a control abstraction that brings action-level observability and programmability to IoT automations; the \emph{peer coordination plane} (CoMesh), a decentralized infrastructure that removes hub bottlenecks and cloud dependence; and the \emph{human interaction plane} (Control in Context), an empirical account of how real occupants navigate the control spectrum.
+This thesis is the first to drive network and systems design for smart spaces attuned to the needs of the people who inhabit them, advancing this vision across three \emph{independent} planes of the smart-space stack. At the \emph{device action plane}, RASC introduces a control abstraction that brings action-level observability and programmability to IoT automations. At the \emph{smart-space automation plane}, CoMesh provides a decentralized infrastructure that removes hub bottlenecks and cloud dependence. Finally, at the \emph{human interaction plane}, Control in Context contributes an empirical account of how and why real occupants navigate the control spectrum.
 
 
 \subsection{Thesis Contributions}
@@ -93,24 +93,27 @@ This thesis is the first to drive network and systems design for smart spaces fr
     % \tagpdfsetup{table-tagging=false}
     \renewcommand{\arraystretch}{1.3}
     \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.8cm}|>{\raggedright\arraybackslash}m{2.5cm}|X|>{\raggedright\arraybackslash}m{3cm}}
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}|>{\raggedright\arraybackslash}m{2.3cm}|X|>{\raggedright\arraybackslash}m{2.6cm}|>{\raggedright\arraybackslash}m{1.9cm}}
         \hline
-        \textbf{Work} & \textbf{Plane} & \textbf{Objective} & \textbf{Evaluation} \\
+        \textbf{Work} & \textbf{Plane} & \textbf{Objective} & \textbf{Evaluation} & \textbf{Venue} \\
         \hline\hline
         RASC~\cite{rasc}
-        & Device actuation
-        & Observability \& programmability abstraction for IoT device actions
-        & System measurements \\
+        & Device action
+        & {\small Observability \& programmability abstraction for IoT device actions}
+        & System\par measurements
+        & {\footnotesize USENIX\par NSDI 2026} \\
         \hline
         CoMesh~\cite{comesh}
-        & Peer coordination
-        & Decentralized control plane for commercial edge IoT meshes
-        & System measurements \\
+        & Smart-space automation
+        & {\small Scalable \& fault-tolerant abstraction for commercial edge IoT mesh automations}
+        & System\par measurements
+        & {\footnotesize IEEE\par TNSM 2026} \\
         \hline
         Control in Context~\cite{controlincontext}
         & Human interaction
-        & User study of smart home control-interface navigation
-        & HCI analysis \\
+        & {\small Smart home control-interface navigation framework}
+        & HCI analysis
+        & {\footnotesize ACM\par CHI 2026} \\
         \hline
     \end{tabularx}
 \end{table}
@@ -118,13 +121,13 @@ This thesis is the first to drive network and systems design for smart spaces fr
 This thesis makes three concrete contributions to the control of smart spaces---one at each plane of the smart-space stack, unified by a single user-aware vision (\Cref{intro:fig:stack}). It combines systems design and implementation with empirical user research. \Cref{intro:tab:contributions} summarizes the three contributions and their evaluation methodology.
 
 \begin{itemize}
-    \item \textbf{The device actuation plane: observable, programmable control (\ref{chapter:rasc}).}
-    \emph{How do control and occupants observe and program actions?}
+    \item \textbf{The device action plane: observable, programmable control (\ref{chapter:rasc}).}
+    \emph{How do automations and occupants observe and program actions?}
     The RPC primitive underlying all IoT platforms is fire-and-forget, leaving developers and occupants without feedback on whether actions have actually taken effect. RASC~\cite{rasc} is a new control abstraction that exposes the full action lifecycle, so that automations---and the people who write them---can observe whether an action started, completed, or failed, and program causal dependencies among actions, all without requiring any device modifications.
 
-    \item \textbf{The peer coordination plane: scalable, fault-tolerant control (\ref{chapter:comesh}).}
+    \item \textbf{The smart-space automation plane: scalable, fault-tolerant control (\ref{chapter:comesh}).}
     \emph{Where should control logic run?}
-    Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for Sense-Trigger-Actuate operations over large commercial edge IoT meshes: it spreads control across the devices themselves, so the system \emph{scales} to thousands of devices and \emph{tolerates} device failures, churn, and mobility without any central point of failure.
+    Today's platforms concentrate control logic in a central hub or cloud, creating bottlenecks, single points of failure, and cloud dependency. CoMesh~\cite{comesh} is the first fully decentralized, hub-less control plane for large commercial edge IoT meshes: it spreads control across the devices themselves, so the system \emph{scales} to thousands of devices and \emph{tolerates} device failures, churn, and mobility without any central point of failure.
 
     \item \textbf{The human interaction plane: usable control interfaces (\ref{chapter:cic}).}
     \emph{How do occupants view and use control interfaces?}
@@ -134,13 +137,27 @@ This thesis makes three concrete contributions to the control of smart spaces---
     Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this interface spectrum in practice, grounding future interface and system design in observed behavior rather than assumptions.
 \end{itemize}
 
-These are independent contributions unified by a single vision---user-aware design---rather than a pipeline: no insight ``flows'' from one to the next, and none subsumes another. Together they make three planes of the smart-space stack---the \emph{device actuation plane} (how actions are observed and programmed), the \emph{peer coordination plane} (where control logic runs), and the \emph{human interaction plane} (how occupants view and use control interfaces)---resilient, observable, and built around the people who inhabit the space. \Cref{intro:fig:stack} situates each contribution accordingly.
+These are independent contributions unified by a single vision---user-aware design---rather than a pipeline: no insight ``flows'' from one to the next, and none subsumes another. Together they make three planes of the smart-space stack---the \emph{device action plane} (how actions are observed and programmed), the \emph{smart-space automation plane} (where control logic runs), and the \emph{human interaction plane} (how occupants view and use control interfaces)---resilient, observable, and built around the people who inhabit the space. \Cref{intro:fig:stack} situates each contribution accordingly.
+
+
+\subsubsection{RASC: Enhancing Observability and Programmability in Smart Spaces}
+\label{intro:sec:rasc}
+
+IoT platforms today rely on RPC, a fire-and-forget primitive that provides no feedback on whether a physical action has started, completed, or failed. This leaves both users and developers without the observability needed to build reliable routines, reason about device state, or diagnose failures. We introduce RASC~\cite{rasc} (Request-Ack-Start-Complete), a new abstraction for IoT device control that exposes the full lifecycle of every action, and Rascal, its implementation atop existing RPC-based IoT platforms.
+
+RASC's contributions are:
+\begin{itemize}
+    \item The RASC abstraction, which extends RPC with four lifecycle states---Request, Acknowledgment, Start, and Complete---enabling both users and higher-level automation systems to reason about action progress in real time.
+    \item An adaptive polling strategy that detects when actions start, complete, or fail with minimal overhead, without requiring any device-side modifications.
+    \item Scheduling policies over a directed acyclic graph (DAG) of actions that express causal dependencies, enabling routines that react dynamically to action outcomes rather than relying on fixed time windows.
+    \item Integration with Home Assistant via Rascal, a widely used open-source smart home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
+\end{itemize}
 
 
 \subsubsection{CoMesh: A Decentralized Control Plane for Commercial Edge IoT Meshes}
 \label{intro:sec:comesh}
 
-Large commercial edge deployments---smart buildings, farms, and factories---rely on IoT mesh networks spanning hundreds to thousands of devices. Existing approaches route all Sense-Trigger-Actuate (STA) coordination through a central hub or cloud, creating a single point of failure that drives outages, privacy exposure, and prohibitive cloud costs at scale. We present CoMesh~\cite{comesh}, the first fully decentralized, hub-less control plane for STA operations over large commercial edge IoT meshes. CoMesh organizes smart devices into overlapping subgroups called \emph{coteries} that collectively monitor devices and manage routines using zero-message exchange protocols, quorum-based agreement, epoch-based migration, and locality-sensitive hashing (LSH). The result is a self-healing architecture that adapts to device failures, churn, and mobility without human intervention.
+Today's smart spaces route all STA coordination through a central hub or cloud---a single point of failure that drives outages, exposes private telemetry, and incurs prohibitive cloud costs, and that does not scale to the hundreds-to-thousands of devices in commercial edge deployments such as smart buildings, farms, and factories. We present CoMesh~\cite{comesh}, the first fully decentralized, hub-less control plane for STA operations over large commercial edge IoT meshes. CoMesh organizes smart devices into overlapping subgroups called \emph{coteries} that collectively monitor devices and manage routines using zero-message exchange protocols, quorum-based agreement, epoch-based migration, and locality-sensitive hashing (LSH). The result is a self-healing architecture that adapts to device failures, churn, and mobility without human intervention.
 
 CoMesh's contributions are:
 \begin{itemize}
@@ -164,37 +181,39 @@ Control in Context's contributions are:
 \end{itemize}
 
 
-\subsubsection{RASC: Enhancing Observability and Programmability in Smart Spaces}
-\label{intro:sec:rasc}
-
-IoT platforms today rely on RPC, a fire-and-forget primitive that provides no feedback on whether a physical action has started, completed, or failed. This leaves both users and developers without the observability needed to build reliable routines, reason about device state, or diagnose failures. We introduce RASC~\cite{rasc} (Request-Ack-Start-Complete), a new abstraction for IoT device control that exposes the full lifecycle of every action, and Rascal, its implementation atop existing RPC-based IoT platforms.
-
-RASC's contributions are:
-\begin{itemize}
-    \item The RASC abstraction, which extends RPC with four lifecycle states---Request, Acknowledgment, Start, and Complete---enabling both users and higher-level automation systems to reason about action progress in real time.
-    \item An adaptive polling strategy that detects when actions start, complete, or fail with minimal overhead, without requiring any device-side modifications.
-    \item DAG-aware scheduling policies that express causal dependencies among actions, enabling routines that react dynamically to action outcomes rather than relying on fixed time windows.
-    \item Integration with Home Assistant via Rascal, a widely used open-source smart home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
-\end{itemize}
-
-
 \subsection{Broader Impact}
 \label{intro:sec:impact}
 
-The contributions of this thesis advance a local-first, people-centric vision for IoT. By demonstrating how privacy-preserving control, transparent automation, and programmable action abstractions can coexist on commodity hardware, this work benefits commercial ecosystems, everyday occupants, and the broader research community.
+This thesis advances a local-first, human-centered vision for IoT, with benefits for commercial ecosystems, everyday occupants, and the research community:
 
 \begin{itemize}
-    \item \textbf{Decentralized edge control (CoMesh).} Smart devices in homes and commercial buildings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}; CoMesh marshals this untapped capacity, running STA coordination directly on the devices already present without requiring dedicated control hardware. This eliminates recurring cloud fees, reduces WAN bandwidth, and removes the single-hub failure point that drives costly support incidents. Sensitive telemetry never leaves the premises, easing regulatory exposure (GDPR, CCPA), while automations continue operating during ISP outages or cloud service discontinuations---safeguarding locks, alarms, and other critical automations. CoMesh also seeds new research on sustainable, low-carbon IoT by demonstrating that constrained, mostly-idle devices can shoulder control tasks once reserved for data centers.
+    \item \textbf{Progress-aware automation (RASC):}
+    \begin{itemize}
+        \item Multi-vendor automation tooling without brittle polling or closed SDKs.
+        \item Fewer silent failures: occupants can inspect, pause, or roll back automations like debugged programs.
+        \item A common API for reasoning about---and formally verifying---workflow correctness.
+    \end{itemize}
 
-    \item \textbf{Human-centric control insights (Control in Context).} Ground-truth evidence on where occupants struggle lets product teams target improvements that reduce device returns and help-desk volume. By treating troubleshooting as a user experience problem, this work reveals opportunities for transparency-driven design that lower the barrier for less-technical users to adopt and rely on smart spaces. Clearer mental models and faster diagnostics make dense IoT environments more accessible and trustworthy.
+    \item \textbf{Decentralized edge control (CoMesh):}
+    \begin{itemize}
+        \item Runs on the idle devices already present~\cite{hyperedge}---no recurring cloud fees, less wide-area network traffic, and no single-hub failure point.
+        \item Keeps sensitive telemetry on-premises, easing regulatory exposure.
+        \item Keeps critical automations (locks, alarms) working through network and cloud outages.
+        \item Seeds sustainable, low-carbon IoT research---constrained, mostly-idle devices can shoulder control once reserved for data centers.
+    \end{itemize}
 
-    \item \textbf{Progress-aware automation (RASC).} Standardized lifecycle hooks enable seamless multi-vendor integration and richer automation tooling without brittle polling or closed SDKs. Fewer silent failures improve user satisfaction, and occupants gain the ability to inspect, pause, or roll back automations like well-debugged programs. Researchers and practitioners gain a common API for reasoning about workflow correctness and applying formal verification to IoT environments.
+    \item \textbf{Human-centered control insights (Control in Context):}
+    \begin{itemize}
+        \item Ground-truth evidence on where occupants struggle cuts device returns and support volume.
+        \item Motivates transparency-driven designs that make dense smart spaces accessible and trustworthy for less-technical users.
+        \item Clearer mental models and faster diagnostics for occupants in dense smart spaces.
+    \end{itemize}
 \end{itemize}
 
-Collectively, this thesis turns properties that were once vendor-locked---privacy, latency, and programmability---into parameters that occupants and developers can tune to fit their priorities. By exposing these trade-offs transparently, this work empowers smart-space adopters to choose how intelligent their environment is and where that intelligence lives.
+Collectively, this thesis turns once vendor-locked properties---privacy, latency, and programmability---into parameters that occupants and developers can tune to fit their priorities---choosing how intelligent their space is and where that intelligence lives.
 
 
 \subsection{Thesis Organization}
 \label{intro:sec:organization}
 
-The remainder of this dissertation is organized as follows. \ref{chapter:comesh} presents CoMesh, our decentralized STA control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \ref{chapter:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. \ref{chapter:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. The dissertation concludes with a summary of contributions and a discussion of future directions.
+The remainder of this dissertation is organized as follows. \ref{chapter:rasc} presents Rascal, our implementation of the RASC abstraction, including case studies, dynamic scheduling algorithms, and a trace-driven evaluation. \ref{chapter:comesh} presents CoMesh, our decentralized control plane for commercial edge IoT meshes, including formal analysis and evaluation on Raspberry Pi deployments and large-scale simulations. \ref{chapter:cic} presents Control in Context, our mixed-methods user study characterizing how and why smart home users navigate the spectrum from physical to proxy-based control. The dissertation concludes with a summary of contributions and a discussion of future directions.
