@@ -23,7 +23,7 @@ With correct membership lists, this takes zero messages.
 \noindent{\bf Leader Election.}
 The \kgroup{}'s goal is to fault-tolerantly replicate the state of its assigned entity (device or routine). To make its operations efficient, each \kgroup{} elects a leader, selected as that non-faulty \kgroup{} member with the lowest hashed value $Hash (S, D)$. 
 Along with using the zero-exchange mechanism for election, \sysname{} ensures the leader is actually alive by running the (well-known)  
-Bully election algorithm to quickly confirm the leader~\cite{Bully}. Bully election is attractive as it is fast in the common case: 1 RTT for lowest-hashed \kgroup{} device (leader) to inform others in the \kgroup{}.
+Bully election algorithm to quickly confirm the leader~\cite{Bully}. Bully election is attractive as it is fast in the common case: 1 round-trip time (RTT) for lowest-hashed \kgroup{} device (leader) to inform others in the \kgroup{}.
 Under failures Bully algorithm takes a worst case of 5 RTTs.
 
 \label{comesh:subsection:quorum}

@@ -12,7 +12,7 @@ To the best of our knowledge, \sysname{} is the first decentralized IoT routine 
 {Finally, while smart buildings are not delay-tolerant networks (DTNs)~\cite{fall2003delay}, \sysname's design addresses many concerns that also arise in DTNs, namely churn, failures, etc.}
 
 \noindent \textbf{Consistent Hashing \& Committees. }
-P2P systems such as Chord~\cite{chord}, Dynamo~\cite{dynamo},
+Peer-to-peer (P2P) systems such as Chord~\cite{chord}, Dynamo~\cite{dynamo},
 employ consistent hashing.
 to find the node storing a key-value pair.
 \sysname{}'s \kgroup{} mechanism is inspired by consistent subgroups used by the election protocol in \cite{large_election}, but that mechanism is neither dynamic, nor intended for IoT settings, nor has locality. 
@@ -22,7 +22,7 @@ Quorums have been used for coordinating
 sensor networks' sleep schedules~\cite{heterogenous-quorum},
 localization~\cite{scalable-quorums}, etc.
 Agreement protocols for wireless topologies include 
-Wireless Paxos~\cite{wirelesspaxos} and  WSN Byzantine consensus~\cite{wchain}.
+Wireless Paxos~\cite{wirelesspaxos} and wireless sensor network Byzantine consensus~\cite{wchain}.
 These require many message exchange rounds, but
 \sysname{}'s \kgroups{}
 require only one round and ensure safety.
@@ -30,7 +30,7 @@ Blockchain- and edge-centric consensus schemes~\cite{khalid2020decentralized,yeo
 have been proposed for access control, authentication, but not in the context of routine management.
 
 \noindent \textbf{Load balancing. }
-Load balancing has long been studied in internet-based, p2p, and cloud distributed systems~\cite{mizan},
+Load balancing has long been studied in internet-based, P2P, and cloud distributed systems~\cite{mizan},
 and for the edge~\cite{presto}.
 In ad-hoc/mesh networks, load balancing has been explored for power-aware routing~\cite{1561947}. 
 Load balancing has also targeted edge-cloud~\cite{nezami2021decentralized} {or edge-fog hybrids, like EdgeMesh~\cite{sahni2017edge}}.
