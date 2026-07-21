@@ -83,6 +83,11 @@
 \toggletrue{our_comments}
 \toggletrue{our_contents}
 
+% def_revisions: show post-defense revisions in blue; togglefalse for final copy
+\providetoggle{def_revisions}
+\toggletrue{def_revisions}
+\newcommand{\rev}[1]{\iftoggle{def_revisions}{{\color{blue}#1}}{#1}}
+
 % =====================================================================
 % SHARED THEOREM ENVIRONMENTS (CoMesh, RASC)
 % Defined once here to avoid redefinition errors when both are active.
