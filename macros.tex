@@ -83,10 +83,14 @@
 \toggletrue{our_comments}
 \toggletrue{our_contents}
 
-% def_revisions: show post-defense revisions in blue; togglefalse for final copy
+% def_revisions: show post-defense revisions in color; togglefalse for final copy
+% \rev   = round 1, in response to the committee's defense comments (blue)
+% \revii = round 2, in response to advisor feedback on those revisions (purple)
 \providetoggle{def_revisions}
 \toggletrue{def_revisions}
+\definecolor{revpurple}{RGB}{140,60,170}
 \newcommand{\rev}[1]{\iftoggle{def_revisions}{{\color{blue}#1}}{#1}}
+\newcommand{\revii}[1]{\iftoggle{def_revisions}{{\color{revpurple}#1}}{#1}}
 
 % =====================================================================
 % SHARED THEOREM ENVIRONMENTS (CoMesh, RASC)
