@@ -16,7 +16,7 @@ or manually by the user.
 \begin{figure}[th]
     \centering
     \includegraphics[width=0.7\linewidth,alt={CDF plot with a compressed x-axis that uses axis breaks to show widely separated ranges of smart device action lengths. y-axis: CDF (0 to 1). Four curves: door (blue, 4 to 5 seconds, a tight steep S-curve), elevator (orange, 17 to 21 seconds), shade (green, 30 to 33 seconds), and thermostat (red, 125 to 3493 seconds, a long spread). Each action has a distinct, non-overlapping length range, and lengths span nearly three orders of magnitude across device types.}]{RASC/figures/intro/action-length-var.pdf}
-    \caption{\bf \small IoT actions vary in length. {\it Actions: door: close, elevator: up 1 floor, shade: open, thermostat: heat  68.x to 69.y \textdegree Fahrenheit.} 
+    \caption{\bf \small IoT actions vary in length. {\it Actions: door: close, elevator: up 1 floor, shade: open, thermostat: heat  68.x to 69.y \textdegree F.} 
     }
     \medskip
     \label{rasc:fig:action-length-variability}
@@ -103,7 +103,7 @@ This intertwined nature of observability and programmability---summarized in \Cr
 distributed systems~\cite{omnitable,viperprobe}, Kubernetes~\cite{kubern8observability}, and SDNs~\cite{simon}.
 
 \noindent \textbf{A New Abstraction:}
-This paper proposes {\it \abs} (Request-Ack-Start-Complete), a new abstraction for IoT devices, as an alternative to RPC. RASC does not replace RPC, but instead can be built atop RPC.
+This chapter proposes {\it \abs} (Request-Ack-Start-Complete), a new abstraction for IoT devices, as an alternative to RPC. RASC does not replace RPC, but instead can be built atop RPC.
 \abs{} provides Replies at three critical action lifecycle points: {\bf A}ck (the action is received by the device but not yet started), {\bf S}tart (the device starts the action), and {\bf C}omplete (the device finishes the action). Naturally, some of these replies may overlap   (e.g., if the action is short), but each is essential for longer actions 
 to satisfy \Cref{rasc:tab:properties}'s goals.
 
@@ -123,7 +123,7 @@ Second, atop \abs{} when we provide support for expressive routine dependencies,
 Third, a key principle in our design is backwards compatibility: to make \sysname{} immediately deployable atop today's ecosystems, IoT devices and their vendor services cannot be modified. This forces us to work within the constraints of existing RPC interfaces. 
 This is challenging as (i) \abs{} is more expressive than RPCs, and (ii) RPCs may go either via the IoT cloud service, or directly to the device.
 
-This paper makes the following contributions:
+This chapter makes the following contributions:
 \begin{itemize}
 \item We present a new expressive RPC-enhancing abstraction called \abs, for IoT settings.
 \item We build the \sysname{} system that implements \abs{} over existing RPC-based IoT APIs.
@@ -133,7 +133,7 @@ diverse action dependencies.
 with the popular and open-source home automation system called Home Assistant~\cite{HomeAssistant}.
 \item We measured action execution times for various devices in office buildings. 
 We use these and sets of real routines to perform trace-driven evaluation. We find that (i) \sysname{} 
-detects completion within 2-13 RPCs and 2s-16s over 90\% of the time, and (ii) 
-our routine scheduling policies outperform state-of-the-art by 10\%-55\%.
+detects completion within 2--13 RPCs and 2s--16s over 90\% of the time, and (ii) 
+our routine scheduling policies outperform state-of-the-art by 10\%--55\%.
 
 \end{itemize}

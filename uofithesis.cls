@@ -180,9 +180,12 @@
 }
 
 % Acknowledgements environment
+% Heading uses the American spelling "Acknowledgments" per author preference.
+% The environment NAME keeps the British spelling so \acknowledgements{...}
+% calls in the thesis body continue to work.
 \newenvironment{acknowledgements}{%
     \thispagestyle{plain}
-    \section*{Acknowledgements}
+    \section*{Acknowledgments}
     \vspace{12pt}
     \doublespacing
 }{%

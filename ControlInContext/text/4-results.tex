@@ -3,7 +3,7 @@
 Our analysis of survey and interview data focuses on how users navigate the spectrum between proxy-based and physical device control in everyday smart home use. We structure our findings around three core themes: (1) user strategies for navigating this spectrum (RQ1), (2) the tradeoffs they perceive when doing so (RQ1a),
 (3) how navigation strategies, perspectives, and trust shift when users encounter device errors or failures (RQ2, RQ2a), and (4) how users commonly struggle to realize their goals across the control spectrum (RQ2b).
 
-\paragraph{Sample and device ownership.} Our survey respondents were experienced smart home users: they owned a median of 12 smart devices (\Cref{cic:table:participants}). The most common reasons they gave for their most recent purchase were upgrading a device already in the home (38\%), added convenience (19\%), added control over some home process (19\%), and added security (17\%), and 90\% used that device at least three times a week. Participants were largely satisfied with these purchases: 67\% strongly agreed that they accomplished the goals they had in mind when buying the device, most often attributing this to added control (42\%), convenience (37\%), and security (37\%). This grounds the navigation behaviors below in the experience of users who actively live with sizeable, multi-vendor smart homes.
+\paragraph{Sample and device ownership.} Our survey respondents were experienced smart home users: they owned a median of 12 smart devices (\Cref{cic:table:participants}). The most common reasons they gave for their most recent purchase were upgrading a device already in the home (38\%), added convenience (19\%), added control over some home process (19\%), and added security (17\%), and 90\% used that device at least three times a week. Participants were largely satisfied with these purchases: 67\% strongly agreed that they accomplished the goals they had in mind when buying the device, most often attributing this to added control (42\%), convenience (37\%), and security (37\%). This grounds the navigation behaviors below in the experience of users who actively live with sizable, multi-vendor smart homes.
 
 \subsubsection{Control spectrum navigation strategies (RQ1)}
 \label{cic:subsec:controlspectrum}
@@ -19,21 +19,14 @@ Our analysis of survey and interview data focuses on how users navigate the spec
     \label{cic:fig:control-scheme-popularity}
 \end{figure}
 
-\begin{figure}[ht] %{0.5\textwidth}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.667\linewidth,alt={Legend mapping the abbreviations used in the adjacent charts to their control schemes and control methods.}]{ControlInContext/figures/control_schemes_legend_split.pdf}
     \par
     \includegraphics[width=0.268\linewidth,alt={Heatmap. Columns: control scheme C (central) and D (other); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage of participants (colorbar about 18 to 33). The darkest cell is central control for 16-38 devices (about 33 percent), and central stays less dark for 11-15 devices, so central use rises with more devices owned. Other control is lightest for the 11-15 device bin.}]{ControlInContext/figures/control_schemes_vs_dev_no_bins.pdf}
     \includegraphics[width=0.24\linewidth,alt={Heatmap. Columns: control method R (routines), V (voice), S (streaming); rows top to bottom: number of owned devices 16-38, 11-15, 4-10; cell color encodes percentage (colorbar about 8 to 53). The voice (V) column is darkest across all device bins (about 45 to 53 percent), routines (R) are moderate (about 30 to 38 percent) but showing an increasing trend as the number of owned devices increases, and streaming (S) is lightest, especially for the 11-15 device bin.}]{ControlInContext/figures/control_methods_vs_dev_no_bins.pdf}
     \caption{\bf \small Percentage of survey participants using central or other control schemes and several control methods vs. number of owned devices. {\it Each cell's color shows the percentage of participants falling into it who choose the respective control scheme or method. The percentages for the different options of control schemes and methods do not add up to 100\% since the participants could provide multiple answers.}}
-    % \Description{Heatmaps showing percentages of participants using different control schemes and methods by number of owned devices.
-    % 
-    % The left heatmap compares control schemes: Central Control (C) and Other Control (D). Each row corresponds to a range of owned devices: 4-10, 11-15, and 16-38. Darker shades represent higher percentages. The highest usage of Central Control occurs in the 16-38 device group, followed by the 11-15 group. Other Control is most used by participants with either 4-10 or 16-38 devices, with lower use in the 11-15 range.
-    % 
-    % The right heatmap compares control methods: Routines (R), Voice Command (V), and Content Streaming/Casting (S), using the same device count bins. Voice Command consistently shows the darkest shading across all device ranges, especially in the lower two bins. Routines show moderate use across device ranges, while Content Streaming is most used in the lowest and highest device bins.
     
-    %     Legend boxes at the top explain abbreviations for schemes and methods.
-    % }
 
     \label{cic:fig:control-scheme-popularity-vs-dev-no}
     \bigskip
@@ -52,7 +45,6 @@ Our analysis of survey and interview data focuses on how users navigate the spec
 \end{figure}
 
 Survey and interview responses showed that participants rarely commit to a single point on the control spectrum. 
-%\del{Instead, they utilized different control methods, such as voice commands, phone applications, routines, and more, depending on the task, device, and context.} 
 About half of the survey participants ($51\%$) controlled their devices using voice commands, which can be used across the proxy-based control spectrum. Additionally, $33\%$ of participants reported using routines to control their devices, which allowed them to control groups of devices simultaneously. Furthermore, $18\%$ of participants reported using `content streaming or casting' to control single devices, which is common for media devices such as smart TVs. Both user preferences and device constraints influenced participants' choice of control methods; for instance, participants using Amazon Alexa often relied on voice control due to physical device functionality limitations, while others with broader device ecosystems could select among multiple control methods.
 
 As smart home ecosystems became more complex, participants increasingly shifted toward centralized control by purchasing and using smart home third-party hubs and adopting routines. \Cref{cic:fig:control-scheme-popularity-vs-dev-no} shows that the use of centralized schemes rises alongside the number of devices owned among the survey participants. 
@@ -63,7 +55,6 @@ In particular, interview participant P7, who owned nearly 50 devices, said they 
 At the same time, users moved along the spectrum toward physical control when centralized systems failed to meet specific needs. This involved falling back to control methods such as physical interaction with a specific device or using a brand-specific application on their phone. Several interview participants noted that detailed settings, such as firmware updates or custom automations, were often only accessible through the device's native app. For example, P3 shared: ``\textit{There is a button in the [Hue] app to make the light bulb that you're trying to interact with, blink on and off, so that you know exactly which one it is; that doesn't exist in the Google app.}'' 
 
 Further, \Cref{cic:fig:control-scheme-popularity-vs-dev-kind} shows that non-central control remains popular for devices requiring more granular or custom interactions, such as security systems or vacuums, where direct control over specific features is necessary. We also observe that participants usually chose to control a device exclusively with either routines or voice commands, but not both.
-
 
 Some participants used strategies to stay where they were on the control spectrum rather than move along it. Half of the interview participants (4/8), in particular, expressed that they were hesitant to buy new smart home devices that required significant effort to integrate into the existing infrastructure. For example, participants often decided against purchasing devices that required them to download a new application on their phone to set up or use the device. They instead chose to purchase devices that could be controlled using applications already on their phone. P1, when discussing why they purchased a particular brand of new smart device, echoed this sentiment, saying, ``\textit{I already got a lot of apps on my phone. So when possible, I don't wanna put more apps on. So I checked that it'll work with Smart Life. I checked that it's compatible with Alexa.}'' Similarly, P3 described the cost of integrating a new device into their existing smart home control scheme as a significant factor, saying ``\textit{I definitely consider that before buying a potential product, and if possible, I try to buy ones that don't require me to use a new app or ecosystem. There is a cost of switching there that I don't necessarily want to introduce to myself.}'' Participants' responses reflected a desire to gain the benefits (e.g., safety, convenience, etc.) of new smart devices in their home without the potential drawbacks of needing to work outside their home's existing smart device ecosystem, forcing them to adopt mindsets of ``brand loyalty''~\cite{wu2017internet}.
 
@@ -119,7 +110,6 @@ Not all tradeoffs were framed as strictly negative. Some participants viewed the
 
 Overall, participants' experiences reveal that smart home control is shaped by ongoing negotiation. Users must continually balance ease of use with technical specificity, minimize app clutter while maximizing access, and integrate new devices without overwhelming themselves. These tradeoffs not only shaped how users controlled devices but also influenced how they structured, grew, and maintained their smart home management systems over time. In the next section, we examine how these navigation strategies and tradeoffs shift when smart home management systems encounter errors and how users respond to breakdowns that disrupt their preferred control methods.
 
-
 \subsubsection{Navigating the control spectrum when failures occur (RQ2, RQ2a)}
 \label{cic:subsec:navigatingcontrol}
 
@@ -142,14 +132,13 @@ Control schemes with very few to no proxies played a crucial role in this contex
     \begin{subfigure}{\linewidth}
         \centering
         \includegraphics[width=0.6\linewidth,alt={Directed node-link flow diagram of troubleshooting step sequences. Six circular nodes: ``Research'' (top-left), ``Investigate network connection'' (center-top), ``Investigate device power'' (top-right), ``Investigate device-to-service connection'' (center-bottom), ``Contact support'' (bottom-left), ``Customized solutions'' (bottom-right). A red inner ring marks a node as a common initial step; a green outer ring marks a common final step. ``Investigate device power'' has both rings and a self-loop (participants repeat this step), making it both a frequent start and sometimes end. ``Investigate network connection'' and ``Investigate device-to-service connection'' also have both rings. ``Research'' and ``Contact support'' have green outer rings only (frequent endpoints). Arrow thickness encodes transition frequency (scale 1 to 6 occurrences). The thickest arrows run between ``Investigate device power'' and ``Investigate network connection'' (bidirectional, about 5 to 6 occurrences) and between those two and ``Investigate device-to-service connection''; thinner arrows connect ``Research'' to ``Contact support'' and to ``Investigate network connection''.}]{ControlInContext/figures/survey_troubleshooting_step_sequence.pdf}
-        \caption{Troubleshooting step sequence. % %
+        \caption{Troubleshooting step sequence.
         A node has a red ring around it if it has been described as an initial step in at least one participant's troubleshooting process. A green ring around a node means it was the final step of one or more participants' troubleshooting process. An arrow links two nodes A, B if at least one participant has gone from step A to step B. The line width of each ring or arrow represents the absolute number of its occurrences across our participants' processes.
         }
         \label{cic:fig:survey-troubleshooting-sequence}
     \end{subfigure}
     \caption{\bf \small Troubleshooting steps results from survey responses. {\it As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.}
     }
-    % \Description{Troubleshooting steps result from survey responses. As many are experienced users of their smart home setups, this may subtly shape the emphasis on certain troubleshooting approaches depicted here.}
     \label{cic:fig:survey-troubleshooting}
     \medskip
 \end{figure}
@@ -162,51 +151,12 @@ Notably, participants' troubleshooting practices revealed that they often unders
 
 Overall, device failures and errors forced participants to switch between control schemes, uncovering limitations and prompting changes to their routine. While many relied on layered troubleshooting strategies, persistent problems sometimes led to long-term shifts in user behavior, feature abandonment, or restructuring of control ecosystems. These findings show that the smart home control spectrum is not only navigated during setup or steady-state use but also actively re-navigated in moments of breakdown.
 
-
 \subsubsection{Discoverability Failures across the Control Spectrum (RQ2b)}
-% \subsection{User Confusion in Locating Smart Home Functionality across the Spectrum}
 \label{cic:sec:confusion}
 
 Our interviews reveal that users frequently struggle to realize their intended goals with smart home systems, not because functionality is absent, but because its integration or accessibility---whether in terms of location, when it is available, or how it is surfaced---is unclear.
 
 We identify five recurring categories of confusion and elaborate on each below. \Cref{cic:tab:confusion} summarizes all these categories, including relevant quotes from interviewees.
-
-% \begin{table}[t]
-% \centering
-% \caption{\add{Taxonomy of user confusion in executing smart home functionality.}}
-%    \bigskip
-% \label{cic:tab:confusion}
-% \color{blue}
-% \begin{tabular}{R{4.8cm}|p{10.5cm}}
-% \hline
-% \textbf{Category} & \textbf{Description and Example Quotes} \\
-% \hline\hline
-% Fragmented control (central vs. vendor) 
-% & Users unsure which app (hub vs. vendor) exposes functionality. 
-% \textit{Example:} ``In the Nest app you can see the history... but not on Google Home.'' (N3) \\
-% \hline
-
-% \multirow{2}{*}{Hidden / hard-to-find features}
-% & Poor discoverability of routines, shortcuts, or advanced options. 
-% \textit{Example:} ``Every time I go to set a routine, I have to relearn it.'' (N1) \\
-% \hline
-
-% \multirow{2}{*}{Missing or partial integrations}
-% & Features expected to exist but absent or incomplete. 
-% \textit{Example:} ``I can stream the camera, but I can't move it with voice.'' (N3) \\
-% \hline
-
-% Ecosystem lock-in \& workarounds 
-% & Vendor ecosystems discourage cross-platform setups; workarounds reduce control. 
-% \textit{Example:} ``They assume you're Hue or Ikea exclusively.'' (N5) \\
-% \hline
-
-% \multirow{2}{*}{Multi-user household challenges}
-% & Routines or settings tied to single accounts, limiting family use. 
-% \textit{Example:} ``If I add a routine in the Tapo app, [my wife] can't change it.'' (N3) \\
-% \hline
-% \end{tabular}
-%%% \end{table}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[t]
@@ -215,7 +165,6 @@ We identify five recurring categories of confusion and elaborate on each below. 
     \bigskip
     \label{cic:tab:confusion}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    % \tagpdfsetup{table-tagging=false}
     \footnotesize
     \begin{tabular}{R{3.4cm}|p{5.8cm}|p{6cm}}
         \hline
@@ -264,5 +213,4 @@ Users expected that devices across ecosystems could be mixed and matched. When t
 Participants assumed that central routines or device automations would be shareable within a household. When vendor apps restricted access to a single account, this clashed with their model of a shared home environment, driving them to central hubs despite their own limitations. For instance, Tapo does not allow multiple household members (\Cref{cic:tab:confusion}--row 5). 
 
 Across all categories, confusion arose less from the outright absence of functionality than from mismatches between participants' mental models and system design. Users expected hubs to be universal, apps to be intuitive, integrations to be complete, and households to be collaborative. In practice, however, they lacked a clear taxonomy of where functionality resides, how it should be invoked, and whether it integrates with other devices. These findings show that confusion is not just an isolated annoyance but a systemic barrier that reshapes how users perceive and navigate smart home control schemes, influencing when they trust central control, fall back to vendor apps, or abandon features altogether.
-
 

@@ -69,7 +69,7 @@ We use the term \emph{smart space} to refer to any physical environment instrume
 
 Despite their differences in scale and purpose, all smart spaces share a common computational substrate: the \emph{Sense-Trigger-Actuate} (STA) paradigm, in which devices sense their environment, automation rules evaluate conditions and fire, and commands actuate devices. These workloads---packaged as automations, routines, or scripts---are how occupants and operators program their environments to respond to the world around them.
 
-Modern IoT stacks must be evaluated through two complementary lenses. \textbf{System-facing metrics}---latency, reliability, fault-tolerance, privacy, and cost-efficiency---ensure that automations trigger promptly, survive device or network failures, and protect sensitive telemetry. \textbf{User-facing metrics}---fine-grained control, observability, debuggability, and overall usability---determine whether occupants can understand and shape the behavior of their increasingly complex environments. Together, these metrics define the standard against which any scalable, human-centered IoT platform must be evaluated. This thesis contributes to both dimensions, combining systems design and implementation with empirical human-computer interaction (HCI) research.
+Modern IoT stacks must be evaluated through two complementary lenses. \textbf{System-facing metrics}---latency, reliability, fault tolerance, privacy, and cost-efficiency---ensure that automations trigger promptly, survive device or network failures, and protect sensitive telemetry. \textbf{User-facing metrics}---fine-grained control, observability, debuggability, and overall usability---determine whether occupants can understand and shape the behavior of their increasingly complex environments. Together, these metrics define the standard against which any scalable, human-centered IoT platform must be evaluated. This thesis contributes to both dimensions, combining systems design and implementation with empirical human-computer interaction (HCI) research.
 
 Today's dominant IoT architecture routes every sensor reading and actuation request through a vendor cloud backend, which creates three intertwined pain points. First, \textbf{privacy risks} arise because raw telemetry must transit and persist in third-party infrastructure; keeping control logic on-premise eliminates this exposure entirely~\cite{HACloudless, csa2025matter}. In high-security industrial settings---semiconductor fabs and pharmaceutical facilities, for instance---operators routinely prohibit any data from leaving the premises to protect proprietary processes, a constraint cloud-centric platforms cannot satisfy by design. Second, \textbf{reliability degrades} when every automation depends on an Internet path, particularly during network or cloud service outages~\cite{gcloud-down1}. Third, \textbf{cost scales unfavorably}: servicing 500 devices that ping once per second can incur fees approaching \$2{,}500 per month on mainstream IoT cloud tiers~\cite{AzureIoTHub}, while local control removes usage-based bills altogether. Together, these pressures make edge-native, on-premise control an attractive foundation for smart environments that must be private, dependable, and economically sustainable. Crucially, the hardware needed to realize this vision is already in place: smart devices in both residential and commercial settings sit idle for the vast majority of their operational lifetime~\cite{hyperedge}, offering a ready substrate for distributed control logic without requiring any additional infrastructure investment.
 
@@ -95,7 +95,7 @@ This thesis shows that it is possible to build networks and systems for smart sp
     % \tagpdfsetup{table-tagging=false}
     \renewcommand{\arraystretch}{1.3}
     \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}|>{\raggedright\arraybackslash}m{2.3cm}|X|>{\raggedright\arraybackslash}m{2.6cm}|>{\raggedright\arraybackslash}m{1.9cm}}
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}>{\raggedright\arraybackslash}m{2.3cm}X>{\raggedright\arraybackslash}m{2.6cm}>{\raggedright\arraybackslash}m{1.9cm}}
         \hline
         \textbf{Work} & \textbf{Plane} & \textbf{Objective} & \textbf{Evaluation} & \textbf{Venue} \\
         \hline\hline
@@ -133,7 +133,7 @@ This thesis makes three concrete contributions to the control of smart spaces---
 
     \item \textbf{The human interaction plane: usable control interfaces (\ref{chapter:cic}).}
     \emph{How do occupants view and use control interfaces?}
-    Smart home users interact through a spectrum of command interfaces---from pressing a physical button on a device, to a per-brand mobile app, to a centralized hub application such as Google Home or Alexa that routes all commands through a cloud backend.
+    Smart-home users interact through a spectrum of command interfaces---from pressing a physical button on a device, to a per-brand mobile app, to a centralized hub application such as Google Home or Alexa that routes all commands through a cloud backend.
     These represent different interface architectures, each with different latency, reliability, and failure-mode characteristics.
     System designers have long assumed centralized hub interfaces are users' primary mode, yet real behavior is far more nuanced.
     Control in Context~\cite{controlincontext} is the first empirical characterization of how and why users move across this interface spectrum in practice, grounding future interface and system design in observed behavior rather than assumptions.
@@ -152,7 +152,7 @@ RASC's contributions are:
     \item The RASC abstraction, which extends RPC with four lifecycle states---Request, Acknowledgment, Start, and Complete---enabling both users and higher-level automation systems to reason about action progress in real time.
     \item An adaptive polling strategy that detects when actions start, complete, or fail with minimal overhead, without requiring any device-side modifications.
     \item Scheduling policies over a directed acyclic graph (DAG) of actions that express causal dependencies, enabling routines that react dynamically to action outcomes rather than relying on fixed time windows.
-    \item Integration with Home Assistant via Rascal, a widely used open-source smart home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
+    \item Integration with Home Assistant via Rascal, a widely used open-source smart-home platform, and trace-driven evaluation showing that Rascal detects action completion within 2--16 seconds in over 90\% of cases and that its scheduling policies outperform state-of-the-art baselines by 10--55\%.
 \end{itemize}
 
 
@@ -165,7 +165,7 @@ CoMesh's contributions are:
 \begin{itemize}
     \item Design and implementation of CoMesh using a novel combination of distributed systems techniques: load-balanced STA operations over space and time; zero-message member selection; quorum-based agreement; and LSH-based locality to minimize inter-device communication.
     \item Formal proofs of CoMesh's safety, liveness, and progress properties.
-    \item Experimental evaluation on Raspberry Pi deployments and large-scale simulations using real building maps and automation workloads, demonstrating scalability, fault-tolerance, and low latency.
+    \item Experimental evaluation on Raspberry Pi deployments and large-scale simulations using real building maps and automation workloads, demonstrating scalability, fault tolerance, and low latency.
 \end{itemize}
 
 
@@ -176,10 +176,10 @@ Smart home platforms are designed around vendor ecosystems and commercial integr
 
 Control in Context's contributions are:
 \begin{itemize}
-    \item A survey of $N=60$ smart home device owners and semi-structured follow-up interviews with $N=8$ participants, revealing that control is a fluid, reflective process shaped by tradeoffs between convenience, reliability, and cognitive load.
+    \item A survey of $N=60$ smart-home device owners and semi-structured follow-up interviews with $N=8$ participants, revealing that control is a fluid, reflective process shaped by tradeoffs between convenience, reliability, and cognitive load.
     \item Evidence that users move freely along the control spectrum guided by situational factors such as task type, perceived reliability, and device location---not by abstract ecosystem boundaries.
     \item Characterization of how troubleshooting workflows interact with control scheme preferences, showing that failures lead users to reassess strategies and sometimes abandon devices or platforms entirely.
-    \item Design implications for future smart home systems that support movement across the control spectrum and treat the user---not the device ecosystem---as the center of design.
+    \item Design implications for future smart-home systems that support movement across the control spectrum and treat the user---not the device ecosystem---as the center of design.
 \end{itemize}
 
 
@@ -199,7 +199,7 @@ This thesis advances a local-first, human-centered vision for IoT, with benefits
     \item \textbf{Decentralized edge control (CoMesh):}
     \begin{itemize}
         \item Runs on the idle devices already present~\cite{hyperedge}---no recurring cloud fees, less wide-area network traffic, and no single-hub failure point.
-        \item Keeps sensitive telemetry on-premises, easing regulatory exposure.
+        \item Keeps sensitive telemetry on-premise, easing regulatory exposure.
         \item Keeps critical automations (locks, alarms) working through network and cloud outages.
         \item Seeds sustainable, low-carbon IoT research---constrained, mostly-idle devices can shoulder control once reserved for data centers.
     \end{itemize}
@@ -212,7 +212,7 @@ This thesis advances a local-first, human-centered vision for IoT, with benefits
     \end{itemize}
 \end{itemize}
 
-Collectively, this thesis turns once vendor-locked properties---privacy, latency, and programmability---into parameters that occupants and developers can tune to fit their priorities---choosing how intelligent their space is and where that intelligence lives.
+Collectively, this thesis turns once vendor-locked properties---privacy, latency, and pro\-gram\-ma\-bil\-ity---into parameters that occupants and developers can tune to fit their pri\-or\-i\-ties---choosing how intelligent their space is and where that intelligence lives.
 
 
 \subsection{Thesis Organization}

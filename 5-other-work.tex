@@ -6,7 +6,7 @@
 In this appendix I briefly describe other research projects that I conducted
 during my Ph.D. in parallel with this thesis.
 
-\smallskip\noindent\textbf{Cross-System Interaction Failures.} Modern cloud
+\smallskip\noindent\textbf{Cross-System Interaction Failures~\cite{csi}.} Modern cloud
 deployments are orchestrations of independent systems---data processing
 engines, storage layers, resource managers---each specializing in one service.
 Their reliability therefore depends not only on each system in isolation but on
@@ -15,7 +15,7 @@ manifests at these boundaries rather than inside any single component. We
 termed this failure mode \emph{cross-system interaction} (CSI) failures and
 characterized it by analyzing eleven CSI-failure-induced incidents at Google,
 Azure, and AWS alongside 120 CSI failure cases drawn from seven widely
-co-deployed open-source systems~\cite{csi}. The study identifies
+co-deployed open-source systems. The study identifies
 \emph{discrepancies} between interacting systems as the underlying root
 cause---failures that cannot be understood by examining any one system
 alone---and argues for cross-system testing and verification. Cross-testing the

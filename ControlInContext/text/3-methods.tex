@@ -7,7 +7,6 @@ We conducted a survey and follow-up interview study to understand the perception
     \bigskip
     \label{cic:table:participants}
     \tagpdfsetup{table/header-columns={1}}
-    % \tagpdfsetup{table-tagging=false}
     \begin{center}
         \footnotesize
         \renewcommand{\arraystretch}{1.4}
@@ -32,14 +31,12 @@ We conducted a survey and follow-up interview study to understand the perception
     \end{center}
 \end{table}
 
-
 \subsubsection{Survey Methodology}
 \label{cic:sec:survey_method}
 Participants first completed a brief screening survey (median completion time: 65 seconds), which required them to provide their Prolific ID and indicate the number of smart home devices they owned.
 
 {Our goal was to study people with active smart home setups rather than casual single-device owners. We therefore restricted survey participation to adults who (1) were registered on Prolific and reported owning at least one internet-enabled device in Prolific’s prescreening questions~\cite{peer2023platform}, and (2) reported owning at least four smart home devices (e.g., smart lights, plugs, thermostats, cameras, speakers) in our screening survey. Participants were not limited to central-hub households, and those only using per-brand apps or direct device control were eligible.} $60$ participants completed this survey. 
 
-%\del{A subset of these survey respondents participated in a 30-minute follow-up interview. }
 Participants were paid \$0.40 USD (hourly rate of \$24 USD) for completing the screening survey and \$4.00 USD (hourly rate of \$16 USD) for completing the main survey. {We did not specifically recruit or target professional smart home installers or technicians. A small number of participants described installing devices themselves (e.g., DIY setups), but they still participated in the study as end users of those systems rather than in a professional capacity.}
 
 We had 43 valid survey responses from the 60 participants, excluding those who failed any of the arithmetic-based attention-check questions we included at random points in our survey (e.g., ``What is 2 + 7'')~\cite{abbey2017attention} or had inconsistent responses, such as differences in the number of or types of smart devices owned. All 60 survey participants were compensated for their time.
@@ -48,12 +45,10 @@ We had 43 valid survey responses from the 60 participants, excluding those who f
 The survey aimed to elicit participant preferences and perceptions related to smart home device control, as well as existing troubleshooting workflows and how device control preferences influence them. 
 The full survey is included in Appendix~\ref{appdx:survey}.
 
-
 \noindent\textbf{General Smart Home Setup.}
 The survey began by collecting information regarding each participant's general smart home setup. Participants listed smart home devices they currently use, where they lived, where each device was located, and what smart home device-related applications they currently have on their phones. 
 
 Participants reported what, when, and why they purchased their most recent smart home devices, then rated how well these devices met their goals and explained their ratings. We asked participants to focus on this single device to reduce survey cognitive load~\cite{lenzner2010cognitive} and provide detailed context. 
-
 
 \noindent\textbf{Current Methods for Device Control.}
 \label{cic:survey:control}
@@ -71,7 +66,6 @@ Finally, the survey asked whether the participant was the primary user of any ho
     \bigskip
     \label{cic:tab:interviewparticipantdevice}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    % \tagpdfsetup{table-tagging=false}
     \resizebox{\textwidth}{!}{%
         \begin{tabular}{ccccccccccccccc}
             &
@@ -101,14 +95,6 @@ Finally, the survey asked whether the participant was the primary user of any ho
     }
 \end{table}
 
-
-%\subsubsection{Maintaining Survey Data Quality}
-
-
-%Within online research, concerns about data quality are not unfounded; previous research reveals how platforms such as Amazon Mechanical Turk have the potential to produce low-quality data, limiting the generalizability of results~\cite{chmielewski2020mturk}. However, when compared to other commonly used crowdsourcing platforms for online human-subjects research, Prolific is a platform that researchers can use to collect high-quality data~\cite{douglas2023data,eyal2021data}. 
-
-
-
 \subsubsection{Follow-up Interviews}
 $40$ survey participants expressed interest in the semi-structured follow-up interview {in exchange for an extra \$20 USD in compensation}. {We prioritized invitation to respondents with the largest reported smart home devices they owned, with the aim of capturing rich experiences across the control spectrum in multi-device ecosystems. Although later waves extended invitations to all participants eventually, only a subset responded, and we conducted 8 interviews.} Interview participants had a variety of devices in their homes, allowing us to elicit a range of perspectives (\Cref{cic:tab:interviewparticipantdevice}). {We used interviewees' survey responses to personalize specific questions during the study. For example, if a participant reported owning smart lights, we asked how they controlled them and why.} Each of the 8 interviews we conducted lasted around 30 minutes and was structured into the following sections (the full interview protocol is included in Appendix~\ref{cic:appdx:interview}): 
 
@@ -121,11 +107,9 @@ $40$ survey participants expressed interest in the semi-structured follow-up int
 
 \subsubsection{Data Analysis}
 We conducted descriptive statistical analysis of the survey data, calculating mean and median ratings for Likert scale-based questions. For qualitative responses and interviews, we performed in-depth qualitative analysis using thematic analysis and open coding~\cite{khandkar2009open, deterding2021flexible}. Two members of the research team independently coded four interviews, followed by cross-coding two interviews to assess inter-rater reliability (IRR)~\cite{hallgren2012computing}, resulting in a Fleiss' Kappa of $0.44$, indicating moderate agreement~\cite{falotico2015fleiss}. 
-%\del{The research team conducted two separate rounds of coding and workflow extraction from all interviews: the initial round to identify general themes, and a second round that involved multi-layer coding to address our research questions.} 
 Codes were consolidated and discussed through team discussions, yielding codes and themes directly related to the research questions, as well as a concrete set of user workflows for troubleshooting smart home devices. These results provided high-level insights into user perceptions, user behavior, and control workflows for smart home devices (\Cref{cic:table:codes}). 
 
 While our interview and survey samples are not designed to support statistical inference, our findings should be interpreted as analytic generalizations about how smart home users navigate proxy-based and physical device control, not as precise estimates of how common each behavior is in the broader population. Our work sits among other qualitative smart home behavior research, providing in-depth insights into user experiences, privacy concerns, and adoption barriers~\cite{dermody2025multi, zheng2018user}.
-
 
 \renewcommand{\arraystretch}{0.75}
 \begin{table}
@@ -135,7 +119,6 @@ While our interview and survey samples are not designed to support statistical i
     \bigskip
     \label{cic:table:codes}
     \tagpdfsetup{table/header-rows={1},table/header-columns={1}}
-    % \tagpdfsetup{table-tagging=false}
     \begin{tabular}{p{0.17\textwidth}|p{0.5\textwidth}|p{0.25\textwidth}}
     \hline
         \textbf{Theme} & \textbf{Codes} & \textbf{Meaning} \\ 

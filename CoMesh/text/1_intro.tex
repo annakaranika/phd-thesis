@@ -36,7 +36,7 @@ This STA abstraction is commonly programmed via {\it routines}, available in Sam
     \label{comesh:fig:prog-workflow}
 \end{figure}
 
-This paper focuses on management of such routine-based workloads running over large commercial edge IoT meshes. \Cref{comesh:fig:IoTsetting} (from \ref{intro:sec:background}) shows three emerging edge mesh scenarios---a smart building (b), a smart farm (c), and a smart factory (d).
+This chapter focuses on management of such routine-based workloads running over large commercial edge IoT meshes. \Cref{comesh:fig:IoTsetting} (from \Cref{intro:sec:background}) shows three emerging edge mesh scenarios---a smart building (b), a smart farm (c), and a smart factory (d).
 Some examples of routines follow. A  smart office will have routines running day and night, e.g., to: (i) raise and lower shades and thermostat, in response to sunlight and temperature; (ii) change interior lighting as a function of occupancy; (iii) enable security cameras and lock gates at 9 pm. 
 A smart farm has routines that: (iv) water dry areas of the farm when soil sensors detect dryness below a threshold; (v) trigger robots to inspect crops. 
 Routines might be triggered by sensors, time (fixed or periodic), or humans. 
@@ -85,7 +85,7 @@ of, and it is scoped on data streams and individual commands,
 \textit{not} routines.
 No existing system
 handles inter-routine conflicts, \textit{and} with decentralization.
-Our paper takes the next big step in making cloudless commercial edges hubless and fully decentralized. The cloudless+hubless approach addresses concerns of the hub being overwhelmed
+This chapter takes the next big step in making cloudless commercial edges hubless and fully decentralized. The cloudless+hubless approach addresses concerns of the hub being overwhelmed
 (\Cref{comesh:fig:resources}), and being susceptible to unreliability~\cite{moore2020iot} and cloud outages~\cite{gcloud-down1}.
 %
 \Cref{comesh:fig:resources}(a, b), done with Raspberry Pis, shows that with more devices (i) CPU load on the {central hub} rises rapidly and crosses 50\% at just 64 devices, (ii) even with 3 central hubs sharing the load, the CPU load is high (30\%) and has high variance. The per-device CPU load is reduced by over 6$\times$ (beyond 64 devices, or 15 routines) vs the 3-hubs by our decentralized solution (\sysname), at 5.2\%-12.4\%, and it scales (remains flat). Regardless of load concerns, hubless solutions are paramount due to needs of user privacy (of data \& operations), cloud outage resilience, and lowering cloud costs.
@@ -105,7 +105,7 @@ Our paper takes the next big step in making cloudless commercial edges hubless a
                                @{}>{\raggedright\arraybackslash\hsize=0.97\hsize}X
                                @{}>{\raggedright\arraybackslash\hsize=1.03\hsize}X@{}}
 \hline
-\textbf{Property} & \textbf{N-Hubs (Sharded/Hierarchical)} & \textbf{CoMesh (this paper)} \\
+\textbf{Property} & \textbf{N-Hubs (Sharded/Hierarchical)} & \textbf{CoMesh (this chapter)} \\
 \hline\hline
 
 % Complexity (1 pair)
@@ -153,13 +153,13 @@ Preferable for larger on-field setups with many devices \\
 
 
 A cloudless+hubless STA solution requires that all actions: 
-(i) operate {\it over the local edge mesh}, (ii)  remain {\it local}, without requiring a connection to the cloud, and (iii) maintain {\it fault-tolerance\footnote{While this paper only deals with crash failures, our decentralized approaches spread the attack surface and are more secure than a centralized cloudless solution. Security is beyond the scope of this paper.}} in spite of local device failures.  
+(i) operate {\it over the local edge mesh}, (ii)  remain {\it local}, without requiring a connection to the cloud, and (iii) maintain {\it fault tolerance\footnote{While this thesis only deals with crash failures, our decentralized approaches spread the attack surface and are more secure than a centralized cloudless solution. Security is beyond the scope of this thesis.}} in spite of local device failures.  
 
 
 
 \noindent {\bf Contributions. } We present \sysname, the first system to realize
 a {\it fully decentralized} (i.e., hub-less and local)    control plane for  monitoring and management of  routines
-over large edge meshes. The contributions of this paper are: 
+over large edge meshes. The contributions of this chapter are: 
 \begin{itemize}
     \item Design and implementation of \sysname, using 
     a novel combination of techniques: 

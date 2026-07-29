@@ -14,24 +14,24 @@ This property may be implemented atop RPC-complete with the use of a timeout aft
 \begin{figure}[tb]
     \begin{subfigure}[t]{0.48\linewidth}
         \centering
-        {\includegraphics[width=0.95\textwidth,alt={Illustration of a garage routine in three steps: (i) the garage door opens, (ii) the trashcan is moved out into the driveway, (iii) the garage door closes.}]{RASC/figures/intro/garage-routine-desc.pdf}}
-        \caption{\small \textit{Routine description:} (i) the garage door opens; (ii) the trashcan is moved out into the driveway; (iii) the garage door closes.}
+        {\includegraphics[width=0.95\textwidth,alt={Illustration of a garage routine in three steps: (i) the garage door opens, (ii) the trash can is moved out into the driveway, (iii) the garage door closes.}]{RASC/figures/intro/garage-routine-desc.pdf}}
+        \caption{\small \textit{Routine description:} (i) the garage door opens; (ii) the trash can is moved out into the driveway; (iii) the garage door closes.}
         \medskip
         \label{rasc:fig:garage-routine-desc}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.47\linewidth}
         \centering
-        {\includegraphics[width=\linewidth,alt={Illustration of an action failure in the garage routine: the trashcan gets stuck below the garage door because of an obstacle, so the garage door cannot close.}]{RASC/figures/intro/garage-routine-failure.pdf}}
-        \caption{\small \textit{Action failures:} the trashcan gets stuck below the garage door because of an obstacle and the garage door cannot close.}
+        {\includegraphics[width=\linewidth,alt={Illustration of an action failure in the garage routine: the trash can gets stuck below the garage door because of an obstacle, so the garage door cannot close.}]{RASC/figures/intro/garage-routine-failure.pdf}}
+        \caption{\small \textit{Action failures:} the trash can gets stuck below the garage door because of an obstacle and the garage door cannot close.}
         \medskip
         \label{rasc:fig:garage-routine-failure}
     \end{subfigure}
     \par\medskip
     \begin{subfigure}[t]{0.48\linewidth}
         \centering
-        {\includegraphics[width=\textwidth,alt={Illustration of fallback actions in the garage routine: if the first movement fails, the trashcan moves back inside and the garage door then closes.}]{RASC/figures/intro/garage-routine-fallback.pdf}}
-        \caption{\small \textit{Fallback actions:} the trashcan moves back inside after the first movement's failure and the garage door closes.}
+        {\includegraphics[width=\textwidth,alt={Illustration of fallback actions in the garage routine: if the first movement fails, the trash can moves back inside and the garage door then closes.}]{RASC/figures/intro/garage-routine-fallback.pdf}}
+        \caption{\small \textit{Fallback actions:} the trash can moves back inside after the first movement's failure and the garage door closes.}
         \medskip
         \label{rasc:fig:garage-routine-fallback}
     \end{subfigure}
@@ -64,7 +64,7 @@ to its original spot, and, finally, $A6$ closes the garage door
 to prevent exposure to robbers. 
 Implementing \Cref{rasc:fig:garage-routine-workflow} via RPC 
 requires users stitching multiple routines 
-(roughly four here--one extra for every new dependency type) guarded by complex predicates to emulate progress points, 
+(roughly four here---one extra for every new dependency type) guarded by complex predicates to emulate progress points, 
 to block unintended triggers. This is prohibitive.  
 
 \noindent \textbf{Dynamic action scheduling.}

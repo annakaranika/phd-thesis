@@ -31,7 +31,7 @@ In IoT settings, it is impossible to distinguish a failed device from one that i
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.65\linewidth,alt={Diagram of communication between a smart device and a client app. Each arrowed line is an RPC in today's stacks; the dashed lines are the ones this work replaces with the new RASC abstraction. A client device app or smart hub communicates either directly with the device (hub-to-device) or via a vendor cloud service (hub-to-cloud-to-device). The device app may also first communicate with the smart hub.}]{RASC/figures/intro/smart space setup.pdf}
-    \caption{\bf \small Communication between a smart device and a client app. {\it Each arrowed line is an RPC in today's stacks. This paper replaces dashed lines with the new \abs{} abstraction.}
+    \caption{\bf \small Communication between a smart device and a client app. {\it Each arrowed line is an RPC in today's stacks. This chapter replaces dashed lines with the new \abs{} abstraction.}
     }
     \medskip
     \label{rasc:fig:iot setup}
@@ -58,7 +58,7 @@ Key questions arise: {\it What polling frequency is appropriate? Should polling 
 
 \noindent \textbf{\underline{Problem Statement}.}
 We seek to minimize \emph{detection time}: the gap between the action state change on a device and \sysname's next poll.
-Inputs are: (i) the {\bf historical state-change time distribution} \(p(t)\) for a (device, action) pair---\texttt{dist.pdf(t)}, (ii) a {\bf state change time bound} $U$---\texttt{dist.ppf(0.99)}\footnote{Percent point function (inverse cdf); \(\texttt{ppf}(y)\) returns the value with cdf \(y\).} which may occasionally be exceeded, and (iii) a poll \textbf{budget} \(k\) representing how many total polls are allowed for a given action (representing allowable bandwidth).
+Inputs are: (i) the {\bf historical state-change time distribution} \(p(t)\) for a (device, action) pair---\texttt{dist.pdf(t)}, (ii) a {\bf state change time bound} $U$---\texttt{dist.ppf(0.99)}\footnote{Percent point function (inverse CDF); \(\texttt{ppf}(y)\) returns the value with CDF \(y\).} which may occasionally be exceeded, and (iii) a poll \textbf{budget} \(k\) representing how many total polls are allowed for a given action (representing allowable bandwidth).
 We must 
 select \(k\) poll timepoints in \((0,U]\) that minimize expected detection time.
 
@@ -223,13 +223,13 @@ with a smaller $k^*$. The algorithm recursively updates $k^*$ until it finds a $
 \end{figure}
 
 
-\noindent \textbf{Reducing Polling further via  Confidence Intervals.} 
+\noindent \textbf{Reducing Polling further via Confidence Intervals.} 
 We relax the worst-case detection time assumption by introducing a {\it service-level objective (SLO)}: a confidence level for meeting the detection window $Q_w$. 
 When SLO=0.9, \sysname's placement may violate $Q_w$ on at most 10\% of events. 
 This allows \sysname{} to avoid excessive polling in high probability areas of the distribution.
 Our evaluations (\Cref{rasc:sec:detection_times}) find that  SLO-awareness does not change average detection time. \Cref{rasc:algo:adaptive-polling-algorithm} shows how to find polls under SLOs.
 
-\begin{theorem}[Meeting a Detection Tolerance SLO--Condensed version]
+\begin{theorem}[Meeting a Detection Tolerance SLO]
 Given a detection window $Q_w \in (0, U]$, a service-level objective (SLO) $\text{slo}\in(0,1]$, and a placement
 $\mathcal{L}=\{L_1<\dots<L_k=U\}$, its covered set is
 \[

@@ -2,6 +2,71 @@
 \label{rasc:sec:casestudies}
 While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmability: diverse dependencies and dynamic scheduling.
 
+\subsubsection{Diverse Action-Causality Expressiveness}
+\label{rasc:sec:causality}
+
+
+Commercial IoT platforms rarely support cross-action dependencies: e.g., Alexa routines allow limited inter-routine chaining,\footnote{Alexa can call one routine from another but offers no richer dependencies.} but not dependencies between actions. The \abs{} abstraction enables both cross-action and finer-grained dependencies across critical points {\it inside} an action's progress.
+\Cref{rasc:fig:energy-saving-vacuum-rasc,rasc:fig:garage-routine-workflow} depict {\it co-action} and \textit{fallback action} examples.
+
+In \sysname{} each routine is represented internally as a DAG of device actions (\Cref{rasc:fig:energy-saving-vacuum-rasc}). When an action emits a progress event (A, S, or C), \sysname{} inspects its dependent children; any child whose dependencies are satisfied is immediately scheduled to run. \sysname{} execution is {\it event-driven}. 
+
+\subsubsection{Dynamic Action Scheduling}
+\label{rasc:sec:dyn-sched}
+
+We describe how to schedule routines and actions when some of these actions take a shorter or longer time than expected. 
+
+\noindent\textbf{Background.}
+In real-world IoT deployments, action durations vary widely:
+ovens heat faster when pre-warmed, elevators stall if doors are obstructed,
+and HVAC cycles fluctuate with outside temperature. 
+Due to these variable times, any static schedule that is made, which devices execute (to respect dependencies) will need to be {\it dynamically} adjusted at runtime.
+
+The real-time systems community studied this problem through
+\emph{resource reclamation algorithms}~\cite{shen1993resource,manimaran1997new,gupta2000new}.
+These algorithms optimize for \emph{early completions}:
+if a task finishes ahead of its worst-case bound, subsequent tasks can advance to reclaim idle time while maintaining precedence.
+For example, \emph{Restriction Vectors (RV)}~\cite{manimaran1997new}
+maintains a task timeline and, upon early task completion, pulls dependent tasks forward to begin once all predecessors have completed. This reclaims idle slack while preserving precedence constraints.
+
+\noindent\textbf{Challenges.} 
+We need to extend reclaiming algorithms to handle both early completions and 
+actions \textit{exceeding} their schedule. 
+A heater lagging on a cold day or a door closing more slowly than usual delays subsequent tasks, and naive scheduling
+can break causal dependencies or stall routines. 
+
+\sysname's fine-grained causality model (\Cref{rasc:sec:causality}) makes scheduling challenging:
+we must honor dependencies at arbitrary progress points (e.g., Ack, Start, Complete), increasing potential conflicts and correctness risks.
+
+Correct IoT scheduling hinges on two properties: \textbf{\textit{Safety}} (no device receives two action requests at once) and \textbf{\textit{Serial Equivalence}} (overlapping routines execute with some serial order). Without them, final states can be unpredictable or inconsistent with any one routine. SafeHome~\cite{SafeHomeEuroSys2021} guarantees these only for fixed action durations.
+However, with unpredictable durations and fine-grained dependencies, maintaining these guarantees requires adaptation.
+
+\noindent\textbf{Overview.} 
+\sysname{} extends reclamation-style scheduling to IoT,
+building atop the \abs{} abstraction (\Cref{rasc:sec:rasc}).
+\sysname's scheduling occurs in two phases: 
+(i)~it schedules arriving routines (\Cref{rasc:sec:scheduler}), and
+(ii)~it dynamically adjusts the schedule for early state changes and delays (\Cref{rasc:sec:rescheduler}). 
+We present \textbf{\textit{DAG-TL}}, to ensure serial equivalence for routines despite variable action lengths, 
+alongside two rescheduling policies, \textbf{\textit{STF and RV}}, which 
+adapt to both early and late state changes while preserving
+Safety and Serial Equivalence.
+
+
+\subsubsubsection{\scheduler: Ensuring Routine Serial Equivalence}
+\label{rasc:sec:scheduler}
+
+We adapt the Timeline Scheduler (TL) from \cite{SafeHomeEuroSys2021}. 
+Upon routine arrival, the original TL places actions in the earliest gaps that preserve 
+intra-routine action order and inter-routine serialization order.
+TL uses action-by-action backtracking to find gaps that
+maintain serialization at all times.
+For \sysname-style DAGs, the original TL has exponential worst-case time complexity. 
+
+To handle \sysname-style routines expressed as DAGs, our {\it \scheduler} approach 
+adopts an {\it aggressive backtrack strategy} that makes ``big jumps'' in the state space.
+Specifically, upon detecting a serialization conflict, it jumps to the routine's top-level action and shifts the entire DAG forward in a single step---placing it after the last conflicting time found by inspecting the intersection of the preceding and following routine sets in the serialization order. By pruning unsatisfied paths early, we avoid repeated local retries.
+
 \begin{figure}[t]
     \raggedleft
     % \hspace{0.1cm}
@@ -45,81 +110,16 @@ While \Cref{rasc:sec:rasc} addressed observability, we now turn to programmabili
     \begin{subfigure}[b]{0.3\linewidth}
         \centering
         {\includegraphics[width=\textwidth,alt={Routine R_B-prime together with a valid DAG-TL schedule. DAG-TL now places R_B entirely after R_A, without serialization conflicts.}]{RASC/figures/applications/tl-vs-dag-tl/DAG-TL_valid-new.pdf}}
-        \caption{\small $R_B'$ \& invalid \scheduler.}
+        \caption{\small $R_B'$ \& valid \scheduler.}
         \medskip
         \label{rasc:fig:dag-tl-valid}
     \end{subfigure}
     % \hspace{0.1cm}
     
-    \caption{\bf \small Example Routines and Schedule for TL vs \scheduler. {\it Action symbols feature a letter that stands for the routine they are a part of and a number to denote which device they execute on, e.g., $A1$ is part of routine $R_A$ and executes on device $D1$.}}
+    \caption{\bf \small Example Routines and Schedule for TL vs. \scheduler. {\it Action symbols feature a letter that stands for the routine they are a part of and a number to denote which device they execute on, e.g., $A1$ is part of routine $R_A$ and executes on device $D1$.}}
     \medskip
     \label{rasc:fig:TL-vs-DAG-TL}
 \end{figure}
-
-\subsubsection{Diverse Action-Causality Expressiveness}
-\label{rasc:sec:causality}
-
-
-Commercial IoT platforms rarely support cross-action dependencies: e.g., Alexa routines allow limited inter-routine chaining,\footnote{Alexa can call a routine from another but offers no richer dependencies.} but not dependencies between actions. The \abs{} abstraction enables both cross-action and finer-grained dependencies across critical points {\it inside} an action's progress.
-\Cref{rasc:fig:energy-saving-vacuum-rasc,rasc:fig:garage-routine-workflow} depict {\it co-action} and \textit{fallback action} examples.
-
-In \sysname{} each routine is represented internally as a DAG of device actions (\Cref{rasc:fig:energy-saving-vacuum-rasc}). When an action emits a progress event (A, S, or C), \sysname{} inspects its dependent children; any child whose dependencies are satisfied is immediately scheduled to run. \sysname{} execution is {\it event-driven}. 
-
-\subsubsection{Dynamic Action Scheduling}
-\label{rasc:sec:dyn-sched}
-
-We describe how to schedule routines and actions when some of these actions take a shorter or longer time than expected. 
-
-\noindent\textbf{Background.}
-In real-world IoT deployments, action durations vary widely:
-ovens heat faster when pre-warmed, elevators stall if doors are obstructed,
-and HVAC cycles fluctuate with outside temperature. 
-Due to these variable times, any static schedule that is made, which devices execute (to respect dependencies) will need to be {\it dynamically} adjusted at runtime.
-
-The real-time systems community studied this problem through
-\emph{resource reclamation algorithms}~\cite{shen1993resource,manimaran1997new,gupta2000new}.
-These algorithms optimize for \emph{early completions}:
-if a task finishes ahead of its worst-case bound, subsequent tasks can advance to reclaim idle time while maintaining precedence.
-For example, \emph{Restriction Vectors (RV)}~\cite{manimaran1997new}
-maintains a task timeline and, upon early task completion, pulls dependent tasks forward to begin once all predecessors have completed. This reclaims idle slack while preserving precedence constraints.
-
-\noindent\textbf{Challenges.} 
-We need to extend reclaiming algorithms to handle both early completions and 
-actions \textit{exceeding} their schedule. 
-A heater lagging on a cold day or a door closing slower than usual delays subsequent tasks, and naive scheduling
-can break causal dependencies or stall routines. 
-
-\sysname's fine-grained causality model (\Cref{rasc:sec:causality}) makes scheduling challenging:
-we must honor dependencies at arbitrary progress points (e.g., Ack, Start, Complete), increasing potential conflicts and correctness risks.
-
-Correct IoT scheduling hinges on two properties: \textbf{\textit{Safety}} (no device receives two action requests at once) and \textbf{\textit{Serial Equivalence}} (overlapping routines execute with some serial order). Without them, final states can be unpredictable or inconsistent with any one routine. SafeHome~\cite{SafeHomeEuroSys2021} guarantees these only for fixed action durations.
-However, with unpredictable durations and fine-grained dependencies, maintaining these guarantees requires adaptation.
-
-\noindent\textbf{Overview.} 
-\sysname{} extends reclamation-style scheduling to IoT,
-building atop the \abs{} abstraction (\Cref{rasc:sec:rasc}).
-\sysname's scheduling occurs in two phases: 
-(i)~it schedules arriving routines (\Cref{rasc:sec:scheduler}), and
-(ii)~it dynamically adjusts the schedule for early state changes and delays (\Cref{rasc:sec:rescheduler}). 
-We present \textbf{\textit{DAG-TL}}, to ensure serial equivalence for routines despite variable action lengths, 
-alongside two rescheduling policies, \textbf{\textit{STF and RV}}, which 
-adapt to both early and late state changes while preserving
-Safety and Serial Equivalence.
-
-
-\subsubsubsection{\scheduler: Ensuring Routine Serial Equivalence}
-\label{rasc:sec:scheduler}
-
-We adapt the Timeline Scheduler (TL) from \cite{SafeHomeEuroSys2021}. 
-Upon routine arrival, the original TL places actions in the earliest gaps that preserve 
-intra-routine action order and inter-routine serialization order.
-TL uses action-by-action backtracking to find gaps that
-maintain serialization at all times.
-For \sysname-style DAGs, the original TL has exponential worst-case time complexity. 
-
-To handle \sysname-style routines expressed as DAGs, our {\it \scheduler} approach 
-adopts an {\it aggressive backtrack strategy} that makes ``big jumps'' in the state space.
-Specifically, upon detecting a serialization conflict, it jumps to the routine's top-level action and shifts the entire DAG forward in a single step---placing it after the last conflicting time found by inspecting the intersection of the preceding and following routine sets in the serialization order. By pruning unsatisfied paths early, we avoid repeated local retries.
 
 \noindent\textbf{Illustrative example.}
 \Cref{rasc:fig:TL-vs-DAG-TL} shows three routines: $R_A$, $R_B$ and $R_B'$. After sequential $R_A$ is scheduled (\Cref{rasc:fig:ra-sched}), sequential $R_B$ arrives.
@@ -145,7 +145,7 @@ Each routine $R$ is a DAG of actions. An action $a$ has:
 (iii) dependency edges to its parents in the routine $Pred_{\text{DAG}}(a)$.
 Multiple routines may run concurrently and touch overlapping device sets.
 
-Our goal is to maintain a {\it feasible schedule} that (1) is \textbf{Safe} (no device runs two actions at once), (2) is \textbf{Serially Equivalent}~\cite{SafeHomeEuroSys2021}  across routines (the final state equals some serial execution of whole routines), and (3) \textbf{adapts} when actions finish early/late while preserving (1)-(2).
+Our goal is to maintain a {\it feasible schedule} that (1) is \textbf{Safe} (no device runs two actions at once), (2) is \textbf{Serially Equivalent}~\cite{SafeHomeEuroSys2021}  across routines (the final state equals some serial execution of whole routines), and (3) \textbf{adapts} when actions finish early/late while preserving (1)--(2).
 
 \noindent \textbf{{When to Trigger the Rescheduler}. }
 Late actions are handled by \sysname{} {\it proactively}, to ensure safety. When a high percentage of the action's state change length upper bound $U$ (\Cref{rasc:sec:adaptive-polling-strategy}) has elapsed (95\% in our implementation), \sysname{} extrapolates to estimate the new state change time (e.g., oven took 20 min to warm up from 200\textdegree F to 400\textdegree F, then \sysname{} estimates it will take 5 min more to get to the target 450\textdegree F). 
