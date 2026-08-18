@@ -17,6 +17,12 @@
 \usepackage{subcaption}
 % \usepackage{stfloats}     % bottom placement of figure* (not used)
 
+% --- Text alignment -------------------------------------------------
+% The thesis is set left-aligned (ragged right) for accessibility.
+% Graduate College requires captions left-aligned as well as body text.
+% singlelinecheck=false stops short captions from being centered.
+\AtBeginDocument{\captionsetup{justification=raggedright,singlelinecheck=false}}
+
 % --- Math (CoMesh, RASC) --------------------------------------------
 \usepackage{amsmath}
 \usepackage{amsthm}
